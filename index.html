@@ -39,8 +39,8 @@
                 extend: {
                     fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
                     colors: {
-                        void: { DEFAULT: '#000000', 50: '#0A0A0A', 100: '#0F0F0F', 200: '#18181B' },
-                        steel: { DEFAULT: '#71717A', light: '#A1A1AA', dark: '#52525B' }
+                        void: { DEFAULT: '#1A1D23', 50: '#1F2229', 100: '#262A33', 200: '#2E333E' },
+                        steel: { DEFAULT: '#8B8FA3', light: '#B0B4C6', dark: '#5C5F72' }
                     }
                 }
             }
@@ -61,28 +61,45 @@
     </script>
     
     <style>
-        :root { --silver-gradient: linear-gradient(160deg, #FFF 0%, #D4D4D8 25%, #52525B 50%, #E4E4E7 75%, #FFF 100%); }
+        :root { 
+            --silver-gradient: linear-gradient(145deg, #E5E7EB 0%, #9CA3AF 30%, #4B5563 70%, #D1D5DB 100%); 
+        }
         * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; background: #000; overflow-x: hidden; padding-top: 36px; }
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; background: #1A1D23; overflow-x: hidden; padding-top: 36px; color: #E5E7EB; }
         body.no-scroll { overflow: hidden; }
-        ::-webkit-scrollbar { width: 6px; background: #000; }
-        ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 4px; }
+        ::-webkit-scrollbar { width: 6px; background: #1A1D23; }
+        ::-webkit-scrollbar-thumb { background: #3A3F4B; border-radius: 4px; }
+        
         .text-silver-premium { background: var(--silver-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-card { background: rgba(255,255,255,0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        
+        .glass-card { 
+            background: linear-gradient(145deg, rgba(38, 42, 51, 0.8) 0%, rgba(30, 33, 40, 0.9) 100%); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.07); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25); 
+        }
         .glass-card-hover { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .glass-card-hover:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-4px); }
+        .glass-card-hover:hover { 
+            border-color: rgba(255,255,255,0.15); 
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        
         .btn-shine { position: relative; overflow: hidden; }
-        .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.25), transparent); transform: rotate(45deg) translateX(-100%); transition: transform 0.6s; }
+        .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(45deg) translateX(-100%); transition: transform 0.6s; }
         .btn-shine:hover::after { transform: rotate(45deg) translateX(100%); }
+        
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+        
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
         @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
-        @keyframes blink-price { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-        @keyframes pulse-slow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
+        @keyframes blink-price { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        @keyframes pulse-slow { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.06; transform: scale(1.05); } }
         @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        @keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.1); } 50% { box-shadow: 0 0 40px rgba(255,255,255,0.2); } }
+        @keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.05); } 50% { box-shadow: 0 0 25px rgba(255,255,255,0.08); } }
         @keyframes banner-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        
         .animate-float { animation: float 6s ease-in-out infinite; }
         .animate-float-d1 { animation-delay: 1s; }
         .animate-float-d2 { animation-delay: 2s; }
@@ -92,48 +109,63 @@
         .price-blink { animation: blink-price 2s ease-in-out infinite; }
         .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
         .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
-        .premium-glass { background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-        .shimmer-line { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); animation: shimmer 3s ease-in-out infinite; }
-        .benefit-card { transition: all 0.3s ease; }
-        .benefit-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); background: rgba(255,255,255,0.06); }
+        
+        .premium-glass { 
+            background: linear-gradient(145deg, rgba(38, 42, 51, 0.9) 0%, rgba(28, 31, 37, 0.95) 100%); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); 
+        }
+        .shimmer-line { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); animation: shimmer 3s ease-in-out infinite; }
+        
+        .benefit-card { transition: all 0.3s ease; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .benefit-card:hover { border-color: rgba(255,255,255,0.1); transform: translateY(-2px); background: rgba(255,255,255,0.05); }
+        
         .banner-container { position: relative; overflow: hidden; }
         .banner-container::before, .banner-container::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 10; pointer-events: none; }
-        .banner-container::before { left: 0; background: linear-gradient(to right, #0A0A0A 0%, transparent 100%); }
-        .banner-container::after { right: 0; background: linear-gradient(to left, #0A0A0A 0%, transparent 100%); }
+        .banner-container::before { left: 0; background: linear-gradient(to right, #1A1D23 0%, transparent 100%); }
+        .banner-container::after { right: 0; background: linear-gradient(to left, #1A1D23 0%, transparent 100%); }
         .banner-track { display: flex; gap: 24px; animation: banner-scroll 30s linear infinite; width: max-content; }
         .banner-track:hover { animation-play-state: paused; }
-        .banner-card { flex-shrink: 0; width: 340px; padding: 20px 24px; border-radius: 16px; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); transition: all 0.4s; }
-        .banner-card:hover { transform: translateY(-4px) scale(1.02); }
-        .banner-card-red { background: linear-gradient(135deg, rgba(239,68,68,0.08) 0%, rgba(239,68,68,0.02) 100%); box-shadow: 0 8px 32px rgba(239,68,68,0.1); }
-        .banner-card-yellow { background: linear-gradient(135deg, rgba(234,179,8,0.08) 0%, rgba(234,179,8,0.02) 100%); box-shadow: 0 8px 32px rgba(234,179,8,0.1); }
-        .banner-card-green { background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 100%); box-shadow: 0 8px 32px rgba(16,185,129,0.1); }
-        .product-card { position: relative; cursor: pointer; overflow: hidden; }
-        .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); opacity: 0; transition: opacity 0.4s; }
+        .banner-card { flex-shrink: 0; width: 340px; padding: 20px 24px; border-radius: 16px; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); transition: all 0.4s; background: rgba(38, 42, 51, 0.6); }
+        .banner-card:hover { transform: translateY(-4px) scale(1.02); border-color: rgba(255,255,255,0.12); }
+        
+        .banner-card-red { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.08); border-left: 1px solid rgba(239, 68, 68, 0.2); }
+        .banner-card-yellow { box-shadow: 0 8px 30px rgba(250, 204, 21, 0.08); border-left: 1px solid rgba(250, 204, 21, 0.2); }
+        .banner-card-green { box-shadow: 0 8px 30px rgba(16, 185, 129, 0.08); border-left: 1px solid rgba(16, 185, 129, 0.2); }
+        
+        .product-card { position: relative; cursor: pointer; overflow: hidden; background: rgba(38, 42, 51, 0.5); border: 1px solid rgba(255,255,255,0.06); }
+        .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); opacity: 0; transition: opacity 0.4s; }
         .product-card:hover::before { opacity: 1; }
-        .product-badge { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 3px 10px; font-size: 9px; color: #A1A1AA; text-transform: uppercase; }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        .product-badge { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 3px 10px; font-size: 9px; color: #9CA3AF; text-transform: uppercase; }
+        
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; visibility: hidden; transition: all 0.3s; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: rgba(10,10,10,0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 32px; max-width: 480px; width: 100%; transform: scale(0.95); transition: transform 0.3s; position: relative; }
+        .modal-content { background: rgba(38, 42, 51, 0.98); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; max-width: 480px; width: 100%; transform: scale(0.95); transition: transform 0.3s; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .modal-overlay.active .modal-content { transform: scale(1); }
-        .floating-btn { position: fixed; z-index: 100; opacity: 0; visibility: hidden; transition: all 0.3s; }
+        
+        .floating-btn { position: fixed; z-index: 100; opacity: 0; visibility: hidden; transition: all 0.3s; background: #2E333E; border: 1px solid #3A3F4B; }
         .floating-btn.visible { opacity: 1; visibility: visible; }
+        .floating-btn:hover { background: #3A3F4B; border-color: #4A5060; }
+        
         .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .blog-btn { transition: all 0.3s ease; }
-        .blog-btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+        .blog-btn { transition: all 0.3s ease; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+        .blog-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
         .blog-btn:hover i { transform: translateX(3px); }
+        
         .search-item:hover { background: rgba(255,255,255,0.05); }
+        
         @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
     </style>
     
     <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="hueLadxQV3ytbYXVwY32gKQ-DfvkyDTe_XkMoimWN5c" />
 </head>
-<body class="bg-void text-white font-body">
+<body class="bg-void text-gray-200 font-body">
 
     <!-- ========== TOP BAR (FIXED) ========== -->
-    <div class="fixed top-0 left-0 right-0 z-[60] bg-void-100 border-b border-white/5 py-2 text-xs font-medium text-steel">
+    <div class="fixed top-0 left-0 right-0 z-[60] bg-void-50 border-b border-white/5 py-2 text-xs font-medium text-steel">
         <div class="max-w-7xl mx-auto px-4">
-            <!-- Desktop -->
             <div class="hidden md:flex justify-between items-center">
                 <div class="flex items-center gap-8">
                     <div class="flex items-center gap-2 text-white">
@@ -149,9 +181,8 @@
                         <span class="text-white font-bold price-blink" id="xagIdr">Rp 545.000</span>
                     </div>
                 </div>
-                <span class="text-[10px] text-steel-light">Terhubung dengan <span class="text-white font-bold">200+</span> supplier nasional</span>
+                <span class="text-[10px] text-steel-dark">Terhubung dengan <span class="text-white font-bold">200+</span> supplier nasional</span>
             </div>
-            <!-- Mobile -->
             <div class="md:hidden flex justify-between items-center">
                 <div class="flex items-center gap-2 text-white">
                     <span class="w-1.5 h-1.5 rounded-full pulse-dot-open" id="marketDotMobile"></span>
@@ -166,7 +197,7 @@
     </div>
 
     <!-- ========== NAVIGATION ========== -->
-    <header class="sticky top-[36px] z-50 bg-void/95 backdrop-blur-lg border-b border-white/5">
+    <header class="sticky top-[36px] z-50 bg-void/95 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 h-16 lg:h-20 flex items-center justify-between">
             <a href="#hero" class="flex flex-col items-start cursor-pointer">
                 <span class="font-display text-2xl lg:text-3xl font-bold text-silver-premium">VELDION</span>
@@ -181,7 +212,7 @@
             </nav>
             <div class="flex items-center gap-2">
                 <button id="searchBtn" class="p-2.5 text-steel hover:text-white transition" aria-label="Search"><i data-lucide="search" class="w-5 h-5"></i></button>
-                <a href="https://wa.me/628137271517" target="_blank" class="flex items-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded hover:bg-steel-light transition btn-shine">
+                <a href="https://wa.me/628137271517" target="_blank" class="flex items-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded hover:bg-gray-100 transition btn-shine">
                     <span class="hidden sm:inline">Hubungi Kami</span><i data-lucide="message-circle" class="w-4 h-4 sm:hidden"></i>
                 </a>
             </div>
@@ -190,9 +221,9 @@
 
     <main>
         <!-- ========== HERO ========== -->
-        <section id="hero" class="relative min-h-[calc(100vh-156px)] md:min-h-[calc(100vh-166px)] flex items-center justify-center overflow-hidden bg-gradient-to-b from-void-50 to-black">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.02] rounded-full blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl"></div>
+        <section id="hero" class="relative min-h-[calc(100vh-156px)] md:min-h-[calc(100vh-166px)] flex items-center justify-center overflow-hidden bg-gradient-to-b from-void-50 to-void">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.03] rounded-full blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.03] rounded-full blur-3xl"></div>
             <div class="relative z-10 max-w-7xl mx-auto px-4 py-8 md:py-12 text-center">
                 <div class="mb-5 reveal active flex justify-center">
                     <img src="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png" alt="Veldion Silver" width="120" height="120" class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-2xl" loading="lazy" decoding="async">
@@ -204,8 +235,8 @@
                 <h1 class="font-display text-3xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tighter mb-4 reveal active" style="transition-delay:100ms">Investasi Perak Tanpa<br><span class="text-silver-premium">Antrean Panjang</span></h1>
                 <p class="text-sm md:text-lg text-steel max-w-2xl mx-auto mb-6 leading-relaxed reveal active" style="transition-delay:200ms">Supplier besar butuh <span class="text-white font-medium">2-3 bulan Pre-Order</span>. Veldion menjembatani Anda dengan stok ready dari 200+ supplier. <span class="text-white font-medium">Tanpa menunggu.</span></p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center reveal active" style="transition-delay:300ms">
-                    <a href="#produk" class="px-6 py-3 md:px-8 md:py-4 bg-white text-black font-bold text-sm rounded hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition btn-shine flex items-center justify-center gap-2">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-                    <a href="#mitra" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/20 text-white font-bold text-sm rounded hover:bg-white/5 transition flex items-center justify-center gap-2">Mitra Veldion</a>
+                    <a href="#produk" class="px-6 py-3 md:px-8 md:py-4 bg-white text-black font-bold text-sm rounded hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition btn-shine flex items-center justify-center gap-2">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    <a href="#mitra" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/10 text-white font-bold text-sm rounded hover:bg-white/5 transition flex items-center justify-center gap-2">Mitra Veldion</a>
                 </div>
             </div>
         </section>
@@ -214,24 +245,25 @@
         <section class="py-8 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
-                    <div class="banner-card banner-card-red"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-red-500/15 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div><div><span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4></div></div><p class="text-white/80 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p></div>
-                    <div class="banner-card banner-card-yellow"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/15 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-yellow-400"></i></div><div><span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Stok Terbatas</h4></div></div><p class="text-white/80 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p></div>
-                    <div class="banner-card banner-card-green"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i></div><div><span class="text-[10px] font-bold text-emerald-400 uppercase">Solusi</span><h4 class="text-white font-semibold text-sm">Ready Stock</h4></div></div><p class="text-white/80 text-sm">Kami menghubungkan Anda ke stok <strong class="text-white">READY STOCK</strong>.</p></div>
-                    <div class="banner-card banner-card-red"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-red-500/15 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div><div><span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4></div></div><p class="text-white/80 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p></div>
-                    <div class="banner-card banner-card-yellow"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/15 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-yellow-400"></i></div><div><span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Stok Terbatas</h4></div></div><p class="text-white/80 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p></div>
-                    <div class="banner-card banner-card-green"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i></div><div><span class="text-[10px] font-bold text-emerald-400 uppercase">Solusi</span><h4 class="text-white font-semibold text-sm">Ready Stock</h4></div></div><p class="text-white/80 text-sm">Kami menghubungkan Anda ke stok <strong class="text-white">READY STOCK</strong>.</p></div>
+                    <div class="banner-card banner-card-red"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div><div><span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4></div></div><p class="text-white/80 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p></div>
+                    <div class="banner-card banner-card-yellow"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-yellow-400"></i></div><div><span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Stok Terbatas</h4></div></div><p class="text-white/80 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p></div>
+                    <div class="banner-card banner-card-green"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i></div><div><span class="text-[10px] font-bold text-emerald-400 uppercase">Solusi</span><h4 class="text-white font-semibold text-sm">Ready Stock</h4></div></div><p class="text-white/80 text-sm">Kami menghubungkan Anda ke stok <strong class="text-white">READY STOCK</strong>.</p></div>
+                    
+                    <div class="banner-card banner-card-red"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div><div><span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4></div></div><p class="text-white/80 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p></div>
+                    <div class="banner-card banner-card-yellow"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-yellow-400"></i></div><div><span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Stok Terbatas</h4></div></div><p class="text-white/80 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p></div>
+                    <div class="banner-card banner-card-green"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i></div><div><span class="text-[10px] font-bold text-emerald-400 uppercase">Solusi</span><h4 class="text-white font-semibold text-sm">Ready Stock</h4></div></div><p class="text-white/80 text-sm">Kami menghubungkan Anda ke stok <strong class="text-white">READY STOCK</strong>.</p></div>
                 </div>
             </div>
         </section>
 
         <!-- ========== SUPPLIER ========== -->
-        <section id="supplier" class="py-16 md:py-20 bg-black border-t border-white/5">
+        <section id="supplier" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12 md:mb-16 reveal"><span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Network</span><h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3">Supplier Mitra</h2></div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/10"><i data-lucide="gem" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">Silverium</h3><p class="text-xs text-steel">Supplier perak modern dengan kualitas presisi.</p><div class="mt-4 text-[10px] text-steel-dark">5.0 rating</div></div>
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float animate-float-d1"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/10"><i data-lucide="key-round" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">Key Silver</h3><p class="text-xs text-steel">Spesialis perak press dan koin edisi khusus.</p><div class="mt-4 text-[10px] text-steel-dark">4.9 rating</div></div>
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float animate-float-d2"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/10"><i data-lucide="landmark" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">JSG / TDS</h3><p class="text-xs text-steel">Produsen dengan sertifikasi ketat.</p><div class="mt-4 text-[10px] text-steel-dark">4.8 rating</div></div>
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5"><i data-lucide="gem" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">Silverium</h3><p class="text-xs text-steel">Supplier perak modern dengan kualitas presisi.</p><div class="mt-4 text-[10px] text-steel-dark">5.0 rating</div></div>
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float animate-float-d1"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5"><i data-lucide="key-round" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">Key Silver</h3><p class="text-xs text-steel">Spesialis perak press dan koin edisi khusus.</p><div class="mt-4 text-[10px] text-steel-dark">4.9 rating</div></div>
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float animate-float-d2"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5"><i data-lucide="landmark" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">JSG / TDS</h3><p class="text-xs text-steel">Produsen dengan sertifikasi ketat.</p><div class="mt-4 text-[10px] text-steel-dark">4.8 rating</div></div>
                 </div>
             </div>
         </section>
@@ -242,8 +274,8 @@
                 <div class="text-center mb-12 md:mb-16 reveal"><span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Best Seller</span><h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3">Produk Paling Dicari</h2></div>
                 <div class="hidden md:grid grid-cols-4 gap-4 mb-12">
                     <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Bullion</h4><p class="text-xs text-steel mt-1">Batangan investasi.</p></div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Press</h4><p class="text-xs text-steel mt-1">Laminasi tipis.</p></div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Coin</h4><p class="text-xs text-steel mt-1">Koin edisi.</p></div>
+                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Press</h4><p class="text-xs text-steel mt-1">Laminasi tipis。</p></div>
+                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Coin</h4><p class="text-xs text-steel mt-1">Koin edisi。</p></div>
                     <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Medalion</h4><p class="text-xs text-steel mt-1">Bulat artistik.</p></div>
                 </div>
                 <div class="md:hidden mb-12 flex justify-center gap-6 py-4">
@@ -252,7 +284,7 @@
                     <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d2" data-cat="coin"><div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">C</span></div><span class="text-[10px] text-steel-light">Coin</span></div>
                     <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d3" data-cat="medalion"><div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">M</span></div><span class="text-[10px] text-steel-light">Medalion</span></div>
                 </div>
-                <div class="flex justify-between items-end mb-8"><div><h3 class="text-2xl font-display font-bold text-white">Live Products</h3><p class="text-xs text-steel mt-1">Klik untuk detail</p></div><div class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full pulse-dot-open"></span><span class="text-[10px] bg-white/5 px-3 py-1 rounded-full text-steel-light">Best Seller</span></div></div>
+                <div class="flex justify-between items-end mb-8"><div><h3 class="text-2xl font-display font-bold text-white">Live Products</h3><p class="text-xs text-steel mt-1">Klik untuk detail</p></div><div class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full pulse-dot-open"></span><span class="text-[10px] bg-white/5 px-3 py-1 rounded-full text-steel-light border border-white/5">Best Seller</span></div></div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5" id="productGrid"></div>
                 <div class="text-center mt-10"><a href="https://wa.me/628137271517" target="_blank" class="inline-flex items-center gap-2 text-xs text-steel-light hover:text-white transition border border-white/10 px-6 py-3 rounded-xl">Ada produk lain? Tanya WhatsApp<i data-lucide="arrow-right" class="w-3 h-3"></i></a></div>
             </div>
@@ -260,8 +292,8 @@
 
         <!-- ========== MITRA ========== -->
         <section id="mitra" class="py-20 md:py-24 relative overflow-hidden bg-void-100">
-            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
-            <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl animate-pulse-slow" style="animation-delay:2s"></div>
+            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-3xl animate-pulse-slow" style="animation-delay:2s"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
                 <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div class="reveal">
@@ -269,12 +301,12 @@
                         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"><span class="text-silver-premium">Prioritas Stok</span><br>& Harga Spesial</h2>
                         <p class="text-steel-light mb-8 leading-relaxed text-sm max-w-lg">Bergabung sebagai Mitra untuk akses stok prioritas & harga kompetitif.</p>
                         <div class="space-y-3 mb-8">
-                            <div class="benefit-card p-4 rounded-xl bg-white/5 border border-white/5 flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Komitmen minimal <span class="text-white font-semibold">100gr/bulan</span></p></div>
-                            <div class="benefit-card p-4 rounded-xl bg-white/5 border border-white/5 flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Verifikasi cepat via WhatsApp</p></div>
-                            <div class="benefit-card p-4 rounded-xl bg-white/5 border border-white/5 flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Rekomendasi 3 teman = <span class="text-white font-semibold">bonus 1gr perak</span></p></div>
-                            <div class="benefit-card p-4 rounded-xl bg-white/5 border border-white/5 flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Diskon <span class="text-white font-semibold">2%</span> untuk pembelian 500gr+</p></div>
+                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Komitmen minimal <span class="text-white font-semibold">100gr/bulan</span></p></div>
+                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Verifikasi cepat via WhatsApp</p></div>
+                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Rekomendasi 3 teman = <span class="text-white font-semibold">bonus 1gr perak</span></p></div>
+                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Diskon <span class="text-white font-semibold">2%</span> untuk pembelian 500gr+</p></div>
                         </div>
-                        <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20tertarik%20jadi%20Mitra" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-white to-steel-light text-black font-bold rounded-lg transition btn-shine">Daftar Jadi Mitra<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                        <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20tertarik%20jadi%20Mitra" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-white to-gray-200 text-black font-bold rounded-lg transition btn-shine">Daftar Jadi Mitra<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
                     </div>
                     <div class="reveal">
                         <div class="premium-glass p-6 md:p-8 rounded-2xl relative overflow-hidden">
@@ -282,11 +314,11 @@
                             <div class="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
                             <div class="flex items-center justify-between mb-6 relative z-10"><h3 class="text-lg font-bold text-white">Perbandingan Harga</h3><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-[10px] font-semibold text-emerald-400">Live</span></div></div>
                             <div class="space-y-4 relative z-10">
-                                <div class="p-5 rounded-xl bg-white/5 border border-white/10"><div class="flex justify-between mb-3"><span class="text-sm text-steel">Harga Konsumen</span><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/15 text-red-400">Standar</span></div><div class="text-2xl font-display font-bold text-white mb-2">Rp 2.540.000 <span class="text-sm font-normal text-steel">/ 100gr</span></div><div class="flex items-center gap-2 text-[11px] text-steel"><i data-lucide="clock" class="w-3.5 h-3.5"></i><span>Proses standar</span></div></div>
-                                <div class="p-5 rounded-xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/20 relative overflow-hidden animate-glow">
+                                <div class="p-5 rounded-xl bg-white/5 border border-white/5"><div class="flex justify-between mb-3"><span class="text-sm text-steel">Harga Konsumen</span><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/15 text-red-400 border border-red-500/20">Standar</span></div><div class="text-2xl font-display font-bold text-white mb-2">Rp 2.540.000 <span class="text-sm font-normal text-steel">/ 100gr</span></div><div class="flex items-center gap-2 text-[11px] text-steel"><i data-lucide="clock" class="w-3.5 h-3.5"></i><span>Proses standar</span></div></div>
+                                <div class="p-5 rounded-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 relative overflow-hidden animate-glow">
                                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
                                     <div class="relative z-10">
-                                        <div class="flex justify-between mb-3"><span class="text-sm text-white font-semibold">Harga Mitra</span><div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-white to-steel-light"><span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span><span class="text-[10px] font-bold text-black">PRIORITY</span></div></div>
+                                        <div class="flex justify-between mb-3"><span class="text-sm text-white font-semibold">Harga Mitra</span><div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-white to-gray-300"><span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span><span class="text-[10px] font-bold text-black">PRIORITY</span></div></div>
                                         <div class="text-2xl font-display font-bold text-silver-premium mb-2">Rp 2.450.000 <span class="text-sm font-normal text-steel">/ 100gr</span></div>
                                         <div class="flex items-center gap-2 mb-3"><div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><i data-lucide="trending-down" class="w-3.5 h-3.5 text-emerald-400"></i><span class="text-[11px] font-semibold text-emerald-400">Hemat Rp 90.000 (3.5%)</span></div></div>
                                         <div class="flex items-center gap-2 text-[11px] text-steel mb-4"><i data-lucide="zap" class="w-3.5 h-3.5 text-white"></i><span>Alokasi stok diprioritaskan</span></div>
@@ -305,7 +337,7 @@
         </section>
 
         <!-- ========== BUYBACK ========== -->
-        <section id="buyback" class="py-16 md:py-20 bg-black border-t border-white/5">
+        <section id="buyback" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
                 <div class="reveal">
                     <span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Liquiditas</span>
@@ -316,7 +348,7 @@
                 <div class="glass-card p-6 md:p-8 rounded-xl reveal border border-white/5">
                     <div class="flex items-center justify-between mb-6"><h3 class="text-lg font-bold text-white">Current Buyback Rates</h3><div class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full pulse-dot-open"></span><span class="text-[10px] text-steel-dark border border-white/10 px-3 py-1 rounded-full">Live</span></div></div>
                     <div id="buybackRates" class="space-y-1"></div>
-                    <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20mau%20jual%20perak" target="_blank" class="mt-6 w-full py-4 bg-white/10 border border-white/10 text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-white/20 transition btn-shine"><i data-lucide="hand-coins" class="w-4 h-4"></i>Proses Buyback</a>
+                    <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20mau%20jual%20perak" target="_blank" class="mt-6 w-full py-4 bg-white/10 border border-white/10 text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-white/15 transition btn-shine"><i data-lucide="hand-coins" class="w-4 h-4"></i>Proses Buyback</a>
                 </div>
             </div>
         </section>
@@ -326,9 +358,9 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12 reveal"><span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Knowledge Hub</span><h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3">Insights</h2></div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/10"><i data-lucide="trending-up" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Analisis Pasar</h4><p class="text-xs text-steel">Update pergerakan harga perak global.</p></a>
-                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/10"><i data-lucide="book-open" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Panduan Investasi</h4><p class="text-xs text-steel">Cara investasi perak untuk pemula.</p></a>
-                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/10"><i data-lucide="shield" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Safe Haven</h4><p class="text-xs text-steel">Perak sebagai aset lindung nilai.</p></a>
+                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/5"><i data-lucide="trending-up" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Analisis Pasar</h4><p class="text-xs text-steel">Update pergerakan harga perak global.</p></a>
+                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/5"><i data-lucide="book-open" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Panduan Investasi</h4><p class="text-xs text-steel">Cara investasi perak untuk pemula.</p></a>
+                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/5"><i data-lucide="shield" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Safe Haven</h4><p class="text-xs text-steel">Perak sebagai aset lindung nilai.</p></a>
                 </div>
                 <div class="text-center mt-10 reveal"><a href="https://perakin-insights.blogspot.com/" target="_blank" class="blog-btn inline-flex items-center gap-3 px-8 py-4 border border-white/10 text-white font-bold rounded-xl"><span class="text-sm">Kunjungi Blog</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
             </div>
@@ -339,10 +371,32 @@
     <footer class="bg-void-100 border-t border-white/5 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
-                <div class="md:col-span-4"><span class="font-display text-2xl font-bold text-silver-premium block mb-4">VELDION SILVER</span><p class="text-xs text-steel-light leading-relaxed mb-4">Distributor perak fisik terpercaya. Stok ready tanpa Pre-Order.</p><div class="flex items-center gap-3"><a href="linkKamu" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition border border-white/10"><i data-lucide="instagram" class="w-4 h-4 text-steel-light"></i></a><a href="linkKamu" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition border border-white/10"><i data-lucide="twitter" class="w-4 h-4 text-steel-light"></i></a></div></div>
+                <div class="md:col-span-4"><span class="font-display text-2xl font-bold text-silver-premium block mb-4">VELDION SILVER</span><p class="text-xs text-steel-light leading-relaxed mb-4">Distributor perak fisik terpercaya. Stok ready tanpa Pre-Order.</p><div class="flex items-center gap-3"><a href="linkKamu" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition border border-white/5"><i data-lucide="instagram" class="w-4 h-4 text-steel-light"></i></a><a href="linkKamu" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition border border-white/5"><i data-lucide="twitter" class="w-4 h-4 text-steel-light"></i></a></div></div>
                 <div class="md:col-span-2"><h4 class="text-xs font-bold text-white uppercase mb-4">Navigasi</h4><ul class="space-y-2 text-sm text-steel"><li><a href="#produk" class="hover:text-white">Produk</a></li><li><a href="#mitra" class="hover:text-white">Mitra</a></li><li><a href="#buyback" class="hover:text-white">Buyback</a></li></ul></div>
                 <div class="md:col-span-3"><h4 class="text-xs font-bold text-white uppercase mb-4">Keunggulan</h4><ul class="space-y-2 text-sm text-steel"><li class="flex items-center gap-2"><i data-lucide="zap" class="w-3 h-3"></i>Stok Real-Time</li><li class="flex items-center gap-2"><i data-lucide="shield-check" class="w-3 h-3"></i>100% Asli</li><li class="flex items-center gap-2"><i data-lucide="truck" class="w-3 h-3"></i>Pengiriman Aman</li></ul></div>
-                <div class="md:col-span-3"><h4 class="text-xs font-bold text-white uppercase mb-4">Kontak</h4><address class="not-italic space-y-3 text-sm text-steel"><div class="flex items-start gap-2"><i data-lucide="mail" class="w-4 h-4 mt-0.5"></i><a href="mailto:veldionsilver@gmail.com" class="hover:text-white">veldionsilver@gmail.com</a></div><div class="flex items-start gap-2"><i data-lucide="phone" class="w-4 h-4 mt-0.5"></i><a href="https://wa.me/628137271517" class="hover:text-white">0813 727 1517</a></div></address></div>
+                
+                <!-- Kolom Kontak yang sudah diperbaiki -->
+                <div class="md:col-span-3">
+                    <h4 class="text-xs font-bold text-white uppercase mb-4">Kontak</h4>
+                    <address class="not-italic space-y-3 text-sm text-steel">
+                        <!-- 1. Tentang Kami -->
+                        <div class="flex items-start gap-2 cursor-pointer hover:text-white transition group" id="aboutBtn">
+                            <i data-lucide="info" class="w-4 h-4 mt-0.5 group-hover:text-white"></i>
+                            <span class="hover:text-white">Tentang Kami</span>
+                        </div>
+                        <!-- 2. Email -->
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="mail" class="w-4 h-4 mt-0.5"></i>
+                            <a href="mailto:veldionsilver@gmail.com" class="hover:text-white">veldionsilver@gmail.com</a>
+                        </div>
+                        <!-- 3. Telepon -->
+                        <div class="flex items-start gap-2">
+                            <i data-lucide="phone" class="w-4 h-4 mt-0.5"></i>
+                            <a href="https://wa.me/628137271517" class="hover:text-white">0813 727 1517</a>
+                        </div>
+                    </address>
+                </div>
+            
             </div>
             <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-steel-dark"><p>© 2026 Veldion Silver</p><p>Harga mengikuti pasar (XAG/IDR)</p></div>
         </div>
@@ -360,12 +414,46 @@
     </nav>
 
     <!-- FLOATING -->
-    <button id="toTopBtn" class="floating-btn right-6 bottom-36 md:right-8 md:bottom-24 w-12 h-12 bg-white/10 backdrop-blur border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition" aria-label="Top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
+    <button id="toTopBtn" class="floating-btn right-6 bottom-36 md:right-8 md:bottom-24 w-12 h-12 bg-void-200 backdrop-blur border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition" aria-label="Top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
     <a href="https://wa.me/628137271517" target="_blank" class="hidden md:flex fixed z-40 bg-white text-black rounded-full shadow-lg transition hover:shadow-xl hover:scale-105 right-8 bottom-8 items-center overflow-hidden group active"><div class="p-4"><i data-lucide="message-circle" class="w-5 h-5"></i></div><div class="w-0 group-hover:w-auto group-hover:pr-5 overflow-hidden transition-all duration-500 whitespace-nowrap font-bold text-sm">Chat Admin</div></a>
 
     <!-- MODALS -->
     <div class="modal-overlay" id="searchModal"><div class="modal-content max-w-2xl"><div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4"><i data-lucide="search" class="w-5 h-5 text-steel"></i><input type="text" id="searchInput" placeholder="Cari produk, kategori, supplier..." class="bg-transparent w-full text-white text-sm focus:outline-none"><button id="closeSearch" class="text-steel hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button></div><div id="searchResults" class="max-h-96 overflow-y-auto text-sm text-steel"></div></div></div>
-    <div class="modal-overlay" id="productModal"><div class="modal-content"><button id="closeProductModal" class="absolute top-5 right-5 text-steel hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center border border-white/10"><span class="text-3xl font-display font-bold text-silver-premium" id="modalInitial">B</span></div><div><h3 class="font-display text-xl font-bold text-white" id="modalName">Produk</h3><p class="text-sm text-steel-light" id="modalCategory">Kategori</p></div></div><div class="space-y-3 mb-6"><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Supplier</span><span class="text-white font-medium text-sm" id="modalSupplier">-</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Berat</span><span class="text-white font-medium text-sm" id="modalWeight">-</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Kadar</span><span class="text-white font-medium text-sm" id="modalPurity">-</span></div><div class="flex justify-between py-2"><span class="text-steel text-sm">Harga</span><span class="text-xl font-display font-bold text-silver-premium" id="modalPrice">-</span></div></div><a id="modalLink" href="#" target="_blank" class="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-steel-light transition btn-shine"><i data-lucide="message-circle" class="w-5 h-5"></i>Tanya Stok via WhatsApp</a></div></div>
+    
+    <div class="modal-overlay" id="productModal"><div class="modal-content"><button id="closeProductModal" class="absolute top-5 right-5 text-steel hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center border border-white/10"><span class="text-3xl font-display font-bold text-silver-premium" id="modalInitial">B</span></div><div><h3 class="font-display text-xl font-bold text-white" id="modalName">Produk</h3><p class="text-sm text-steel-light" id="modalCategory">Kategori</p></div></div><div class="space-y-3 mb-6"><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Supplier</span><span class="text-white font-medium text-sm" id="modalSupplier">-</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Berat</span><span class="text-white font-medium text-sm" id="modalWeight">-</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Kadar</span><span class="text-white font-medium text-sm" id="modalPurity">-</span></div><div class="flex justify-between py-2"><span class="text-steel text-sm">Harga</span><span class="text-xl font-display font-bold text-silver-premium" id="modalPrice">-</span></div></div><a id="modalLink" href="#" target="_blank" class="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100 transition btn-shine"><i data-lucide="message-circle" class="w-5 h-5"></i>Tanya Stok via WhatsApp</a></div></div>
+
+    <!-- Modal Tentang Kami -->
+    <div class="modal-overlay" id="aboutModal">
+        <div class="modal-content max-w-lg text-center">
+            <button id="closeAboutModal" class="absolute top-5 right-5 text-steel hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+            
+            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-white/10 to-white/5 rounded-full flex items-center justify-center border border-white/10 mb-5">
+                <span class="text-3xl font-display font-bold text-silver-premium">VS</span>
+            </div>
+
+            <h3 class="text-2xl font-display font-bold text-white mb-2">Tentang Veldion Silver</h3>
+            <p class="text-sm text-steel-light mb-6">Distributor Perak Fisik Terpercaya</p>
+
+            <div class="text-left space-y-4 text-sm text-steel-light leading-relaxed">
+                <p>
+                    <span class="text-white font-semibold">Veldion Silver</span> hadir sebagai jembatan investasi yang menghubungkan Anda langsung dengan lebih dari <span class="text-white font-medium">200 supplier perak fisik resmi</span> di Indonesia.
+                </p>
+                <p>
+                    Kami lahir untuk menjawab tantangan utama investor perak: <span class="text-white font-medium">antrean Pre-Order yang panjang</span>. Dengan jaringan supplier yang luas, kami memastikan stok selalu <span class="text-white font-medium">ready</span> dan proses transaksi yang cepat.
+                </p>
+                <div class="pt-4 border-t border-white/10 flex items-center justify-between">
+                    <div class="flex items-center gap-2 text-xs">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-steel"></i>
+                        <span>Banda Aceh, Indonesia</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                        <span>Verified Business</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
     /* ============================================================
@@ -376,8 +464,8 @@
     const MARKET_OPEN = true;
 
     // 2. HARGA XAG (ubah setiap hari)
-    const XAG_USD = "$87.86";
-    const XAG_IDR = "Rp107.500";
+    const XAG_USD = "$91.20";
+    const XAG_IDR = "Rp73.910";
 
     // 3. DATA PRODUK (ubah setiap hari)
     // Cara edit: ganti nilai dalam tanda petik
@@ -466,7 +554,7 @@
     function renderProducts() {
         const grid = document.getElementById('productGrid');
         grid.innerHTML = PRODUCTS.map((p, i) => `
-            <div class="product-card glass-card glass-card-hover p-4 md:p-5 rounded-xl reveal" data-idx="${i}" style="transition-delay:${i*50}ms">
+            <div class="product-card glass-card-hover p-4 md:p-5 rounded-xl reveal" data-idx="${i}" style="transition-delay:${i*50}ms">
                 <span class="product-badge">${p.category}</span>
                 <div class="flex flex-col items-center text-center">
                     <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center border border-white/10 mb-3">
@@ -560,15 +648,28 @@
     });
 
     // Modal handlers
-    ['productModal', 'searchModal'].forEach(id => {
+    ['productModal', 'searchModal', 'aboutModal'].forEach(id => {
         document.getElementById(id).addEventListener('click', e => {
             if (e.target.id === id) { document.getElementById(id).classList.remove('active'); document.body.classList.remove('no-scroll'); }
         });
     });
+    
     document.getElementById('closeProductModal').addEventListener('click', () => { document.getElementById('productModal').classList.remove('active'); document.body.classList.remove('no-scroll'); });
     document.getElementById('closeSearch').addEventListener('click', closeSearchM);
+    
+    // About Modal Listener
+    document.getElementById('aboutBtn').addEventListener('click', () => {
+        document.getElementById('aboutModal').classList.add('active');
+        document.body.classList.add('no-scroll');
+        lucide.createIcons();
+    });
+    document.getElementById('closeAboutModal').addEventListener('click', () => {
+        document.getElementById('aboutModal').classList.remove('active');
+        document.body.classList.remove('no-scroll');
+    });
+
     document.getElementById('searchBtn').addEventListener('click', () => { document.getElementById('searchModal').classList.add('active'); searchInput.focus(); searchResults.innerHTML = defaultSearch(); document.body.classList.add('no-scroll'); lucide.createIcons(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { ['productModal', 'searchModal'].forEach(id => document.getElementById(id).classList.remove('active')); document.body.classList.remove('no-scroll'); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { ['productModal', 'searchModal', 'aboutModal'].forEach(id => document.getElementById(id).classList.remove('active')); document.body.classList.remove('no-scroll'); } });
 
     // Scroll reveal
     const observer = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting && e.target.classList.add('active')); }, { threshold: 0.1 });
@@ -609,4 +710,3 @@
     </script>
 </body>
 </html>
-
