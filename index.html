@@ -2,11 +2,12 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Veldion Silver • Distributor Perak Fisik Indonesia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0C0F14">
     
     <!-- SEO -->
-    <meta name="description" content="Veldion Silver adalah distributor perak fisik terpercaya di Indonesia. Stok ready dari 200+ supplier resmi tanpa Pre-Order panjang.">
+    <title>Veldion Silver • Distributor Perak Fisik Indonesia</title>
+    <meta name="description" content="Veldion Silver adalah distributor perak fisik terpercaya. Stok ready tanpa Pre-Order panjang. Pengiriman aman ke seluruh Indonesia.">
     <meta name="keywords" content="jual perak fisik, distributor perak, perak batangan, investasi perak, veldion silver">
     <meta name="author" content="Veldion Silver">
     <meta name="robots" content="index, follow">
@@ -16,14 +17,9 @@
     <meta property="og:type" content="business.business">
     <meta property="og:url" content="https://veldion.id/">
     <meta property="og:title" content="Veldion Silver - Distributor Perak Fisik Indonesia">
-    <meta property="og:description" content="Stok ready dari 200+ supplier tanpa antrean Pre-Order.">
+    <meta property="og:description" content="Stok ready tanpa antrean Pre-Order. Pengiriman aman.">
     <meta property="og:image" content="https://veldion.id/og-image.png">
     <meta property="og:site_name" content="Veldion Silver">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Veldion Silver">
-    <meta name="twitter:description" content="Stok ready tanpa PO panjang.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +35,9 @@
                 extend: {
                     fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
                     colors: {
-                        void: { DEFAULT: '#1A1D23', 50: '#1F2229', 100: '#262A33', 200: '#2E333E' },
-                        steel: { DEFAULT: '#8B8FA3', light: '#B0B4C6', dark: '#5C5F72' }
+                        void: { DEFAULT: '#0C0F14', 50: '#12161D', 100: '#181D26', 200: '#1E242F', 300: '#252C3A' },
+                        steel: { DEFAULT: '#7A8499', light: '#A0A9BA', dark: '#555D6F' },
+                        teal: { DEFAULT: '#14B8A6', light: '#2DD4BF', dark: '#0D9488', glow: 'rgba(20, 184, 166, 0.15)' }
                     }
                 }
             }
@@ -62,196 +59,1130 @@
     
     <style>
         :root { 
-            --silver-gradient: linear-gradient(145deg, #E5E7EB 0%, #9CA3AF 30%, #4B5563 70%, #D1D5DB 100%); 
+            --teal-gradient: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 50%, #0D9488 100%);
+            --silver-gradient: linear-gradient(145deg, #E5E7EB 0%, #9CA3AF 30%, #6B7280 70%, #D1D5DB 100%);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-top: env(safe-area-inset-top, 0px);
+            --desktop-top-bar-height: 36px;
+            --desktop-nav-height: 80px;
+            --mobile-top-bar-height: 44px;
+            --mobile-header-height: 64px;
+            --mobile-nav-height: 70px;
         }
-        * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; background: #1A1D23; overflow-x: hidden; padding-top: 36px; color: #E5E7EB; }
-        body.no-scroll { overflow: hidden; }
-        ::-webkit-scrollbar { width: 6px; background: #1A1D23; }
-        ::-webkit-scrollbar-thumb { background: #3A3F4B; border-radius: 4px; }
         
-        .text-silver-premium { background: var(--silver-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { 
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased; 
+            background: #0C0F14; 
+            overflow-x: hidden; 
+            color: #E5E7EB;
+            line-height: 1.6;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        body.no-scroll { overflow: hidden; }
+        
+        ::-webkit-scrollbar { width: 6px; background: #0C0F14; }
+        ::-webkit-scrollbar-thumb { background: #252C3A; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2E3644; }
+        
+        .text-teal-gradient { background: var(--teal-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .text-silver-premium { background: var(--silver-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         
         .glass-card { 
-            background: linear-gradient(145deg, rgba(38, 42, 51, 0.8) 0%, rgba(30, 33, 40, 0.9) 100%); 
+            background: linear-gradient(145deg, rgba(30, 36, 47, 0.8) 0%, rgba(18, 22, 29, 0.9) 100%); 
             backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255,255,255,0.07); 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.25); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
         }
+        
         .glass-card-hover { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        
         .glass-card-hover:hover { 
-            border-color: rgba(255,255,255,0.15); 
+            border-color: rgba(45, 212, 191, 0.2); 
             transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 8px 30px rgba(20, 184, 166, 0.1), inset 0 1px 0 rgba(255,255,255,0.05);
         }
         
         .btn-shine { position: relative; overflow: hidden; }
         .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(45deg) translateX(-100%); transition: transform 0.6s; }
         .btn-shine:hover::after { transform: rotate(45deg) translateX(100%); }
         
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* ========== ANIMASI INFINITY SCROLL ========== */
+        .anim-item {
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+            filter: blur(3px);
+        }
         
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-        @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
-        @keyframes blink-price { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        @keyframes pulse-slow { 0%, 100% { opacity: 0.03; transform: scale(1); } 50% { opacity: 0.06; transform: scale(1.05); } }
-        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        @keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.05); } 50% { box-shadow: 0 0 25px rgba(255,255,255,0.08); } }
-        @keyframes banner-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .anim-left {
+            transform: translateX(-40px);
+        }
+        
+        .anim-right {
+            transform: translateX(40px);
+        }
+        
+        .anim-up {
+            transform: translateY(40px);
+        }
+        
+        .anim-down {
+            transform: translateY(-40px);
+        }
+        
+        .anim-scale {
+            transform: scale(0.9);
+        }
+        
+        .anim-item.anim-in {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0) translateY(0) scale(1);
+        }
+        
+        .anim-item.anim-out {
+            opacity: 0;
+            filter: blur(3px);
+        }
+        
+        .anim-item.anim-out.anim-left {
+            transform: translateX(-40px);
+        }
+        
+        .anim-item.anim-out.anim-right {
+            transform: translateX(40px);
+        }
+        
+        .anim-item.anim-out.anim-up {
+            transform: translateY(40px);
+        }
+        
+        .anim-item.anim-out.anim-down {
+            transform: translateY(-40px);
+        }
+        
+        .anim-item.anim-out.anim-scale {
+            transform: scale(0.9);
+        }
+        
+        /* ========== ANIMASI HALUS LAINNYA ========== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.2); }
+        }
+        
+        @keyframes border-glow {
+            0%, 100% { border-color: rgba(45, 212, 191, 0.1); }
+            50% { border-color: rgba(45, 212, 191, 0.3); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        
+        @keyframes banner-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
         
         .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-d1 { animation-delay: 1s; }
-        .animate-float-d2 { animation-delay: 2s; }
-        .animate-float-d3 { animation-delay: 3s; }
-        .pulse-dot-open { animation: pulse-dot 1.5s ease-in-out infinite; }
-        .pulse-dot-closed { animation: none; }
-        .price-blink { animation: blink-price 2s ease-in-out infinite; }
-        .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
+        .animate-float-d1 { animation-delay: 0.5s; }
+        .animate-float-d2 { animation-delay: 1s; }
+        .animate-float-d3 { animation-delay: 1.5s; }
+        .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
         .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
-        
-        .premium-glass { 
-            background: linear-gradient(145deg, rgba(38, 42, 51, 0.9) 0%, rgba(28, 31, 37, 0.95) 100%); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255,255,255,0.08); 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); 
+        .animate-border-glow { animation: border-glow 3s ease-in-out infinite; }
+        .animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
+        .animate-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
         }
-        .shimmer-line { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); animation: shimmer 3s ease-in-out infinite; }
         
-        .benefit-card { transition: all 0.3s ease; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-        .benefit-card:hover { border-color: rgba(255,255,255,0.1); transform: translateY(-2px); background: rgba(255,255,255,0.05); }
-        
+        /* ========== BANNER INFINITE ========== */
         .banner-container { position: relative; overflow: hidden; }
-        .banner-container::before, .banner-container::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 10; pointer-events: none; }
-        .banner-container::before { left: 0; background: linear-gradient(to right, #1A1D23 0%, transparent 100%); }
-        .banner-container::after { right: 0; background: linear-gradient(to left, #1A1D23 0%, transparent 100%); }
-        .banner-track { display: flex; gap: 24px; animation: banner-scroll 30s linear infinite; width: max-content; }
-        .banner-track:hover { animation-play-state: paused; }
-        .banner-card { flex-shrink: 0; width: 340px; padding: 20px 24px; border-radius: 16px; backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); transition: all 0.4s; background: rgba(38, 42, 51, 0.6); }
-        .banner-card:hover { transform: translateY(-4px) scale(1.02); border-color: rgba(255,255,255,0.12); }
+        .banner-container::before, .banner-container::after { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            bottom: 0; 
+            width: 80px; 
+            z-index: 10; 
+            pointer-events: none; 
+        }
+        .banner-container::before { 
+            left: 0; 
+            background: linear-gradient(to right, #0C0F14 0%, transparent 100%); 
+        }
+        .banner-container::after { 
+            right: 0; 
+            background: linear-gradient(to left, #0C0F14 0%, transparent 100%); 
+        }
+        .banner-track { 
+            display: flex; 
+            gap: 24px; 
+            animation: banner-scroll 35s linear infinite; 
+            width: max-content; 
+        }
+        .banner-track:hover { 
+            animation-play-state: paused; 
+        }
+        .banner-card { 
+            flex-shrink: 0; 
+            width: 320px; 
+            padding: 20px 24px; 
+            border-radius: 16px; 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            background: rgba(30, 36, 47, 0.6); 
+        }
+        .banner-card:hover { 
+            transform: translateY(-4px) scale(1.02); 
+            border-color: rgba(255,255,255,0.1); 
+        }
+        .banner-card-red { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.08); border-left: 2px solid rgba(239, 68, 68, 0.3); }
+        .banner-card-yellow { box-shadow: 0 8px 30px rgba(250, 204, 21, 0.08); border-left: 2px solid rgba(250, 204, 21, 0.3); }
+        .banner-card-teal { box-shadow: 0 8px 30px rgba(20, 184, 166, 0.08); border-left: 2px solid rgba(20, 184, 166, 0.3); }
         
-        .banner-card-red { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.08); border-left: 1px solid rgba(239, 68, 68, 0.2); }
-        .banner-card-yellow { box-shadow: 0 8px 30px rgba(250, 204, 21, 0.08); border-left: 1px solid rgba(250, 204, 21, 0.2); }
-        .banner-card-green { box-shadow: 0 8px 30px rgba(16, 185, 129, 0.08); border-left: 1px solid rgba(16, 185, 129, 0.2); }
-        
-        .product-card { position: relative; cursor: pointer; overflow: hidden; background: rgba(38, 42, 51, 0.5); border: 1px solid rgba(255,255,255,0.06); }
-        .product-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); opacity: 0; transition: opacity 0.4s; }
+        /* ========== PRODUCT CARD ========== */
+        .product-card { 
+            position: relative; 
+            cursor: pointer; 
+            overflow: hidden; 
+            background: rgba(30, 36, 47, 0.5); 
+            border: 1px solid rgba(255,255,255,0.05); 
+            transition: all 0.3s ease; 
+            border-radius: 16px; 
+            padding: 16px; 
+        }
+        .product-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            height: 1px; 
+            background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.3), transparent); 
+            opacity: 0; 
+            transition: opacity 0.4s; 
+        }
         .product-card:hover::before { opacity: 1; }
-        .product-badge { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.08); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 3px 10px; font-size: 9px; color: #9CA3AF; text-transform: uppercase; }
+        .product-card:hover { 
+            border-color: rgba(45, 212, 191, 0.2); 
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.1);
+        }
+        .product-badge { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: rgba(255,255,255,0.06); 
+            backdrop-filter: blur(4px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 20px; 
+            padding: 3px 10px; 
+            font-size: 9px; 
+            color: #9CA3AF; 
+            text-transform: uppercase; 
+        }
         
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; visibility: hidden; transition: all 0.3s; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: rgba(38, 42, 51, 0.98); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 32px; max-width: 480px; width: 100%; transform: scale(0.95); transition: transform 0.3s; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .modal-overlay.active .modal-content { transform: scale(1); }
+        /* ========== MODAL ========== */
+        .modal-overlay { 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(8px); 
+            z-index: 1100; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 16px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.3s ease, visibility 0.3s ease; 
+        }
+        .modal-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+        .modal-content { 
+            background: rgba(30, 36, 47, 0.98); 
+            border: 1px solid rgba(255,255,255,0.06); 
+            border-radius: 20px; 
+            padding: 28px; 
+            max-width: 420px; 
+            width: 100%; 
+            transform: scale(0.95) translateY(10px); 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            position: relative; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+        }
+        .modal-overlay.active .modal-content { 
+            transform: scale(1) translateY(0); 
+        }
         
-        .floating-btn { position: fixed; z-index: 100; opacity: 0; visibility: hidden; transition: all 0.3s; background: #2E333E; border: 1px solid #3A3F4B; }
-        .floating-btn.visible { opacity: 1; visibility: visible; }
-        .floating-btn:hover { background: #3A3F4B; border-color: #4A5060; }
+        /* ========== FLOATING BUTTON ========== */
+        .floating-btn { 
+            position: fixed; 
+            z-index: 100; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: all 0.3s; 
+            background: #1E242F; 
+            border: 1px solid #252C3A; 
+            width: 44px; 
+            height: 44px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            right: 16px; 
+            bottom: 24px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .floating-btn.visible { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+        .floating-btn:hover { 
+            background: #252C3A; 
+            border-color: #2E3644; 
+            transform: translateY(-2px);
+        }
         
-        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-        .blog-btn { transition: all 0.3s ease; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        .blog-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); }
-        .blog-btn:hover i { transform: translateX(3px); }
+        /* ========== DESKTOP HEADER ========== */
+        .desktop-top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 60;
+            background: rgba(18, 22, 29, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: var(--desktop-top-bar-height);
+            display: flex;
+            align-items: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
         
-        .search-item:hover { background: rgba(255,255,255,0.05); }
+        @media (max-width: 768px) {
+            .desktop-top-bar { display: none; }
+        }
         
-        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        .desktop-nav {
+            position: fixed;
+            top: var(--desktop-top-bar-height);
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(12, 15, 20, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: var(--desktop-nav-height);
+            display: flex;
+            align-items: center;
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .desktop-nav.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(12, 15, 20, 0.98);
+        }
+        
+        .nav-item {
+            position: relative;
+            padding: 1rem 0;
+            color: #A0A9BA;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--teal-gradient);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 2px;
+        }
+        
+        .nav-item:hover {
+            color: #FFFFFF;
+        }
+        
+        .nav-item.active {
+            color: #FFFFFF;
+        }
+        
+        .nav-item.active::after {
+            width: 80%;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+        }
+        
+        /* ========== MOBILE HEADER ========== */
+        .mobile-top-bar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 55;
+            background: rgba(18, 22, 29, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: var(--mobile-top-bar-height);
+            padding: 0 16px;
+            padding-top: max(0px, var(--safe-top));
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-top-bar { display: flex; }
+        }
+        
+        .mobile-scroll-header {
+            display: none;
+            position: fixed;
+            top: var(--mobile-top-bar-height);
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(12, 15, 20, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            height: var(--mobile-header-height);
+            padding: 0 16px;
+            align-items: center;
+            justify-content: space-between;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .mobile-scroll-header.visible {
+            transform: translateY(0);
+            opacity: 1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-scroll-header { display: flex; }
+        }
+        
+        .mobile-scroll-logo { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .mobile-scroll-logo .brand-name { 
+            font-family: 'Sora', sans-serif; 
+            font-size: 20px;
+            font-weight: 700; 
+            background: var(--teal-gradient); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            line-height: 1.2;
+        }
+        
+        .mobile-scroll-logo .brand-tag { 
+            font-size: 8px; 
+            color: #555D6F; 
+            text-transform: uppercase; 
+            letter-spacing: 0.15em; 
+            margin-top: 1px; 
+        }
+        
+        .mobile-scroll-cta { 
+            padding: 8px 18px; 
+            background: var(--teal-gradient); 
+            border-radius: 30px; 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: #0C0F14; 
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+            text-decoration: none; 
+            transition: all 0.2s ease; 
+            box-shadow: 0 2px 10px rgba(20, 184, 166, 0.3);
+        }
+        .mobile-scroll-cta:active { transform: scale(0.95); }
+        
+        /* ========== MOBILE BOTTOM NAVIGATION ========== */
+        .mobile-nav-wrapper { display: none; }
+        
+        @media (max-width: 768px) {
+            .mobile-nav-wrapper {
+                display: block;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                padding: 8px 12px;
+                padding-bottom: max(8px, calc(var(--safe-bottom) + 4px));
+                background: linear-gradient(to top, rgba(12, 15, 20, 0.95) 30%, transparent);
+            }
+        }
+        
+        .mobile-nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: rgba(18, 22, 29, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 32px;
+            padding: 6px 4px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            max-width: 420px;
+            margin: 0 auto;
+        }
+        
+        .mobile-nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 8px 6px;
+            border-radius: 24px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .mobile-nav-item:active { transform: scale(0.94); }
+        .mobile-nav-item.active { background: rgba(45, 212, 191, 0.1); }
+        .mobile-nav-item .nav-icon { width: 20px; height: 20px; color: #555D6F; transition: color 0.2s ease, transform 0.2s ease; margin-bottom: 3px; }
+        .mobile-nav-item.active .nav-icon { color: #2DD4BF; transform: translateY(-1px); }
+        .mobile-nav-item .nav-label { font-size: 10px; font-weight: 600; color: #555D6F; text-transform: uppercase; letter-spacing: 0.04em; transition: color 0.2s ease; }
+        .mobile-nav-item.active .nav-label { color: #2DD4BF; }
+        
+        .mobile-nav-cta {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 8px 6px;
+            background: var(--teal-gradient);
+            border-radius: 24px;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 2px 12px rgba(20, 184, 166, 0.3);
+            transition: all 0.2s ease;
+            margin-left: 2px;
+        }
+        
+        .mobile-nav-cta:active { transform: scale(0.94); }
+        .mobile-nav-cta .nav-icon { width: 20px; height: 20px; color: #0C0F14; margin-bottom: 3px; }
+        .mobile-nav-cta .nav-label { font-size: 10px; font-weight: 700; color: #0C0F14; text-transform: uppercase; letter-spacing: 0.04em; }
+        
+        /* ========== BODY PADDING ========== */
+        body { 
+            padding-top: 0;
+        }
+        
+        @media (min-width: 769px) {
+            body { 
+                padding-top: calc(var(--desktop-top-bar-height) + var(--desktop-nav-height));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body { 
+                padding-bottom: calc(var(--mobile-nav-height) + 8px);
+            }
+        }
+        
+        /* ========== HERO SECTION ========== */
+        #hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+            margin-top: 0;
+        }
+        
+        @media (min-width: 769px) {
+            #hero {
+                min-height: 100vh;
+                min-height: 100dvh;
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #hero {
+                min-height: calc(100vh - var(--mobile-top-bar-height));
+                min-height: calc(100dvh - var(--mobile-top-bar-height));
+                margin-top: var(--mobile-top-bar-height);
+            }
+        }
+        
+        .hero-content {
+            width: 100%;
+            padding: 2rem 1rem;
+        }
+        
+        @media (min-width: 769px) {
+            .hero-content {
+                padding: 3rem 1rem;
+            }
+        }
+        
+        /* ========== PRIVILEGE CARD ========== */
+        .privilege-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(30, 36, 47, 0.9) 0%, rgba(18, 22, 29, 0.95) 100%);
+            border: 1px solid rgba(45, 212, 191, 0.08);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 16px;
+        }
+        .privilege-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.2) 0%, transparent 50%, rgba(45, 212, 191, 0.1) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .privilege-card:hover::before { opacity: 1; }
+        .privilege-card:hover {
+            border-color: rgba(45, 212, 191, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(20, 184, 166, 0.1);
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .benefit-item:hover { background: rgba(45, 212, 191, 0.05); transform: translateX(4px); }
+        
+        /* ========== COMPARISON CARD ========== */
+        .comparison-card {
+            position: relative;
+            background: linear-gradient(145deg, rgba(30, 36, 47, 0.9) 0%, rgba(18, 22, 29, 0.95) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .comparison-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .comparison-card.featured {
+            border-color: rgba(45, 212, 191, 0.2);
+            background: linear-gradient(145deg, rgba(45, 212, 191, 0.05) 0%, rgba(18, 22, 29, 0.95) 100%);
+        }
+        
+        .comparison-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--teal-gradient);
+        }
+        
+        .comparison-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.2s ease;
+        }
+        
+        .comparison-item:hover {
+            transform: translateX(4px);
+        }
+        
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+        
+        /* ========== FAQ ========== */
+        .faq-item { 
+            border-radius: 16px; 
+            overflow: hidden; 
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: rgba(45, 212, 191, 0.1);
+        }
+        .faq-toggle { 
+            width: 100%; 
+            padding: 16px 18px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            background: transparent; 
+            border: none; 
+            cursor: pointer; 
+            transition: background 0.2s ease; 
+            text-align: left;
+        }
+        .faq-toggle:hover { background: rgba(255, 255, 255, 0.02); }
+        .faq-question { 
+            font-size: 13px; 
+            font-weight: 500; 
+            color: #FFFFFF; 
+        }
+        .faq-icon { 
+            width: 18px; 
+            height: 18px; 
+            color: #7A8499; 
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            flex-shrink: 0; 
+        }
+        .faq-item.open .faq-icon { transform: rotate(180deg); }
+        .faq-content { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .faq-item.open .faq-content { 
+            max-height: 300px; 
+        }
+        .faq-answer { 
+            padding: 0 18px 16px; 
+            font-size: 13px; 
+            color: #7A8499; 
+            line-height: 1.6; 
+        }
+        
+        /* ========== CTA BUTTONS ========== */
+        .cta-wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: linear-gradient(145deg, rgba(30, 36, 47, 0.8) 0%, rgba(18, 22, 29, 0.9) 100%);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #2DD4BF;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-wa-btn:hover {
+            background: linear-gradient(145deg, rgba(45, 212, 191, 0.1) 0%, rgba(30, 36, 47, 0.9) 100%);
+            border-color: rgba(45, 212, 191, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.2);
+        }
+        
+        .cta-primary-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--teal-gradient);
+            color: #0C0F14;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.2);
+        }
+        
+        .cta-primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(20, 184, 166, 0.3);
+        }
+        
+        /* ========== FOOTER ========== */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1.5fr 1fr 1fr;
+                gap: 4rem;
+            }
+        }
+        
+        .footer-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-link {
+            display: block;
+            color: #7A8499;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 5px 0;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        
+        .footer-link:hover {
+            color: #2DD4BF;
+            transform: translateX(4px);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+        
+        .footer-social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7A8499;
+            transition: all 0.2s ease;
+        }
+        
+        .footer-social-btn:hover {
+            background: rgba(45, 212, 191, 0.1);
+            border-color: rgba(45, 212, 191, 0.2);
+            color: #2DD4BF;
+            transform: translateY(-2px);
+        }
+        
+        /* ========== SEARCH ITEM ========== */
+        .search-item:hover { background: rgba(255,255,255,0.03); transform: translateX(4px); transition: all 0.2s ease; }
+        
+        /* ========== PRELOAD ========== */
+        .preload-logo {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* ========== REDUCED MOTION ========== */
+        @media (prefers-reduced-motion: reduce) { 
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } 
+        }
+        
+        /* ========== FOCUS VISIBLE ========== */
+        button:focus-visible, a:focus-visible {
+            outline: 2px solid rgba(45, 212, 191, 0.4);
+            outline-offset: 2px;
+        }
+        
+        /* ========== EXTRA SMALL DEVICES ========== */
+        @media (max-width: 320px) {
+            .mobile-nav-item { padding: 6px 4px; }
+            .mobile-nav-item .nav-label { font-size: 8px; }
+            .banner-card { width: 280px; padding: 16px; }
+            .mobile-nav-cta .nav-label { font-size: 8px; }
+        }
     </style>
     
-    <!-- Google Search Console Verification -->
     <meta name="google-site-verification" content="hueLadxQV3ytbYXVwY32gKQ-DfvkyDTe_XkMoimWN5c" />
+    
+    <!-- Preload logo untuk performa -->
+    <link rel="preload" as="image" href="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png">
 </head>
 <body class="bg-void text-gray-200 font-body">
 
-    <!-- ========== TOP BAR (FIXED) ========== -->
-    <div class="fixed top-0 left-0 right-0 z-[60] bg-void-50 border-b border-white/5 py-2 text-xs font-medium text-steel">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="hidden md:flex justify-between items-center">
+    <!-- ========== PRELOAD LOGO ========== -->
+    <img src="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png" class="preload-logo" alt="" aria-hidden="true">
+
+    <!-- ========== DESKTOP TOP BAR ========== -->
+    <div class="desktop-top-bar text-xs font-medium text-steel">
+        <div class="max-w-7xl mx-auto px-4 w-full">
+            <div class="flex justify-between items-center">
                 <div class="flex items-center gap-8">
-                    <div class="flex items-center gap-2 text-white">
-                        <span class="w-1.5 h-1.5 rounded-full pulse-dot-open" id="marketDot"></span>
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full pulse-dot" id="marketDot"></span>
                         <span class="font-semibold tracking-wider text-[10px] uppercase" id="marketText">Market Open</span>
                     </div>
                     <div class="flex items-center gap-1 text-steel-light">
                         <span class="text-[10px] uppercase">XAG/USD:</span>
-                        <span class="text-white font-bold price-blink" id="xagUsd">$32.45</span>
+                        <span class="text-white font-bold" id="xagUsd">$32.45</span>
                     </div>
                     <div class="flex items-center gap-1 text-steel-light">
                         <span class="text-[10px] uppercase">XAG/IDR:</span>
-                        <span class="text-white font-bold price-blink" id="xagIdr">Rp 545.000</span>
+                        <span class="text-white font-bold" id="xagIdr">Rp 545.000</span>
                     </div>
                 </div>
-                <span class="text-[10px] text-steel-dark">Terhubung dengan <span class="text-white font-bold">200+</span> supplier nasional</span>
+                <span class="text-[10px] text-steel-dark">Pengiriman aman ke seluruh Indonesia</span>
             </div>
-            <div class="md:hidden flex justify-between items-center">
-                <div class="flex items-center gap-2 text-white">
-                    <span class="w-1.5 h-1.5 rounded-full pulse-dot-open" id="marketDotMobile"></span>
-                    <span class="font-semibold tracking-wider text-[10px] uppercase" id="marketTextMobile">Market Open</span>
+        </div>
+    </div>
+
+    <!-- ========== MOBILE TOP BAR ========== -->
+    <div class="mobile-top-bar" id="mobileTopBar">
+        <div class="flex justify-between items-center w-full">
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-teal pulse-dot" id="marketDotMobile"></span>
+                <span class="font-semibold tracking-wider text-[10px] uppercase text-teal-light" id="marketTextMobile">Market Open</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-1">
+                    <span class="text-[9px] text-steel-light">XAG/USD:</span>
+                    <span class="text-white font-semibold text-[11px]" id="xagUsdMobile">$32.45</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <div class="flex items-center gap-1"><span class="text-[9px] text-steel-light">XAG/USD:</span><span class="text-white font-bold text-[11px] price-blink" id="xagUsdMobile">$32.45</span></div>
-                    <div class="flex items-center gap-1"><span class="text-[9px] text-steel-light">XAG/IDR:</span><span class="text-white font-bold text-[11px] price-blink" id="xagIdrMobile">Rp 545.000</span></div>
+                <div class="flex items-center gap-1">
+                    <span class="text-[9px] text-steel-light">XAG/IDR:</span>
+                    <span class="text-white font-semibold text-[11px]" id="xagIdrMobile">Rp 545.000</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ========== NAVIGATION ========== -->
-    <header class="sticky top-[36px] z-50 bg-void/95 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-4 h-16 lg:h-20 flex items-center justify-between">
+    <!-- ========== DESKTOP NAVIGATION ========== -->
+    <header class="desktop-nav" id="desktopNav">
+        <div class="max-w-7xl mx-auto px-4 w-full flex items-center justify-between">
             <a href="#hero" class="flex flex-col items-start cursor-pointer">
-                <span class="font-display text-2xl lg:text-3xl font-bold text-silver-premium">VELDION</span>
+                <span class="font-display text-2xl lg:text-3xl font-bold text-teal-gradient">VELDION</span>
                 <span class="text-[8px] lg:text-[9px] text-steel-dark tracking-[0.3em] uppercase">Silver Bridge</span>
             </a>
-            <nav class="hidden lg:flex items-center gap-10 text-sm font-medium text-steel-light">
-                <a href="#produk" class="hover:text-white transition py-4">Produk</a>
-                <a href="#supplier" class="hover:text-white transition py-4">Supplier</a>
-                <a href="#mitra" class="hover:text-white transition py-4">Mitra</a>
-                <a href="#buyback" class="hover:text-white transition py-4">Buyback</a>
-                <a href="#insights" class="hover:text-white transition py-4">Insights</a>
+            <nav class="hidden lg:flex items-center gap-10 text-sm font-medium">
+                <a href="#supplier" class="nav-item" data-section="supplier">Supplier</a>
+                <a href="#produk" class="nav-item" data-section="produk">Produk</a>
+                <a href="#privilege" class="nav-item" data-section="privilege">Privilege</a>
+                <a href="#buyback" class="nav-item" data-section="buyback">Buyback</a>
+                <a href="#faq" class="nav-item" data-section="faq">FAQ</a>
             </nav>
             <div class="flex items-center gap-2">
-                <button id="searchBtn" class="p-2.5 text-steel hover:text-white transition" aria-label="Search"><i data-lucide="search" class="w-5 h-5"></i></button>
-                <a href="https://wa.me/628137271517" target="_blank" class="flex items-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-bold rounded hover:bg-gray-100 transition btn-shine">
-                    <span class="hidden sm:inline">Hubungi Kami</span><i data-lucide="message-circle" class="w-4 h-4 sm:hidden"></i>
+                <button id="searchBtn" class="p-2.5 text-steel hover:text-white transition" aria-label="Search">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <a href="https://wa.me/628137271517" target="_blank" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-teal-light to-teal text-void text-sm font-bold rounded-full hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] transition btn-shine">
+                    <span class="hidden sm:inline">Hubungi Kami</span>
+                    <i data-lucide="message-circle" class="w-4 h-4 sm:hidden"></i>
                 </a>
             </div>
         </div>
     </header>
 
+    <!-- ========== MOBILE SCROLL HEADER ========== -->
+    <header class="mobile-scroll-header" id="mobileScrollHeader">
+        <a href="#hero" class="mobile-scroll-logo">
+            <span class="brand-name">VELDION</span>
+            <span class="brand-tag">Silver Bridge</span>
+        </a>
+        <a href="https://wa.me/628137271517" target="_blank" class="mobile-scroll-cta">Hubungi</a>
+    </header>
+
+    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <div class="mobile-nav-wrapper" id="mobileNavWrapper">
+        <nav class="mobile-nav-bar" role="navigation" aria-label="Mobile Navigation">
+            <a href="#hero" class="mobile-nav-item active" data-section="hero">
+                <i data-lucide="home" class="nav-icon"></i>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="#supplier" class="mobile-nav-item" data-section="supplier">
+                <i data-lucide="users" class="nav-icon"></i>
+                <span class="nav-label">Supplier</span>
+            </a>
+            <a href="#produk" class="mobile-nav-item" data-section="produk">
+                <i data-lucide="box" class="nav-icon"></i>
+                <span class="nav-label">Produk</span>
+            </a>
+            <a href="#privilege" class="mobile-nav-item" data-section="privilege">
+                <i data-lucide="crown" class="nav-icon"></i>
+                <span class="nav-label">Privilege</span>
+            </a>
+            <a href="#buyback" class="mobile-nav-item" data-section="buyback">
+                <i data-lucide="refresh-cw" class="nav-icon"></i>
+                <span class="nav-label">Buyback</span>
+            </a>
+            <a href="https://wa.me/628137271517" target="_blank" class="mobile-nav-cta">
+                <i data-lucide="message-circle" class="nav-icon"></i>
+                <span class="nav-label">Chat</span>
+            </a>
+        </nav>
+    </div>
+
     <main>
         <!-- ========== HERO ========== -->
-        <section id="hero" class="relative min-h-[calc(100vh-156px)] md:min-h-[calc(100vh-166px)] flex items-center justify-center overflow-hidden bg-gradient-to-b from-void-50 to-void">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.03] rounded-full blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.03] rounded-full blur-3xl"></div>
-            <div class="relative z-10 max-w-7xl mx-auto px-4 py-8 md:py-12 text-center">
-                <div class="mb-5 reveal active flex justify-center">
-                    <img src="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png" alt="Veldion Silver" width="120" height="120" class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-2xl" loading="lazy" decoding="async">
+        <section id="hero" class="bg-gradient-to-b from-void-50 to-void">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-teal/[0.03] rounded-full blur-3xl animate-float-slow"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float animate-float-d2"></div>
+            <div class="hero-content relative z-10 max-w-7xl mx-auto px-4 text-center">
+                <div class="mb-5 anim-item anim-up anim-in flex justify-center">
+                    <img src="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png" alt="Veldion Silver" width="140" height="140" class="object-contain drop-shadow-2xl animate-float" loading="eager" decoding="async" fetchpriority="high">
                 </div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-5 reveal active backdrop-blur-sm">
-                    <i data-lucide="shield-check" class="w-3 h-3 text-white"></i>
-                    <span class="text-[10px] font-semibold text-steel-light uppercase tracking-widest">Akses Supplier Resmi</span>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal/20 bg-teal/5 mb-5 anim-item anim-up anim-in backdrop-blur-sm animate-border-glow">
+                    <i data-lucide="zap" class="w-3 h-3 text-teal-light"></i>
+                    <span class="text-[10px] font-semibold text-teal-light uppercase tracking-widest">Always Ready</span>
                 </div>
-                <h1 class="font-display text-3xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tighter mb-4 reveal active" style="transition-delay:100ms">Investasi Perak Tanpa<br><span class="text-silver-premium">Antrean Panjang</span></h1>
-                <p class="text-sm md:text-lg text-steel max-w-2xl mx-auto mb-6 leading-relaxed reveal active" style="transition-delay:200ms">Supplier besar butuh <span class="text-white font-medium">2-3 bulan Pre-Order</span>. Veldion menjembatani Anda dengan stok ready dari 200+ supplier. <span class="text-white font-medium">Tanpa menunggu.</span></p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center reveal active" style="transition-delay:300ms">
-                    <a href="#produk" class="px-6 py-3 md:px-8 md:py-4 bg-white text-black font-bold text-sm rounded hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition btn-shine flex items-center justify-center gap-2">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-                    <a href="#mitra" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/10 text-white font-bold text-sm rounded hover:bg-white/5 transition flex items-center justify-center gap-2">Mitra Veldion</a>
+                <h1 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tighter mb-4 anim-item anim-up anim-in" style="transition-delay:100ms">Investasi Perak Tanpa<br><span class="text-teal-gradient">Antrean Panjang</span></h1>
+                <p class="text-sm md:text-base text-steel max-w-2xl mx-auto mb-6 leading-relaxed anim-item anim-up anim-in" style="transition-delay:200ms">Supplier besar butuh <span class="text-white font-medium">2-3 bulan Pre-Order</span>. Veldion menyediakan stok ready. <br><span class="text-white font-medium">Tanpa menunggu lama.</span></br></p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center anim-item anim-up anim-in" style="transition-delay:300ms">
+                    <a href="#produk" class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-teal-light to-teal text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(20,184,166,0.3)] transition btn-shine flex items-center justify-center gap-2">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    <a href="#privilege" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/10 text-white font-bold text-sm rounded-full hover:bg-white/5 transition flex items-center justify-center gap-2">Keunggulan Veldion</a>
                 </div>
             </div>
         </section>
 
-        <!-- ========== BANNER ========== -->
+        <!-- ========== BANNER INFINITE ========== -->
         <section class="py-8 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
-                    <div class="banner-card banner-card-red"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div><div><span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4></div></div><p class="text-white/80 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p></div>
-                    <div class="banner-card banner-card-yellow"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-yellow-400"></i></div><div><span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Stok Terbatas</h4></div></div><p class="text-white/80 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p></div>
-                    <div class="banner-card banner-card-green"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i></div><div><span class="text-[10px] font-bold text-emerald-400 uppercase">Solusi</span><h4 class="text-white font-semibold text-sm">Ready Stock</h4></div></div><p class="text-white/80 text-sm">Kami menghubungkan Anda ke stok <strong class="text-white">READY STOCK</strong>.</p></div>
-                    
-                    <div class="banner-card banner-card-red"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div><div><span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4></div></div><p class="text-white/80 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p></div>
-                    <div class="banner-card banner-card-yellow"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center"><i data-lucide="package" class="w-5 h-5 text-yellow-400"></i></div><div><span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span><h4 class="text-white font-semibold text-sm">Stok Terbatas</h4></div></div><p class="text-white/80 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p></div>
-                    <div class="banner-card banner-card-green"><div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center"><i data-lucide="rocket" class="w-5 h-5 text-emerald-400"></i></div><div><span class="text-[10px] font-bold text-emerald-400 uppercase">Solusi</span><h4 class="text-white font-semibold text-sm">Ready Stock</h4></div></div><p class="text-white/80 text-sm">Kami menghubungkan Anda ke stok <strong class="text-white">READY STOCK</strong>.</p></div>
+                    <!-- Masalah 1 -->
+                    <div class="banner-card banner-card-red">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-red-400"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span>
+                                <h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p>
+                    </div>
+                    <!-- Masalah 2 -->
+                    <div class="banner-card banner-card-yellow">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                                <i data-lucide="package" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span>
+                                <h4 class="text-white font-semibold text-sm">Stok Terbatas</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p>
+                    </div>
+                    <!-- Solusi -->
+                    <div class="banner-card banner-card-teal">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center">
+                                <i data-lucide="rocket" class="w-5 h-5 text-teal-light"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-teal-light uppercase">Solusi</span>
+                                <h4 class="text-white font-semibold text-sm">Ready Stock</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Veldion menyediakan stok <strong class="text-white">READY STOCK</strong>.</p>
+                    </div>
+                    <!-- Ulang untuk infinite effect -->
+                    <div class="banner-card banner-card-red">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-red-400"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span>
+                                <h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p>
+                    </div>
+                    <div class="banner-card banner-card-yellow">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                                <i data-lucide="package" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span>
+                                <h4 class="text-white font-semibold text-sm">Stok Terbatas</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p>
+                    </div>
+                    <div class="banner-card banner-card-teal">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center">
+                                <i data-lucide="rocket" class="w-5 h-5 text-teal-light"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-teal-light uppercase">Solusi</span>
+                                <h4 class="text-white font-semibold text-sm">Ready Stock</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Veldion menyediakan stok <strong class="text-white">READY STOCK</strong>.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -259,11 +1190,35 @@
         <!-- ========== SUPPLIER ========== -->
         <section id="supplier" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 md:mb-16 reveal"><span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Network</span><h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3">Supplier Mitra</h2></div>
+                <div class="text-center mb-12 md:mb-16 anim-item anim-up">
+                    <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">Network</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3">Supplier Resmi</h2>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5"><i data-lucide="gem" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">Silverium</h3><p class="text-xs text-steel">Supplier perak modern dengan kualitas presisi.</p><div class="mt-4 text-[10px] text-steel-dark">5.0 rating</div></div>
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float animate-float-d1"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5"><i data-lucide="key-round" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">Key Silver</h3><p class="text-xs text-steel">Spesialis perak press dan koin edisi khusus.</p><div class="mt-4 text-[10px] text-steel-dark">4.9 rating</div></div>
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal animate-float animate-float-d2"><div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5"><i data-lucide="landmark" class="w-7 h-7 text-steel-light"></i></div><h3 class="text-xl font-bold text-white mb-2">JSG / TDS</h3><p class="text-xs text-steel">Produsen dengan sertifikasi ketat.</p><div class="mt-4 text-[10px] text-steel-dark">4.8 rating</div></div>
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center anim-item anim-left">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5">
+                            <i data-lucide="gem" class="w-7 h-7 text-steel-light"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Silverium</h3>
+                        <p class="text-xs text-steel">Supplier perak modern dengan kualitas presisi dengan kemurnian 999.9.</p>
+                        <div class="mt-4 text-[10px] text-steel-dark">5.0 rating</div>
+                    </div>
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center anim-item anim-up">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5">
+                            <i data-lucide="key-round" class="w-7 h-7 text-steel-light"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Key Silver</h3>
+                        <p class="text-xs text-steel">Spesialis perak press dan beragam jenis khusus dengan kemurnian 999.5.</p>
+                        <div class="mt-4 text-[10px] text-steel-dark">4.9 rating</div>
+                    </div>
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center anim-item anim-right">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5">
+                            <i data-lucide="landmark" class="w-7 h-7 text-steel-light"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">JSG / TDS</h3>
+                        <p class="text-xs text-steel">Spesialis Silver berjenis bulat medalion dan bullion dengan kemurnian 999.5.</p>
+                        <div class="mt-4 text-[10px] text-steel-dark">4.8 rating</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -271,66 +1226,245 @@
         <!-- ========== PRODUK ========== -->
         <section id="produk" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 md:mb-16 reveal"><span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Best Seller</span><h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3">Produk Paling Dicari</h2></div>
+                <div class="text-center mb-12 md:mb-16 anim-item anim-up">
+                    <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">Katalog</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3">Produk Ready Stock</h2>
+                </div>
+                
+                <!-- Kategori Desktop -->
                 <div class="hidden md:grid grid-cols-4 gap-4 mb-12">
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Bullion</h4><p class="text-xs text-steel mt-1">Batangan investasi.</p></div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Press</h4><p class="text-xs text-steel mt-1">Laminasi tipis。</p></div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Coin</h4><p class="text-xs text-steel mt-1">Koin edisi。</p></div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-white/30 transition"><h4 class="text-lg font-bold text-white">Medalion</h4><p class="text-xs text-steel mt-1">Bulat artistik.</p></div>
+                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
+                        <h4 class="text-lg font-bold text-white">Bullion</h4>
+                        <p class="text-xs text-steel mt-1">Batangan investasi.</p>
+                    </div>
+                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
+                        <h4 class="text-lg font-bold text-white">Press</h4>
+                        <p class="text-xs text-steel mt-1">Laminasi tipis/Antam style.</p>
+                    </div>
+                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
+                        <h4 class="text-lg font-bold text-white">Coin</h4>
+                        <p class="text-xs text-steel mt-1">Koin edisi.</p>
+                    </div>
+                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
+                        <h4 class="text-lg font-bold text-white">Medalion</h4>
+                        <p class="text-xs text-steel mt-1">Bulat artistik.</p>
+                    </div>
                 </div>
-                <div class="md:hidden mb-12 flex justify-center gap-6 py-4">
-                    <div class="flex flex-col items-center cursor-pointer animate-float" data-cat="bullion"><div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">B</span></div><span class="text-[10px] text-steel-light">Bullion</span></div>
-                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d1" data-cat="press"><div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">P</span></div><span class="text-[10px] text-steel-light">Press</span></div>
-                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d2" data-cat="coin"><div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">C</span></div><span class="text-[10px] text-steel-light">Coin</span></div>
-                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d3" data-cat="medalion"><div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2"><span class="text-lg font-bold text-white">M</span></div><span class="text-[10px] text-steel-light">Medalion</span></div>
+                
+                <!-- Kategori Mobile -->
+                <div class="md:hidden mb-10 flex justify-center gap-6 py-4">
+                    <div class="flex flex-col items-center cursor-pointer animate-float" data-cat="bullion">
+                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
+                            <span class="text-lg font-bold text-white">B</span>
+                        </div>
+                        <span class="text-[10px] text-steel-light">Bullion</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d1" data-cat="press">
+                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
+                            <span class="text-lg font-bold text-white">P</span>
+                        </div>
+                        <span class="text-[10px] text-steel-light">Press</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d2" data-cat="coin">
+                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
+                            <span class="text-lg font-bold text-white">C</span>
+                        </div>
+                        <span class="text-[10px] text-steel-light">Coin</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d3" data-cat="medalion">
+                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
+                            <span class="text-lg font-bold text-white">M</span>
+                        </div>
+                        <span class="text-[10px] text-steel-light">Medalion</span>
+                    </div>
                 </div>
-                <div class="flex justify-between items-end mb-8"><div><h3 class="text-2xl font-display font-bold text-white">Live Products</h3><p class="text-xs text-steel mt-1">Klik untuk detail</p></div><div class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full pulse-dot-open"></span><span class="text-[10px] bg-white/5 px-3 py-1 rounded-full text-steel-light border border-white/5">Best Seller</span></div></div>
+                
+                <!-- Live Products Header -->
+                <div class="flex justify-between items-end mb-8">
+                    <div>
+                        <h3 class="text-2xl font-display font-bold text-white">Live Products</h3>
+                        <p class="text-xs text-steel mt-1">Klik untuk detail</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 bg-teal rounded-full pulse-dot"></span>
+                        <span class="text-[10px] bg-white/5 px-3 py-1 rounded-full text-steel-light border border-white/5">Best Seller</span>
+                    </div>
+                </div>
+                
+                <!-- Product Grid -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5" id="productGrid"></div>
-                <div class="text-center mt-10"><a href="https://wa.me/628137271517" target="_blank" class="inline-flex items-center gap-2 text-xs text-steel-light hover:text-white transition border border-white/10 px-6 py-3 rounded-xl">Ada produk lain? Tanya WhatsApp<i data-lucide="arrow-right" class="w-3 h-3"></i></a></div>
+                
+                <!-- CTA WhatsApp -->
+                <div class="text-center mt-10">
+                    <a href="https://wa.me/628137271517" target="_blank" class="cta-wa-btn">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        <span>Ada produk lain? Tanya WhatsApp</span>
+                        <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- ========== MITRA ========== -->
-        <section id="mitra" class="py-20 md:py-24 relative overflow-hidden bg-void-100">
-            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-3xl animate-pulse-slow"></div>
-            <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/[0.03] rounded-full blur-3xl animate-pulse-slow" style="animation-delay:2s"></div>
+        <!-- ========== VELDION PRIVILEGE ========== -->
+        <section id="privilege" class="py-20 md:py-24 relative overflow-hidden bg-void-100">
+            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-teal/[0.03] rounded-full blur-3xl animate-float-slow"></div>
+            <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-3xl animate-float animate-float-d2"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
-                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div class="reveal">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"><div class="w-5 h-5 rounded-full bg-gradient-to-br from-yellow-400/20 to-yellow-600/20 flex items-center justify-center"><i data-lucide="crown" class="w-3 h-3 text-yellow-400"></i></div><span class="text-[11px] font-semibold text-steel-light uppercase tracking-widest">Veldion Partner</span></div>
-                        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"><span class="text-silver-premium">Prioritas Stok</span><br>& Harga Spesial</h2>
-                        <p class="text-steel-light mb-8 leading-relaxed text-sm max-w-lg">Bergabung sebagai Mitra untuk akses stok prioritas & harga kompetitif.</p>
-                        <div class="space-y-3 mb-8">
-                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Komitmen minimal <span class="text-white font-semibold">100gr/bulan</span></p></div>
-                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Verifikasi cepat via WhatsApp</p></div>
-                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Rekomendasi 3 teman = <span class="text-white font-semibold">bonus 1gr perak</span></p></div>
-                            <div class="benefit-card p-4 rounded-xl flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5"><i data-lucide="check" class="w-3.5 h-3.5 text-white"></i></div><p class="text-sm text-steel-light">Diskon <span class="text-white font-semibold">2%</span> untuk pembelian 500gr+</p></div>
-                        </div>
-                        <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20tertarik%20jadi%20Mitra" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-white to-gray-200 text-black font-bold rounded-lg transition btn-shine">Daftar Jadi Mitra<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                <div class="text-center mb-16 anim-item anim-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-6 animate-border-glow">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-teal-light"></i>
+                        <span class="text-[11px] font-semibold text-teal-light uppercase tracking-widest">Veldion Privilege</span>
                     </div>
-                    <div class="reveal">
-                        <div class="premium-glass p-6 md:p-8 rounded-2xl relative overflow-hidden">
-                            <div class="shimmer-line"></div>
-                            <div class="absolute -top-20 -right-20 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
-                            <div class="flex items-center justify-between mb-6 relative z-10"><h3 class="text-lg font-bold text-white">Perbandingan Harga</h3><div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span class="text-[10px] font-semibold text-emerald-400">Live</span></div></div>
-                            <div class="space-y-4 relative z-10">
-                                <div class="p-5 rounded-xl bg-white/5 border border-white/5"><div class="flex justify-between mb-3"><span class="text-sm text-steel">Harga Konsumen</span><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/15 text-red-400 border border-red-500/20">Standar</span></div><div class="text-2xl font-display font-bold text-white mb-2">Rp 2.540.000 <span class="text-sm font-normal text-steel">/ 100gr</span></div><div class="flex items-center gap-2 text-[11px] text-steel"><i data-lucide="clock" class="w-3.5 h-3.5"></i><span>Proses standar</span></div></div>
-                                <div class="p-5 rounded-xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 relative overflow-hidden animate-glow">
-                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
-                                    <div class="relative z-10">
-                                        <div class="flex justify-between mb-3"><span class="text-sm text-white font-semibold">Harga Mitra</span><div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-white to-gray-300"><span class="w-1.5 h-1.5 rounded-full bg-black animate-pulse"></span><span class="text-[10px] font-bold text-black">PRIORITY</span></div></div>
-                                        <div class="text-2xl font-display font-bold text-silver-premium mb-2">Rp 2.450.000 <span class="text-sm font-normal text-steel">/ 100gr</span></div>
-                                        <div class="flex items-center gap-2 mb-3"><div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20"><i data-lucide="trending-down" class="w-3.5 h-3.5 text-emerald-400"></i><span class="text-[11px] font-semibold text-emerald-400">Hemat Rp 90.000 (3.5%)</span></div></div>
-                                        <div class="flex items-center gap-2 text-[11px] text-steel mb-4"><i data-lucide="zap" class="w-3.5 h-3.5 text-white"></i><span>Alokasi stok diprioritaskan</span></div>
-                                        <div class="grid grid-cols-2 gap-2">
-                                            <div class="flex items-center gap-2 p-2 rounded-lg bg-white/5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i><span class="text-[11px] text-white">Alokasi Stok</span></div>
-                                            <div class="flex items-center gap-2 p-2 rounded-lg bg-white/5"><i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i><span class="text-[11px] text-white">Harga Grosir</span></div>
-                                        </div>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Mengapa Memilih <span class="text-teal-gradient">Veldion?</span></h2>
+                    <p class="text-steel max-w-xl mx-auto mt-4">Keunggulan yang membuat investasi perak Anda lebih efisien dan menguntungkan.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-10 items-start">
+                    <!-- Left: Benefit List -->
+                    <div class="anim-item anim-left">
+                        <div class="privilege-card p-6 md:p-8 rounded-2xl">
+                            <h3 class="font-display text-lg font-bold text-white mb-5 flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-teal-light"></i>
+                                </div>
+                                Jaminan Transaksi
+                            </h3>
+                            <div class="space-y-1">
+                                <div class="benefit-item">
+                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">100% Produk Asli & Terverifikasi</p>
+                                        <p class="text-xs text-steel mt-0.5">Setiap produk diperiksa keasliannya sebelum dikirim.</p>
+                                    </div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">Stok Ready, Tanpa Pre-Order</p>
+                                        <p class="text-xs text-steel mt-0.5">Tidak perlu menunggu 2-3 bulan seperti supplier besar.</p>
+                                    </div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">Pengiriman Terinsuransi</p>
+                                        <p class="text-xs text-steel mt-0.5">Dilengkapi asuransi untuk keamanan ekstra.</p>
+                                    </div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">Buyback dari Supplier Resmi</p>
+                                        <p class="text-xs text-steel mt-0.5">Harga buyback mengacu pada harga beli supplier terkait dihari itu.</p>
+                                    </div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium text-sm">Support Responsif</p>
+                                        <p class="text-xs text-steel mt-0.5">Tim Veldion Silver siap membantu setiap jam market open via WhatsApp.</p>
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-[10px] text-steel-dark mt-4 text-center relative z-10">*Harga dapat bervariasi sesuai volume komitmen</p>
                         </div>
+                    </div>
+
+                    <!-- Right: Stats & Comparison -->
+                    <div class="space-y-5">
+                        <!-- Stats Row -->
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="text-center p-4 glass-card rounded-xl anim-item anim-scale">
+                                <div class="font-display text-xl md:text-2xl font-bold text-white mb-1" id="statTransactions">500+</div>
+                                <p class="text-[9px] text-steel uppercase tracking-wider">Transaksi Sukses</p>
+                            </div>
+                            <div class="text-center p-4 glass-card rounded-xl anim-item anim-scale">
+                                <div class="font-display text-xl md:text-2xl font-bold text-teal-gradient mb-1">Minim PO</div>
+                                <p class="text-[9px] text-steel uppercase tracking-wider">Tanpa Antrean</p>
+                            </div>
+                            <div class="text-center p-4 glass-card rounded-xl anim-item anim-scale">
+                                <div class="font-display text-xl md:text-2xl font-bold text-white mb-1">1-3</div>
+                                <p class="text-[9px] text-steel uppercase tracking-wider">Hari Kirim</p>
+                            </div>
+                        </div>
+
+                        <!-- Comparison Cards -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Supplier Lain -->
+                            <div class="comparison-card p-4 rounded-xl anim-item anim-left">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center">
+                                        <i data-lucide="check" class="w-3 h-3 text-red-400"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-steel uppercase tracking-wider">Supplier Resmi</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="comparison-item">
+                                        <i data-lucide="clock" class="comparison-icon text-red-400"></i>
+                                        <span class="text-xs text-steel">PO 2-3 Bulan</span>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <i data-lucide="users" class="comparison-icon text-red-400"></i>
+                                        <span class="text-xs text-steel">Antrean Panjang</span>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <i data-lucide="alert-circle" class="comparison-icon text-red-400"></i>
+                                        <span class="text-xs text-steel">Stok Tidak Pasti</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Veldion -->
+                            <div class="comparison-card featured p-4 rounded-xl anim-item anim-right">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <div class="w-6 h-6 rounded-full bg-teal/20 flex items-center justify-center">
+                                        <i data-lucide="check" class="w-3 h-3 text-teal-light"></i>
+                                    </div>
+                                    <span class="text-[10px] font-bold text-teal-light uppercase tracking-wider">Veldion Silver</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="comparison-item">
+                                        <i data-lucide="zap" class="comparison-icon text-teal-light"></i>
+                                        <span class="text-xs text-white font-medium">Ready Stock</span>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <i data-lucide="truck" class="comparison-icon text-teal-light"></i>
+                                        <span class="text-xs text-white font-medium">Kirim 1-3 Hari</span>
+                                    </div>
+                                    <div class="comparison-item">
+                                        <i data-lucide="badge-check" class="comparison-icon text-teal-light"></i>
+                                        <span class="text-xs text-white font-medium">Harga Kompetitif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Value Proposition -->
+                        <div class="glass-card p-4 rounded-xl border-l-2 border-teal/30 anim-item anim-up">
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="trending-up" class="w-4 h-4 text-teal-light"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white text-sm mb-1">Harga Kompetitif</h4>
+                                    <p class="text-xs text-steel leading-relaxed">Harga mengikuti spot price <span class="text-teal-light font-medium">XAG/USD dan XAG/IDR</span> dengan spread kompetitif. Tidak ada biaya tersembunyi atau mark-up berlebih demi kenyamanan pelanggan Veldion Silver.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <a href="https://wa.me/628137271517" target="_blank" class="cta-primary-btn animate-heartbeat anim-item anim-up">
+                            Hubungi Admin Veldion
+                        </a>
                     </div>
                 </div>
             </div>
@@ -338,155 +1472,226 @@
 
         <!-- ========== BUYBACK ========== -->
         <section id="buyback" class="py-16 md:py-20 bg-void border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-                <div class="reveal">
-                    <span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Liquiditas</span>
-                    <h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3 mb-6">Buyback Program</h2>
-                    <p class="text-steel mb-6 leading-relaxed">Veldion menerima kembali perak fisik Anda berdasarkan harga pasar supplier.</p>
-                    <div class="flex items-center gap-3 text-xs text-steel-light mb-8 p-4 glass-card rounded-xl"><i data-lucide="info" class="w-5 h-5 flex-shrink-0"></i><span>Harga buyback mengacu pada harga beli supplier saat ini.</span></div>
-                </div>
-                <div class="glass-card p-6 md:p-8 rounded-xl reveal border border-white/5">
-                    <div class="flex items-center justify-between mb-6"><h3 class="text-lg font-bold text-white">Current Buyback Rates</h3><div class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full pulse-dot-open"></span><span class="text-[10px] text-steel-dark border border-white/10 px-3 py-1 rounded-full">Live</span></div></div>
-                    <div id="buybackRates" class="space-y-1"></div>
-                    <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20mau%20jual%20perak" target="_blank" class="mt-6 w-full py-4 bg-white/10 border border-white/10 text-white font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-white/15 transition btn-shine"><i data-lucide="hand-coins" class="w-4 h-4"></i>Proses Buyback</a>
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="anim-item anim-left">
+                        <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">Likuiditas</span>
+                        <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-6">Buyback Program</h2>
+                        <p class="text-steel mb-6 leading-relaxed">Veldion Silver menerima kembali perak fisik Anda berdasarkan harga pasar. Likuiditas investasi Anda tetap terjaga.</p>
+                        <div class="flex items-center gap-3 text-xs text-steel-light mb-8 p-4 glass-card rounded-xl">
+                            <i data-lucide="info" class="w-5 h-5 flex-shrink-0 text-teal-light"></i>
+                            <span>Harga buyback mengacu pada harga beli dari supplier resmi terkait pada hari yang sama.</span>
+                        </div>
+                    </div>
+                    <div class="glass-card p-6 md:p-8 rounded-xl anim-item anim-right border border-white/5">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-bold text-white">Harga Buyback Hari Ini</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-teal rounded-full pulse-dot"></span>
+                                <span class="text-[10px] text-steel-dark border border-white/5 px-3 py-1 rounded-full">Live</span>
+                            </div>
+                        </div>
+                        <div id="buybackRates" class="space-y-1"></div>
+                        <a href="https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20mau%20jual%20perak" target="_blank" class="mt-6 w-full py-4 bg-teal/10 border border-teal/20 text-teal-light font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-teal/15 transition">
+                            <i data-lucide="hand-coins" class="w-4 h-4"></i>
+                            Proses Buyback
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========== INSIGHTS ========== -->
-        <section id="insights" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 reveal"><span class="text-xs font-bold text-steel tracking-[0.3em] uppercase">Knowledge Hub</span><h2 class="font-display text-3xl md:text-5xl font-bold text-white mt-3">Insights</h2></div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/5"><i data-lucide="trending-up" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Analisis Pasar</h4><p class="text-xs text-steel">Update pergerakan harga perak global.</p></a>
-                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/5"><i data-lucide="book-open" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Panduan Investasi</h4><p class="text-xs text-steel">Cara investasi perak untuk pemula.</p></a>
-                    <a href="https://perakin-insights.blogspot.com/" target="_blank" class="group glass-card glass-card-hover p-6 rounded-xl reveal block"><div class="w-12 h-12 bg-white/5 rounded-lg flex items-center justify-center mb-4 group-hover:bg-white/10 transition border border-white/5"><i data-lucide="shield" class="w-6 h-6 text-white"></i></div><h4 class="text-lg font-bold text-white mb-2 group-hover:text-steel-light">Safe Haven</h4><p class="text-xs text-steel">Perak sebagai aset lindung nilai.</p></a>
+        <!-- ========== FAQ ========== -->
+        <section id="faq" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
+            <div class="max-w-3xl mx-auto px-4">
+                <div class="text-center mb-12 anim-item anim-up">
+                    <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">FAQ</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3">Pertanyaan Umum</h2>
                 </div>
-                <div class="text-center mt-10 reveal"><a href="https://perakin-insights.blogspot.com/" target="_blank" class="blog-btn inline-flex items-center gap-3 px-8 py-4 border border-white/10 text-white font-bold rounded-xl"><span class="text-sm">Kunjungi Blog</span><i data-lucide="arrow-right" class="w-4 h-4"></i></a></div>
+                <div class="space-y-3" id="faqContainer">
+                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-left">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+                            <span class="faq-question">Apakah perak yang dijual dijamin keasliannya?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-content">
+                            <p class="faq-answer">Ya, setiap produk diverifikasi keasliannya. Kami hanya menjual perak dengan kadar kemurnian terjamin.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-up">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+                            <span class="faq-question">Berapa lama proses pengiriman?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-content">
+                            <p class="faq-answer">Pengiriman biasanya 1-3 hari kerja tergantung lokasi. Semua pengiriman dilengkapi nomor resi untuk tracking.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-right">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+                            <span class="faq-question">Bagaimana cara melakukan buyback?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-content">
+                            <p class="faq-answer">Hubungi kami via WhatsApp, kirim foto produk, dan kami akan berikan penawaran harga berdasarkan pasar saat ini.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-up">
+                        <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
+                            <span class="faq-question">Apakah harga bisa dinegosiasi?</span>
+                            <i data-lucide="chevron-down" class="faq-icon"></i>
+                        </button>
+                        <div class="faq-content">
+                            <p class="faq-answer">Harga yang tercantum sudah final. Namun, kami selalu berusaha memberikan harga kompetitif di pasar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CTA ========== -->
+        <section class="py-20 md:py-24 bg-void border-t border-white/5">
+            <div class="max-w-3xl mx-auto px-4 text-center">
+                <div class="glass-card p-10 md:p-14 rounded-2xl relative overflow-hidden anim-item anim-up">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[350px] h-[180px] bg-teal/[0.03] rounded-full blur-[80px] animate-glow"></div>
+                    <div class="relative z-10">
+                        <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">Siap Investasi Perak?</h2>
+                        <p class="text-steel max-w-md mx-auto mb-8 leading-relaxed text-sm">Jelajahi katalog kami dan dapatkan perak fisik berkualitas tanpa antrean panjang.</p>
+                        <a href="#produk" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-teal-light to-teal text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(20,184,166,0.3)] transition btn-shine">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="bg-void-100 border-t border-white/5 pt-16 pb-8">
+    <footer class="bg-void-100 border-t border-white/5 pt-12 pb-6">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
-                <div class="md:col-span-4"><span class="font-display text-2xl font-bold text-silver-premium block mb-4">VELDION SILVER</span><p class="text-xs text-steel-light leading-relaxed mb-4">Distributor perak fisik terpercaya. Stok ready tanpa Pre-Order.</p><div class="flex items-center gap-3"><a href="linkKamu" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition border border-white/5"><i data-lucide="instagram" class="w-4 h-4 text-steel-light"></i></a><a href="linkKamu" class="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-white/10 transition border border-white/5"><i data-lucide="twitter" class="w-4 h-4 text-steel-light"></i></a></div></div>
-                <div class="md:col-span-2"><h4 class="text-xs font-bold text-white uppercase mb-4">Navigasi</h4><ul class="space-y-2 text-sm text-steel"><li><a href="#produk" class="hover:text-white">Produk</a></li><li><a href="#mitra" class="hover:text-white">Mitra</a></li><li><a href="#buyback" class="hover:text-white">Buyback</a></li></ul></div>
-                <div class="md:col-span-3"><h4 class="text-xs font-bold text-white uppercase mb-4">Keunggulan</h4><ul class="space-y-2 text-sm text-steel"><li class="flex items-center gap-2"><i data-lucide="zap" class="w-3 h-3"></i>Stok Real-Time</li><li class="flex items-center gap-2"><i data-lucide="shield-check" class="w-3 h-3"></i>100% Asli</li><li class="flex items-center gap-2"><i data-lucide="truck" class="w-3 h-3"></i>Pengiriman Aman</li></ul></div>
-                
-                <!-- Kolom Kontak yang sudah diperbaiki -->
-                <div class="md:col-span-3">
-                    <h4 class="text-xs font-bold text-white uppercase mb-4">Kontak</h4>
-                    <address class="not-italic space-y-3 text-sm text-steel">
-                        <!-- 1. Tentang Kami -->
-                        <div class="flex items-start gap-2 cursor-pointer hover:text-white transition group" id="aboutBtn">
-                            <i data-lucide="info" class="w-4 h-4 mt-0.5 group-hover:text-white"></i>
-                            <span class="hover:text-white">Tentang Kami</span>
-                        </div>
-                        <!-- 2. Email -->
-                        <div class="flex items-start gap-2">
-                            <i data-lucide="mail" class="w-4 h-4 mt-0.5"></i>
-                            <a href="mailto:veldionsilver@gmail.com" class="hover:text-white">veldionsilver@gmail.com</a>
-                        </div>
-                        <!-- 3. Telepon -->
-                        <div class="flex items-start gap-2">
-                            <i data-lucide="phone" class="w-4 h-4 mt-0.5"></i>
-                            <a href="https://wa.me/628137271517" class="hover:text-white">0813 727 1517</a>
-                        </div>
-                    </address>
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div>
+                    <span class="font-display text-xl font-bold text-teal-gradient block mb-3">VELDION SILVER</span>
+                    <p class="text-xs text-steel-light leading-relaxed mb-4 max-w-sm">Distributor perak fisik terpercaya. Stok ready dengan harga kompetitif tanpa antrean Pre-Order panjang.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/veldion.silver" target="_blank" class="footer-social-btn">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="https://wa.me/628137271517" target="_blank" class="footer-social-btn">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        </a>
+                    </div>
                 </div>
-            
+                
+                <!-- Navigasi -->
+                <div>
+                    <h4 class="footer-section-title">Fitur</h4>
+                    <nav>
+                        <a href="#supplier" class="footer-link">Supplier</a>
+                        <a href="#produk" class="footer-link">Produk</a>
+                        <a href="#privilege" class="footer-link">Privilege</a>
+                        <a href="#buyback" class="footer-link">Buyback</a>
+                        <a href="#faq" class="footer-link">FAQ</a>
+                    </nav>
+                </div>
+                
+                <!-- Kontak -->
+                <div>
+                    <h4 class="footer-section-title">Kontak Veldion Silver</h4>
+                    <a href="https://wa.me/628137271517" class="footer-link">WhatsApp</a>
+                    <a href="mailto:veldionsilver@gmail.com" class="footer-link">Email</a>
+                    <a href="https://veldionsilver.github.io/tentang-kami/" class="footer-link">Tentang</a>
+                </div>
             </div>
-            <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-steel-dark"><p>© 2026 Veldion Silver</p><p>Harga mengikuti pasar (XAG/IDR)</p></div>
+            
+            <!-- Copyright -->
+            <div class="footer-copyright border-t border-white/5 mt-8 pt-6 text-center">
+                <p class="text-[11px] text-steel-dark">© 2026 Veldion Silver. All rights reserved.</p>
+                <p class="text-[11px] text-steel-dark mt-1">Harga mengikuti pasar real time</p>
+            </div>
         </div>
     </footer>
 
-    <!-- ========== MOBILE NAV ========== -->
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-void/95 backdrop-blur-lg border-t border-white/10 z-50 pb-safe">
-        <div class="flex justify-around items-center h-16">
-            <a href="#hero" class="flex flex-col items-center justify-center w-full h-full text-steel hover:text-white"><i data-lucide="home" class="w-5 h-5"></i><span class="text-[10px] mt-1">Home</span></a>
-            <a href="#produk" class="flex flex-col items-center justify-center w-full h-full text-steel hover:text-white"><i data-lucide="box" class="w-5 h-5"></i><span class="text-[10px] mt-1">Produk</span></a>
-            <a href="#supplier" class="flex flex-col items-center justify-center w-full h-full text-steel hover:text-white"><i data-lucide="users" class="w-5 h-5"></i><span class="text-[10px] mt-1">Supplier</span></a>
-            <a href="#mitra" class="flex flex-col items-center justify-center w-full h-full text-steel hover:text-white"><i data-lucide="star" class="w-5 h-5"></i><span class="text-[10px] mt-1">Mitra</span></a>
-            <a href="https://wa.me/628137271517" target="_blank" class="flex flex-col items-center justify-center w-full h-full text-steel hover:text-white"><i data-lucide="message-circle" class="w-5 h-5"></i><span class="text-[10px] mt-1">Chat</span></a>
-        </div>
-    </nav>
+    <!-- ========== BACK TO TOP ========== -->
+    <button id="toTopBtn" class="floating-btn" aria-label="Top">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
 
-    <!-- FLOATING -->
-    <button id="toTopBtn" class="floating-btn right-6 bottom-36 md:right-8 md:bottom-24 w-12 h-12 bg-void-200 backdrop-blur border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition" aria-label="Top"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
-    <a href="https://wa.me/628137271517" target="_blank" class="hidden md:flex fixed z-40 bg-white text-black rounded-full shadow-lg transition hover:shadow-xl hover:scale-105 right-8 bottom-8 items-center overflow-hidden group active"><div class="p-4"><i data-lucide="message-circle" class="w-5 h-5"></i></div><div class="w-0 group-hover:w-auto group-hover:pr-5 overflow-hidden transition-all duration-500 whitespace-nowrap font-bold text-sm">Chat Admin</div></a>
-
-    <!-- MODALS -->
-    <div class="modal-overlay" id="searchModal"><div class="modal-content max-w-2xl"><div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4"><i data-lucide="search" class="w-5 h-5 text-steel"></i><input type="text" id="searchInput" placeholder="Cari produk, kategori, supplier..." class="bg-transparent w-full text-white text-sm focus:outline-none"><button id="closeSearch" class="text-steel hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button></div><div id="searchResults" class="max-h-96 overflow-y-auto text-sm text-steel"></div></div></div>
-    
-    <div class="modal-overlay" id="productModal"><div class="modal-content"><button id="closeProductModal" class="absolute top-5 right-5 text-steel hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button><div class="flex items-center gap-4 mb-6"><div class="w-16 h-16 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center border border-white/10"><span class="text-3xl font-display font-bold text-silver-premium" id="modalInitial">B</span></div><div><h3 class="font-display text-xl font-bold text-white" id="modalName">Produk</h3><p class="text-sm text-steel-light" id="modalCategory">Kategori</p></div></div><div class="space-y-3 mb-6"><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Supplier</span><span class="text-white font-medium text-sm" id="modalSupplier">-</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Berat</span><span class="text-white font-medium text-sm" id="modalWeight">-</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Kadar</span><span class="text-white font-medium text-sm" id="modalPurity">-</span></div><div class="flex justify-between py-2"><span class="text-steel text-sm">Harga</span><span class="text-xl font-display font-bold text-silver-premium" id="modalPrice">-</span></div></div><a id="modalLink" href="#" target="_blank" class="w-full py-4 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-gray-100 transition btn-shine"><i data-lucide="message-circle" class="w-5 h-5"></i>Tanya Stok via WhatsApp</a></div></div>
-
-    <!-- Modal Tentang Kami -->
-    <div class="modal-overlay" id="aboutModal">
-        <div class="modal-content max-w-lg text-center">
-            <button id="closeAboutModal" class="absolute top-5 right-5 text-steel hover:text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
-            
-            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-white/10 to-white/5 rounded-full flex items-center justify-center border border-white/10 mb-5">
-                <span class="text-3xl font-display font-bold text-silver-premium">VS</span>
+    <!-- ========== MODALS ========== -->
+    <div class="modal-overlay" id="searchModal">
+        <div class="modal-content max-w-lg">
+            <div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4">
+                <i data-lucide="search" class="w-5 h-5 text-steel"></i>
+                <input type="text" id="searchInput" placeholder="Cari produk, kategori..." class="bg-transparent w-full text-white text-sm focus:outline-none">
+                <button id="closeSearch" class="text-steel hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
             </div>
-
-            <h3 class="text-2xl font-display font-bold text-white mb-2">Tentang Veldion Silver</h3>
-            <p class="text-sm text-steel-light mb-6">Distributor Perak Fisik Terpercaya</p>
-
-            <div class="text-left space-y-4 text-sm text-steel-light leading-relaxed">
-                <p>
-                    <span class="text-white font-semibold">Veldion Silver</span> hadir sebagai jembatan investasi yang menghubungkan Anda langsung dengan lebih dari <span class="text-white font-medium">200 supplier perak fisik resmi</span> di Indonesia.
-                </p>
-                <p>
-                    Kami lahir untuk menjawab tantangan utama investor perak: <span class="text-white font-medium">antrean Pre-Order yang panjang</span>. Dengan jaringan supplier yang luas, kami memastikan stok selalu <span class="text-white font-medium">ready</span> dan proses transaksi yang cepat.
-                </p>
-                <div class="pt-4 border-t border-white/10 flex items-center justify-between">
-                    <div class="flex items-center gap-2 text-xs">
-                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-steel"></i>
-                        <span>Banda Aceh, Indonesia</span>
-                    </div>
-                    <div class="flex items-center gap-2 text-xs">
-                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
-                        <span>Verified Business</span>
-                    </div>
+            <div id="searchResults" class="max-h-80 overflow-y-auto text-sm text-steel"></div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button id="closeProductModal" class="absolute top-5 right-5 text-steel hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-teal/20 to-teal/5 rounded-xl flex items-center justify-center border border-teal/10">
+                    <span class="text-3xl font-display font-bold text-teal-gradient" id="modalInitial">B</span>
+                </div>
+                <div>
+                    <h3 class="font-display text-xl font-bold text-white" id="modalName">Produk</h3>
+                    <p class="text-sm text-steel-light" id="modalCategory">Kategori</p>
                 </div>
             </div>
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between py-2 border-b border-white/5">
+                    <span class="text-steel text-sm">Supplier</span>
+                    <span class="text-white font-medium text-sm" id="modalSupplier">-</span>
+                </div>
+                <div class="flex justify-between py-2 border-b border-white/5">
+                    <span class="text-steel text-sm">Berat</span>
+                    <span class="text-white font-medium text-sm" id="modalWeight">-</span>
+                </div>
+                <div class="flex justify-between py-2 border-b border-white/5">
+                    <span class="text-steel text-sm">Kadar</span>
+                    <span class="text-white font-medium text-sm" id="modalPurity">-</span>
+                </div>
+                <div class="flex justify-between py-2">
+                    <span class="text-steel text-sm">Harga</span>
+                    <span class="text-xl font-display font-bold text-teal-gradient" id="modalPrice">-</span>
+                </div>
+            </div>
+            <a id="modalLink" href="#" target="_blank" class="w-full py-4 bg-gradient-to-r from-teal-light to-teal text-void font-bold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(20,184,166,0.3)] transition btn-shine">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                Tanya Stok via WhatsApp
+            </a>
         </div>
     </div>
 
+    <!-- ========== SCRIPTS ========== -->
     <script>
     /* ============================================================
-       KONFIGURASI - EDIT DI BAWAH INI
+       KONFIGURASI - MUDAH DIUBAH
        ============================================================ */
 
-    // 1. STATUS MARKET (true = open/hijau, false = closed/merah)
-    const MARKET_OPEN = true;
+    // 1. STATUS MARKET (true = open, false = closed)
+    const MARKET_OPEN = closed;
 
     // 2. HARGA XAG (ubah setiap hari)
-    const XAG_USD = "$91.20";
-    const XAG_IDR = "Rp73.910";
+    const XAG_USD = "$32.45";
+    const XAG_IDR = "Rp 545.000";
 
-    // 3. DATA PRODUK (ubah setiap hari)
-    // Cara edit: ganti nilai dalam tanda petik
+    // 3. DATA PRODUK (ubah sesuai stok)
     const PRODUCTS = [
-        // PRODUK 1
         { name: "Perak Reguler 3.3gr", category: "Press", supplier: "Silverium", weight: "3.3gr", purity: "999.9", price: "Rp 379.500", initial: "P" },
-        // PRODUK 2
         { name: "Perak Reguler 9.9gr", category: "Press", supplier: "Silverium", weight: "9.9gr", purity: "999.9", price: "Rp 1.089.000", initial: "P" },
-        // PRODUK 3
         { name: "Perak Bullion 50gr", category: "Bullion", supplier: "Key Silver", weight: "50gr", purity: "999.5", price: "Rp 4.450.000", initial: "B" },
-        // PRODUK 4
         { name: "Perak Coin ABA 5 Dirham", category: "Coin", supplier: "Silverium", weight: "15.55gr", purity: "999.9", price: "Rp 1.539.450", initial: "C" },
-        // PRODUK 5
         { name: "Perak Coin ABA 1 Dirham", category: "Coin", supplier: "Silverium", weight: "3.11gr", purity: "999.9", price: "Rp 330.250", initial: "C" },
-        // PRODUK 6
-        { name: "Perak Bullion 100gr", category: "Bullion", supplier: "Key Silver", weight: "50gr", purity: "999.5", price: "Rp 8.000.000", initial: "B" },
-        // PRODUK 7
-        { name: "Perak Medalion 50gr", category: "Medalion", supplier: "Silverium", weight: "1gr", purity: "999.9", price: "Rp 4.450.000", initial: "M" },
-        // PRODUK 8
+        { name: "Perak Bullion 100gr", category: "Bullion", supplier: "Key Silver", weight: "100gr", purity: "999.5", price: "Rp 8.000.000", initial: "B" },
+        { name: "Perak Medalion 50gr", category: "Medalion", supplier: "Silverium", weight: "50gr", purity: "999.9", price: "Rp 4.450.000", initial: "M" },
         { name: "Perak Medalion 1gr", category: "Medalion", supplier: "JSG", weight: "1gr", purity: "999.5", price: "Rp 115.000", initial: "M" }
-        // Untuk tambah produk, copy baris di atas dan ganti isinya
     ];
 
     // 4. HARGA BUYBACK (ubah setiap hari)
@@ -497,35 +1702,69 @@
         { name: "JSG / TDS", price: "Rp 66.500/gr" }
     ];
 
-    // 5. NOMOR WHATSAPP (jangan ubah kecuali perlu)
+    // 5. NOMOR WHATSAPP
     const WHATSAPP = "628137271517";
 
-    /* ============================================================
-       AKHIR KONFIGURASI - JANGAN UBAH DI BAWAH INI
-       ============================================================ */
+    // 6. JUMLAH TRANSAKSI
+    const TRANSACTION_COUNT = "150+";
 
-    // Initialize icons
-    lucide.createIcons();
-
-    // Categories & Suppliers for search
+    // 7. KATEGORI PRODUK
     const CATEGORIES = [
         { name: "Bullion", desc: "Batangan investasi", icon: "B" },
         { name: "Press", desc: "Laminasi tipis", icon: "P" },
         { name: "Coin", desc: "Koin edisi", icon: "C" },
         { name: "Medalion", desc: "Bulat artistik", icon: "M" }
     ];
-    const SUPPLIERS = [
-        { name: "Silverium", desc: "Supplier modern" },
-        { name: "Key Silver", desc: "Spesialis press" },
-        { name: "Antam", desc: "BUMN terpercaya" },
-        { name: "JSG", desc: "Sertifikasi ketat" }
-    ];
+
     const CAT_INFO = {
-        bullion: { title: "Bullion", desc: "Batangan investasi bersertifikat." },
-        press: { title: "Press", desc: "Laminasi tipis praktis." },
-        coin: { title: "Coin", desc: "Koin ABA dan edisi khusus." },
-        medalion: { title: "Medalion", desc: "Bulat padat artistik." }
+        bullion: { title: "Bullion", desc: "Batangan investasi." },
+        press: { title: "Press", desc: "Laminasi tipis." },
+        coin: { title: "Coin", desc: "Koin edisi." },
+        medalion: { title: "Medalion", desc: "Bulat artistik." }
     };
+
+    /* ============================================================
+       AKHIR KONFIGURASI
+       ============================================================ */
+
+    // Initialize
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    function init() {
+        lucide.createIcons();
+        setMarket(MARKET_OPEN);
+        
+        // Set text values
+        const setText = (id, val) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = val;
+        };
+        
+        setText('xagUsd', XAG_USD);
+        setText('xagIdr', XAG_IDR);
+        setText('xagUsdMobile', XAG_USD);
+        setText('xagIdrMobile', XAG_IDR);
+        setText('statTransactions', TRANSACTION_COUNT);
+        
+        // Render konten
+        renderProducts();
+        renderBuyback();
+        
+        // Setup infinite scroll animation
+        setupInfiniteAnimation();
+        
+        // Setup event listeners
+        setupEventListeners();
+        
+        // Update icons untuk konten baru
+        setTimeout(() => {
+            lucide.createIcons();
+        }, 200);
+    }
 
     // Set market status
     function setMarket(open) {
@@ -533,55 +1772,91 @@
         const txt = document.getElementById('marketText');
         const dotM = document.getElementById('marketDotMobile');
         const txtM = document.getElementById('marketTextMobile');
+        
         if (open) {
-            dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot-open';
-            txt.textContent = 'Market Open';
-            txt.className = 'font-semibold tracking-wider text-[10px] uppercase text-emerald-400';
-            dotM.className = 'w-1.5 h-1.5 rounded-full bg-emerald-500 pulse-dot-open';
-            txtM.textContent = 'Market Open';
-            txtM.className = 'font-semibold tracking-wider text-[10px] uppercase text-emerald-400';
+            if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-teal pulse-dot';
+            if (txt) {
+                txt.textContent = 'Market Open';
+                txt.className = 'font-semibold tracking-wider text-[10px] uppercase text-teal-light';
+            }
+            if (dotM) dotM.className = 'w-1.5 h-1.5 rounded-full bg-teal pulse-dot';
+            if (txtM) {
+                txtM.textContent = 'Market Open';
+                txtM.className = 'font-semibold tracking-wider text-[10px] uppercase text-teal-light';
+            }
         } else {
-            dot.className = 'w-1.5 h-1.5 rounded-full bg-red-500 pulse-dot-closed';
-            txt.textContent = 'Market Closed';
-            txt.className = 'font-semibold tracking-wider text-[10px] uppercase text-red-400';
-            dotM.className = 'w-1.5 h-1.5 rounded-full bg-red-500 pulse-dot-closed';
-            txtM.textContent = 'Market Closed';
-            txtM.className = 'font-semibold tracking-wider text-[10px] uppercase text-red-400';
+            if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-red-500';
+            if (txt) {
+                txt.textContent = 'Market Closed';
+                txt.className = 'font-semibold tracking-wider text-[10px] uppercase text-red-400';
+            }
+            if (dotM) dotM.className = 'w-1.5 h-1.5 rounded-full bg-red-500';
+            if (txtM) {
+                txtM.textContent = 'Market Closed';
+                txtM.className = 'font-semibold tracking-wider text-[10px] uppercase text-red-400';
+            }
         }
     }
 
     // Render products
     function renderProducts() {
         const grid = document.getElementById('productGrid');
-        grid.innerHTML = PRODUCTS.map((p, i) => `
-            <div class="product-card glass-card-hover p-4 md:p-5 rounded-xl reveal" data-idx="${i}" style="transition-delay:${i*50}ms">
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        for (let i = 0; i < PRODUCTS.length; i++) {
+            const p = PRODUCTS[i];
+            const direction = i % 3 === 0 ? 'anim-left' : (i % 3 === 1 ? 'anim-up' : 'anim-right');
+            
+            const card = document.createElement('div');
+            card.className = `product-card glass-card-hover p-4 md:p-5 rounded-xl anim-item ${direction}`;
+            card.setAttribute('data-idx', i);
+            
+            card.innerHTML = `
                 <span class="product-badge">${p.category}</span>
                 <div class="flex flex-col items-center text-center">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center border border-white/10 mb-3">
-                        <span class="text-2xl md:text-3xl font-display font-bold text-silver-premium">${p.initial}</span>
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-teal/10 to-white/5 rounded-xl flex items-center justify-center border border-teal/10 mb-3">
+                        <span class="text-2xl md:text-3xl font-display font-bold text-teal-gradient">${p.initial}</span>
                     </div>
                     <h4 class="font-semibold text-white text-sm truncate w-full">${p.name}</h4>
                     <p class="text-[10px] text-steel mt-1 mb-2">${p.supplier} • ${p.purity}</p>
-                    <div class="text-sm md:text-base font-display font-bold text-silver-premium">${p.price}</div>
+                    <div class="text-sm md:text-base font-display font-bold text-teal-gradient">${p.price}</div>
                 </div>
-            </div>
-        `).join('');
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        document.querySelectorAll('[data-idx]').forEach(c => c.addEventListener('click', () => openProduct(parseInt(c.dataset.idx))));
+            `;
+            
+            card.addEventListener('click', function() {
+                openProduct(parseInt(this.dataset.idx));
+            });
+            
+            grid.appendChild(card);
+        }
+        
+        // Observe new items
+        document.querySelectorAll('.anim-item').forEach(el => animObserver.observe(el));
     }
 
     // Render buyback
     function renderBuyback() {
         const el = document.getElementById('buybackRates');
-        el.innerHTML = `
-            <div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>
-            ${BUYBACK_RATES.map(r => `
-                <div class="flex justify-between items-center py-3 border-b border-white/5 hover:bg-white/5 transition px-2">
-                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full pulse-dot-open"></span><span class="text-white font-medium">${r.name}</span></div>
+        if (!el) return;
+        
+        let html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
+        
+        for (let i = 0; i < BUYBACK_RATES.length; i++) {
+            const r = BUYBACK_RATES[i];
+            html += `
+                <div class="flex justify-between items-center py-3 border-b border-white/5 hover:bg-teal/5 transition px-2">
+                    <div class="flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 bg-teal rounded-full pulse-dot"></span>
+                        <span class="text-white font-medium">${r.name}</span>
+                    </div>
                     <span class="font-bold text-white">${r.price}</span>
                 </div>
-            `).join('')}
-        `;
+            `;
+        }
+        
+        el.innerHTML = html;
     }
 
     // Open product modal
@@ -599,114 +1874,238 @@
         document.body.classList.add('no-scroll');
     }
 
-    // Search
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    
+    // Setup infinite animation (trigger setiap masuk/keluar viewport)
+    function setupInfiniteAnimation() {
+        document.querySelectorAll('.anim-item').forEach(el => animObserver.observe(el));
+    }
+
+    // Observer untuk infinite animation
+    const animObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Masuk viewport
+                entry.target.classList.add('anim-in');
+                entry.target.classList.remove('anim-out');
+            } else {
+                // Keluar viewport
+                entry.target.classList.add('anim-out');
+                entry.target.classList.remove('anim-in');
+            }
+        });
+    }, { 
+        threshold: 0.1,
+        rootMargin: '0px'
+    });
+
+    // Setup all event listeners
+    function setupEventListeners() {
+        // Search
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', e => {
+                const q = e.target.value.toLowerCase().trim();
+                if (!q) { 
+                    searchResults.innerHTML = defaultSearch(); 
+                    lucide.createIcons(); 
+                    return; 
+                }
+                if (q.length < 2) { 
+                    searchResults.innerHTML = '<div class="p-4 text-center text-steel-dark">Min 2 karakter...</div>'; 
+                    return; 
+                }
+                const fp = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+                if (!fp.length) { 
+                    searchResults.innerHTML = '<div class="p-4 text-center text-steel">Tidak ditemukan.</div>'; 
+                    return; 
+                }
+                searchResults.innerHTML = `<div class="p-4 space-y-2">${fp.map(p => `<a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Halo Veldion, saya mau tanya stok ' + p.name)}" target="_blank" class="search-item flex justify-between p-2 rounded-lg border-b border-white/5"><div><div class="text-white text-sm">${p.name}</div><div class="text-[10px] text-steel">${p.category} • ${p.supplier}</div></div><i data-lucide="external-link" class="w-4 h-4 text-steel"></i></a>`).join('')}</div>`;
+                lucide.createIcons();
+            });
+        }
+
+        // Modal handlers
+        ['productModal', 'searchModal'].forEach(id => {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.addEventListener('click', e => { 
+                    if (e.target.id === id) { 
+                        modal.classList.remove('active'); 
+                        document.body.classList.remove('no-scroll'); 
+                    } 
+                });
+            }
+        });
+        
+        document.getElementById('closeProductModal')?.addEventListener('click', () => { 
+            document.getElementById('productModal').classList.remove('active'); 
+            document.body.classList.remove('no-scroll'); 
+        });
+        
+        document.getElementById('closeSearch')?.addEventListener('click', closeSearchM);
+        
+        document.getElementById('searchBtn')?.addEventListener('click', () => { 
+            document.getElementById('searchModal').classList.add('active'); 
+            if (searchInput) searchInput.focus(); 
+            if (searchResults) searchResults.innerHTML = defaultSearch(); 
+            document.body.classList.add('no-scroll'); 
+            lucide.createIcons(); 
+        });
+        
+        document.addEventListener('keydown', e => { 
+            if (e.key === 'Escape') { 
+                ['productModal', 'searchModal'].forEach(id => { 
+                    document.getElementById(id)?.classList.remove('active'); 
+                }); 
+                document.body.classList.remove('no-scroll'); 
+            } 
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() { 
+                const faqItem = this.closest('.faq-item');
+                const content = faqItem.querySelector('.faq-content');
+                const isOpen = faqItem.classList.contains('open');
+                
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('open');
+                    const c = item.querySelector('.faq-content');
+                    if (c) c.style.maxHeight = null;
+                });
+                
+                if (!isOpen) {
+                    faqItem.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function(e) {
+                const href = this.getAttribute('href'); 
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    const isMobile = window.innerWidth < 768;
+                    const offset = isMobile ? 70 : 100;
+                    window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // To top
+        const toTop = document.getElementById('toTopBtn');
+        window.addEventListener('scroll', () => { 
+            if (toTop) toTop.classList.toggle('visible', window.scrollY > 500); 
+        });
+        if (toTop) {
+            toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+
+        // Mobile category
+        document.querySelectorAll('[data-cat]').forEach(el => {
+            el.addEventListener('click', () => { 
+                const c = CAT_INFO[el.dataset.cat]; 
+                if (c) alert(c.title + '\n\n' + c.desc); 
+            });
+        });
+
+        // Scroll handlers
+        const mobileScrollHeader = document.getElementById('mobileScrollHeader');
+        const desktopNav = document.getElementById('desktopNav');
+        const desktopNavItems = document.querySelectorAll('.nav-item');
+        const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+        const sections = document.querySelectorAll('section[id]');
+        
+        function updateMobileScrollHeader() {
+            if (!mobileScrollHeader) return;
+            mobileScrollHeader.classList.toggle('visible', window.scrollY > 100);
+        }
+        
+        function updateDesktopNav() {
+            const scrollY = window.scrollY;
+            const headerOffset = 150;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - headerOffset;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                    desktopNavItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.dataset.section === sectionId) {
+                            item.classList.add('active');
+                        }
+                    });
+                    
+                    mobileNavItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.dataset.section === sectionId) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+            
+            if (desktopNav) {
+                desktopNav.classList.toggle('scrolled', scrollY > 36);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            updateMobileScrollHeader();
+            updateDesktopNav();
+        });
+
+        // Initial calls
+        setTimeout(() => {
+            updateDesktopNav();
+            updateMobileScrollHeader();
+        }, 100);
+    }
+
+    // Search helper functions
     function defaultSearch() {
         return `
             <div class="p-4">
-                <div class="mb-4"><div class="flex items-center gap-2 mb-2"><i data-lucide="layers" class="w-4 h-4 text-steel"></i><span class="text-xs font-semibold text-white uppercase">Kategori</span></div>
-                <div class="grid grid-cols-2 gap-2">
-                    ${CATEGORIES.map(c => `<a href="#produk" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border border-white/5"><div class="w-6 h-6 rounded bg-white/5 flex items-center justify-center text-xs font-bold text-silver-premium">${c.icon}</div><div><div class="text-xs text-white">${c.name}</div></div></a>`).join('')}
-                </div></div>
-                <div class="mb-4"><div class="flex items-center gap-2 mb-2"><i data-lucide="building-2" class="w-4 h-4 text-steel"></i><span class="text-xs font-semibold text-white uppercase">Supplier</span></div>
-                <div class="space-y-1">
-                    ${SUPPLIERS.map(s => `<a href="#supplier" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border border-white/5"><i data-lucide="gem" class="w-4 h-4 text-steel-light"></i><span class="text-xs text-white">${s.name}</span></a>`).join('')}
-                </div></div>
-                <a href="#produk" onclick="closeSearchM()" class="flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/10"><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span><span class="text-sm font-semibold text-white">Lihat Semua Produk</span></a>
-            </div>`;
+                <div class="mb-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i data-lucide="layers" class="w-4 h-4 text-steel"></i>
+                        <span class="text-xs font-semibold text-white uppercase">Kategori</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        ${CATEGORIES.map(c => `
+                            <a href="#produk" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border border-white/5">
+                                <div class="w-6 h-6 rounded bg-teal/10 flex items-center justify-center text-xs font-bold text-teal-light">${c.icon}</div>
+                                <div>
+                                    <div class="text-xs text-white">${c.name}</div>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+                <a href="#produk" onclick="closeSearchM()" class="flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5">
+                    <span class="w-2 h-2 bg-teal rounded-full animate-pulse"></span>
+                    <span class="text-sm font-semibold text-white">Lihat Semua Produk</span>
+                </a>
+            </div>
+        `;
     }
     
-    function closeSearchM() {
-        document.getElementById('searchModal').classList.remove('active');
-        document.body.classList.remove('no-scroll');
-        searchInput.value = '';
+    function closeSearchM() { 
+        document.getElementById('searchModal').classList.remove('active'); 
+        document.body.classList.remove('no-scroll'); 
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = ''; 
     }
-    
-    searchInput.addEventListener('input', e => {
-        const q = e.target.value.toLowerCase().trim();
-        if (!q) { searchResults.innerHTML = defaultSearch(); lucide.createIcons(); return; }
-        if (q.length < 2) { searchResults.innerHTML = '<div class="p-4 text-center text-steel-dark">Min 2 karakter...</div>'; return; }
-        
-        const fp = PRODUCTS.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.supplier.toLowerCase().includes(q));
-        const fc = CATEGORIES.filter(c => c.name.toLowerCase().includes(q));
-        const fs = SUPPLIERS.filter(s => s.name.toLowerCase().includes(q));
-        
-        if (!fp.length && !fc.length && !fs.length) {
-            searchResults.innerHTML = '<div class="p-4 text-center text-steel">Tidak ditemukan.</div>';
-            return;
-        }
-        
-        let h = '<div class="p-4 space-y-4">';
-        if (fp.length) h += `<div><div class="text-xs font-semibold text-white uppercase mb-2">Produk (${fp.length})</div>${fp.map(p => `<a href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Halo Veldion, saya mau tanya stok ' + p.name)}" target="_blank" class="search-item flex justify-between p-2 rounded-lg border-b border-white/5"><div><div class="text-white text-sm">${p.name}</div><div class="text-[10px] text-steel">${p.category} • ${p.supplier}</div></div><i data-lucide="external-link" class="w-4 h-4 text-steel"></i></a>`).join('')}</div>`;
-        if (fc.length) h += `<div><div class="text-xs font-semibold text-white uppercase mb-2">Kategori</div>${fc.map(c => `<a href="#produk" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border-b border-white/5"><div class="w-6 h-6 rounded bg-white/5 flex items-center justify-center text-xs font-bold text-silver-premium">${c.icon}</div><span class="text-white text-sm">${c.name}</span></a>`).join('')}</div>`;
-        if (fs.length) h += `<div><div class="text-xs font-semibold text-white uppercase mb-2">Supplier</div>${fs.map(s => `<a href="#supplier" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border-b border-white/5"><i data-lucide="gem" class="w-4 h-4 text-steel-light"></i><span class="text-white text-sm">${s.name}</span></a>`).join('')}</div>`;
-        h += '</div>';
-        searchResults.innerHTML = h;
-        lucide.createIcons();
-    });
 
-    // Modal handlers
-    ['productModal', 'searchModal', 'aboutModal'].forEach(id => {
-        document.getElementById(id).addEventListener('click', e => {
-            if (e.target.id === id) { document.getElementById(id).classList.remove('active'); document.body.classList.remove('no-scroll'); }
-        });
-    });
-    
-    document.getElementById('closeProductModal').addEventListener('click', () => { document.getElementById('productModal').classList.remove('active'); document.body.classList.remove('no-scroll'); });
-    document.getElementById('closeSearch').addEventListener('click', closeSearchM);
-    
-    // About Modal Listener
-    document.getElementById('aboutBtn').addEventListener('click', () => {
-        document.getElementById('aboutModal').classList.add('active');
-        document.body.classList.add('no-scroll');
-        lucide.createIcons();
-    });
-    document.getElementById('closeAboutModal').addEventListener('click', () => {
-        document.getElementById('aboutModal').classList.remove('active');
-        document.body.classList.remove('no-scroll');
-    });
-
-    document.getElementById('searchBtn').addEventListener('click', () => { document.getElementById('searchModal').classList.add('active'); searchInput.focus(); searchResults.innerHTML = defaultSearch(); document.body.classList.add('no-scroll'); lucide.createIcons(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { ['productModal', 'searchModal', 'aboutModal'].forEach(id => document.getElementById(id).classList.remove('active')); document.body.classList.remove('no-scroll'); } });
-
-    // Scroll reveal
-    const observer = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting && e.target.classList.add('active')); }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', function(e) {
-            const h = this.getAttribute('href'); if (h === '#') return;
-            e.preventDefault();
-            const t = document.querySelector(h);
-            if (t) window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
-        });
-    });
-
-    // To top
-    const toTop = document.getElementById('toTopBtn');
-    window.addEventListener('scroll', () => toTop.classList.toggle('visible', window.scrollY > 500));
-    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Mobile category
-    document.querySelectorAll('[data-cat]').forEach(el => {
-        el.addEventListener('click', () => {
-            const c = CAT_INFO[el.dataset.cat];
-            if (!c) return;
-            alert(c.title + '\n\n' + c.desc);
-        });
-    });
-
-    // Init
-    setMarket(MARKET_OPEN);
-    document.getElementById('xagUsd').textContent = XAG_USD;
-    document.getElementById('xagIdr').textContent = XAG_IDR;
-    document.getElementById('xagUsdMobile').textContent = XAG_USD;
-    document.getElementById('xagIdrMobile').textContent = XAG_IDR;
-    renderProducts();
-    renderBuyback();
+    // Make closeSearchM globally accessible
+    window.closeSearchM = closeSearchM;
     </script>
 </body>
 </html>
