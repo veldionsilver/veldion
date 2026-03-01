@@ -2,7 +2,7 @@
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#0C0F14">
     
     <!-- SEO -->
@@ -116,76 +116,20 @@
         .btn-shine::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent); transform: rotate(45deg) translateX(-100%); transition: transform 0.6s; }
         .btn-shine:hover::after { transform: rotate(45deg) translateX(100%); }
         
-        /* ========== ANIMASI INFINITY SCROLL ========== */
-        .anim-item {
-            opacity: 0;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform, filter;
-            filter: blur(3px);
+        /* ========== ANIMASI HALUS ========== */
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
         }
         
-        .anim-left {
-            transform: translateX(-40px);
-        }
-        
-        .anim-right {
-            transform: translateX(40px);
-        }
-        
-        .anim-up {
-            transform: translateY(40px);
-        }
-        
-        .anim-down {
-            transform: translateY(-40px);
-        }
-        
-        .anim-scale {
-            transform: scale(0.9);
-        }
-        
-        .anim-item.anim-in {
-            opacity: 1;
-            filter: blur(0);
-            transform: translateX(0) translateY(0) scale(1);
-        }
-        
-        .anim-item.anim-out {
-            opacity: 0;
-            filter: blur(3px);
-        }
-        
-        .anim-item.anim-out.anim-left {
-            transform: translateX(-40px);
-        }
-        
-        .anim-item.anim-out.anim-right {
-            transform: translateX(40px);
-        }
-        
-        .anim-item.anim-out.anim-up {
-            transform: translateY(40px);
-        }
-        
-        .anim-item.anim-out.anim-down {
-            transform: translateY(-40px);
-        }
-        
-        .anim-item.anim-out.anim-scale {
-            transform: scale(0.9);
-        }
-        
-        /* ========== ANIMASI HALUS LAINNYA ========== */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
-        }
-        
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
         
         @keyframes pulse-dot {
@@ -193,91 +137,36 @@
             50% { opacity: 0.5; transform: scale(1.3); }
         }
         
-        @keyframes glow-pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(20, 184, 166, 0.1); }
-            50% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.2); }
-        }
-        
-        @keyframes border-glow {
-            0%, 100% { border-color: rgba(45, 212, 191, 0.1); }
-            50% { border-color: rgba(45, 212, 191, 0.3); }
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-        
-        @keyframes banner-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        
         .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-slow { animation: float-slow 4s ease-in-out infinite; }
-        .animate-float-d1 { animation-delay: 0.5s; }
-        .animate-float-d2 { animation-delay: 1s; }
-        .animate-float-d3 { animation-delay: 1.5s; }
         .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
-        .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
-        .animate-border-glow { animation: border-glow 3s ease-in-out infinite; }
-        .animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
-        .animate-shimmer {
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite;
-        }
         
-        /* ========== BANNER INFINITE ========== */
-        .banner-container { position: relative; overflow: hidden; }
-        .banner-container::before, .banner-container::after { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            bottom: 0; 
-            width: 80px; 
-            z-index: 10; 
-            pointer-events: none; 
+        /* ========== BANNER INFINITE - DISEDERHANAKAN ========== */
+        .banner-container { 
+            position: relative; 
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 4px 0;
         }
-        .banner-container::before { 
-            left: 0; 
-            background: linear-gradient(to right, #0C0F14 0%, transparent 100%); 
-        }
-        .banner-container::after { 
-            right: 0; 
-            background: linear-gradient(to left, #0C0F14 0%, transparent 100%); 
-        }
+        .banner-container::-webkit-scrollbar { display: none; }
         .banner-track { 
             display: flex; 
-            gap: 24px; 
-            animation: banner-scroll 35s linear infinite; 
+            gap: 16px; 
             width: max-content; 
-        }
-        .banner-track:hover { 
-            animation-play-state: paused; 
+            padding: 0 16px;
         }
         .banner-card { 
             flex-shrink: 0; 
-            width: 320px; 
-            padding: 20px 24px; 
+            width: 280px; 
+            padding: 16px 20px; 
             border-radius: 16px; 
             backdrop-filter: blur(20px); 
             border: 1px solid rgba(255,255,255,0.05); 
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
             background: rgba(30, 36, 47, 0.6); 
         }
-        .banner-card:hover { 
-            transform: translateY(-4px) scale(1.02); 
-            border-color: rgba(255,255,255,0.1); 
-        }
-        .banner-card-red { box-shadow: 0 8px 30px rgba(239, 68, 68, 0.08); border-left: 2px solid rgba(239, 68, 68, 0.3); }
-        .banner-card-yellow { box-shadow: 0 8px 30px rgba(250, 204, 21, 0.08); border-left: 2px solid rgba(250, 204, 21, 0.3); }
-        .banner-card-teal { box-shadow: 0 8px 30px rgba(20, 184, 166, 0.08); border-left: 2px solid rgba(20, 184, 166, 0.3); }
+        .banner-card-red { border-left: 2px solid rgba(239, 68, 68, 0.3); }
+        .banner-card-yellow { border-left: 2px solid rgba(250, 204, 21, 0.3); }
+        .banner-card-teal { border-left: 2px solid rgba(20, 184, 166, 0.3); }
         
         /* ========== PRODUCT CARD ========== */
         .product-card { 
@@ -290,18 +179,6 @@
             border-radius: 16px; 
             padding: 16px; 
         }
-        .product-card::before { 
-            content: ''; 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            height: 1px; 
-            background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.3), transparent); 
-            opacity: 0; 
-            transition: opacity 0.4s; 
-        }
-        .product-card:hover::before { opacity: 1; }
         .product-card:hover { 
             border-color: rgba(45, 212, 191, 0.2); 
             transform: translateY(-4px);
@@ -373,17 +250,12 @@
             justify-content: center; 
             cursor: pointer; 
             right: 16px; 
-            bottom: 24px; 
+            bottom: 90px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
         .floating-btn.visible { 
             opacity: 1; 
             visibility: visible; 
-        }
-        .floating-btn:hover { 
-            background: #252C3A; 
-            border-color: #2E3644; 
-            transform: translateY(-2px);
         }
         
         /* ========== DESKTOP HEADER ========== */
@@ -449,23 +321,15 @@
             border-radius: 2px;
         }
         
-        .nav-item:hover {
-            color: #FFFFFF;
-        }
-        
-        .nav-item.active {
-            color: #FFFFFF;
-        }
-        
-        .nav-item.active::after {
-            width: 80%;
-        }
+        .nav-item:hover { color: #FFFFFF; }
+        .nav-item.active { color: #FFFFFF; }
+        .nav-item.active::after { width: 80%; }
         
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
         }
         
-        /* ========== MOBILE HEADER ========== */
+        /* ========== MOBILE TOP BAR ========== */
         .mobile-top-bar {
             display: none;
             position: fixed;
@@ -554,7 +418,7 @@
         }
         .mobile-scroll-cta:active { transform: scale(0.95); }
         
-        /* ========== MOBILE BOTTOM NAVIGATION ========== */
+        /* ========== MOBILE BOTTOM NAVIGATION - REDESIGN SESUAI OLD FILE ========== */
         .mobile-nav-wrapper { display: none; }
         
         @media (max-width: 768px) {
@@ -566,8 +430,8 @@
                 right: 0;
                 z-index: 100;
                 padding: 8px 12px;
-                padding-bottom: max(8px, calc(var(--safe-bottom) + 4px));
-                background: linear-gradient(to top, rgba(12, 15, 20, 0.95) 30%, transparent);
+                padding-bottom: max(8px, var(--safe-bottom));
+                background: linear-gradient(to top, rgba(12, 15, 20, 0.98) 30%, transparent);
             }
         }
         
@@ -575,57 +439,63 @@
             display: flex;
             align-items: center;
             justify-content: space-around;
-            background: rgba(18, 22, 29, 0.95);
+            background: rgba(18, 22, 29, 0.98);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 32px;
             padding: 6px 4px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
-            max-width: 420px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+            max-width: 400px;
             margin: 0 auto;
         }
         
+        /* Semua item navigasi seragam - tidak ada tombol chat spesial */
         .mobile-nav-item {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 48px;
-            padding: 8px 6px;
+            padding: 8px 4px;
             border-radius: 24px;
             transition: all 0.2s ease;
             text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
             -webkit-tap-highlight-color: transparent;
         }
         
-        .mobile-nav-item:active { transform: scale(0.94); }
-        .mobile-nav-item.active { background: rgba(45, 212, 191, 0.1); }
-        .mobile-nav-item .nav-icon { width: 20px; height: 20px; color: #555D6F; transition: color 0.2s ease, transform 0.2s ease; margin-bottom: 3px; }
-        .mobile-nav-item.active .nav-icon { color: #2DD4BF; transform: translateY(-1px); }
-        .mobile-nav-item .nav-label { font-size: 10px; font-weight: 600; color: #555D6F; text-transform: uppercase; letter-spacing: 0.04em; transition: color 0.2s ease; }
-        .mobile-nav-item.active .nav-label { color: #2DD4BF; }
-        
-        .mobile-nav-cta {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 48px;
-            padding: 8px 6px;
-            background: var(--teal-gradient);
-            border-radius: 24px;
-            text-decoration: none;
-            -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 2px 12px rgba(20, 184, 166, 0.3);
-            transition: all 0.2s ease;
-            margin-left: 2px;
+        .mobile-nav-item:active { 
+            transform: scale(0.94); 
+            background: rgba(45, 212, 191, 0.1);
         }
         
-        .mobile-nav-cta:active { transform: scale(0.94); }
-        .mobile-nav-cta .nav-icon { width: 20px; height: 20px; color: #0C0F14; margin-bottom: 3px; }
-        .mobile-nav-cta .nav-label { font-size: 10px; font-weight: 700; color: #0C0F14; text-transform: uppercase; letter-spacing: 0.04em; }
+        .mobile-nav-item.active { 
+            color: #2DD4BF; 
+            background: rgba(45, 212, 191, 0.08);
+        }
+        
+        .mobile-nav-item .nav-icon { 
+            width: 20px; 
+            height: 20px; 
+            margin-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+        
+        .mobile-nav-item.active .nav-icon { 
+            color: #2DD4BF; 
+        }
+        
+        .mobile-nav-item .nav-label { 
+            font-size: 10px; 
+            font-weight: 600; 
+            letter-spacing: 0.05em;
+            text-transform: uppercase; 
+            transition: color 0.2s ease; 
+        }
+        
+        .mobile-nav-item.active .nav-label { 
+            color: #2DD4BF; 
+        }
         
         /* ========== BODY PADDING ========== */
         body { 
@@ -692,22 +562,6 @@
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             border-radius: 16px;
         }
-        .privilege-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(45, 212, 191, 0.2) 0%, transparent 50%, rgba(45, 212, 191, 0.1) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .privilege-card:hover::before { opacity: 1; }
         .privilege-card:hover {
             border-color: rgba(45, 212, 191, 0.3);
             transform: translateY(-4px);
@@ -732,10 +586,6 @@
             overflow: hidden;
             transition: all 0.3s ease;
             border-radius: 12px;
-        }
-        
-        .comparison-card:hover {
-            transform: translateY(-2px);
         }
         
         .comparison-card.featured {
@@ -766,10 +616,6 @@
             transform: translateX(4px);
         }
         
-        .comparison-item:last-child {
-            border-bottom: none;
-        }
-        
         .comparison-icon {
             width: 20px;
             height: 20px;
@@ -781,9 +627,6 @@
             border-radius: 16px; 
             overflow: hidden; 
             transition: all 0.3s ease;
-        }
-        .faq-item:hover {
-            border-color: rgba(45, 212, 191, 0.1);
         }
         .faq-toggle { 
             width: 100%; 
@@ -840,13 +683,6 @@
             color: #2DD4BF;
             text-decoration: none;
             transition: all 0.3s ease;
-        }
-        
-        .cta-wa-btn:hover {
-            background: linear-gradient(145deg, rgba(45, 212, 191, 0.1) 0%, rgba(30, 36, 47, 0.9) 100%);
-            border-color: rgba(45, 212, 191, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.2);
         }
         
         .cta-primary-btn {
@@ -956,14 +792,13 @@
         
         /* ========== EXTRA SMALL DEVICES ========== */
         @media (max-width: 320px) {
-            .mobile-nav-item { padding: 6px 4px; }
-            .mobile-nav-item .nav-label { font-size: 8px; }
-            .banner-card { width: 280px; padding: 16px; }
-            .mobile-nav-cta .nav-label { font-size: 8px; }
+            .mobile-nav-item { padding: 6px 2px; }
+            .mobile-nav-item .nav-label { font-size: 9px; }
+            .banner-card { width: 260px; }
         }
     </style>
     
-<meta name="google-site-verification" content="hueLadxQV3ytbYXVwY32gKQ-DfvkyDTe_XkMoimWN5c" />
+    <meta name="google-site-verification" content="hueLadxQV3ytbYXVwY32gKQ-DfvkyDTe_XkMoimWN5c" />
     
     <link rel="preload" as="image" href="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png">
     
@@ -1020,8 +855,8 @@
     <div class="mobile-top-bar" id="mobileTopBar">
         <div class="flex justify-between items-center w-full">
             <div class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-teal pulse-dot" id="marketDotMobile"></span>
-                <span class="font-semibold tracking-wider text-[10px] uppercase text-teal-light" id="marketTextMobile">Market Open</span>
+                <span class="w-1.5 h-1.5 rounded-full pulse-dot" id="marketDotMobile"></span>
+                <span class="font-semibold tracking-wider text-[10px] uppercase" id="marketTextMobile">Market Open</span>
             </div>
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-1">
@@ -1071,7 +906,7 @@
         <a href="https://wa.me/628137271517" target="_blank" class="mobile-scroll-cta">Hubungi</a>
     </header>
 
-    <!-- ========== MOBILE BOTTOM NAVIGATION ========== -->
+    <!-- ========== MOBILE BOTTOM NAVIGATION - REDESIGN ========== -->
     <div class="mobile-nav-wrapper" id="mobileNavWrapper">
         <nav class="mobile-nav-bar" role="navigation" aria-label="Mobile Navigation">
             <a href="#hero" class="mobile-nav-item active" data-section="hero">
@@ -1094,37 +929,33 @@
                 <i data-lucide="refresh-cw" class="nav-icon"></i>
                 <span class="nav-label">Buyback</span>
             </a>
-            <a href="https://wa.me/628137271517" target="_blank" class="mobile-nav-cta">
-                <i data-lucide="message-circle" class="nav-icon"></i>
-                <span class="nav-label">Chat</span>
-            </a>
         </nav>
     </div>
 
     <main>
         <!-- ========== HERO ========== -->
         <section id="hero" class="bg-gradient-to-b from-void-50 to-void">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-teal/[0.03] rounded-full blur-3xl animate-float-slow"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float animate-float-d2"></div>
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-teal/[0.03] rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float"></div>
             <div class="hero-content relative z-10 max-w-7xl mx-auto px-4 text-center">
-                <div class="mb-5 anim-item anim-up anim-in flex justify-center">
+                <div class="mb-5 reveal active flex justify-center">
                     <img src="https://i.ibb.co.com/MyKwnnnJ/VS-nobg.png" alt="Veldion Silver" width="140" height="140" class="object-contain drop-shadow-2xl animate-float" loading="eager" decoding="async" fetchpriority="high">
                 </div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal/20 bg-teal/5 mb-5 anim-item anim-up anim-in backdrop-blur-sm animate-border-glow">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal/20 bg-teal/5 mb-5 reveal active backdrop-blur-sm">
                     <i data-lucide="zap" class="w-3 h-3 text-teal-light"></i>
                     <span class="text-[10px] font-semibold text-teal-light uppercase tracking-widest">Always Ready</span>
                 </div>
-                <h1 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tighter mb-4 anim-item anim-up anim-in" style="transition-delay:100ms">Investasi Perak Tanpa<br><span class="text-teal-gradient">Antrean Panjang</span></h1>
-                <p class="text-sm md:text-base text-steel max-w-2xl mx-auto mb-6 leading-relaxed anim-item anim-up anim-in" style="transition-delay:200ms">Supplier besar butuh <span class="text-white font-medium">2-3 bulan Pre-Order</span>. Veldion menyediakan stok ready. <br><span class="text-white font-medium">Tanpa menunggu lama.</span></br></p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center anim-item anim-up anim-in" style="transition-delay:300ms">
+                <h1 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tighter mb-4 reveal active" style="transition-delay:100ms">Investasi Perak Tanpa<br><span class="text-teal-gradient">Antrean Panjang</span></h1>
+                <p class="text-sm md:text-base text-steel max-w-2xl mx-auto mb-6 leading-relaxed reveal active" style="transition-delay:200ms">Supplier besar butuh <span class="text-white font-medium">2-3 bulan Pre-Order</span>. Veldion menyediakan stok ready. <br><span class="text-white font-medium">Tanpa menunggu lama.</span></p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center reveal active" style="transition-delay:300ms">
                     <a href="#produk" class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-teal-light to-teal text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(20,184,166,0.3)] transition btn-shine flex items-center justify-center gap-2">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
                     <a href="#privilege" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/10 text-white font-bold text-sm rounded-full hover:bg-white/5 transition flex items-center justify-center gap-2">Keunggulan Veldion</a>
                 </div>
             </div>
         </section>
 
-        <!-- ========== BANNER INFINITE ========== -->
-        <section class="py-8 md:py-10 bg-void-50 border-y border-white/5">
+        <!-- ========== BANNER INFINITE - DISEDERHANAKAN ========== -->
+        <section class="py-6 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
                     <!-- Masalah 1 -->
@@ -1166,43 +997,6 @@
                         </div>
                         <p class="text-white/70 text-sm">Veldion menyediakan stok <strong class="text-white">READY STOCK</strong>.</p>
                     </div>
-                    <!-- Ulang untuk infinite effect -->
-                    <div class="banner-card banner-card-red">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
-                                <i data-lucide="clock" class="w-5 h-5 text-red-400"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span>
-                                <h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4>
-                            </div>
-                        </div>
-                        <p class="text-white/70 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p>
-                    </div>
-                    <div class="banner-card banner-card-yellow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
-                                <i data-lucide="package" class="w-5 h-5 text-yellow-400"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span>
-                                <h4 class="text-white font-semibold text-sm">Stok Terbatas</h4>
-                            </div>
-                        </div>
-                        <p class="text-white/70 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p>
-                    </div>
-                    <div class="banner-card banner-card-teal">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center">
-                                <i data-lucide="rocket" class="w-5 h-5 text-teal-light"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-bold text-teal-light uppercase">Solusi</span>
-                                <h4 class="text-white font-semibold text-sm">Ready Stock</h4>
-                            </div>
-                        </div>
-                        <p class="text-white/70 text-sm">Veldion menyediakan stok <strong class="text-white">READY STOCK</strong>.</p>
-                    </div>
                 </div>
             </div>
         </section>
@@ -1210,12 +1004,12 @@
         <!-- ========== SUPPLIER ========== -->
         <section id="supplier" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 md:mb-16 anim-item anim-up">
+                <div class="text-center mb-12 md:mb-16 reveal">
                     <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">Network</span>
                     <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3">Supplier Resmi</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center anim-item anim-left">
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal">
                         <div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5">
                             <i data-lucide="gem" class="w-7 h-7 text-steel-light"></i>
                         </div>
@@ -1223,7 +1017,7 @@
                         <p class="text-xs text-steel">Supplier perak modern dengan kualitas presisi dengan kemurnian 999.9.</p>
                         <div class="mt-4 text-[10px] text-steel-dark">5.0 rating</div>
                     </div>
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center anim-item anim-up">
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal">
                         <div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5">
                             <i data-lucide="key-round" class="w-7 h-7 text-steel-light"></i>
                         </div>
@@ -1231,7 +1025,7 @@
                         <p class="text-xs text-steel">Spesialis perak press dan beragam jenis khusus dengan kemurnian 999.5.</p>
                         <div class="mt-4 text-[10px] text-steel-dark">4.9 rating</div>
                     </div>
-                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center anim-item anim-right">
+                    <div class="glass-card glass-card-hover p-8 rounded-xl text-center reveal">
                         <div class="w-16 h-16 mx-auto mb-4 bg-white/5 rounded-full flex items-center justify-center border border-white/5">
                             <i data-lucide="landmark" class="w-7 h-7 text-steel-light"></i>
                         </div>
@@ -1246,57 +1040,9 @@
         <!-- ========== PRODUK ========== -->
         <section id="produk" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 md:mb-16 anim-item anim-up">
+                <div class="text-center mb-12 md:mb-16 reveal">
                     <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">Katalog</span>
                     <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3">Produk Ready Stock</h2>
-                </div>
-                
-                <!-- Kategori Desktop -->
-                <div class="hidden md:grid grid-cols-4 gap-4 mb-12">
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
-                        <h4 class="text-lg font-bold text-white">Bullion</h4>
-                        <p class="text-xs text-steel mt-1">Batangan investasi.</p>
-                    </div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
-                        <h4 class="text-lg font-bold text-white">Press</h4>
-                        <p class="text-xs text-steel mt-1">Laminasi tipis/Antam style.</p>
-                    </div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
-                        <h4 class="text-lg font-bold text-white">Coin</h4>
-                        <p class="text-xs text-steel mt-1">Koin edisi.</p>
-                    </div>
-                    <div class="border-l-2 border-white/10 pl-4 py-2 hover:border-teal/30 transition">
-                        <h4 class="text-lg font-bold text-white">Medalion</h4>
-                        <p class="text-xs text-steel mt-1">Bulat artistik.</p>
-                    </div>
-                </div>
-                
-                <!-- Kategori Mobile -->
-                <div class="md:hidden mb-10 flex justify-center gap-6 py-4">
-                    <div class="flex flex-col items-center cursor-pointer animate-float" data-cat="bullion">
-                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
-                            <span class="text-lg font-bold text-white">B</span>
-                        </div>
-                        <span class="text-[10px] text-steel-light">Bullion</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d1" data-cat="press">
-                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
-                            <span class="text-lg font-bold text-white">P</span>
-                        </div>
-                        <span class="text-[10px] text-steel-light">Press</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d2" data-cat="coin">
-                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
-                            <span class="text-lg font-bold text-white">C</span>
-                        </div>
-                        <span class="text-[10px] text-steel-light">Coin</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer animate-float animate-float-d3" data-cat="medalion">
-                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-2">
-                            <span class="text-lg font-bold text-white">M</span>
-                        </div>
-                        <span class="text-[10px] text-steel-light">Medalion</span>
-                    </div>
                 </div>
                 
                 <!-- Live Products Header -->
@@ -1327,11 +1073,11 @@
 
         <!-- ========== VELDION PRIVILEGE ========== -->
         <section id="privilege" class="py-20 md:py-24 relative overflow-hidden bg-void-100">
-            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-teal/[0.03] rounded-full blur-3xl animate-float-slow"></div>
-            <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-3xl animate-float animate-float-d2"></div>
+            <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-teal/[0.03] rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-3xl animate-float"></div>
             <div class="max-w-7xl mx-auto px-4 relative z-10">
-                <div class="text-center mb-16 anim-item anim-up">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-6 animate-border-glow">
+                <div class="text-center mb-16 reveal">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal/10 border border-teal/20 mb-6">
                         <i data-lucide="sparkles" class="w-4 h-4 text-teal-light"></i>
                         <span class="text-[11px] font-semibold text-teal-light uppercase tracking-widest">Veldion Privilege</span>
                     </div>
@@ -1341,7 +1087,7 @@
 
                 <div class="grid lg:grid-cols-2 gap-10 items-start">
                     <!-- Left: Benefit List -->
-                    <div class="anim-item anim-left">
+                    <div class="reveal">
                         <div class="privilege-card p-6 md:p-8 rounded-2xl">
                             <h3 class="font-display text-lg font-bold text-white mb-5 flex items-center gap-3">
                                 <div class="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center">
@@ -1386,15 +1132,6 @@
                                         <p class="text-xs text-steel mt-0.5">Harga buyback mengacu pada harga beli supplier terkait dihari itu.</p>
                                     </div>
                                 </div>
-                                <div class="benefit-item">
-                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                        <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-white font-medium text-sm">Support Responsif</p>
-                                        <p class="text-xs text-steel mt-0.5">Tim Veldion Silver siap membantu setiap jam market open via WhatsApp.</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1403,15 +1140,15 @@
                     <div class="space-y-5">
                         <!-- Stats Row -->
                         <div class="grid grid-cols-3 gap-3">
-                            <div class="text-center p-4 glass-card rounded-xl anim-item anim-scale">
+                            <div class="text-center p-4 glass-card rounded-xl reveal">
                                 <div class="font-display text-xl md:text-2xl font-bold text-white mb-1" id="statTransactions">500+</div>
                                 <p class="text-[9px] text-steel uppercase tracking-wider">Transaksi Sukses</p>
                             </div>
-                            <div class="text-center p-4 glass-card rounded-xl anim-item anim-scale">
+                            <div class="text-center p-4 glass-card rounded-xl reveal">
                                 <div class="font-display text-xl md:text-2xl font-bold text-teal-gradient mb-1">Minim PO</div>
                                 <p class="text-[9px] text-steel uppercase tracking-wider">Tanpa Antrean</p>
                             </div>
-                            <div class="text-center p-4 glass-card rounded-xl anim-item anim-scale">
+                            <div class="text-center p-4 glass-card rounded-xl reveal">
                                 <div class="font-display text-xl md:text-2xl font-bold text-white mb-1">1-3</div>
                                 <p class="text-[9px] text-steel uppercase tracking-wider">Hari Kirim</p>
                             </div>
@@ -1420,7 +1157,7 @@
                         <!-- Comparison Cards -->
                         <div class="grid grid-cols-2 gap-3">
                             <!-- Supplier Lain -->
-                            <div class="comparison-card p-4 rounded-xl anim-item anim-left">
+                            <div class="comparison-card p-4 rounded-xl reveal">
                                 <div class="flex items-center gap-2 mb-3">
                                     <div class="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center">
                                         <i data-lucide="check" class="w-3 h-3 text-red-400"></i>
@@ -1444,7 +1181,7 @@
                             </div>
                             
                             <!-- Veldion -->
-                            <div class="comparison-card featured p-4 rounded-xl anim-item anim-right">
+                            <div class="comparison-card featured p-4 rounded-xl reveal">
                                 <div class="flex items-center gap-2 mb-3">
                                     <div class="w-6 h-6 rounded-full bg-teal/20 flex items-center justify-center">
                                         <i data-lucide="check" class="w-3 h-3 text-teal-light"></i>
@@ -1469,20 +1206,21 @@
                         </div>
 
                         <!-- Value Proposition -->
-                        <div class="glass-card p-4 rounded-xl border-l-2 border-teal/30 anim-item anim-up">
+                        <div class="glass-card p-4 rounded-xl border-l-2 border-teal/30 reveal">
                             <div class="flex items-start gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-teal/10 flex items-center justify-center flex-shrink-0">
                                     <i data-lucide="trending-up" class="w-4 h-4 text-teal-light"></i>
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-white text-sm mb-1">Harga Kompetitif</h4>
-                                    <p class="text-xs text-steel leading-relaxed">Harga mengikuti spot price <span class="text-teal-light font-medium">XAG/USD dan XAG/IDR</span> dengan spread kompetitif. Tidak ada biaya tersembunyi atau mark-up berlebih demi kenyamanan pelanggan Veldion Silver.</p>
+                                    <!-- PERUBAHAN 1: "dan" tidak dihighlight, hanya XAG/USD dan XAG/IDR yang hijau -->
+                                    <p class="text-xs text-steel leading-relaxed">Harga mengikuti spot price <span class="text-teal-light font-medium">XAG/USD</span> dan <span class="text-teal-light font-medium">XAG/IDR</span> dengan spread kompetitif.</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- CTA -->
-                        <a href="https://wa.me/628137271517" target="_blank" class="cta-primary-btn animate-heartbeat anim-item anim-up">
+                        <a href="https://wa.me/628137271517" target="_blank" class="cta-primary-btn reveal">
                             Hubungi Admin Veldion
                         </a>
                     </div>
@@ -1494,7 +1232,7 @@
         <section id="buyback" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="anim-item anim-left">
+                    <div class="reveal">
                         <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">Likuiditas</span>
                         <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3 mb-6">Buyback Program</h2>
                         <p class="text-steel mb-6 leading-relaxed">Veldion Silver menerima kembali perak fisik Anda berdasarkan harga pasar. Likuiditas investasi Anda tetap terjaga.</p>
@@ -1503,9 +1241,10 @@
                             <span>Harga buyback mengacu pada harga beli dari supplier resmi terkait pada hari yang sama.</span>
                         </div>
                     </div>
-                    <div class="glass-card p-6 md:p-8 rounded-xl anim-item anim-right border border-white/5">
+                    <div class="glass-card p-6 md:p-8 rounded-xl reveal border border-white/5">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-bold text-white">Harga Buyback Hari Ini</h3>
+                            <!-- PERUBAHAN 2: Header dengan tanggal yang bisa dikonfigurasi -->
+                            <h3 class="text-lg font-bold text-white">Harga Buyback <span id="buybackDate" class="text-teal-light">-</span></h3>
                             <div class="flex items-center gap-2">
                                 <span class="w-2 h-2 bg-teal rounded-full pulse-dot"></span>
                                 <span class="text-[10px] text-steel-dark border border-white/5 px-3 py-1 rounded-full">Live</span>
@@ -1524,12 +1263,12 @@
         <!-- ========== FAQ ========== -->
         <section id="faq" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
             <div class="max-w-3xl mx-auto px-4">
-                <div class="text-center mb-12 anim-item anim-up">
+                <div class="text-center mb-12 reveal">
                     <span class="text-xs font-bold text-teal tracking-[0.3em] uppercase">FAQ</span>
                     <h2 class="font-display text-3xl md:text-4xl font-bold text-white mt-3">Pertanyaan Umum</h2>
                 </div>
                 <div class="space-y-3" id="faqContainer">
-                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-left">
+                    <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
                             <span class="faq-question">Apakah perak yang dijual dijamin keasliannya?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1538,7 +1277,7 @@
                             <p class="faq-answer">Ya, setiap produk diverifikasi keasliannya. Kami hanya menjual perak dengan kadar kemurnian terjamin.</p>
                         </div>
                     </div>
-                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-up">
+                    <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
                             <span class="faq-question">Berapa lama proses pengiriman?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1547,7 +1286,7 @@
                             <p class="faq-answer">Pengiriman biasanya 1-3 hari kerja tergantung lokasi. Semua pengiriman dilengkapi nomor resi untuk tracking.</p>
                         </div>
                     </div>
-                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-right">
+                    <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
                             <span class="faq-question">Bagaimana cara melakukan buyback?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1556,7 +1295,7 @@
                             <p class="faq-answer">Hubungi kami via WhatsApp, kirim foto produk, dan kami akan berikan penawaran harga berdasarkan pasar saat ini.</p>
                         </div>
                     </div>
-                    <div class="glass-card rounded-xl overflow-hidden faq-item anim-item anim-up">
+                    <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors">
                             <span class="faq-question">Apakah harga bisa dinegosiasi?</span>
                             <i data-lucide="chevron-down" class="faq-icon"></i>
@@ -1572,8 +1311,8 @@
         <!-- ========== CTA ========== -->
         <section class="py-20 md:py-24 bg-void border-t border-white/5">
             <div class="max-w-3xl mx-auto px-4 text-center">
-                <div class="glass-card p-10 md:p-14 rounded-2xl relative overflow-hidden anim-item anim-up">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[350px] h-[180px] bg-teal/[0.03] rounded-full blur-[80px] animate-glow"></div>
+                <div class="glass-card p-10 md:p-14 rounded-2xl relative overflow-hidden reveal">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[350px] h-[180px] bg-teal/[0.03] rounded-full blur-[80px]"></div>
                     <div class="relative z-10">
                         <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">Siap Investasi Perak?</h2>
                         <p class="text-steel max-w-md mx-auto mb-8 leading-relaxed text-sm">Jelajahi katalog kami dan dapatkan perak fisik berkualitas tanpa antrean panjang.</p>
@@ -1592,12 +1331,16 @@
                 <div>
                     <span class="font-display text-xl font-bold text-teal-gradient block mb-3">VELDION SILVER</span>
                     <p class="text-xs text-steel-light leading-relaxed mb-4 max-w-sm">Distributor perak fisik terpercaya. Stok ready dengan harga kompetitif tanpa antrean Pre-Order panjang.</p>
+                    <!-- PERUBAHAN 3: Tambah logo X/Twitter -->
                     <div class="footer-social">
                         <a href="https://instagram.com/veldion.silver" target="_blank" class="footer-social-btn">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
                         </a>
                         <a href="https://wa.me/628137271517" target="_blank" class="footer-social-btn">
                             <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" target="_blank" class="footer-social-btn">
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
                         </a>
                     </div>
                 </div>
@@ -1624,7 +1367,7 @@
             </div>
             
             <!-- Copyright -->
-            <div class="footer-copyright border-t border-white/5 mt-8 pt-6 text-center">
+            <div class="border-t border-white/5 mt-8 pt-6 text-center">
                 <p class="text-[11px] text-steel-dark">© 2026 Veldion Silver. All rights reserved.</p>
                 <p class="text-[11px] text-steel-dark mt-1">Harga mengikuti pasar real time</p>
             </div>
@@ -1692,17 +1435,21 @@
     <!-- ========== SCRIPTS ========== -->
     <script>
     /* ============================================================
-       KONFIGURASI - MUDAH DIUBAH
+       ╔════════════════════════════════════════════════════════════╗
+       ║                    AREA KONFIGURASI                        ║
+       ║  Edit nilai di bawah ini setiap hari sesuai kebutuhan     ║
+       ║  Jangan ubah kode di luar area ini kecuali paham          ║
+       ╚════════════════════════════════════════════════════════════╝
        ============================================================ */
 
     // 1. STATUS MARKET (true = open, false = closed)
-    const MARKET_OPEN = closed;
+    const MARKET_OPEN = true;
 
-    // 2. HARGA XAG (ubah setiap hari)
+    // 2. HARGA XAG (update sesuai harga pasar)
     const XAG_USD = "$32.45";
     const XAG_IDR = "Rp 545.000";
 
-    // 3. DATA PRODUK (ubah sesuai stok)
+    // 3. DATA PRODUK (nama, kategori, supplier, berat, kadar, harga, inisial)
     const PRODUCTS = [
         { name: "Perak Reguler 3.3gr", category: "Press", supplier: "Silverium", weight: "3.3gr", purity: "999.9", price: "Rp 379.500", initial: "P" },
         { name: "Perak Reguler 9.9gr", category: "Press", supplier: "Silverium", weight: "9.9gr", purity: "999.9", price: "Rp 1.089.000", initial: "P" },
@@ -1714,7 +1461,7 @@
         { name: "Perak Medalion 1gr", category: "Medalion", supplier: "JSG", weight: "1gr", purity: "999.5", price: "Rp 115.000", initial: "M" }
     ];
 
-    // 4. HARGA BUYBACK (ubah setiap hari)
+    // 4. HARGA BUYBACK (update sesuai harga pasar)
     const BUYBACK_RATES = [
         { name: "Antam", price: "Rp 55.000/gr" },
         { name: "Silverium", price: "Rp 61.000/gr" },
@@ -1722,29 +1469,20 @@
         { name: "JSG / TDS", price: "Rp 66.500/gr" }
     ];
 
-    // 5. NOMOR WHATSAPP
+    // 5. NOMOR WHATSAPP (format: tanpa + dan spasi)
     const WHATSAPP = "628137271517";
 
     // 6. JUMLAH TRANSAKSI
     const TRANSACTION_COUNT = "150+";
 
-    // 7. KATEGORI PRODUK
-    const CATEGORIES = [
-        { name: "Bullion", desc: "Batangan investasi", icon: "B" },
-        { name: "Press", desc: "Laminasi tipis", icon: "P" },
-        { name: "Coin", desc: "Koin edisi", icon: "C" },
-        { name: "Medalion", desc: "Bulat artistik", icon: "M" }
-    ];
-
-    const CAT_INFO = {
-        bullion: { title: "Bullion", desc: "Batangan investasi." },
-        press: { title: "Press", desc: "Laminasi tipis." },
-        coin: { title: "Coin", desc: "Koin edisi." },
-        medalion: { title: "Medalion", desc: "Bulat artistik." }
-    };
+    // 7. TANGGAL BUYBACK (format: "15 Januari 2025")
+    const BUYBACK_DATE = "15 Januari 2025";
 
     /* ============================================================
-       AKHIR KONFIGURASI
+       ╔════════════════════════════════════════════════════════════╗
+       ║               AKHIR AREA KONFIGURASI                       ║
+       ║         Jangan edit kode di bawah ini                     ║
+       ╚════════════════════════════════════════════════════════════╝
        ============================================================ */
 
     // Initialize
@@ -1769,13 +1507,14 @@
         setText('xagUsdMobile', XAG_USD);
         setText('xagIdrMobile', XAG_IDR);
         setText('statTransactions', TRANSACTION_COUNT);
+        setText('buybackDate', BUYBACK_DATE); // PERUBAHAN 2: Set tanggal buyback
         
         // Render konten
         renderProducts();
         renderBuyback();
         
-        // Setup infinite scroll animation
-        setupInfiniteAnimation();
+        // Setup reveal animations (mirip old file)
+        setupRevealAnimations();
         
         // Setup event listeners
         setupEventListeners();
@@ -1827,10 +1566,9 @@
         
         for (let i = 0; i < PRODUCTS.length; i++) {
             const p = PRODUCTS[i];
-            const direction = i % 3 === 0 ? 'anim-left' : (i % 3 === 1 ? 'anim-up' : 'anim-right');
             
             const card = document.createElement('div');
-            card.className = `product-card glass-card-hover p-4 md:p-5 rounded-xl anim-item ${direction}`;
+            card.className = 'product-card glass-card-hover p-4 md:p-5 rounded-xl';
             card.setAttribute('data-idx', i);
             
             card.innerHTML = `
@@ -1851,9 +1589,6 @@
             
             grid.appendChild(card);
         }
-        
-        // Observe new items
-        document.querySelectorAll('.anim-item').forEach(el => animObserver.observe(el));
     }
 
     // Render buyback
@@ -1894,28 +1629,21 @@
         document.body.classList.add('no-scroll');
     }
 
-    // Setup infinite animation (trigger setiap masuk/keluar viewport)
-    function setupInfiniteAnimation() {
-        document.querySelectorAll('.anim-item').forEach(el => animObserver.observe(el));
-    }
-
-    // Observer untuk infinite animation
-    const animObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Masuk viewport
-                entry.target.classList.add('anim-in');
-                entry.target.classList.remove('anim-out');
-            } else {
-                // Keluar viewport
-                entry.target.classList.add('anim-out');
-                entry.target.classList.remove('anim-in');
-            }
+    // Setup reveal animations (seperti old file)
+    function setupRevealAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
-    }, { 
-        threshold: 0.1,
-        rootMargin: '0px'
-    });
+        
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
 
     // Setup all event listeners
     function setupEventListeners() {
@@ -1982,7 +1710,7 @@
             } 
         });
 
-        // FAQ toggle
+        // FAQ toggle (seperti old file)
         document.querySelectorAll('.faq-toggle').forEach(toggle => {
             toggle.addEventListener('click', function() { 
                 const faqItem = this.closest('.faq-item');
@@ -2013,6 +1741,14 @@
                     const isMobile = window.innerWidth < 768;
                     const offset = isMobile ? 70 : 100;
                     window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+                    
+                    // Update active state di mobile nav
+                    document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                        item.classList.remove('active');
+                        if (item.dataset.section === href.replace('#', '')) {
+                            item.classList.add('active');
+                        }
+                    });
                 }
             });
         });
@@ -2026,27 +1762,11 @@
             toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         }
 
-        // Mobile category
-        document.querySelectorAll('[data-cat]').forEach(el => {
-            el.addEventListener('click', () => { 
-                const c = CAT_INFO[el.dataset.cat]; 
-                if (c) alert(c.title + '\n\n' + c.desc); 
-            });
-        });
-
-        // Scroll handlers
-        const mobileScrollHeader = document.getElementById('mobileScrollHeader');
-        const desktopNav = document.getElementById('desktopNav');
-        const desktopNavItems = document.querySelectorAll('.nav-item');
+        // Scroll handlers untuk active nav
         const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
         const sections = document.querySelectorAll('section[id]');
         
-        function updateMobileScrollHeader() {
-            if (!mobileScrollHeader) return;
-            mobileScrollHeader.classList.toggle('visible', window.scrollY > 100);
-        }
-        
-        function updateDesktopNav() {
+        function updateActiveNav() {
             const scrollY = window.scrollY;
             const headerOffset = 150;
             
@@ -2056,13 +1776,6 @@
                 const sectionId = section.getAttribute('id');
                 
                 if (scrollY >= sectionTop && scrollY < sectionBottom) {
-                    desktopNavItems.forEach(item => {
-                        item.classList.remove('active');
-                        if (item.dataset.section === sectionId) {
-                            item.classList.add('active');
-                        }
-                    });
-                    
                     mobileNavItems.forEach(item => {
                         item.classList.remove('active');
                         if (item.dataset.section === sectionId) {
@@ -2071,26 +1784,25 @@
                     });
                 }
             });
-            
-            if (desktopNav) {
-                desktopNav.classList.toggle('scrolled', scrollY > 36);
-            }
         }
 
-        window.addEventListener('scroll', () => {
-            updateMobileScrollHeader();
-            updateDesktopNav();
-        });
-
+        window.addEventListener('scroll', updateActiveNav);
+        
         // Initial calls
         setTimeout(() => {
-            updateDesktopNav();
-            updateMobileScrollHeader();
+            updateActiveNav();
         }, 100);
     }
 
     // Search helper functions
     function defaultSearch() {
+        const CATEGORIES = [
+            { name: "Bullion", icon: "B" },
+            { name: "Press", icon: "P" },
+            { name: "Coin", icon: "C" },
+            { name: "Medalion", icon: "M" }
+        ];
+        
         return `
             <div class="p-4">
                 <div class="mb-4">
