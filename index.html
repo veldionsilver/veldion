@@ -140,20 +140,26 @@
         .animate-float { animation: float 6s ease-in-out infinite; }
         .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
         
-        /* ========== BANNER INFINITE - DISEDERHANAKAN ========== */
+        /* ========== BANNER INFINITE - ANIMASI OTOMATIS ========== */
+        @keyframes banner-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
         .banner-container { 
             position: relative; 
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            overflow: hidden;
             padding: 4px 0;
         }
-        .banner-container::-webkit-scrollbar { display: none; }
         .banner-track { 
             display: flex; 
             gap: 16px; 
             width: max-content; 
             padding: 0 16px;
+            animation: banner-scroll 25s linear infinite;
+        }
+        .banner-track:hover {
+            animation-play-state: paused;
         }
         .banner-card { 
             flex-shrink: 0; 
@@ -954,11 +960,11 @@
             </div>
         </section>
 
-        <!-- ========== BANNER INFINITE - DISEDERHANAKAN ========== -->
+        <!-- ========== BANNER INFINITE - ANIMASI OTOMATIS ========== -->
         <section class="py-6 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
-                    <!-- Masalah 1 -->
+                    <!-- Card 1 -->
                     <div class="banner-card banner-card-red">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
@@ -971,7 +977,7 @@
                         </div>
                         <p class="text-white/70 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p>
                     </div>
-                    <!-- Masalah 2 -->
+                    <!-- Card 2 -->
                     <div class="banner-card banner-card-yellow">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
@@ -984,7 +990,48 @@
                         </div>
                         <p class="text-white/70 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p>
                     </div>
-                    <!-- Solusi -->
+                    <!-- Card 3 -->
+                    <div class="banner-card banner-card-teal">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center">
+                                <i data-lucide="rocket" class="w-5 h-5 text-teal-light"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-teal-light uppercase">Solusi</span>
+                                <h4 class="text-white font-semibold text-sm">Ready Stock</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Veldion menyediakan stok <strong class="text-white">READY STOCK</strong>.</p>
+                    </div>
+                    
+                    <!-- DUPLIKAT untuk seamless loop -->
+                    <!-- Card 1 (duplikat) -->
+                    <div class="banner-card banner-card-red">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-red-400"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-red-400 uppercase">Masalah</span>
+                                <h4 class="text-white font-semibold text-sm">Pre-Order Panjang</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Pembelian ke supplier besar harus mengantri <strong class="text-white">2-3 Bulan</strong>.</p>
+                    </div>
+                    <!-- Card 2 (duplikat) -->
+                    <div class="banner-card banner-card-yellow">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
+                                <i data-lucide="package" class="w-5 h-5 text-yellow-400"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-bold text-yellow-400 uppercase">Masalah</span>
+                                <h4 class="text-white font-semibold text-sm">Stok Terbatas</h4>
+                            </div>
+                        </div>
+                        <p class="text-white/70 text-sm">Stok sering kehabisan, investor harus menunggu lama.</p>
+                    </div>
+                    <!-- Card 3 (duplikat) -->
                     <div class="banner-card banner-card-teal">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-teal/10 flex items-center justify-center">
@@ -1097,7 +1144,7 @@
                             </h3>
                             <div class="space-y-1">
                                 <div class="benefit-item">
-                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <div class="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center flex-shrink:0 mt-0.5">
                                         <i data-lucide="check" class="w-3.5 h-3.5 text-teal-light"></i>
                                     </div>
                                     <div>
@@ -1213,7 +1260,6 @@
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-white text-sm mb-1">Harga Kompetitif</h4>
-                                    <!-- PERUBAHAN 1: "dan" tidak dihighlight, hanya XAG/USD dan XAG/IDR yang hijau -->
                                     <p class="text-xs text-steel leading-relaxed">Harga mengikuti spot price <span class="text-teal-light font-medium">XAG/USD</span> dan <span class="text-teal-light font-medium">XAG/IDR</span> dengan spread kompetitif.</p>
                                 </div>
                             </div>
@@ -1243,7 +1289,6 @@
                     </div>
                     <div class="glass-card p-6 md:p-8 rounded-xl reveal border border-white/5">
                         <div class="flex items-center justify-between mb-6">
-                            <!-- PERUBAHAN 2: Header dengan tanggal yang bisa dikonfigurasi -->
                             <h3 class="text-lg font-bold text-white">Harga Buyback <span id="buybackDate" class="text-teal-light">-</span></h3>
                             <div class="flex items-center gap-2">
                                 <span class="w-2 h-2 bg-teal rounded-full pulse-dot"></span>
@@ -1331,7 +1376,6 @@
                 <div>
                     <span class="font-display text-xl font-bold text-teal-gradient block mb-3">VELDION SILVER</span>
                     <p class="text-xs text-steel-light leading-relaxed mb-4 max-w-sm">Distributor perak fisik terpercaya. Stok ready dengan harga kompetitif tanpa antrean Pre-Order panjang.</p>
-                    <!-- PERUBAHAN 3: Tambah logo X/Twitter -->
                     <div class="footer-social">
                         <a href="https://instagram.com/veldion.silver" target="_blank" class="footer-social-btn">
                             <i data-lucide="instagram" class="w-4 h-4"></i>
@@ -1507,19 +1551,19 @@
         setText('xagUsdMobile', XAG_USD);
         setText('xagIdrMobile', XAG_IDR);
         setText('statTransactions', TRANSACTION_COUNT);
-        setText('buybackDate', BUYBACK_DATE); // PERUBAHAN 2: Set tanggal buyback
+        setText('buybackDate', BUYBACK_DATE);
         
         // Render konten
         renderProducts();
         renderBuyback();
         
-        // Setup reveal animations (mirip old file)
+        // Setup reveal animations
         setupRevealAnimations();
         
         // Setup event listeners
         setupEventListeners();
         
-        // Update icons untuk konten baru
+        // Update icons
         setTimeout(() => {
             lucide.createIcons();
         }, 200);
@@ -1629,7 +1673,7 @@
         document.body.classList.add('no-scroll');
     }
 
-    // Setup reveal animations (seperti old file)
+    // Setup reveal animations
     function setupRevealAnimations() {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1710,7 +1754,7 @@
             } 
         });
 
-        // FAQ toggle (seperti old file)
+        // FAQ toggle
         document.querySelectorAll('.faq-toggle').forEach(toggle => {
             toggle.addEventListener('click', function() { 
                 const faqItem = this.closest('.faq-item');
