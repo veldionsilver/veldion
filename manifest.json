@@ -2,12 +2,12 @@
   "name": "Veldion Silver",
   "short_name": "Veldion",
   "description": "Distributor perak fisik murni 999.5 & 999.9 Ready Stock Indonesia",
-  "start_url": "/",
+  "start_url": "/veldion/",
   "display": "standalone",
   "background_color": "#0C0F14",
   "theme_color": "#14B8A6",
   "orientation": "portrait-primary",
-  "scope": "/",
+  "scope": "/veldion/",
   "lang": "id",
   "icons": [
     {
