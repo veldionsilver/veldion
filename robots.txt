@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/js/data.js
+
+Sitemap: https://veldionsilver.github.io/veldion/sitemap.xml
