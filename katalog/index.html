@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080A0F">
+    <title>Katalog • Veldion Silver</title>
+    <meta name="description" content="Semua produk perak fisik Veldion Silver ready stock.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
+                    colors: {
+                        void: { DEFAULT: '#080A0F', 50: '#0C0F14', 100: '#12151C', 200: '#181C26', 300: '#1E2430' },
+                        steel: { DEFAULT: '#94A3B8', light: '#CBD5E1', dark: '#64748B' },
+                        silver: { DEFAULT: '#C0C5CE', light: '#E2E8F0', dark: '#94A3B8' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* ====== BASE ====== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #080A0F;
+            color: #E2E8F0;
+            padding-top: 70px;
+            padding-bottom: 80px;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media (min-width: 769px) { body { padding-top: 80px; padding-bottom: 0; } }
+
+        /* ====== SCROLLBAR ====== */
+        ::-webkit-scrollbar { width: 6px; background: #080A0F; }
+        ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
+
+        /* ====== GLASS ====== */
+        .glass-card {
+            background: linear-gradient(145deg, rgba(18,21,28,.9) 0%, rgba(8,10,15,.95) 100%);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(192,197,206,.06);
+            box-shadow: 0 4px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.02);
+        }
+        .glass-card-hover {
+            transition: all .5s cubic-bezier(.16,1,.3,1);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(192,197,206,.15);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,.5), 0 0 60px rgba(192,197,206,.05);
+        }
+
+        /* ====== TEXT GRADIENT ====== */
+        .text-silver-gradient {
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ====== BUTTONS ====== */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,.25), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform .8s;
+        }
+        .btn-shine:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        /* ====== NAV ====== */
+        .desktop-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: rgba(8,10,15,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(192,197,206,.06);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+        @media (min-width: 769px) {
+            .desktop-nav { height: 80px; padding: 0 32px; }
+        }
+        .nav-brand {
+            font-family: 'Sora', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+        .nav-brand small {
+            display: block;
+            font-size: 8px;
+            font-weight: 400;
+            letter-spacing: .3em;
+            color: #64748B;
+            -webkit-text-fill-color: #64748B;
+            text-transform: uppercase;
+        }
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 10px;
+            color: #94A3B8;
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all .3s ease;
+            border: 1px solid rgba(192,197,206,.06);
+        }
+        .nav-back:hover {
+            background: rgba(192,197,206,.08);
+            color: #fff;
+            border-color: rgba(192,197,206,.15);
+        }
+        .nav-wa {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 100%);
+            color: #080A0F;
+            font-weight: 700;
+            font-size: 13px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+        .nav-wa:hover {
+            box-shadow: 0 0 25px rgba(192,197,206,.3);
+            transform: translateY(-1px);
+        }
+
+        /* ====== PRODUCT CARD ====== */
+        .product-card {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: linear-gradient(145deg, rgba(18,21,28,.7) 0%, rgba(8,10,15,.85) 100%);
+            border: 1px solid rgba(192,197,206,.05);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all .4s cubic-bezier(.16,1,.3,1);
+        }
+        .product-card:hover {
+            border-color: rgba(192,197,206,.15);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 48px rgba(0,0,0,.4), 0 0 40px rgba(192,197,206,.06);
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.03), transparent);
+            transition: left .6s;
+        }
+        .product-card:hover::before { left: 100%; }
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(192,197,206,.06);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(192,197,206,.08);
+            border-radius: 24px;
+            padding: 4px 12px;
+            font-size: 9px;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+
+        /* ====== MODAL ====== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.9);
+            backdrop-filter: blur(12px);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .4s ease, visibility .4s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: linear-gradient(145deg, rgba(18,21,28,.98) 0%, rgba(8,10,15,.99) 100%);
+            border: 1px solid rgba(192,197,206,.08);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 440px;
+            width: 100%;
+            transform: scale(.95) translateY(20px);
+            transition: transform .5s cubic-bezier(.16,1,.3,1);
+            position: relative;
+            box-shadow: 0 24px 64px rgba(0,0,0,.6);
+        }
+        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+        /* ====== LOADING ====== */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(192,197,206,.1);
+            border-top-color: #C0C5CE;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .desktop-nav { height: 60px; padding: 0 16px; }
+            body { padding-top: 60px; }
+            .nav-brand { font-size: 18px; }
+            .nav-wa { padding: 6px 14px; font-size: 11px; }
+        }
+        @media (max-width: 480px) {
+            .nav-back span { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== NAV ====== -->
+    <header class="desktop-nav">
+        <div class="w-full max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/veldion/" class="nav-brand">
+                VELDION
+                <small>Silver Bridge</small>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <a href="/veldion/" class="nav-back">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Kembali</span>
+                </a>
+                <a href="https://wa.me/628137271517" target="_blank" class="nav-wa">
+                    <i data-lucide="message-circle" class="w-4 h-4 inline mr-1.5"></i>
+                    <span class="hidden sm:inline">Hubungi</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ====== MAIN ====== -->
+    <main class="max-w-7xl mx-auto px-4 py-6 md:py-10">
+
+        <!-- HEADER -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+            <div>
+                <h1 class="font-display text-2xl md:text-4xl font-bold text-white">
+                    Semua Produk <span class="text-silver-gradient">Veldion</span>
+                </h1>
+                <p class="text-sm text-steel mt-1">Klik produk untuk detail & pesan via WhatsApp</p>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-steel bg-white/5 px-4 py-2 rounded-full border border-white/5">
+                <i data-lucide="package" class="w-4 h-4"></i>
+                <span id="totalProducts">Loading...</span>
+            </div>
+        </div>
+
+        <!-- LOADING -->
+        <div id="loadingIndicator" class="flex justify-center py-16">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- GRID -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5" id="productGrid"></div>
+
+        <!-- ERROR -->
+        <div id="errorMessage" class="text-center py-12 text-steel hidden">
+            <i data-lucide="alert-circle" class="w-12 h-12 mx-auto mb-4 opacity-50"></i>
+            <p class="text-sm">Gagal memuat data. Coba refresh halaman.</p>
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-10">
+            <a href="https://wa.me/628137271517" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(192,197,206,0.3)] transition btn-shine">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                Tanya Stok via WhatsApp
+            </a>
+        </div>
+
+    </main>
+
+    <!-- ====== MODAL ====== -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button id="closeProductModal" class="absolute top-4 right-4 text-steel hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-16 h-16 bg-gradient-to-br from-silver/20 to-silver/5 rounded-xl flex items-center justify-center border border-silver/10 overflow-hidden" id="modalImageContainer">
+                    <span class="text-3xl font-display font-bold text-silver-gradient" id="modalInitial">P</span>
+                </div>
+                <div>
+                    <h3 class="font-display text-xl font-bold text-white" id="modalName">Produk</h3>
+                    <p class="text-sm text-steel-light" id="modalCategory">Kategori</p>
+                </div>
+            </div>
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Supplier</span><span class="text-white font-medium text-sm" id="modalSupplier">-</span></div>
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Berat</span><span class="text-white font-medium text-sm" id="modalWeight">-</span></div>
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Kadar</span><span class="text-white font-medium text-sm" id="modalPurity">-</span></div>
+                <div class="flex justify-between py-2"><span class="text-steel text-sm">Harga</span><span class="text-xl font-display font-bold text-silver-gradient" id="modalPrice">-</span></div>
+            </div>
+            <a id="modalLink" href="#" target="_blank" class="w-full py-4 bg-gradient-to-r from-silver-light to-silver text-void font-bold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(192,197,206,0.3)] transition btn-shine">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                Tanya Stok via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ====== SCRIPT ====== -->
+    <script>
+        // ============================================================
+        // KATALOG — FETCH FROM GOOGLE SHEETS
+        // ============================================================
+
+        const SHEET_URL =
+            'https://docs.google.com/spreadsheets/d/1lu-Hs6HelTvKs5yjZZXfnh4kJUkMUFUxEHxRX_8zX2o/gviz/tq?tqx=out:csv&sheet=Veldion_Catalog';
+
+        let allProducts = [];
+
+        async function fetchProducts() {
+            const grid = document.getElementById('productGrid');
+            const loading = document.getElementById('loadingIndicator');
+            const error = document.getElementById('errorMessage');
+            const totalSpan = document.getElementById('totalProducts');
+
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error('Network error');
+
+                const csvText = await response.text();
+                const parsed = parseCSV(csvText);
+
+                if (!parsed || parsed.length === 0) {
+                    throw new Error('No data');
+                }
+
+                allProducts = parsed;
+                loading.style.display = 'none';
+                error.classList.add('hidden');
+                totalSpan.textContent = allProducts.length + ' produk';
+                renderProducts(allProducts);
+
+            } catch (err) {
+                console.error('Fetch error:', err);
+                loading.style.display = 'none';
+                error.classList.remove('hidden');
+                totalSpan.textContent = 'Gagal';
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n').filter(line => line.trim() !== '');
+            if (lines.length < 2) return [];
+
+            const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+            const nameIdx = headers.findIndex(h => h.includes('nama') || h.includes('name'));
+            const catIdx = headers.findIndex(h => h.includes('kategori') || h.includes('category'));
+            const supIdx = headers.findIndex(h => h.includes('supplier'));
+            const weightIdx = headers.findIndex(h => h.includes('berat') || h.includes('weight'));
+            const purityIdx = headers.findIndex(h => h.includes('kemurnian') || h.includes('purity'));
+            const priceIdx = headers.findIndex(h => h.includes('harga') || h.includes('price'));
+            const imgIdx = headers.findIndex(h => h.includes('image') || h.includes('gambar'));
+
+            const products = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim());
+                if (values.length < 4) continue;
+
+                const name = nameIdx !== -1 ? values[nameIdx] || '' : '';
+                const category = catIdx !== -1 ? values[catIdx] || '' : '';
+                const supplier = supIdx !== -1 ? values[supIdx] || '' : '';
+                const weight = weightIdx !== -1 ? values[weightIdx] || '' : '';
+                const purity = purityIdx !== -1 ? values[purityIdx] || '' : '';
+                let price = priceIdx !== -1 ? values[priceIdx] || '' : '';
+                const image = imgIdx !== -1 ? values[imgIdx] || '' : '';
+
+                if (price && !price.startsWith('Rp')) {
+                    price = 'Rp' + price.replace(/,/g, '.').replace(/\./g, ',');
+                }
+
+                if (name) {
+                    products.push({
+                        name: name,
+                        category: category || 'Umum',
+                        supplier: supplier || '-',
+                        weight: weight || '-',
+                        purity: purity || '-',
+                        price: price || 'Rp -',
+                        image: image,
+                        initial: name.charAt(0).toUpperCase()
+                    });
+                }
+            }
+
+            return products;
+        }
+
+        function renderProducts(products) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            products.forEach((p, idx) => {
+                const imgHtml = p.image ?
+                    `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" class="w-full h-full object-cover rounded-xl" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"text-2xl font-display font-bold text-silver-gradient\\">${p.initial}</span>'">` :
+                    `<span class="text-2xl font-display font-bold text-silver-gradient">${p.initial}</span>`;
+
+                const card = document.createElement('div');
+                card.className = 'product-card glass-card-hover p-4 md:p-5 rounded-xl';
+                card.dataset.idx = idx;
+                card.innerHTML = `
+                    <span class="product-badge">${p.category}</span>
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-silver/10 to-white/5 rounded-xl flex items-center justify-center border border-silver/10 mb-4 overflow-hidden">
+                            ${imgHtml}
+                        </div>
+                        <h4 class="font-semibold text-white text-sm truncate w-full">${p.name}</h4>
+                        <p class="text-[10px] text-steel mt-1 mb-2">${p.supplier} • ${p.purity}</p>
+                        <div class="text-sm md:text-base font-display font-bold text-silver-gradient">${p.price}</div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => openModal(idx));
+                grid.appendChild(card);
+            });
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // ====== MODAL ======
+        function openModal(idx) {
+            const p = allProducts[idx];
+            if (!p) return;
+
+            const imgHtml = p.image ?
+                `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" class="w-full h-full object-cover rounded-xl" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"text-3xl font-display font-bold text-silver-gradient\\">${p.initial}</span>'">` :
+                `<span class="text-3xl font-display font-bold text-silver-gradient">${p.initial}</span>`;
+
+            document.getElementById('modalInitial').innerHTML = imgHtml;
+            document.getElementById('modalName').textContent = p.name;
+            document.getElementById('modalCategory').textContent = p.category;
+            document.getElementById('modalSupplier').textContent = p.supplier;
+            document.getElementById('modalWeight').textContent = p.weight + 'gr';
+            document.getElementById('modalPurity').textContent = p.purity;
+            document.getElementById('modalPrice').textContent = p.price;
+            document.getElementById('modalLink').href =
+                `https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(p.name)}`;
+
+            document.getElementById('productModal').classList.add('active');
+            document.body.classList.add('no-scroll');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+
+        // ====== INIT ======
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchProducts();
+
+            const modal = document.getElementById('productModal');
+            modal.addEventListener('click', (e) => {
+                if (e.target.id === 'productModal') closeModal();
+            });
+            document.getElementById('closeProductModal').addEventListener('click', closeModal);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    </script>
+
+</body>
+</html>
