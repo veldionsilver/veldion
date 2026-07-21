@@ -22,6 +22,7 @@ const MARKET = {
 const PRODUCTS = [
     {
         name: "Press 10gr",
+        category: "Press",
         supplier: "Key Silver",
         weight: "10gr",
         purity: "999.5",
@@ -31,6 +32,7 @@ const PRODUCTS = [
     },
     {
         name: "Argentum 10gr",
+        category: "Argentum",
         supplier: "Key Silver",
         weight: "10gr",
         purity: "999",
@@ -40,6 +42,7 @@ const PRODUCTS = [
     },
     {
         name: "Bullion Klasik 50gr",
+        category: "Bullion",
         supplier: "Key Silver",
         weight: "50gr",
         purity: "999.5",
@@ -49,6 +52,7 @@ const PRODUCTS = [
     },
     {
         name: "SAC Silver 1gr",
+        category: "SAC",
         supplier: "Key Silver",
         weight: "1gr",
         purity: "999",
@@ -58,6 +62,7 @@ const PRODUCTS = [
     },
     {
         name: "Reguler 3.3gr",
+        category: "Press",
         supplier: "Silverium",
         weight: "3.3gr",
         purity: "999.9",
@@ -67,6 +72,7 @@ const PRODUCTS = [
     },
     {
         name: "Reguler 9.9gr",
+        category: "Press",
         supplier: "Silverium",
         weight: "9.9gr",
         purity: "999.9",
@@ -76,6 +82,7 @@ const PRODUCTS = [
     },
     {
         name: "Coin ABA 1 Dirham",
+        category: "Coin",
         supplier: "Silverium",
         weight: "3.11gr",
         purity: "999.9",
@@ -85,13 +92,14 @@ const PRODUCTS = [
     },
     {
         name: "Medalion 10gr",
+        category: "Medalion",
         supplier: "JSG",
         weight: "10gr",
         purity: "999.5",
         price: "Rp672.000",
         initial: "M",
         image: "assets/images/products/jsg-medalion-10gr.webp"
-    },
+    }
 ];
 
 // 4. HARGA BUYBACK (update harian)
