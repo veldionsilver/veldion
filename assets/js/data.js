@@ -20,86 +20,78 @@ const MARKET = {
 // Untuk foto produk: simpan di assets/images/products/
 // Format nama: supplier-namaproduk.webp (lowercase, tanpa spasi)
 const PRODUCTS = [
-    {
-        name: "Perak Reguler 3.3gr",
-        category: "Press",
-        supplier: "Silverium",
-        weight: "3.3gr",
-        purity: "999.9",
-        price: "Rp 349.250",
-        initial: "P",
-        image: "assets/images/products/silverium-reguler-33gr.webp"
-    },
-    {
-        name: "Perak Reguler 9.9gr",
-        category: "Press",
-        supplier: "Silverium",
-        weight: "9.9gr",
-        purity: "999.9",
-        price: "Rp 962.500",
-        initial: "P",
-        image: "assets/images/products/silverium-reguler-99gr.webp"
-    },
-    {
-        name: "Perak Bullion 33gr",
-        category: "Press",
-        supplier: "Silverium",
-        weight: "33gr",
-        purity: "999.9",
-        price: "Rp 3.033.300",
-        initial: "P",
-        image: "assets/images/products/silverium-bullion-33gr.webp"
-    },
-    {
-        name: "Perak Coin ABA 5 Dirham",
-        category: "Coin",
-        supplier: "Silverium",
-        weight: "15.55gr",
-        purity: "999.9",
-        price: "Rp 1.550.000",
-        initial: "C",
-        image: "assets/images/products/silverium-coin-5dirham.webp"
-    },
-    {
-        name: "Perak Coin ABA 1 Dirham",
-        category: "Coin",
-        supplier: "Silverium",
-        weight: "3.11gr",
-        purity: "999.9",
-        price: "Rp 334.700",
-        initial: "C",
-        image: "assets/images/products/silverium-coin-1dirham.webp"
-    },
-    {
-        name: "Perak Bullion 50gr",
-        category: "Bullion",
-        supplier: "Key Silver",
-        weight: "50gr",
-        purity: "999.5",
-        price: "Rp 4.261.376",
-        initial: "B",
-        image: "assets/images/products/keysilver-bullion-50gr.webp"
-    },
-    {
-        name: "Perak Bullion 99gr",
-        category: "Bullion",
-        supplier: "Silverium",
-        weight: "99gr",
-        purity: "999.9",
-        price: "Rp 375.400",
-        initial: "B",
-        image: "assets/images/products/silverium-bullion-99gr.webp"
-    },
-    {
-        name: "Perak Medalion 1gr",
-        category: "Medalion",
-        supplier: "JSG",
-        weight: "1gr",
-        purity: "999.5",
-        price: "Rp 102.950",
-        initial: "M",
-        image: "assets/images/products/jsg-medalion-1gr.webp"
-    }
+    "    {
+        name: ""Press 10gr"",
+        supplier: ""Key Silver"",
+        weight: ""10gr"",
+        purity: ""999.5"",
+        price: ""Rp761.000"",
+        initial: ""P"",
+        image: ""assets/images/products/key-silver-press-10gr.webp""
+    },"
+"    {
+        name: ""Argentum 10gr"",
+        supplier: ""Key Silver"",
+        weight: ""10gr"",
+        purity: ""999"",
+        price: ""Rp754.000"",
+        initial: ""A"",
+        image: ""assets/images/products/key-silver-argentum-10gr.webp""
+    },"
+"    {
+        name: ""Bullion Klasik 50gr"",
+        supplier: ""Key Silver"",
+        weight: ""50gr"",
+        purity: ""999.5"",
+        price: ""Rp2.877.000"",
+        initial: ""B"",
+        image: ""assets/images/products/key-silver-bullion-klasik-50gr.webp""
+    },"
+"    {
+        name: ""SAC Silver 1gr"",
+        supplier: ""Key Silver"",
+        weight: ""1gr"",
+        purity: ""999"",
+        price: ""Rp73.000"",
+        initial: ""S"",
+        image: ""assets/images/products/key-silver-sac-silver-1gr.webp""
+    },"
+"    {
+        name: ""Reguler 3.3gr"",
+        supplier: ""Silverium"",
+        weight: ""3.3gr"",
+        purity: ""999.9"",
+        price: ""Rp223.000"",
+        initial: ""P"",
+        image: ""assets/images/products/silverium-reguler-3.3gr.webp""
+    },"
+"    {
+        name: ""Reguler 9.9gr"",
+        supplier: ""Silverium"",
+        weight: ""9.9gr"",
+        purity: ""999.9"",
+        price: ""Rp632.000"",
+        initial: ""P"",
+        image: ""assets/images/products/silverium-reguler-9.9gr.webp""
+    },"
+"    {
+        name: ""Coin ABA 1 Dirham"",
+        supplier: ""Silverium"",
+        weight: ""3.11gr"",
+        purity: ""999.9"",
+        price: ""Rp222.000"",
+        initial: ""C"",
+        image: ""assets/images/products/silverium-coin-aba-1-dirham.webp""
+    },"
+"    {
+        name: ""Medalion 10gr"",
+        supplier: ""JSG"",
+        weight: ""10gr"",
+        purity: ""999.5"",
+        price: ""Rp672.000"",
+        initial: ""M"",
+        image: ""assets/images/products/jsg-medalion-10gr.webp""
+    },"
 ];
 
 // 4. HARGA BUYBACK (update harian)
