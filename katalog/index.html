@@ -588,6 +588,26 @@
         let allProducts = [];
         let filteredProducts = [];
 
+        // ====== FORMAT HARGA ======
+        function formatPrice(raw) {
+            if (!raw) return 'Rp -';
+            // Hapus "Rp" dan spasi
+            let clean = raw.replace(/Rp/g, '').trim();
+            // Hapus titik (pemisah ribuan) — kita akan format ulang
+            clean = clean.replace(/\./g, '');
+            // Jika ada koma, ambil bagian sebelum koma (abaikan desimal)
+            if (clean.includes(',')) {
+                clean = clean.split(',')[0];
+            }
+            // Ambil angka dari string
+            const numMatch = clean.match(/\d+/);
+            if (!numMatch) return 'Rp -';
+            const num = parseInt(numMatch[0], 10);
+            if (isNaN(num) || num === 0) return 'Rp -';
+            // Format dengan titik sebagai pemisah ribuan
+            return 'Rp' + num.toLocaleString('id-ID');
+        }
+
         // ====== PARSE CSV ======
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
@@ -646,29 +666,17 @@
                 const purity = purityIdx !== -1 ? values[purityIdx] || '' : '';
                 const image = imgIdx !== -1 ? values[imgIdx] || '' : '';
 
-                // ====== PERBAIKAN HARGA ======
+                // ====== FORMAT HARGA ======
                 let price = 'Rp -';
                 if (priceIdx !== -1 && values[priceIdx]) {
-                    let raw = values[priceIdx];
-                    // Hapus "Rp" dan spasi
-                    let clean = raw.replace(/Rp/g, '').trim();
-                    // Gabungkan dengan nilai setelahnya jika terpotong (karena koma di harga)
-                    // Cek apakah nilai selanjutnya adalah angka 3 digit (bagian dari harga)
+                    let rawPrice = values[priceIdx];
+                    // Cek apakah nilai berikutnya adalah bagian dari harga (karena koma di CSV)
                     let nextIdx = priceIdx + 1;
                     while (nextIdx < values.length && /^\d{3}$/.test(values[nextIdx])) {
-                        clean += values[nextIdx];
+                        rawPrice += ',' + values[nextIdx];
                         nextIdx++;
                     }
-                    // Hapus titik
-                    clean = clean.replace(/\./g, '');
-                    // Ambil angka dari string
-                    const numMatch = clean.match(/\d+/);
-                    if (numMatch) {
-                        const num = parseInt(numMatch[0], 10);
-                        if (!isNaN(num) && num > 0) {
-                            price = 'Rp' + num.toLocaleString('id-ID');
-                        }
-                    }
+                    price = formatPrice(rawPrice);
                 }
 
                 if (name) {
