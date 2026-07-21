@@ -119,5 +119,7 @@ const CATEGORIES = [
     { name: "Bullion", icon: "B" },
     { name: "Press", icon: "P" },
     { name: "Coin", icon: "C" },
-    { name: "Medalion", icon: "M" }
+    { name: "Medalion", icon: "M" },
+    { name: "Argentum", icon: "A" },
+    { name: "SAC", icon: "S" }
 ];
