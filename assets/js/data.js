@@ -6,7 +6,7 @@
 // ============================================================
 
 // 1. STATUS MARKET (true = buka, false = tutup)
-const MARKET_OPEN = true;
+const MARKET_OPEN = false;
 
 // 2. HARGA PASAR (update dari XAG/USD & XAG/IDR)
 const MARKET = {
