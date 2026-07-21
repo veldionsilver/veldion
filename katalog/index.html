@@ -7,12 +7,10 @@
     <title>Katalog • Veldion Silver</title>
     <meta name="description" content="Semua produk perak fisik Veldion Silver ready stock.">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -29,15 +27,10 @@
         }
     </script>
 
-    <!-- Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Inter', sans-serif;
             background: #080A0F;
@@ -46,9 +39,7 @@
             padding-bottom: 80px;
             -webkit-font-smoothing: antialiased;
         }
-        @media (min-width: 769px) {
-            body { padding-top: 80px; padding-bottom: 0; }
-        }
+        @media (min-width: 769px) { body { padding-top: 80px; padding-bottom: 0; } }
 
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
@@ -94,7 +85,6 @@
             transform: rotate(45deg) translateX(100%);
         }
 
-        /* NAV */
         .desktop-nav {
             position: fixed;
             top: 0;
@@ -109,9 +99,8 @@
             align-items: center;
             padding: 0 16px;
         }
-        @media (min-width: 769px) {
-            .desktop-nav { height: 80px; padding: 0 32px; }
-        }
+        @media (min-width: 769px) { .desktop-nav { height: 80px; padding: 0 32px; } }
+
         .nav-brand {
             font-family: 'Sora', sans-serif;
             font-size: 18px;
@@ -123,9 +112,7 @@
             text-decoration: none;
             line-height: 1.2;
         }
-        @media (min-width: 769px) {
-            .nav-brand { font-size: 22px; }
-        }
+        @media (min-width: 769px) { .nav-brand { font-size: 22px; } }
         .nav-brand small {
             display: block;
             font-size: 7px;
@@ -135,9 +122,8 @@
             -webkit-text-fill-color: #64748B;
             text-transform: uppercase;
         }
-        @media (min-width: 769px) {
-            .nav-brand small { font-size: 8px; }
-        }
+        @media (min-width: 769px) { .nav-brand small { font-size: 8px; } }
+
         .nav-back {
             display: inline-flex;
             align-items: center;
@@ -151,18 +137,15 @@
             transition: all .3s ease;
             border: 1px solid rgba(192,197,206,.06);
         }
-        @media (min-width: 769px) {
-            .nav-back { padding: 8px 16px; font-size: 13px; gap: 6px; }
-        }
+        @media (min-width: 769px) { .nav-back { padding: 8px 16px; font-size: 13px; gap: 6px; } }
         .nav-back:hover {
             background: rgba(192,197,206,.08);
             color: #fff;
             border-color: rgba(192,197,206,.15);
         }
         .nav-back span { display: none; }
-        @media (min-width: 480px) {
-            .nav-back span { display: inline; }
-        }
+        @media (min-width: 480px) { .nav-back span { display: inline; } }
+
         .nav-wa {
             padding: 6px 14px;
             background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 100%);
@@ -174,9 +157,7 @@
             transition: all .3s ease;
             white-space: nowrap;
         }
-        @media (min-width: 769px) {
-            .nav-wa { padding: 8px 20px; font-size: 13px; }
-        }
+        @media (min-width: 769px) { .nav-wa { padding: 8px 20px; font-size: 13px; } }
         .nav-wa:hover {
             box-shadow: 0 0 25px rgba(192,197,206,.3);
             transform: translateY(-1px);
@@ -195,10 +176,9 @@
             height: 100%;
             display: flex;
             flex-direction: column;
+            align-items: center;
         }
-        @media (min-width: 769px) {
-            .product-card { padding: 20px; border-radius: 20px; }
-        }
+        @media (min-width: 769px) { .product-card { padding: 20px; border-radius: 20px; } }
         .product-card:hover {
             border-color: rgba(192,197,206,.15);
             transform: translateY(-4px) scale(1.01);
@@ -215,6 +195,7 @@
             transition: left .6s;
         }
         .product-card:hover::before { left: 100%; }
+
         .product-badge {
             position: absolute;
             top: 8px;
@@ -229,14 +210,13 @@
             text-transform: uppercase;
             letter-spacing: .05em;
         }
-        @media (min-width: 769px) {
-            .product-badge { top: 12px; right: 12px; padding: 4px 12px; font-size: 9px; }
-        }
-        .product-image {
-            width: 72px;
-            height: 72px;
+        @media (min-width: 769px) { .product-badge { top: 12px; right: 12px; padding: 4px 12px; font-size: 9px; } }
+
+        .product-image-wrapper {
+            width: 80px;
+            height: 80px;
             margin: 0 auto 10px;
-            background: linear-gradient(to bottom right, rgba(192,197,206,.08), rgba(255,255,255,.02));
+            background: linear-gradient(to bottom right, rgba(192,197,206,.06), rgba(255,255,255,.02));
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -244,15 +224,27 @@
             border: 1px solid rgba(192,197,206,.06);
             overflow: hidden;
             flex-shrink: 0;
+            padding: 8px;
         }
         @media (min-width: 769px) {
-            .product-image { width: 96px; height: 96px; margin-bottom: 14px; border-radius: 16px; }
+            .product-image-wrapper { width: 100px; height: 100px; margin-bottom: 14px; border-radius: 16px; padding: 10px; }
         }
-        .product-image img {
+        .product-image-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
+        .product-image-wrapper .placeholder {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Sora', sans-serif;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (min-width: 769px) { .product-image-wrapper .placeholder { font-size: 36px; } }
+
         .product-name {
             font-weight: 600;
             color: #fff;
@@ -261,18 +253,16 @@
             line-height: 1.3;
             margin-bottom: 2px;
         }
-        @media (min-width: 769px) {
-            .product-name { font-size: 15px; }
-        }
+        @media (min-width: 769px) { .product-name { font-size: 15px; } }
+
         .product-meta {
             font-size: 9px;
             color: #94A3B8;
             text-align: center;
             margin-bottom: 6px;
         }
-        @media (min-width: 769px) {
-            .product-meta { font-size: 11px; margin-bottom: 8px; }
-        }
+        @media (min-width: 769px) { .product-meta { font-size: 11px; margin-bottom: 8px; } }
+
         .product-price {
             font-family: 'Sora', sans-serif;
             font-weight: 700;
@@ -284,9 +274,7 @@
             background-clip: text;
             margin-top: auto;
         }
-        @media (min-width: 769px) {
-            .product-price { font-size: 17px; }
-        }
+        @media (min-width: 769px) { .product-price { font-size: 17px; } }
 
         /* FILTER */
         .filter-bar {
@@ -300,9 +288,8 @@
             border-radius: 14px;
             margin-bottom: 16px;
         }
-        @media (min-width: 769px) {
-            .filter-bar { gap: 10px; padding: 16px 20px; border-radius: 18px; margin-bottom: 24px; }
-        }
+        @media (min-width: 769px) { .filter-bar { gap: 10px; padding: 16px 20px; border-radius: 18px; margin-bottom: 24px; } }
+
         .filter-label {
             display: flex;
             align-items: center;
@@ -314,9 +301,8 @@
             letter-spacing: .05em;
             margin-right: 2px;
         }
-        @media (min-width: 769px) {
-            .filter-label { font-size: 11px; gap: 6px; }
-        }
+        @media (min-width: 769px) { .filter-label { font-size: 11px; gap: 6px; } }
+
         .filter-select {
             background: rgba(8,10,15,.8);
             border: 1px solid rgba(192,197,206,.06);
@@ -340,13 +326,9 @@
         @media (min-width: 769px) {
             .filter-select { font-size: 13px; padding: 7px 32px 7px 14px; min-width: 100px; max-width: 160px; background-size: 12px; background-position: right 12px center; }
         }
-        .filter-select:focus {
-            border-color: rgba(192,197,206,.15);
-        }
-        .filter-select option {
-            background: #12151C;
-            color: #E2E8F0;
-        }
+        .filter-select:focus { border-color: rgba(192,197,206,.15); }
+        .filter-select option { background: #12151C; color: #E2E8F0; }
+
         .filter-reset {
             padding: 4px 10px;
             border-radius: 8px;
@@ -361,18 +343,14 @@
             align-items: center;
             gap: 2px;
         }
-        @media (min-width: 769px) {
-            .filter-reset { padding: 6px 16px; font-size: 12px; gap: 4px; }
-        }
+        @media (min-width: 769px) { .filter-reset { padding: 6px 16px; font-size: 12px; gap: 4px; } }
         .filter-reset:hover {
             background: rgba(192,197,206,.08);
             color: #fff;
             border-color: rgba(192,197,206,.15);
         }
         .filter-reset svg { width: 12px; height: 12px; }
-        @media (min-width: 769px) {
-            .filter-reset svg { width: 14px; height: 14px; }
-        }
+        @media (min-width: 769px) { .filter-reset svg { width: 14px; height: 14px; } }
 
         /* MODAL */
         .modal-overlay {
@@ -402,10 +380,38 @@
             position: relative;
             box-shadow: 0 24px 64px rgba(0,0,0,.6);
         }
-        @media (min-width: 769px) {
-            .modal-content { padding: 32px; max-width: 440px; }
-        }
+        @media (min-width: 769px) { .modal-content { padding: 32px; max-width: 440px; } }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
+        .modal-image {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(192,197,206,.05);
+            border: 1px solid rgba(192,197,206,.06);
+            flex-shrink: 0;
+            padding: 6px;
+        }
+        @media (min-width: 769px) { .modal-image { width: 64px; height: 64px; padding: 8px; } }
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .modal-image .placeholder {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Sora', sans-serif;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (min-width: 769px) { .modal-image .placeholder { font-size: 28px; } }
 
         /* LOADING */
         .spinner {
@@ -423,12 +429,7 @@
             padding: 40px 0;
             color: #94A3B8;
         }
-        .empty-state svg {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 12px;
-            opacity: 0.3;
-        }
+        .empty-state svg { width: 48px; height: 48px; margin: 0 auto 12px; opacity: 0.3; }
         .empty-state button {
             margin-top: 12px;
             color: #CBD5E1;
@@ -453,68 +454,47 @@
             text-decoration: none;
             transition: all .3s ease;
         }
-        @media (min-width: 769px) {
-            .cta-wa { padding: 14px 32px; font-size: 14px; gap: 10px; }
-        }
+        @media (min-width: 769px) { .cta-wa { padding: 14px 32px; font-size: 14px; gap: 10px; } }
         .cta-wa:hover {
             box-shadow: 0 0 30px rgba(192,197,206,.25);
             transform: translateY(-2px);
         }
 
-        /* HIDE COUNTER */
-        .total-products-badge {
-            display: none !important;
-        }
-
-        /* GRID */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
         }
-        @media (min-width: 480px) {
-            .product-grid { gap: 12px; }
-        }
-        @media (min-width: 640px) {
-            .product-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-        }
-        @media (min-width: 1024px) {
-            .product-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
-        }
+        @media (min-width: 480px) { .product-grid { gap: 12px; } }
+        @media (min-width: 640px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
 
-        /* HEADER */
-        .page-header {
-            margin-bottom: 14px;
-        }
+        .page-header { margin-bottom: 14px; }
         .page-header h1 {
             font-family: 'Sora', sans-serif;
             font-size: 22px;
             font-weight: 700;
             color: #fff;
         }
-        @media (min-width: 769px) {
-            .page-header h1 { font-size: 32px; }
-        }
+        @media (min-width: 769px) { .page-header h1 { font-size: 32px; } }
         .page-header p {
             font-size: 12px;
             color: #94A3B8;
             margin-top: 2px;
         }
-        @media (min-width: 769px) {
-            .page-header p { font-size: 14px; margin-top: 4px; }
-        }
+        @media (min-width: 769px) { .page-header p { font-size: 14px; margin-top: 4px; } }
+
+        .total-products-badge { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- ====== NAV ====== -->
     <header class="desktop-nav">
         <div class="w-full max-w-7xl mx-auto flex items-center justify-between">
             <a href="/veldion/" class="nav-brand">
                 VELDION
                 <small>Silver Bridge</small>
             </a>
-
             <div class="flex items-center gap-2">
                 <a href="/veldion/" class="nav-back">
                     <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
@@ -528,66 +508,39 @@
         </div>
     </header>
 
-    <!-- ====== MAIN ====== -->
     <main class="max-w-7xl mx-auto px-3 md:px-4 py-4 md:py-8">
 
-        <!-- HEADER -->
         <div class="page-header">
             <h1>Semua Produk <span class="text-silver-gradient">Veldion</span></h1>
             <p>Klik produk untuk detail &amp; pesan via WhatsApp</p>
         </div>
 
-        <!-- FILTER -->
         <div class="filter-bar">
             <span class="filter-label">
                 <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
                 <span class="hidden xs:inline">Filter</span>
             </span>
-
-            <select id="filterCategory" class="filter-select">
-                <option value="">Kategori</option>
-            </select>
-
-            <select id="filterSupplier" class="filter-select">
-                <option value="">Supplier</option>
-            </select>
-
-            <select id="filterWeight" class="filter-select">
-                <option value="">Gramasi</option>
-            </select>
-
-            <select id="filterPurity" class="filter-select">
-                <option value="">Kemurnian</option>
-            </select>
-
+            <select id="filterCategory" class="filter-select"><option value="">Kategori</option></select>
+            <select id="filterSupplier" class="filter-select"><option value="">Supplier</option></select>
+            <select id="filterWeight" class="filter-select"><option value="">Gramasi</option></select>
+            <select id="filterPurity" class="filter-select"><option value="">Kemurnian</option></select>
             <button id="resetFilters" class="filter-reset">
-                <i data-lucide="x" class="w-3 h-3"></i>
-                Reset
+                <i data-lucide="x" class="w-3 h-3"></i> Reset
             </button>
         </div>
 
-        <!-- LOADING -->
-        <div id="loadingIndicator" class="flex justify-center py-12">
-            <div class="spinner"></div>
-        </div>
-
-        <!-- GRID -->
+        <div id="loadingIndicator" class="flex justify-center py-12"><div class="spinner"></div></div>
         <div class="product-grid" id="productGrid"></div>
-
-        <!-- EMPTY -->
         <div id="emptyState" class="empty-state hidden">
             <i data-lucide="search"></i>
             <p>Tidak ada produk yang sesuai dengan filter.</p>
             <button id="resetFromEmpty">Reset filter</button>
         </div>
-
-        <!-- ERROR -->
         <div id="errorMessage" class="empty-state hidden">
             <i data-lucide="alert-circle"></i>
             <p>Gagal memuat data. Coba refresh halaman.</p>
         </div>
 
-        <!-- CTA -->
         <div class="text-center mt-8 md:mt-12">
             <a href="https://wa.me/628137271517" target="_blank" class="cta-wa">
                 <i data-lucide="message-circle" class="w-4 h-4"></i>
@@ -597,15 +550,14 @@
 
     </main>
 
-    <!-- ====== MODAL ====== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button id="closeProductModal" class="absolute top-4 right-4 text-steel hover:text-white">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             <div class="flex items-center gap-4 mb-5">
-                <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-silver/20 to-silver/5 rounded-xl flex items-center justify-center border border-silver/10 overflow-hidden flex-shrink-0" id="modalImageContainer">
-                    <span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient" id="modalInitial">P</span>
+                <div class="modal-image" id="modalImageContainer">
+                    <span class="placeholder" id="modalInitial">P</span>
                 </div>
                 <div>
                     <h3 class="font-display text-lg md:text-xl font-bold text-white" id="modalName">Produk</h3>
@@ -625,7 +577,6 @@
         </div>
     </div>
 
-    <!-- ====== SCRIPT ====== -->
     <script>
         // ============================================================
         // KATALOG — FETCH FROM GOOGLE SHEETS
@@ -642,7 +593,23 @@
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+            // Ambil header
+            const headerLine = lines[0];
+            const headers = [];
+            let current = '';
+            let inQuotes = false;
+            for (let j = 0; j < headerLine.length; j++) {
+                const char = headerLine[j];
+                if (char === '"') { inQuotes = !inQuotes; continue; }
+                if (char === ',' && !inQuotes) {
+                    headers.push(current.trim().toLowerCase());
+                    current = '';
+                    continue;
+                }
+                current += char;
+            }
+            headers.push(current.trim().toLowerCase());
+
             const nameIdx = headers.findIndex(h => h.includes('nama') || h.includes('name'));
             const catIdx = headers.findIndex(h => h.includes('kategori') || h.includes('category'));
             const supIdx = headers.findIndex(h => h.includes('supplier'));
@@ -655,8 +622,8 @@
 
             for (let i = 1; i < lines.length; i++) {
                 const values = [];
-                let current = '';
-                let inQuotes = false;
+                current = '';
+                inQuotes = false;
                 const line = lines[i];
                 for (let j = 0; j < line.length; j++) {
                     const char = line[j];
@@ -677,18 +644,24 @@
                 const supplier = supIdx !== -1 ? values[supIdx] || '' : '';
                 const weight = weightIdx !== -1 ? values[weightIdx] || '' : '';
                 const purity = purityIdx !== -1 ? values[purityIdx] || '' : '';
-                let priceRaw = priceIdx !== -1 ? values[priceIdx] || '' : '';
                 const image = imgIdx !== -1 ? values[imgIdx] || '' : '';
 
-                // Format harga: hapus "Rp", ambil angka, lalu format dengan titik ribu
+                // ====== PERBAIKAN HARGA ======
                 let price = 'Rp -';
-                if (priceRaw) {
-                    let clean = priceRaw.replace(/Rp/g, '').replace(/\./g, '').trim();
-                    // Ambil angka sebelum koma jika ada
-                    if (clean.includes(',')) {
-                        clean = clean.split(',')[0];
+                if (priceIdx !== -1 && values[priceIdx]) {
+                    let raw = values[priceIdx];
+                    // Hapus "Rp" dan spasi
+                    let clean = raw.replace(/Rp/g, '').trim();
+                    // Gabungkan dengan nilai setelahnya jika terpotong (karena koma di harga)
+                    // Cek apakah nilai selanjutnya adalah angka 3 digit (bagian dari harga)
+                    let nextIdx = priceIdx + 1;
+                    while (nextIdx < values.length && /^\d{3}$/.test(values[nextIdx])) {
+                        clean += values[nextIdx];
+                        nextIdx++;
                     }
-                    // Ambil hanya angka
+                    // Hapus titik
+                    clean = clean.replace(/\./g, '');
+                    // Ambil angka dari string
                     const numMatch = clean.match(/\d+/);
                     if (numMatch) {
                         const num = parseInt(numMatch[0], 10);
@@ -731,16 +704,20 @@
             products.forEach((p, idx) => {
                 const realIdx = allProducts.indexOf(p);
 
-                const imgHtml = p.image ?
-                    `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"text-xl md:text-2xl font-display font-bold text-silver-gradient\\">${p.initial}</span>'">` :
-                    `<span class="text-xl md:text-2xl font-display font-bold text-silver-gradient">${p.initial}</span>`;
+                let imgHtml = '';
+                if (p.image) {
+                    imgHtml =
+                        `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
+                } else {
+                    imgHtml = `<span class="placeholder">${p.initial}</span>`;
+                }
 
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.dataset.idx = realIdx;
                 card.innerHTML = `
                     <span class="product-badge">${p.category}</span>
-                    <div class="product-image">
+                    <div class="product-image-wrapper">
                         ${imgHtml}
                     </div>
                     <div class="product-name">${p.name}</div>
@@ -819,9 +796,13 @@
             const p = allProducts[idx];
             if (!p) return;
 
-            const imgHtml = p.image ?
-                `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" class="w-full h-full object-cover rounded-xl" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"text-2xl md:text-3xl font-display font-bold text-silver-gradient\\">${p.initial}</span>'">` :
-                `<span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient">${p.initial}</span>`;
+            let imgHtml = '';
+            if (p.image) {
+                imgHtml =
+                    `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
+            } else {
+                imgHtml = `<span class="placeholder">${p.initial}</span>`;
+            }
 
             document.getElementById('modalInitial').innerHTML = imgHtml;
             document.getElementById('modalName').textContent = p.name;
