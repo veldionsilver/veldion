@@ -234,6 +234,8 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            object-position: center;
+            display: block;
         }
         .product-image-wrapper .placeholder {
             font-size: 28px;
@@ -353,7 +355,7 @@
         .filter-reset svg { width: 12px; height: 12px; }
         @media (min-width: 769px) { .filter-reset svg { width: 14px; height: 14px; } }
 
-        /* ===== MODAL - SAMA SEPERTI INDEX UTAMA ===== */
+        /* ===== MODAL - SAMA SEPERTI CARD ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -384,9 +386,10 @@
         @media (min-width: 769px) { .modal-content { padding: 32px; max-width: 440px; } }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
 
+        /* ===== MODAL IMAGE - SAMA DENGAN CARD ===== */
         .modal-image {
-            width: 56px;
-            height: 56px;
+            width: 80px;
+            height: 80px;
             border-radius: 12px;
             overflow: hidden;
             display: flex;
@@ -395,9 +398,15 @@
             background: rgba(192,197,206,.05);
             border: 1px solid rgba(192,197,206,.06);
             flex-shrink: 0;
-            padding: 6px;
+            padding: 8px;
         }
-        @media (min-width: 769px) { .modal-image { width: 64px; height: 64px; padding: 8px; } }
+        @media (min-width: 769px) {
+            .modal-image {
+                width: 100px;
+                height: 100px;
+                padding: 10px;
+            }
+        }
         .modal-image img {
             width: 100%;
             height: 100%;
@@ -406,7 +415,7 @@
             display: block;
         }
         .modal-image .placeholder {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             font-family: 'Sora', sans-serif;
             background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
@@ -414,7 +423,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        @media (min-width: 769px) { .modal-image .placeholder { font-size: 28px; } }
+        @media (min-width: 769px) {
+            .modal-image .placeholder {
+                font-size: 36px;
+            }
+        }
 
         /* ===== LOADING ===== */
         .spinner {
@@ -561,7 +574,7 @@
             </button>
             <div class="flex items-center gap-4 mb-5">
                 <div class="modal-image" id="modalImageContainer">
-                    <span class="placeholder" id="modalInitial">P</span>
+                    <span class="placeholder">P</span>
                 </div>
                 <div>
                     <h3 class="font-display text-lg md:text-xl font-bold text-white" id="modalName">Produk</h3>
@@ -644,7 +657,7 @@
             "Reguler 33gr": "silverium-reguler-33gr.webp",
 
             // ===== SILVERIUM - COIN ABA =====
-            "Coin ABA 1 Dirham": "silverium-coin-aba-1-dirham.webp", // Duplicate dengan Key Silver
+            "Coin ABA 1 Dirham": "silverium-coin-aba-1-dirham.webp",
             "Coin ABA 5 Dirham": "silverium-coin-aba-5-dirham.webp",
 
             // ===== JSG - MEDALION =====
@@ -916,29 +929,36 @@
         }
 
         // ============================================================
-        // MODAL — SAMA SEPERTI INDEX UTAMA
+        // MODAL — SAMA PERSIS DENGAN CARD
         // ============================================================
         function openModal(idx) {
             const p = allProducts[idx];
             if (!p) return;
 
             const imageFile = getProductImage(p.name);
+            const container = document.getElementById('modalImageContainer');
             let imgHtml = '';
 
             if (imageFile) {
                 const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
+                // ===== SAMA PERSIS DENGAN CARD =====
                 imgHtml = `
                     <img 
                         src="${imgPath}" 
                         alt="${p.name}"
-                        onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'"
+                        onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback-modal').style.display='flex'"
                     >
+                    <div class="placeholder-fallback-modal" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">
+                        <span class="placeholder">${p.initial}</span>
+                    </div>
                 `;
             } else {
                 imgHtml = `<span class="placeholder">${p.initial}</span>`;
             }
 
-            document.getElementById('modalInitial').innerHTML = imgHtml;
+            // ===== GANTI SELURUH ISI CONTAINER =====
+            container.innerHTML = imgHtml;
+
             document.getElementById('modalName').textContent = p.name;
             document.getElementById('modalCategory').textContent = p.category;
             document.getElementById('modalSupplier').textContent = p.supplier;
