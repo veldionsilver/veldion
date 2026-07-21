@@ -20,7 +20,7 @@ const MARKET = {
 // Untuk foto produk: simpan di assets/images/products/
 // Format nama: supplier-namaproduk.webp (lowercase, tanpa spasi)
 const PRODUCTS = [
-    "    {
+    {
         name: ""Press 10gr"",
         supplier: ""Key Silver"",
         weight: ""10gr"",
@@ -28,8 +28,8 @@ const PRODUCTS = [
         price: ""Rp761.000"",
         initial: ""P"",
         image: ""assets/images/products/key-silver-press-10gr.webp""
-    },"
-"    {
+    },
+    {
         name: ""Argentum 10gr"",
         supplier: ""Key Silver"",
         weight: ""10gr"",
@@ -37,8 +37,8 @@ const PRODUCTS = [
         price: ""Rp754.000"",
         initial: ""A"",
         image: ""assets/images/products/key-silver-argentum-10gr.webp""
-    },"
-"    {
+    },
+    {
         name: ""Bullion Klasik 50gr"",
         supplier: ""Key Silver"",
         weight: ""50gr"",
@@ -46,8 +46,8 @@ const PRODUCTS = [
         price: ""Rp2.877.000"",
         initial: ""B"",
         image: ""assets/images/products/key-silver-bullion-klasik-50gr.webp""
-    },"
-"    {
+    },
+    {
         name: ""SAC Silver 1gr"",
         supplier: ""Key Silver"",
         weight: ""1gr"",
@@ -55,8 +55,8 @@ const PRODUCTS = [
         price: ""Rp73.000"",
         initial: ""S"",
         image: ""assets/images/products/key-silver-sac-silver-1gr.webp""
-    },"
-"    {
+    },
+    {
         name: ""Reguler 3.3gr"",
         supplier: ""Silverium"",
         weight: ""3.3gr"",
@@ -64,8 +64,8 @@ const PRODUCTS = [
         price: ""Rp223.000"",
         initial: ""P"",
         image: ""assets/images/products/silverium-reguler-3.3gr.webp""
-    },"
-"    {
+    },
+    {
         name: ""Reguler 9.9gr"",
         supplier: ""Silverium"",
         weight: ""9.9gr"",
@@ -73,8 +73,8 @@ const PRODUCTS = [
         price: ""Rp632.000"",
         initial: ""P"",
         image: ""assets/images/products/silverium-reguler-9.9gr.webp""
-    },"
-"    {
+    },
+    {
         name: ""Coin ABA 1 Dirham"",
         supplier: ""Silverium"",
         weight: ""3.11gr"",
@@ -82,8 +82,8 @@ const PRODUCTS = [
         price: ""Rp222.000"",
         initial: ""C"",
         image: ""assets/images/products/silverium-coin-aba-1-dirham.webp""
-    },"
-"    {
+    },
+    {
         name: ""Medalion 10gr"",
         supplier: ""JSG"",
         weight: ""10gr"",
@@ -91,7 +91,7 @@ const PRODUCTS = [
         price: ""Rp672.000"",
         initial: ""M"",
         image: ""assets/images/products/jsg-medalion-10gr.webp""
-    },"
+    },
 ];
 
 // 4. HARGA BUYBACK (update harian)
