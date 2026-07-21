@@ -353,7 +353,7 @@
         .filter-reset svg { width: 12px; height: 12px; }
         @media (min-width: 769px) { .filter-reset svg { width: 14px; height: 14px; } }
 
-        /* ===== MODAL ===== */
+        /* ===== MODAL - SAMA SEPERTI INDEX UTAMA ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -551,6 +551,7 @@
 
     </main>
 
+    <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button id="closeProductModal" class="absolute top-4 right-4 text-steel hover:text-white">
@@ -591,28 +592,68 @@
         let filteredProducts = [];
 
         // ============================================================
-        // MAPPING GAMBAR — HARCODE (SAMA SEPERTI INDEX UTAMA)
-        // Tambahkan produk baru di sini jika perlu
+        // MAPPING GAMBAR — LENGKAP BERDASARKAN FILE YANG ADA
         // ============================================================
         const PRODUCT_IMAGES = {
-            // Key Silver
+
+            // ===== KEY SILVER - PRESS =====
+            "Press 1gr": "key-silver-press-1gr.webp",
+            "Press 2gr": "key-silver-press-2gr.webp",
+            "Press 5gr": "key-silver-press-5gr.webp",
             "Press 10gr": "key-silver-press-10gr.webp",
+            "Press 25gr": "key-silver-press-25gr.webp",
+            "Press 50gr": "key-silver-press-50gr.webp",
+            "Press 100gr": "key-silver-press-100gr.webp",
+
+            // ===== KEY SILVER - ARGENTUM =====
+            "Argentum 1gr": "key-silver-argentum-1gr.webp",
+            "Argentum 5gr": "key-silver-argentum-5gr.webp",
             "Argentum 10gr": "key-silver-argentum-10gr.webp",
+            "Argentum 25gr": "key-silver-argentum-25gr.webp",
+            "Argentum 50gr": "key-silver-argentum-50gr.webp",
+            "Argentum 100gr": "key-silver-argentum-100gr.webp",
+            "Argentum 250gr": "key-silver-argentum-250gr.webp",
+
+            // ===== KEY SILVER - BULLION KLASIK =====
+            "Bullion Klasik 10gr": "key-silver-bullion-klasik-10gr.webp",
+            "Bullion Klasik 25gr": "key-silver-bullion-klasik-25gr.webp",
             "Bullion Klasik 50gr": "key-silver-bullion-klasik-50gr.webp",
+            "Bullion Klasik 100gr": "key-silver-bullion-klasik-100gr.webp",
+            "Bullion Klasik 250gr": "key-silver-bullion-klasik-250gr.webp",
+
+            // ===== KEY SILVER - COIN ABA =====
+            "Coin ABA 1 Dirham": "key-silver-coin-aba-1-dirham.webp",
+            "Coin ABA 2 Dirham": "key-silver-coin-aba-2-dirham.webp",
+            "Coin ABA 5 Dirham": "key-silver-coin-aba-5-dirham.webp",
+
+            // ===== KEY SILVER - SAC =====
             "SAC Silver 1gr": "key-silver-sac-silver-1gr.webp",
+            "SAC Silver 5gr": "key-silver-sac-silver-5gr.webp",
+            "SAC Silver 10gr": "key-silver-sac-silver-10gr.webp",
+            "SAC Silver 25gr": "key-silver-sac-silver-25gr.webp",
+            "SAC Silver 50gr": "key-silver-sac-silver-50gr.webp",
+            "SAC Silver 100gr": "key-silver-sac-silver-100gr.webp",
 
-            // Silverium
+            // ===== SILVERIUM - REGULER =====
+            "Reguler 1gr": "silverium-reguler-1gr.webp",
             "Reguler 3.3gr": "silverium-reguler-3.3gr.webp",
+            "Reguler 5gr": "silverium-reguler-5gr.webp",
             "Reguler 9.9gr": "silverium-reguler-9.9gr.webp",
-            "Coin ABA 1 Dirham": "silverium-coin-aba-1-dirham.webp",
+            "Reguler 33gr": "silverium-reguler-33gr.webp",
 
-            // JSG
+            // ===== SILVERIUM - COIN ABA =====
+            "Coin ABA 1 Dirham": "silverium-coin-aba-1-dirham.webp", // Duplicate dengan Key Silver
+            "Coin ABA 5 Dirham": "silverium-coin-aba-5-dirham.webp",
+
+            // ===== JSG - MEDALION =====
+            "Medalion 1gr": "jsg-medalion-1gr.webp",
+            "Medalion 5gr": "jsg-medalion-5gr.webp",
             "Medalion 10gr": "jsg-medalion-10gr.webp",
-
-            // Tambahkan produk lain di sini
-            // "Nama Produk": "nama-file.webp",
+            "Medalion 25gr": "jsg-medalion-25gr.webp",
+            "Medalion 50gr": "jsg-medalion-50gr.webp",
         };
 
+        // ===== FUNGSI AMBIL GAMBAR =====
         function getProductImage(productName) {
             return PRODUCT_IMAGES[productName] || null;
         }
@@ -651,7 +692,6 @@
                 return [];
             }
 
-            // Parse header
             const headers = [];
             let current = '';
             let inQuotes = false;
@@ -687,7 +727,6 @@
             const weightIdx = findIndex(['berat', 'weight', 'gram', 'gr']);
             const purityIdx = findIndex(['kemurnian', 'purity', 'kadar']);
             const priceIdx = findIndex(['harga personal', 'harga', 'price']);
-            // ⚠️ TIDAK ADA imageIdx!
 
             console.log('Index mapping:', { nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx });
 
@@ -739,7 +778,6 @@
                         weight: weight || '-',
                         purity: purity || '-',
                         price: price,
-                        // ⚠️ TIDAK ADA image — pakai mapping!
                         initial: name.charAt(0).toUpperCase()
                     });
                 }
@@ -767,7 +805,6 @@
             products.forEach((p, idx) => {
                 const realIdx = allProducts.indexOf(p);
 
-                // ===== AMBIL GAMBAR DARI MAPPING =====
                 const imageFile = getProductImage(p.name);
                 let imgHtml = '';
 
@@ -877,7 +914,7 @@
         }
 
         // ============================================================
-        // MODAL
+        // MODAL — SAMA SEPERTI INDEX UTAMA
         // ============================================================
         function openModal(idx) {
             const p = allProducts[idx];
