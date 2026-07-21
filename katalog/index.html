@@ -163,7 +163,7 @@
             transform: translateY(-1px);
         }
 
-        /* PRODUCT CARD */
+        /* ===== PRODUCT CARD ===== */
         .product-card {
             position: relative;
             cursor: pointer;
@@ -212,6 +212,7 @@
         }
         @media (min-width: 769px) { .product-badge { top: 12px; right: 12px; padding: 4px 12px; font-size: 9px; } }
 
+        /* ===== IMAGE WRAPPER - SAMA SEPERTI INDEX UTAMA ===== */
         .product-image-wrapper {
             width: 80px;
             height: 80px;
@@ -276,7 +277,7 @@
         }
         @media (min-width: 769px) { .product-price { font-size: 17px; } }
 
-        /* FILTER */
+        /* ===== FILTER ===== */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -352,7 +353,7 @@
         .filter-reset svg { width: 12px; height: 12px; }
         @media (min-width: 769px) { .filter-reset svg { width: 14px; height: 14px; } }
 
-        /* MODAL */
+        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -413,7 +414,7 @@
         }
         @media (min-width: 769px) { .modal-image .placeholder { font-size: 28px; } }
 
-        /* LOADING */
+        /* ===== LOADING ===== */
         .spinner {
             width: 36px;
             height: 36px;
@@ -579,7 +580,8 @@
 
     <script>
         // ============================================================
-        // KATALOG — FETCH FROM GOOGLE SHEETS (FIXED VERSION)
+        // KATALOG — IMAGE HARDCODE (SAMA SEPERTI INDEX UTAMA)
+        // Data lain dari Google Sheets
         // ============================================================
 
         const SHEET_URL =
@@ -588,36 +590,60 @@
         let allProducts = [];
         let filteredProducts = [];
 
-        // ====== FORMAT HARGA ======
+        // ============================================================
+        // MAPPING GAMBAR — HARCODE (SAMA SEPERTI INDEX UTAMA)
+        // Tambahkan produk baru di sini jika perlu
+        // ============================================================
+        const PRODUCT_IMAGES = {
+            // Key Silver
+            "Press 10gr": "key-silver-press-10gr.webp",
+            "Argentum 10gr": "key-silver-argentum-10gr.webp",
+            "Bullion Klasik 50gr": "key-silver-bullion-klasik-50gr.webp",
+            "SAC Silver 1gr": "key-silver-sac-silver-1gr.webp",
+
+            // Silverium
+            "Reguler 3.3gr": "silverium-reguler-3.3gr.webp",
+            "Reguler 9.9gr": "silverium-reguler-9.9gr.webp",
+            "Coin ABA 1 Dirham": "silverium-coin-aba-1-dirham.webp",
+
+            // JSG
+            "Medalion 10gr": "jsg-medalion-10gr.webp",
+
+            // Tambahkan produk lain di sini
+            // "Nama Produk": "nama-file.webp",
+        };
+
+        function getProductImage(productName) {
+            return PRODUCT_IMAGES[productName] || null;
+        }
+
+        // ============================================================
+        // FORMAT HARGA
+        // ============================================================
         function formatPrice(raw) {
             if (!raw || raw === '-') return 'Rp -';
             
-            // Hapus "Rp" dan spasi
             let clean = raw.replace(/Rp/gi, '').trim();
-            
-            // Hapus titik (pemisah ribuan)
             clean = clean.replace(/\./g, '');
             
-            // Tangani format dengan koma (contoh: 96,000)
             let numStr = clean;
             if (clean.includes(',')) {
-                // Ambil bagian sebelum koma
                 const parts = clean.split(',');
                 numStr = parts[0] + parts.slice(1).join('');
             }
             
-            // Ambil angka dari string
             const numMatch = numStr.match(/\d+/);
             if (!numMatch) return 'Rp -';
             
             const num = parseInt(numMatch[0], 10);
             if (isNaN(num) || num === 0) return 'Rp -';
             
-            // Format dengan titik sebagai pemisah ribuan
             return 'Rp' + num.toLocaleString('id-ID');
         }
 
-        // ====== PARSE CSV ======
+        // ============================================================
+        // PARSE CSV — TANPA KOLOM IMAGE
+        // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) {
@@ -625,14 +651,13 @@
                 return [];
             }
 
-            // Parse header dengan benar
-            const headerLine = lines[0];
+            // Parse header
             const headers = [];
             let current = '';
             let inQuotes = false;
             
-            for (let j = 0; j < headerLine.length; j++) {
-                const char = headerLine[j];
+            for (let j = 0; j < lines[0].length; j++) {
+                const char = lines[0][j];
                 if (char === '"') { 
                     inQuotes = !inQuotes; 
                     continue; 
@@ -646,9 +671,8 @@
             }
             headers.push(current.trim());
 
-            console.log('Headers ditemukan:', headers);
+            console.log('Headers:', headers);
 
-            // Cari index dengan case-insensitive dan partial match
             const findIndex = (keywords) => {
                 for (const kw of keywords) {
                     const idx = headers.findIndex(h => h.toLowerCase().includes(kw.toLowerCase()));
@@ -663,14 +687,13 @@
             const weightIdx = findIndex(['berat', 'weight', 'gram', 'gr']);
             const purityIdx = findIndex(['kemurnian', 'purity', 'kadar']);
             const priceIdx = findIndex(['harga personal', 'harga', 'price']);
-            const imgIdx = findIndex(['image', 'gambar', 'img']);
+            // ⚠️ TIDAK ADA imageIdx!
 
-            console.log('Index mapping:', { nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx, imgIdx });
+            console.log('Index mapping:', { nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx });
 
             const products = [];
 
             for (let i = 1; i < lines.length; i++) {
-                // Parse baris dengan benar (handle quoted values)
                 const values = [];
                 current = '';
                 inQuotes = false;
@@ -691,22 +714,15 @@
                 }
                 values.push(current.trim());
 
-                if (values.length < Math.max(nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx, imgIdx) + 1) {
-                    continue;
-                }
-
                 const name = nameIdx !== -1 ? values[nameIdx] || '' : '';
                 const category = catIdx !== -1 ? values[catIdx] || '' : '';
                 const supplier = supIdx !== -1 ? values[supIdx] || '' : '';
                 const weight = weightIdx !== -1 ? values[weightIdx] || '' : '';
                 const purity = purityIdx !== -1 ? values[purityIdx] || '' : '';
-                const image = imgIdx !== -1 ? values[imgIdx] || '' : '';
 
-                // Format harga dengan benar
                 let price = 'Rp -';
                 if (priceIdx !== -1 && values[priceIdx]) {
                     let rawPrice = values[priceIdx];
-                    // Cek jika ada bagian harga tambahan (karena CSV splitting)
                     let nextIdx = priceIdx + 1;
                     while (nextIdx < values.length && /^\d{3}$/.test(values[nextIdx])) {
                         rawPrice += ',' + values[nextIdx];
@@ -723,7 +739,7 @@
                         weight: weight || '-',
                         purity: purity || '-',
                         price: price,
-                        image: image,
+                        // ⚠️ TIDAK ADA image — pakai mapping!
                         initial: name.charAt(0).toUpperCase()
                     });
                 }
@@ -733,7 +749,9 @@
             return products;
         }
 
-        // ====== RENDER ======
+        // ============================================================
+        // RENDER — SAMA SEPERTI INDEX UTAMA
+        // ============================================================
         function renderProducts(products) {
             const grid = document.getElementById('productGrid');
             const empty = document.getElementById('emptyState');
@@ -749,9 +767,23 @@
             products.forEach((p, idx) => {
                 const realIdx = allProducts.indexOf(p);
 
+                // ===== AMBIL GAMBAR DARI MAPPING =====
+                const imageFile = getProductImage(p.name);
                 let imgHtml = '';
-                if (p.image && p.image.trim() !== '') {
-                    imgHtml = `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
+
+                if (imageFile) {
+                    const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
+                    imgHtml = `
+                        <img 
+                            src="${imgPath}" 
+                            alt="${p.name}" 
+                            loading="lazy"
+                            onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback').style.display='flex'"
+                        >
+                        <div class="placeholder-fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">
+                            <span class="placeholder">${p.initial}</span>
+                        </div>
+                    `;
                 } else {
                     imgHtml = `<span class="placeholder">${p.initial}</span>`;
                 }
@@ -776,7 +808,9 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // ====== FILTER ======
+        // ============================================================
+        // FILTER
+        // ============================================================
         function applyFilters() {
             const catFilter = document.getElementById('filterCategory').value;
             const supFilter = document.getElementById('filterSupplier').value;
@@ -826,7 +860,6 @@
             const label = labelMap[id] || '';
             select.innerHTML = `<option value="">${label}</option>`;
             const sorted = Array.from(values).sort((a, b) => {
-                // Sort numeric for weight
                 if (id === 'filterWeight') {
                     const numA = parseFloat(a);
                     const numB = parseFloat(b);
@@ -843,14 +876,25 @@
             if (currentVal) select.value = currentVal;
         }
 
-        // ====== MODAL ======
+        // ============================================================
+        // MODAL
+        // ============================================================
         function openModal(idx) {
             const p = allProducts[idx];
             if (!p) return;
 
+            const imageFile = getProductImage(p.name);
             let imgHtml = '';
-            if (p.image && p.image.trim() !== '') {
-                imgHtml = `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
+
+            if (imageFile) {
+                const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
+                imgHtml = `
+                    <img 
+                        src="${imgPath}" 
+                        alt="${p.name}"
+                        onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'"
+                    >
+                `;
             } else {
                 imgHtml = `<span class="placeholder">${p.initial}</span>`;
             }
@@ -876,7 +920,9 @@
             document.body.classList.remove('no-scroll');
         }
 
-        // ====== FETCH ======
+        // ============================================================
+        // FETCH
+        // ============================================================
         async function fetchProducts() {
             const loading = document.getElementById('loadingIndicator');
             const error = document.getElementById('errorMessage');
@@ -895,7 +941,6 @@
                 }
 
                 console.log('CSV length:', csvText.length);
-                console.log('CSV first 200 chars:', csvText.substring(0, 200));
 
                 const parsed = parseCSV(csvText);
 
@@ -924,14 +969,14 @@
             }
         }
 
-        // ====== INIT ======
+        // ============================================================
+        // INIT
+        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Set initial loading state
             document.getElementById('loadingIndicator').style.display = 'flex';
             
             fetchProducts();
 
-            // Filter events
             ['filterCategory', 'filterSupplier', 'filterWeight', 'filterPurity'].forEach(id => {
                 document.getElementById(id).addEventListener('change', applyFilters);
             });
@@ -946,7 +991,6 @@
             document.getElementById('resetFilters').addEventListener('click', resetFilters);
             document.getElementById('resetFromEmpty').addEventListener('click', resetFilters);
 
-            // Modal events
             const modal = document.getElementById('productModal');
             modal.addEventListener('click', (e) => {
                 if (e.target.id === 'productModal') closeModal();
@@ -959,7 +1003,6 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
 
-        // Fallback if DOM already loaded
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
             document.getElementById('loadingIndicator').style.display = 'flex';
             fetchProducts();
