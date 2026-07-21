@@ -206,6 +206,55 @@
             letter-spacing: .05em;
         }
 
+        /* ====== FILTER ====== */
+        .filter-select {
+            background: rgba(18,21,28,.9);
+            border: 1px solid rgba(192,197,206,.08);
+            border-radius: 10px;
+            padding: 8px 14px;
+            color: #E2E8F0;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            cursor: pointer;
+            min-width: 100px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+        .filter-select:focus {
+            border-color: rgba(192,197,206,.2);
+        }
+        .filter-select option {
+            background: #12151C;
+            color: #E2E8F0;
+        }
+        .filter-reset {
+            padding: 8px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(192,197,206,.06);
+            background: transparent;
+            color: #94A3B8;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all .3s ease;
+        }
+        .filter-reset:hover {
+            background: rgba(192,197,206,.08);
+            color: #fff;
+            border-color: rgba(192,197,206,.15);
+        }
+        .filter-count {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+        @media (max-width: 640px) {
+            .filter-select { min-width: 80px; font-size: 12px; padding: 6px 10px; padding-right: 28px; }
+            .filter-reset { font-size: 12px; padding: 6px 12px; }
+        }
+
         /* ====== MODAL ====== */
         .modal-overlay {
             position: fixed;
@@ -299,6 +348,37 @@
             </div>
         </div>
 
+        <!-- FILTER -->
+        <div class="flex flex-wrap items-center gap-3 mb-6 p-4 glass-card rounded-xl">
+            <div class="flex items-center gap-2 text-xs text-steel uppercase tracking-wider font-semibold">
+                <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+                <span>Filter</span>
+            </div>
+
+            <select id="filterCategory" class="filter-select">
+                <option value="">Semua Kategori</option>
+            </select>
+
+            <select id="filterSupplier" class="filter-select">
+                <option value="">Semua Supplier</option>
+            </select>
+
+            <select id="filterWeight" class="filter-select">
+                <option value="">Semua Gramasi</option>
+            </select>
+
+            <select id="filterPurity" class="filter-select">
+                <option value="">Semua Kemurnian</option>
+            </select>
+
+            <button id="resetFilters" class="filter-reset">
+                <i data-lucide="x" class="w-4 h-4 inline"></i>
+                Reset
+            </button>
+
+            <span id="filterCount" class="filter-count ml-auto"></span>
+        </div>
+
         <!-- LOADING -->
         <div id="loadingIndicator" class="flex justify-center py-16">
             <div class="spinner"></div>
@@ -306,6 +386,13 @@
 
         <!-- GRID -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5" id="productGrid"></div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="text-center py-12 hidden">
+            <i data-lucide="search" class="w-12 h-12 mx-auto mb-4 opacity-30"></i>
+            <p class="text-steel">Tidak ada produk yang sesuai dengan filter.</p>
+            <button id="resetFromEmpty" class="mt-4 text-sm text-silver-light hover:text-white underline">Reset filter</button>
+        </div>
 
         <!-- ERROR -->
         <div id="errorMessage" class="text-center py-12 text-steel hidden">
@@ -361,38 +448,9 @@
             'https://docs.google.com/spreadsheets/d/1lu-Hs6HelTvKs5yjZZXfnh4kJUkMUFUxEHxRX_8zX2o/gviz/tq?tqx=out:csv&sheet=Veldion_Catalog';
 
         let allProducts = [];
+        let filteredProducts = [];
 
-        async function fetchProducts() {
-            const grid = document.getElementById('productGrid');
-            const loading = document.getElementById('loadingIndicator');
-            const error = document.getElementById('errorMessage');
-            const totalSpan = document.getElementById('totalProducts');
-
-            try {
-                const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error('Network error');
-
-                const csvText = await response.text();
-                const parsed = parseCSV(csvText);
-
-                if (!parsed || parsed.length === 0) {
-                    throw new Error('No data');
-                }
-
-                allProducts = parsed;
-                loading.style.display = 'none';
-                error.classList.add('hidden');
-                totalSpan.textContent = allProducts.length + ' produk';
-                renderProducts(allProducts);
-
-            } catch (err) {
-                console.error('Fetch error:', err);
-                loading.style.display = 'none';
-                error.classList.remove('hidden');
-                totalSpan.textContent = 'Gagal';
-            }
-        }
-
+        // ====== PARSE CSV (fix harga dengan koma) ======
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
@@ -409,7 +467,26 @@
             const products = [];
 
             for (let i = 1; i < lines.length; i++) {
-                const values = lines[i].split(',').map(v => v.trim());
+                // Split dengan regex yang lebih cerdas: pisahkan berdasarkan koma, tapi abaikan koma di dalam tanda kutip
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                const line = lines[i];
+                for (let j = 0; j < line.length; j++) {
+                    const char = line[j];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                        continue;
+                    }
+                    if (char === ',' && !inQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                        continue;
+                    }
+                    current += char;
+                }
+                values.push(current.trim());
+
                 if (values.length < 4) continue;
 
                 const name = nameIdx !== -1 ? values[nameIdx] || '' : '';
@@ -417,11 +494,24 @@
                 const supplier = supIdx !== -1 ? values[supIdx] || '' : '';
                 const weight = weightIdx !== -1 ? values[weightIdx] || '' : '';
                 const purity = purityIdx !== -1 ? values[purityIdx] || '' : '';
-                let price = priceIdx !== -1 ? values[priceIdx] || '' : '';
+                let priceRaw = priceIdx !== -1 ? values[priceIdx] || '' : '';
                 const image = imgIdx !== -1 ? values[imgIdx] || '' : '';
 
-                if (price && !price.startsWith('Rp')) {
-                    price = 'Rp' + price.replace(/,/g, '.').replace(/\./g, ',');
+                // Format harga: bersihkan, lalu format dengan titik ribu
+                let price = 'Rp -';
+                if (priceRaw) {
+                    // Hapus "Rp" jika ada, hapus titik, koma jadi penanda desimal
+                    let clean = priceRaw.replace(/Rp/g, '').replace(/\./g, '').trim();
+                    // Jika ada koma, ambil bagian sebelum koma
+                    if (clean.includes(',')) {
+                        clean = clean.split(',')[0];
+                    }
+                    const num = parseInt(clean, 10);
+                    if (!isNaN(num) && num > 0) {
+                        price = 'Rp' + num.toLocaleString('id-ID');
+                    } else {
+                        price = 'Rp ' + priceRaw.replace(/Rp/g, '').trim();
+                    }
                 }
 
                 if (name) {
@@ -431,7 +521,8 @@
                         supplier: supplier || '-',
                         weight: weight || '-',
                         purity: purity || '-',
-                        price: price || 'Rp -',
+                        price: price,
+                        priceRaw: priceRaw,
                         image: image,
                         initial: name.charAt(0).toUpperCase()
                     });
@@ -441,18 +532,33 @@
             return products;
         }
 
+        // ====== RENDER ======
         function renderProducts(products) {
             const grid = document.getElementById('productGrid');
+            const empty = document.getElementById('emptyState');
+            const countSpan = document.getElementById('filterCount');
+
             grid.innerHTML = '';
 
+            if (!products || products.length === 0) {
+                empty.classList.remove('hidden');
+                countSpan.textContent = '0 produk';
+                return;
+            }
+            empty.classList.add('hidden');
+            countSpan.textContent = products.length + ' produk';
+
             products.forEach((p, idx) => {
+                // Cari index asli di allProducts untuk modal
+                const realIdx = allProducts.indexOf(p);
+
                 const imgHtml = p.image ?
                     `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" class="w-full h-full object-cover rounded-xl" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"text-2xl font-display font-bold text-silver-gradient\\">${p.initial}</span>'">` :
                     `<span class="text-2xl font-display font-bold text-silver-gradient">${p.initial}</span>`;
 
                 const card = document.createElement('div');
                 card.className = 'product-card glass-card-hover p-4 md:p-5 rounded-xl';
-                card.dataset.idx = idx;
+                card.dataset.idx = realIdx;
                 card.innerHTML = `
                     <span class="product-badge">${p.category}</span>
                     <div class="flex flex-col items-center text-center">
@@ -465,11 +571,63 @@
                     </div>
                 `;
 
-                card.addEventListener('click', () => openModal(idx));
+                card.addEventListener('click', () => openModal(realIdx));
                 grid.appendChild(card);
             });
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        // ====== FILTER ======
+        function applyFilters() {
+            const catFilter = document.getElementById('filterCategory').value;
+            const supFilter = document.getElementById('filterSupplier').value;
+            const weightFilter = document.getElementById('filterWeight').value;
+            const purityFilter = document.getElementById('filterPurity').value;
+
+            filteredProducts = allProducts.filter(p => {
+                let match = true;
+                if (catFilter && p.category !== catFilter) match = false;
+                if (supFilter && p.supplier !== supFilter) match = false;
+                if (weightFilter && p.weight !== weightFilter) match = false;
+                if (purityFilter && p.purity !== purityFilter) match = false;
+                return match;
+            });
+
+            renderProducts(filteredProducts);
+        }
+
+        function populateFilters() {
+            const categories = new Set();
+            const suppliers = new Set();
+            const weights = new Set();
+            const purities = new Set();
+
+            allProducts.forEach(p => {
+                if (p.category) categories.add(p.category);
+                if (p.supplier) suppliers.add(p.supplier);
+                if (p.weight) weights.add(p.weight);
+                if (p.purity) purities.add(p.purity);
+            });
+
+            populateSelect('filterCategory', categories);
+            populateSelect('filterSupplier', suppliers);
+            populateSelect('filterWeight', weights);
+            populateSelect('filterPurity', purities);
+        }
+
+        function populateSelect(id, values) {
+            const select = document.getElementById(id);
+            const currentVal = select.value;
+            select.innerHTML = `<option value="">Semua ${select.dataset.label || ''}</option>`;
+            const sorted = Array.from(values).sort();
+            sorted.forEach(v => {
+                const opt = document.createElement('option');
+                opt.value = v;
+                opt.textContent = v;
+                select.appendChild(opt);
+            });
+            if (currentVal) select.value = currentVal;
         }
 
         // ====== MODAL ======
@@ -501,10 +659,67 @@
             document.body.classList.remove('no-scroll');
         }
 
+        // ====== FETCH ======
+        async function fetchProducts() {
+            const grid = document.getElementById('productGrid');
+            const loading = document.getElementById('loadingIndicator');
+            const error = document.getElementById('errorMessage');
+            const totalSpan = document.getElementById('totalProducts');
+
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error('Network error');
+
+                const csvText = await response.text();
+                const parsed = parseCSV(csvText);
+
+                if (!parsed || parsed.length === 0) {
+                    throw new Error('No data');
+                }
+
+                allProducts = parsed;
+                loading.style.display = 'none';
+                error.classList.add('hidden');
+                totalSpan.textContent = allProducts.length + ' produk';
+
+                populateFilters();
+                applyFilters();
+
+            } catch (err) {
+                console.error('Fetch error:', err);
+                loading.style.display = 'none';
+                error.classList.remove('hidden');
+                totalSpan.textContent = 'Gagal';
+            }
+        }
+
         // ====== INIT ======
         document.addEventListener('DOMContentLoaded', function() {
+            // Set label untuk select
+            document.getElementById('filterCategory').dataset.label = 'Kategori';
+            document.getElementById('filterSupplier').dataset.label = 'Supplier';
+            document.getElementById('filterWeight').dataset.label = 'Gramasi';
+            document.getElementById('filterPurity').dataset.label = 'Kemurnian';
+
             fetchProducts();
 
+            // Event listeners filter
+            ['filterCategory', 'filterSupplier', 'filterWeight', 'filterPurity'].forEach(id => {
+                document.getElementById(id).addEventListener('change', applyFilters);
+            });
+
+            // Reset filters
+            function resetFilters() {
+                ['filterCategory', 'filterSupplier', 'filterWeight', 'filterPurity'].forEach(id => {
+                    document.getElementById(id).value = '';
+                });
+                applyFilters();
+            }
+
+            document.getElementById('resetFilters').addEventListener('click', resetFilters);
+            document.getElementById('resetFromEmpty').addEventListener('click', resetFilters);
+
+            // Modal
             const modal = document.getElementById('productModal');
             modal.addEventListener('click', (e) => {
                 if (e.target.id === 'productModal') closeModal();
