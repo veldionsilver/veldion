@@ -484,7 +484,7 @@
         }
         @media (min-width: 769px) { .page-header p { font-size: 14px; margin-top: 4px; } }
 
-        .total-products-badge { display: none !important; }
+        .no-scroll { overflow: hidden; }
     </style>
 </head>
 <body>
@@ -579,7 +579,7 @@
 
     <script>
         // ============================================================
-        // KATALOG — FETCH FROM GOOGLE SHEETS
+        // KATALOG — FETCH FROM GOOGLE SHEETS (FIXED VERSION)
         // ============================================================
 
         const SHEET_URL =
@@ -590,20 +590,29 @@
 
         // ====== FORMAT HARGA ======
         function formatPrice(raw) {
-            if (!raw) return 'Rp -';
+            if (!raw || raw === '-') return 'Rp -';
+            
             // Hapus "Rp" dan spasi
-            let clean = raw.replace(/Rp/g, '').trim();
-            // Hapus titik (pemisah ribuan) — kita akan format ulang
+            let clean = raw.replace(/Rp/gi, '').trim();
+            
+            // Hapus titik (pemisah ribuan)
             clean = clean.replace(/\./g, '');
-            // Jika ada koma, ambil bagian sebelum koma (abaikan desimal)
+            
+            // Tangani format dengan koma (contoh: 96,000)
+            let numStr = clean;
             if (clean.includes(',')) {
-                clean = clean.split(',')[0];
+                // Ambil bagian sebelum koma
+                const parts = clean.split(',');
+                numStr = parts[0] + parts.slice(1).join('');
             }
+            
             // Ambil angka dari string
-            const numMatch = clean.match(/\d+/);
+            const numMatch = numStr.match(/\d+/);
             if (!numMatch) return 'Rp -';
+            
             const num = parseInt(numMatch[0], 10);
             if (isNaN(num) || num === 0) return 'Rp -';
+            
             // Format dengan titik sebagai pemisah ribuan
             return 'Rp' + num.toLocaleString('id-ID');
         }
@@ -611,43 +620,68 @@
         // ====== PARSE CSV ======
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
-            if (lines.length < 2) return [];
+            if (lines.length < 2) {
+                console.warn('CSV terlalu pendek:', lines.length);
+                return [];
+            }
 
-            // Ambil header
+            // Parse header dengan benar
             const headerLine = lines[0];
             const headers = [];
             let current = '';
             let inQuotes = false;
+            
             for (let j = 0; j < headerLine.length; j++) {
                 const char = headerLine[j];
-                if (char === '"') { inQuotes = !inQuotes; continue; }
+                if (char === '"') { 
+                    inQuotes = !inQuotes; 
+                    continue; 
+                }
                 if (char === ',' && !inQuotes) {
-                    headers.push(current.trim().toLowerCase());
+                    headers.push(current.trim());
                     current = '';
                     continue;
                 }
                 current += char;
             }
-            headers.push(current.trim().toLowerCase());
+            headers.push(current.trim());
 
-            const nameIdx = headers.findIndex(h => h.includes('nama') || h.includes('name'));
-            const catIdx = headers.findIndex(h => h.includes('kategori') || h.includes('category'));
-            const supIdx = headers.findIndex(h => h.includes('supplier'));
-            const weightIdx = headers.findIndex(h => h.includes('berat') || h.includes('weight'));
-            const purityIdx = headers.findIndex(h => h.includes('kemurnian') || h.includes('purity'));
-            const priceIdx = headers.findIndex(h => h.includes('harga') || h.includes('price'));
-            const imgIdx = headers.findIndex(h => h.includes('image') || h.includes('gambar'));
+            console.log('Headers ditemukan:', headers);
+
+            // Cari index dengan case-insensitive dan partial match
+            const findIndex = (keywords) => {
+                for (const kw of keywords) {
+                    const idx = headers.findIndex(h => h.toLowerCase().includes(kw.toLowerCase()));
+                    if (idx !== -1) return idx;
+                }
+                return -1;
+            };
+
+            const nameIdx = findIndex(['nama produk', 'nama', 'name', 'product']);
+            const catIdx = findIndex(['kategori', 'category', 'jenis']);
+            const supIdx = findIndex(['supplier', 'pemasok']);
+            const weightIdx = findIndex(['berat', 'weight', 'gram', 'gr']);
+            const purityIdx = findIndex(['kemurnian', 'purity', 'kadar']);
+            const priceIdx = findIndex(['harga personal', 'harga', 'price']);
+            const imgIdx = findIndex(['image', 'gambar', 'img']);
+
+            console.log('Index mapping:', { nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx, imgIdx });
 
             const products = [];
 
             for (let i = 1; i < lines.length; i++) {
+                // Parse baris dengan benar (handle quoted values)
                 const values = [];
                 current = '';
                 inQuotes = false;
                 const line = lines[i];
+                
                 for (let j = 0; j < line.length; j++) {
                     const char = line[j];
-                    if (char === '"') { inQuotes = !inQuotes; continue; }
+                    if (char === '"') { 
+                        inQuotes = !inQuotes; 
+                        continue; 
+                    }
                     if (char === ',' && !inQuotes) {
                         values.push(current.trim());
                         current = '';
@@ -657,7 +691,9 @@
                 }
                 values.push(current.trim());
 
-                if (values.length < 4) continue;
+                if (values.length < Math.max(nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx, imgIdx) + 1) {
+                    continue;
+                }
 
                 const name = nameIdx !== -1 ? values[nameIdx] || '' : '';
                 const category = catIdx !== -1 ? values[catIdx] || '' : '';
@@ -666,11 +702,11 @@
                 const purity = purityIdx !== -1 ? values[purityIdx] || '' : '';
                 const image = imgIdx !== -1 ? values[imgIdx] || '' : '';
 
-                // ====== FORMAT HARGA ======
+                // Format harga dengan benar
                 let price = 'Rp -';
                 if (priceIdx !== -1 && values[priceIdx]) {
                     let rawPrice = values[priceIdx];
-                    // Cek apakah nilai berikutnya adalah bagian dari harga (karena koma di CSV)
+                    // Cek jika ada bagian harga tambahan (karena CSV splitting)
                     let nextIdx = priceIdx + 1;
                     while (nextIdx < values.length && /^\d{3}$/.test(values[nextIdx])) {
                         rawPrice += ',' + values[nextIdx];
@@ -693,6 +729,7 @@
                 }
             }
 
+            console.log('Produk terparse:', products.length);
             return products;
         }
 
@@ -713,9 +750,8 @@
                 const realIdx = allProducts.indexOf(p);
 
                 let imgHtml = '';
-                if (p.image) {
-                    imgHtml =
-                        `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
+                if (p.image && p.image.trim() !== '') {
+                    imgHtml = `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
                 } else {
                     imgHtml = `<span class="placeholder">${p.initial}</span>`;
                 }
@@ -767,9 +803,9 @@
 
             allProducts.forEach(p => {
                 if (p.category) categories.add(p.category);
-                if (p.supplier) suppliers.add(p.supplier);
-                if (p.weight) weights.add(p.weight);
-                if (p.purity) purities.add(p.purity);
+                if (p.supplier && p.supplier !== '-') suppliers.add(p.supplier);
+                if (p.weight && p.weight !== '-') weights.add(p.weight);
+                if (p.purity && p.purity !== '-') purities.add(p.purity);
             });
 
             populateSelect('filterCategory', categories);
@@ -789,7 +825,15 @@
             };
             const label = labelMap[id] || '';
             select.innerHTML = `<option value="">${label}</option>`;
-            const sorted = Array.from(values).sort();
+            const sorted = Array.from(values).sort((a, b) => {
+                // Sort numeric for weight
+                if (id === 'filterWeight') {
+                    const numA = parseFloat(a);
+                    const numB = parseFloat(b);
+                    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                }
+                return a.localeCompare(b);
+            });
             sorted.forEach(v => {
                 const opt = document.createElement('option');
                 opt.value = v;
@@ -805,9 +849,8 @@
             if (!p) return;
 
             let imgHtml = '';
-            if (p.image) {
-                imgHtml =
-                    `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
+            if (p.image && p.image.trim() !== '') {
+                imgHtml = `<img src="/veldion/assets/images/katalog/${p.image}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=\\"placeholder\\">${p.initial}</span>'">`;
             } else {
                 imgHtml = `<span class="placeholder">${p.initial}</span>`;
             }
@@ -819,8 +862,9 @@
             document.getElementById('modalWeight').textContent = p.weight + 'gr';
             document.getElementById('modalPurity').textContent = p.purity;
             document.getElementById('modalPrice').textContent = p.price;
-            document.getElementById('modalLink').href =
-                `https://wa.me/628137271517?text=Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(p.name)}`;
+            
+            const waMessage = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(p.name)}%20(${p.category})`;
+            document.getElementById('modalLink').href = `https://wa.me/628137271517?text=${waMessage}`;
 
             document.getElementById('productModal').classList.add('active');
             document.body.classList.add('no-scroll');
@@ -838,14 +882,25 @@
             const error = document.getElementById('errorMessage');
 
             try {
+                loading.style.display = 'flex';
+                error.classList.add('hidden');
+
                 const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error('Network error');
+                if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
 
                 const csvText = await response.text();
+                
+                if (!csvText || csvText.trim() === '') {
+                    throw new Error('Data kosong dari Google Sheets');
+                }
+
+                console.log('CSV length:', csvText.length);
+                console.log('CSV first 200 chars:', csvText.substring(0, 200));
+
                 const parsed = parseCSV(csvText);
 
                 if (!parsed || parsed.length === 0) {
-                    throw new Error('No data');
+                    throw new Error('Tidak ada data yang ditemukan. Periksa header CSV.');
                 }
 
                 allProducts = parsed;
@@ -859,13 +914,24 @@
                 console.error('Fetch error:', err);
                 loading.style.display = 'none';
                 error.classList.remove('hidden');
+                
+                const errorMsg = document.querySelector('#errorMessage p');
+                if (errorMsg) {
+                    errorMsg.textContent = `Error: ${err.message}`;
+                }
+                
+                if (typeof lucide !== 'undefined') lucide.createIcons();
             }
         }
 
         // ====== INIT ======
         document.addEventListener('DOMContentLoaded', function() {
+            // Set initial loading state
+            document.getElementById('loadingIndicator').style.display = 'flex';
+            
             fetchProducts();
 
+            // Filter events
             ['filterCategory', 'filterSupplier', 'filterWeight', 'filterPurity'].forEach(id => {
                 document.getElementById(id).addEventListener('change', applyFilters);
             });
@@ -880,6 +946,7 @@
             document.getElementById('resetFilters').addEventListener('click', resetFilters);
             document.getElementById('resetFromEmpty').addEventListener('click', resetFilters);
 
+            // Modal events
             const modal = document.getElementById('productModal');
             modal.addEventListener('click', (e) => {
                 if (e.target.id === 'productModal') closeModal();
@@ -891,6 +958,12 @@
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
+
+        // Fallback if DOM already loaded
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            document.getElementById('loadingIndicator').style.display = 'flex';
+            fetchProducts();
+        }
     </script>
 
 </body>
