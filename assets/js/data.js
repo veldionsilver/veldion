@@ -10,9 +10,9 @@ const MARKET_OPEN = true;
 
 // 2. HARGA PASAR (update dari XAG/USD & XAG/IDR)
 const MARKET = {
-    xagUsd: "$58.80",
-    xagIdr: "~Rp47.640",
-    date: "21 Juli 2026"
+    xagUsd: "$60.20",
+    xagIdr: "~Rp48.774",
+    date: "22 Juli 2026"
 };
 
 // 3. PRODUK READY STOCK
@@ -26,7 +26,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "10gr",
         purity: "999.5",
-        price: "Rp761.000",
+        price: "Rp780.000",
         initial: "P",
         image: "assets/images/products/key-silver-press-10gr.webp"
     },
@@ -36,7 +36,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "10gr",
         purity: "999",
-        price: "Rp754.000",
+        price: "Rp774.000",
         initial: "A",
         image: "assets/images/products/key-silver-argentum-10gr.webp"
     },
@@ -46,7 +46,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "50gr",
         purity: "999.5",
-        price: "Rp2.877.000",
+        price: "Rp2.966.000",
         initial: "B",
         image: "assets/images/products/key-silver-bullion-klasik-50gr.webp"
     },
@@ -56,7 +56,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "1gr",
         purity: "999",
-        price: "Rp73.000",
+        price: "Rp75.000",
         initial: "S",
         image: "assets/images/products/key-silver-sac-silver-1gr.webp"
     },
@@ -66,7 +66,7 @@ const PRODUCTS = [
         supplier: "Silverium",
         weight: "3.3gr",
         purity: "999.9",
-        price: "Rp223.000",
+        price: "Rp232.000",
         initial: "P",
         image: "assets/images/products/silverium-reguler-3.3gr.webp"
     },
@@ -76,7 +76,7 @@ const PRODUCTS = [
         supplier: "Silverium",
         weight: "9.9gr",
         purity: "999.9",
-        price: "Rp632.000",
+        price: "Rp657.000",
         initial: "P",
         image: "assets/images/products/silverium-reguler-9.9gr.webp"
     },
@@ -86,7 +86,7 @@ const PRODUCTS = [
         supplier: "Silverium",
         weight: "3.11gr",
         purity: "999.9",
-        price: "Rp222.000",
+        price: "Rp230.000",
         initial: "C",
         image: "assets/images/products/silverium-coin-aba-1-dirham.webp"
     },
@@ -96,7 +96,7 @@ const PRODUCTS = [
         supplier: "JSG",
         weight: "10gr",
         purity: "999.5",
-        price: "Rp672.000",
+        price: "Rp688.000",
         initial: "M",
         image: "assets/images/products/jsg-medalion-10gr.webp"
     }
@@ -104,10 +104,10 @@ const PRODUCTS = [
 
 // 4. HARGA BUYBACK (update harian)
 const BUYBACK_RATES = [
-    { name: "Antam", price: "Rp 25.400/gr" },
-    { name: "Silverium", price: "Rp 37.840/gr" },
-    { name: "Key Silver", price: "Rp 37.000/gr" },
-    { name: "JSG / TDS", price: "Rp 34.700/gr" }
+    { name: "Antam", price: "Rp 25.997/gr" },
+    { name: "Silverium", price: "Rp 39.840/gr" },
+    { name: "Key Silver", price: "Rp 38.500/gr" },
+    { name: "JSG / TDS", price: "Rp 36.000/gr" }
 ];
 
 // 5. STATISTIK
