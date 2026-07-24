@@ -5,15 +5,13 @@
 // Edit file ini, lalu commit & push ke GitHub
 // ============================================================
 
-const DATA_VERSION = '2026-07-24'; // Ganti setiap kali update data
-
 // 1. STATUS MARKET (true = buka, false = tutup)
 const MARKET_OPEN = true;
 
 // 2. HARGA PASAR (update dari XAG/USD & XAG/IDR)
 const MARKET = {
-    xagUsd: "$57.65",
-    xagIdr: "~Rp46.708",
+    xagUsd: "$57.70",
+    xagIdr: "~Rp46.748",
     date: "24 Juli 2026"
 };
 
@@ -106,7 +104,7 @@ const PRODUCTS = [
 
 // 4. HARGA BUYBACK (update harian)
 const BUYBACK_RATES = [
-    { name: "Antam", price: "Rp 24.895/gr" },
+    { name: "Antam", price: "Rp 24.917/gr" },
     { name: "Silverium", price: "Rp 38.340/gr" },
     { name: "Key Silver", price: "Rp 37.000/gr" },
     { name: "JSG / TDS", price: "Rp 36.000/gr" }
