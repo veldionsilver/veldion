@@ -5,6 +5,8 @@
 // Edit file ini, lalu commit & push ke GitHub
 // ============================================================
 
+const DATA_VERSION = '2026-07-24'; // Ganti setiap kali update data
+
 // 1. STATUS MARKET (true = buka, false = tutup)
 const MARKET_OPEN = true;
 
