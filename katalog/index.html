@@ -528,6 +528,53 @@
     transform: translateY(-2px);
     box-shadow: 0 0 20px rgba(192,197,206,.1);
 }
+.btn-download:hover {
+    background: rgba(192,197,206,.15);
+    border-color: rgba(192,197,206,.3);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(192,197,206,.1);
+}
+/* Floating arrow - silver */
+.floating-arrow {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    z-index: 999;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    background: rgba(192,197,206,0.08);
+    border-radius: 50%;
+    padding: 10px;
+    border: 1px solid rgba(192,197,206,0.15);
+    backdrop-filter: blur(8px);
+    animation: bounce-arrow 1.8s ease-in-out infinite;
+}
+.floating-arrow.show { opacity: 1; }
+.floating-arrow.hidden { display: none; }
+.floating-arrow svg {
+    display: block;
+    width: 44px;
+    height: 44px;
+    stroke: #C0C5CE;
+    fill: none;
+    stroke-width: 1.5;
+}
+@keyframes bounce-arrow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@media (min-width: 769px) {
+    .floating-arrow {
+        bottom: 140px;
+        right: 40px;
+        padding: 12px;
+    }
+    .floating-arrow svg {
+        width: 52px;
+        height: 52px;
+    }
+}
     </style>
 </head>
 <body>
@@ -596,7 +643,14 @@
 </div>
 
     </main>
-
+    <!-- Floating Arrow -->
+    <div id="floatingArrow" class="floating-arrow hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 16V6"/>
+            <path d="M8 12l4 4 4-4"/>
+        </svg>
+    </div>
     <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
@@ -1097,6 +1151,43 @@
             document.getElementById('loadingIndicator').style.display = 'flex';
             fetchProducts();
         }
+                // Floating arrow
+        (function() {
+            const arrow = document.getElementById('floatingArrow');
+            if (!arrow) return;
+            if (sessionStorage.getItem('arrow_shown')) {
+                arrow.classList.add('hidden');
+                return;
+            }
+            setTimeout(function() {
+                arrow.classList.add('show');
+            }, 1500);
+            setTimeout(function() {
+                arrow.classList.remove('show');
+                arrow.classList.add('hidden');
+                sessionStorage.setItem('arrow_shown', 'true');
+            }, 8000);
+            document.addEventListener('scroll', function() {
+                arrow.classList.remove('show');
+                arrow.classList.add('hidden');
+                sessionStorage.setItem('arrow_shown', 'true');
+            }, { once: true });
+            document.addEventListener('click', function() {
+                arrow.classList.remove('show');
+                arrow.classList.add('hidden');
+                sessionStorage.setItem('arrow_shown', 'true');
+            }, { once: true });
+            arrow.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const btn = document.querySelector('.btn-download');
+                if (btn) {
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                arrow.classList.remove('show');
+                arrow.classList.add('hidden');
+                sessionStorage.setItem('arrow_shown', 'true');
+            });
+        })();
     </script>
 
 </body>
