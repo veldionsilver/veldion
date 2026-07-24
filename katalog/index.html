@@ -501,80 +501,52 @@
         @media (min-width: 769px) { .page-header p { font-size: 14px; margin-top: 4px; } }
 
         .no-scroll { overflow: hidden; }
-    .btn-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: rgba(192,197,206,.08);
-    border: 1px solid rgba(192,197,206,.15);
-    color: #CBD5E1;
-    font-weight: 700;
-    font-size: 13px;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: all .3s ease;
-}
-@media (min-width: 769px) {
-    .btn-download {
-        padding: 14px 32px;
-        font-size: 14px;
-        gap: 10px;
-    }
-}
-.btn-download:hover {
-    background: rgba(192,197,206,.15);
-    border-color: rgba(192,197,206,.3);
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(192,197,206,.1);
-}
-.btn-download:hover {
-    background: rgba(192,197,206,.15);
-    border-color: rgba(192,197,206,.3);
-    transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(192,197,206,.1);
-}
-/* Floating arrow - silver */
-.floating-arrow {
-    position: fixed;
-    bottom: 120px;
-    right: 20px;
-    z-index: 999;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    background: rgba(192,197,206,0.08);
-    border-radius: 50%;
-    padding: 10px;
-    border: 1px solid rgba(192,197,206,0.15);
-    backdrop-filter: blur(8px);
-    animation: bounce-arrow 1.8s ease-in-out infinite;
-}
-.floating-arrow.show { opacity: 1; }
-.floating-arrow.hidden { display: none; }
-.floating-arrow svg {
-    display: block;
-    width: 44px;
-    height: 44px;
-    stroke: #C0C5CE;
-    fill: none;
-    stroke-width: 1.5;
-}
-@keyframes bounce-arrow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-@media (min-width: 769px) {
-    .floating-arrow {
-        bottom: 140px;
-        right: 40px;
-        padding: 12px;
-    }
-    .floating-arrow svg {
-        width: 52px;
-        height: 52px;
-    }
-}
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(192,197,206,.08);
+            border: 1px solid rgba(192,197,206,.15);
+            color: #CBD5E1;
+            font-weight: 700;
+            font-size: 13px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+        @media (min-width: 769px) {
+            .btn-download {
+                padding: 14px 32px;
+                font-size: 14px;
+                gap: 10px;
+            }
+        }
+        .btn-download:hover {
+            background: rgba(192,197,206,.15);
+            border-color: rgba(192,197,206,.3);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(192,197,206,.1);
+        }
+
+        /* ===== ARROW DI HEADER ===== */
+        .page-header h1 a {
+            text-decoration: none;
+        }
+        .page-header h1 a svg {
+            stroke: #94A3B8;
+        }
+        .page-header h1 a:hover svg {
+            stroke: #CBD5E1;
+        }
+        @keyframes pulse-arrow {
+            0%, 100% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(2px); }
+        }
+        .page-header h1 a .animate-pulse {
+            animation: pulse-arrow 1.5s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
@@ -601,9 +573,19 @@
     <main class="max-w-7xl mx-auto px-3 md:px-4 py-4 md:py-8">
 
         <div class="page-header">
-            <h1>Semua Produk <span class="text-silver-gradient">Veldion</span></h1>
-            <p>Klik produk untuk detail &amp; pesan via WhatsApp</p>
-        </div>
+    <h1 class="flex items-center flex-wrap gap-2">
+        <span>Semua Produk <span class="text-silver-gradient">Veldion</span></span>
+        <a href="#download-section" class="inline-flex items-center gap-1.5 text-sm font-medium text-steel hover:text-silver-light transition-colors duration-300 group border border-steel/10 hover:border-steel/30 rounded-full px-3 py-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform duration-300">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Download Katalog</span>
+        </a>
+    </h1>
+    <p>Klik produk untuk detail &amp; pesan via WhatsApp</p>
+</div>
 
         <div class="filter-bar">
             <span class="filter-label">
@@ -632,25 +614,18 @@
         </div>
 
         <div class="text-center mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
-    <a href="katalog-veldion.pdf" download class="btn-download">
-    <i data-lucide="download" class="w-4 h-4 md:w-5 md:h-5"></i>
-    Download Katalog
-    </a>
-    <a href="https://wa.me/628137271517" target="_blank" class="cta-wa">
-        <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
-        Tanya Stok via WhatsApp
-    </a>
-</div>
+            <a href="katalog-veldion.pdf" download class="btn-download" id="download-section">
+                <i data-lucide="download" class="w-4 h-4 md:w-5 md:h-5"></i>
+                Download Katalog
+            </a>
+            <a href="https://wa.me/628137271517" target="_blank" class="cta-wa">
+                <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
+                Tanya Stok via WhatsApp
+            </a>
+        </div>
 
     </main>
-    <!-- Floating Arrow -->
-    <div id="floatingArrow" class="floating-arrow hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 16V6"/>
-            <path d="M8 12l4 4 4-4"/>
-        </svg>
-    </div>
+
     <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
@@ -1151,43 +1126,6 @@
             document.getElementById('loadingIndicator').style.display = 'flex';
             fetchProducts();
         }
-                // Floating arrow
-        (function() {
-            const arrow = document.getElementById('floatingArrow');
-            if (!arrow) return;
-            if (sessionStorage.getItem('arrow_shown')) {
-                arrow.classList.add('hidden');
-                return;
-            }
-            setTimeout(function() {
-                arrow.classList.add('show');
-            }, 1500);
-            setTimeout(function() {
-                arrow.classList.remove('show');
-                arrow.classList.add('hidden');
-                sessionStorage.setItem('arrow_shown', 'true');
-            }, 8000);
-            document.addEventListener('scroll', function() {
-                arrow.classList.remove('show');
-                arrow.classList.add('hidden');
-                sessionStorage.setItem('arrow_shown', 'true');
-            }, { once: true });
-            document.addEventListener('click', function() {
-                arrow.classList.remove('show');
-                arrow.classList.add('hidden');
-                sessionStorage.setItem('arrow_shown', 'true');
-            }, { once: true });
-            arrow.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const btn = document.querySelector('.btn-download');
-                if (btn) {
-                    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-                arrow.classList.remove('show');
-                arrow.classList.add('hidden');
-                sessionStorage.setItem('arrow_shown', 'true');
-            });
-        })();
     </script>
 
 </body>
