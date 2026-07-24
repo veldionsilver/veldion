@@ -1,24 +1,16 @@
-// ============================================================
-// 📁 sw.js - Service Worker Veldion Silver
-// VERSION: 2.0 (data.js TIDAK di-cache)
-// ============================================================
-
-const CACHE_NAME = 'veldion-v2';
-
-// STATIC_ASSETS - TANPA data.js (biar selalu update)
+const CACHE_NAME = 'veldion-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/assets/css/style.css',
   '/assets/js/app.js',
+  '/assets/js/data.js',
   '/assets/images/logo.webp',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png'
 ];
 
-// ============================================================
-// INSTALL
-// ============================================================
+// Install: cache static assets
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -27,9 +19,7 @@ self.addEventListener('install', event => {
   );
 });
 
-// ============================================================
-// ACTIVATE
-// ============================================================
+// Activate: clean old caches
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -42,9 +32,7 @@ self.addEventListener('activate', event => {
   );
 });
 
-// ============================================================
-// FETCH
-// ============================================================
+// Fetch: cache-first for assets, stale-while-revalidate for HTML
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
@@ -55,26 +43,7 @@ self.addEventListener('fetch', event => {
   // Skip cross-origin requests (fonts, CDN, etc.)
   if (url.origin !== self.location.origin) return;
 
-  // ============================================================
-  // 🔥 KHUSUS data.js: SELALU AMBIL DARI JARINGAN
-  // ============================================================
-  if (request.url.includes('/assets/js/data.js')) {
-    event.respondWith(
-      fetch(request, { cache: 'no-store' })
-        .then(response => {
-          return response;
-        })
-        .catch(() => {
-          // Fallback ke cache kalau offline
-          return caches.match(request);
-        })
-    );
-    return;
-  }
-
-  // ============================================================
-  // Cache-first untuk static assets (selain data.js)
-  // ============================================================
+  // Cache-first for static assets
   if (request.destination === 'style' || 
       request.destination === 'script' || 
       request.destination === 'image' ||
@@ -92,9 +61,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // ============================================================
-  // Stale-while-revalidate untuk HTML
-  // ============================================================
+  // Stale-while-revalidate for HTML
   event.respondWith(
     caches.match(request).then(cached => {
       const fetchPromise = fetch(request).then(response => {
