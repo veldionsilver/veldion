@@ -619,38 +619,18 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- SCRIPTS - LOAD DENGAN TIMESTAMP ANTI CACHE                    -->
-    <!-- ============================================================ -->
+    <!-- Scripts -->
     <script>
         (function() {
-            console.log('🔄 Memuat data terbaru...');
-            
-            // Load data.js dengan timestamp
             var d = document.createElement('script');
             d.src = 'assets/js/data.js?v=' + Date.now();
             d.onload = function() {
-                console.log('✅ Data.js loaded:', new Date().toLocaleString());
-                
-                // Load app.js dengan timestamp
                 var a = document.createElement('script');
                 a.src = 'assets/js/app.js?v=' + Date.now();
-                a.onload = function() {
-                    console.log('✅ App.js loaded');
-                    // Panggil fungsi render kalau ada
-                    if (typeof renderProducts === 'function') {
-                        renderProducts();
-                    }
-                };
                 document.head.appendChild(a);
-            };
-            d.onerror = function() {
-                console.error('❌ Gagal memuat data.js!');
-                alert('Gagal memuat data. Cek koneksi internet.');
             };
             document.head.appendChild(d);
         })();
     </script>
-    <!-- ============================================================ -->
 </body>
 </html>
