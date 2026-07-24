@@ -620,18 +620,7 @@
     </div>
 
     <!-- Scripts -->
-    <script>
-        (function() {
-            var version = new Date().toISOString().slice(0,10).replace(/-/g, '');
-            var d = document.createElement('script');
-            d.src = 'assets/js/data.js?v=' + version;
-            d.onload = function() {
-                var a = document.createElement('script');
-                a.src = 'assets/js/app.js?v=' + version;
-                document.head.appendChild(a);
-            };
-            document.head.appendChild(d);
-        })();
-    </script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
