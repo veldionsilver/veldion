@@ -622,5 +622,155 @@
     <!-- Scripts -->
     <script src="assets/js/data.js"></script>
     <script src="assets/js/app.js"></script>
+<!-- ===== INSTALL BANNER OTOMATIS ===== -->
+<style>
+  #installBanner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a1f2e 0%, #0c0f14 100%);
+    border-top: 1px solid rgba(192, 197, 206, 0.15);
+    padding: 12px 16px;
+    z-index: 99999;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #installBanner.show {
+    display: flex;
+  }
+  #installBanner .msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #CBD5E1;
+    font-size: 13px;
+    font-weight: 500;
+    flex: 1;
+    min-width: 150px;
+  }
+  #installBanner .msg .icon {
+    font-size: 22px;
+  }
+  #installBanner .msg span {
+    color: white;
+    font-weight: 700;
+  }
+  #installBanner .actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  #installBanner .btn-install {
+    padding: 8px 20px;
+    background: linear-gradient(135deg, #C0C5CE, #E2E8F0);
+    color: #080A0F;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+  #installBanner .btn-install:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(192,197,206,0.3);
+  }
+  #installBanner .btn-close {
+    background: transparent;
+    border: none;
+    color: #64748B;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.3s;
+    font-family: inherit;
+  }
+  #installBanner .btn-close:hover {
+    color: white;
+  }
+  @media (max-width: 480px) {
+    #installBanner .msg { font-size: 12px; }
+    #installBanner .btn-install { padding: 6px 14px; font-size: 12px; }
+  }
+</style>
+
+<div id="installBanner">
+  <div class="msg">
+    <span class="icon">📲</span>
+    <span>Install <span>Veldion Silver</span> untuk akses cepat</span>
+  </div>
+  <div class="actions">
+    <button class="btn-install" id="installBtn">Install</button>
+    <button class="btn-close" id="closeBannerBtn">✕</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  let deferredPrompt;
+  const banner = document.getElementById('installBanner');
+  const installBtn = document.getElementById('installBtn');
+  const closeBtn = document.getElementById('closeBannerBtn');
+
+  // Sembunyikan jika sudah terinstall
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+    return;
+  }
+
+  // ===== CHROME / EDGE =====
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    banner.classList.add('show');
+  });
+
+  // ===== SAFARI iOS =====
+  if (/iPhone|iPad|iPod/.test(navigator.userAgent) && !window.navigator.standalone) {
+    setTimeout(() => {
+      banner.classList.add('show');
+      document.querySelector('#installBanner .msg').innerHTML = `
+        <span class="icon">📱</span>
+        Tap <span>Share</span> lalu <span>Add to Home Screen</span>
+      `;
+    }, 1500);
+  }
+
+  // ===== INSTALL =====
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const result = await deferredPrompt.userChoice;
+      if (result.outcome === 'accepted') {
+        banner.classList.remove('show');
+      }
+      deferredPrompt = null;
+    } else {
+      // Fallback: arahkan ke menu browser
+      alert('📱 Gunakan menu browser:\n• Chrome: ⋮ → Install App\n• Safari: Share → Add to Home Screen');
+    }
+  });
+
+  // ===== TUTUP =====
+  closeBtn.addEventListener('click', () => {
+    banner.classList.remove('show');
+  });
+
+  // ===== SUDAH TERINSTALL =====
+  window.addEventListener('appinstalled', () => {
+    banner.classList.remove('show');
+  });
+
+})();
+</script>
+<!-- ===== END INSTALL BANNER ===== -->
 </body>
 </html>
