@@ -501,6 +501,33 @@
         @media (min-width: 769px) { .page-header p { font-size: 14px; margin-top: 4px; } }
 
         .no-scroll { overflow: hidden; }
+    .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: rgba(192,197,206,.08);
+    border: 1px solid rgba(192,197,206,.15);
+    color: #CBD5E1;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+@media (min-width: 769px) {
+    .btn-download {
+        padding: 14px 32px;
+        font-size: 14px;
+        gap: 10px;
+    }
+}
+.btn-download:hover {
+    background: rgba(192,197,206,.15);
+    border-color: rgba(192,197,206,.3);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(192,197,206,.1);
+}
     </style>
 </head>
 <body>
@@ -557,12 +584,16 @@
             <p>Gagal memuat data. Coba refresh halaman.</p>
         </div>
 
-        <div class="text-center mt-8 md:mt-12">
-            <a href="https://wa.me/628137271517" target="_blank" class="cta-wa">
-                <i data-lucide="message-circle" class="w-4 h-4"></i>
-                Tanya Stok via WhatsApp
-            </a>
-        </div>
+        <div class="text-center mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
+    <a href="katalog-veldion.pdf" download class="btn-download">
+    <i data-lucide="download" class="w-4 h-4 md:w-5 md:h-5"></i>
+    Download Katalog
+    </a>
+    <a href="https://wa.me/628137271517" target="_blank" class="cta-wa">
+        <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
+        Tanya Stok via WhatsApp
+    </a>
+</div>
 
     </main>
 
