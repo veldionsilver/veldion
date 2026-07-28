@@ -12,7 +12,7 @@ const MARKET_OPEN = true;
 const MARKET = {
     xagUsd: "$57.10",
     xagIdr: "~Rp46.262",
-    date: "27 Juli 2026"
+    date: "29 Juli 2026"
 };
 
 // 3. PRODUK READY STOCK
