@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#080A0F">
     
-    <title>Tentang Veldion Silver • Distributor Perak Fisik Indonesia</title>
-    <meta name="description" content="Veldion Silver adalah distributor perak fisik yang menghubungkan investor dengan stok ready dari Silverium, Key Silver, JSG, dan jaringan supplier luas lainnya. Tanpa pre-order, transparan, dan terpercaya.">
+    <title>Tentang Veldion Silver • Platform Agregator Perak Fisik Indonesia</title>
+    <meta name="description" content="Veldion Silver adalah platform agregator perak fisik yang menghubungkan investor dengan stok ready dari Silverium, Key Silver, JSG, dan jaringan supplier terpercaya. Tanpa pre-order, transparan, dan terpercaya.">
     <link rel="canonical" href="https://veldionsilver.github.io/veldion/tentang-kami/">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,21 +48,21 @@
             background-clip: text;
         }
         .glass {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
+            backdrop-filter: blur(12px);
             border-radius: 16px;
-            transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+            transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
         }
         .glass:hover {
-            border-color: rgba(255,255,255,0.12);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(192,197,206,0.04);
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
         }
         .btn-shine {
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
             cursor: pointer;
             font-family: 'Inter', sans-serif;
@@ -71,60 +71,63 @@
             content: '';
             position: absolute;
             top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
             transform: rotate(45deg) translateX(-100%);
-            transition: transform .6s;
+            transition: transform .7s;
         }
         .btn-shine:hover::after { transform: rotate(45deg) translateX(100%); }
-        .btn-shine:hover { transform: scale(1.03); }
+        .btn-shine:hover { transform: scale(1.02); }
         .btn-outline {
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.08);
             background: transparent;
             color: #CBD5E1;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .btn-outline:hover {
-            background: rgba(255,255,255,0.06);
-            border-color: rgba(255,255,255,0.3);
-            transform: scale(1.03);
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.2);
+            transform: scale(1.02);
         }
         a { text-decoration: none; }
-        .container-custom { max-width: 768px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .container-custom { max-width: 720px; margin: 0 auto; padding: 0 24px; width: 100%; }
         .stat-number {
             font-family: 'Sora', sans-serif;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
             background: linear-gradient(135deg, #E2E8F0, #94A3B8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -0.5px;
         }
         .stat-label {
             color: #64748B;
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+            margin-top: 2px;
         }
         .bullet-point {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 12px;
             color: #94A3B8;
             font-size: 14px;
             line-height: 1.7;
         }
         .bullet-point .dot {
             display: inline-block;
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             background: #94A3B8;
             border-radius: 50%;
-            margin-top: 9px;
+            margin-top: 11px;
             flex-shrink: 0;
         }
         .section-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             color: #94A3B8;
             flex-shrink: 0;
         }
@@ -132,64 +135,71 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .section-header h2 {
             color: white;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
+            letter-spacing: -0.2px;
         }
         .content-padding {
-            padding-left: 32px;
+            padding-left: 30px;
         }
         .testimonial-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: 12px;
-            padding: 16px 20px;
-            transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+            padding: 18px 22px;
+            transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
         }
         .testimonial-card:hover {
-            border-color: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.1);
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(192,197,206,0.04);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
         .star {
             color: #F59E0B;
-            font-size: 13px;
-            letter-spacing: 1px;
+            font-size: 12px;
+            letter-spacing: 2px;
         }
 
-        /* ===== ANIMASI MODERN RINGAN ===== */
+        /* ===== ANIMASI ===== */
         .fade-up {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Hero Glow */
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
+        }
+        .pulse-dot {
+            animation: pulse-dot 2.4s ease-in-out infinite;
+        }
+
         .hero-glow {
             position: relative;
         }
         .hero-glow::before {
             content: '';
             position: absolute;
-            top: -60px;
+            top: -80px;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(192,197,206,0.06) 0%, transparent 70%);
+            width: 400px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(192,197,206,0.04) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
-            filter: blur(40px);
+            filter: blur(60px);
         }
 
-        /* Card Glow halus */
         .card-glow {
             position: relative;
             overflow: hidden;
@@ -201,31 +211,85 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at 30% 20%, rgba(192,197,206,0.02) 0%, transparent 60%);
+            background: radial-gradient(circle at 30% 20%, rgba(192,197,206,0.015) 0%, transparent 60%);
             pointer-events: none;
         }
 
         .stat-card {
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
         }
         .stat-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(192,197,206,0.05);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
         }
 
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #94A3B8;
+        }
+        .trust-badge .dot-indicator {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: #10B981;
+            border-radius: 50%;
+        }
+        .trust-badge .dot-indicator.pulse {
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        .divider-light {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            margin: 0;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
         @media (max-width: 480px) {
+            .grid-2col { grid-template-columns: 1fr; }
             .content-padding { padding-left: 0; }
             .section-header { gap: 10px; }
+            .container-custom { padding: 0 16px; }
+        }
+
+        .network-tag {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #94A3B8;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            margin: 3px 4px 3px 0;
+        }
+        .network-tag.highlight {
+            color: #CBD5E1;
+            border-color: rgba(255,255,255,0.08);
         }
     </style>
 </head>
 <body>
 
     <!-- HEADER -->
-    <header style="position:fixed; top:0; left:0; right:0; z-index:50; background:#080A0F; border-bottom:1px solid rgba(255,255,255,0.05); height:60px; display:flex; align-items:center;">
+    <header style="position:fixed; top:0; left:0; right:0; z-index:50; background:#080A0F; border-bottom:1px solid rgba(255,255,255,0.04); height:60px; display:flex; align-items:center;">
         <div class="container-custom" style="display:flex; justify-content:space-between; align-items:center;">
-            <a href="/veldion/" style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">VELDION</a>
-            <a href="/veldion/" style="font-size:13px; color:#94A3B8; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.06); transition:0.3s;">← Kembali</a>
+            <a href="/veldion/" style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;">VELDION</a>
+            <a href="/veldion/" style="font-size:12px; color:#64748B; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.04); transition:all 0.3s ease; font-weight:500;">Kembali</a>
         </div>
     </header>
 
@@ -234,65 +298,79 @@
 
         <div class="container-custom">
 
-            <!-- HERO dengan Glow -->
-            <div class="hero-glow text-center" style="margin-bottom:48px;">
-                <h1 style="font-family:'Sora',sans-serif; font-size:28px; font-weight:700; color:white; margin-bottom:8px;">
-                    Tentang <span class="text-silver-gradient">Veldion Silver</span>
+            <!-- HERO -->
+            <div class="hero-glow text-center" style="margin-bottom:44px;">
+                <div class="trust-badge" style="margin-bottom:14px;">
+                    <span class="dot-indicator pulse"></span>
+                    <span>110+ Transaksi • Aktif</span>
+                </div>
+                <h1 style="font-family:'Sora',sans-serif; font-size:30px; font-weight:700; color:white; margin-bottom:6px; letter-spacing:-0.5px;">
+                    Veldion Silver
                 </h1>
-                <p style="color:#94A3B8; font-size:14px; max-width:420px; margin:12px auto 0; line-height:1.6;">
-                    Distributor perak fisik yang menghubungkan investor dengan stok ready dari jaringan supplier terpercaya.
+                <p style="font-family:'Sora',sans-serif; font-size:18px; font-weight:400; color:#94A3B8; margin-bottom:12px; letter-spacing:-0.2px;">
+                    Jembatan Perak Fisik
+                </p>
+                <p style="color:#64748B; font-size:14px; max-width:440px; margin:0 auto; line-height:1.7;">
+                    Platform agregator yang menghubungkan investor dengan jaringan supplier perak fisik terpercaya.
                 </p>
             </div>
 
-            <!-- 1. SIAPA KAMI -->
-            <div class="glass card-glow fade-up" style="padding:24px; margin-bottom:20px;">
+            <!-- 1. TENTANG KAMI -->
+            <div class="glass card-glow fade-up" style="padding:28px 28px 24px; margin-bottom:16px;">
                 <div class="section-header">
                     <i data-lucide="users" class="section-icon"></i>
-                    <h2>Siapa Kami</h2>
+                    <h2>Tentang Veldion</h2>
                 </div>
                 <div class="content-padding">
-                    <p style="color:#94A3B8; font-size:14px; line-height:1.7; margin-bottom:10px;">
-                        Veldion Silver adalah <span style="color:white; font-weight:500;">distributor perak fisik</span> yang berfokus pada ketersediaan stok siap kirim. Kami menjembatani kebutuhan investor dengan jaringan luas yang mencakup supplier-supplier terpercaya di Indonesia.
+                    <p style="color:#94A3B8; font-size:14px; line-height:1.8; margin-bottom:10px;">
+                        Veldion Silver adalah <span style="color:white; font-weight:500;">platform agregator perak fisik</span>. Kami bukan distributor yang memiliki stok sendiri — kami adalah jembatan yang menghubungkan Anda dengan jaringan supplier terpercaya yang stoknya <span style="color:white; font-weight:500;">ready</span>.
                     </p>
-                    <p style="color:#94A3B8; font-size:14px; line-height:1.7; margin-bottom:10px;">
-                        Saat ini kami terhubung secara langsung dengan <span style="color:white; font-weight:500;">Silverium, Key Silver, dan JSG</span> — tiga nama besar di industri perak fisik. Selain itu, jaringan Veldion juga mencakup berbagai supplier lain yang terus berkembang menjadi pemain utama di Indonesia, memastikan Anda selalu memiliki akses ke stok perak fisik dari berbagai sumber terpercaya.
+                    <p style="color:#94A3B8; font-size:14px; line-height:1.8; margin-bottom:10px;">
+                        Kami terhubung dengan berbagai supplier perak fisik terpercaya di Indonesia. Di antaranya adalah <span style="color:white; font-weight:500;">Silverium, Key Silver, dan JSG</span> — tiga nama besar yang sudah dikenal luas. Namun jaringan Veldion tidak berhenti di situ. Kami terus memperluas koneksi dengan supplier-supplier lain yang juga berkualitas dan terpercaya.
                     </p>
-                    <p style="color:#94A3B8; font-size:13px; line-height:1.7; font-style:italic; border-top:1px solid rgba(255,255,255,0.05); padding-top:12px; margin-top:4px;">
-                        Dikelola langsung oleh tim berpengalaman yang dipimpin oleh <span style="color:white; font-weight:500;">AZH</span> dan kolega, dengan pemahaman mendalam tentang dinamika pasar logam mulia di Indonesia.
+                    <hr class="divider-light" style="margin:12px 0 10px;">
+                    <p style="color:#64748B; font-size:12px; line-height:1.7; letter-spacing:0.2px;">
+                        Dikelola oleh tim berpengalaman dengan pemahaman mendalam tentang dinamika pasar logam mulia di Indonesia.
                     </p>
                 </div>
             </div>
 
             <!-- 2. MASALAH & SOLUSI -->
-            <div class="glass card-glow fade-up" style="padding:24px; margin-bottom:20px; transition-delay:0.05s;">
+            <div class="glass card-glow fade-up" style="padding:28px 28px 24px; margin-bottom:16px; transition-delay:0.04s;">
                 <div class="section-header">
                     <i data-lucide="lightbulb" class="section-icon"></i>
                     <h2>Masalah & Solusi</h2>
                 </div>
                 <div class="content-padding">
-                    <p style="color:#94A3B8; font-size:14px; line-height:1.7; margin-bottom:12px;">
-                        <span style="color:#94A3B8;">Masalah:</span> Sebagian besar supplier besar mewajibkan <span style="color:white; font-weight:500;">Pre-Order 2-3 bulan</span>. Investor harus menunggu lama. Sementara itu, supplier lain yang tidak menerapkan PO seringkali memiliki <span style="color:white; font-weight:500;">respon yang lambat</span> dan stok yang tidak pasti.
-                    </p>
-                    <p style="color:#94A3B8; font-size:14px; line-height:1.7;">
-                        <span style="color:#94A3B8;">Solusi:</span> Veldion hadir dengan <span style="color:white; font-weight:500;">jaringan dan koneksi luas</span> yang memungkinkan kami terhubung cepat ke berbagai supplier besar perak fisik, mitra, hingga investor penyedia perak fisik ready untuk setiap brand. Jangkauan Veldion memastikan produk yang Anda inginkan segera dikirimkan begitu deal tercapai dan ketersediaan stok telah dipastikan.
-                    </p>
+                    <div style="margin-bottom:12px;">
+                        <p style="color:#64748B; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Masalah</p>
+                        <p style="color:#94A3B8; font-size:14px; line-height:1.8;">
+                            Sebagian besar supplier besar mewajibkan <span style="color:white; font-weight:500;">Pre-Order 2-3 bulan</span>. Investor harus menunggu lama. Sementara itu, supplier lain yang tidak menerapkan PO seringkali memiliki <span style="color:white; font-weight:500;">respon lambat</span> dan stok tidak pasti.
+                        </p>
+                    </div>
+                    <div>
+                        <p style="color:#64748B; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Solusi</p>
+                        <p style="color:#94A3B8; font-size:14px; line-height:1.8;">
+                            Veldion hadir dengan <span style="color:white; font-weight:500;">jaringan dan koneksi luas</span> yang memungkinkan kami terhubung cepat ke berbagai supplier perak fisik, mitra, hingga investor penyedia perak ready untuk setiap brand. Produk yang Anda inginkan segera dikirimkan begitu deal tercapai dan stok dipastikan.
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <!-- 3. CARA KERJA -->
-            <div class="glass card-glow fade-up" style="padding:24px; margin-bottom:20px; transition-delay:0.1s;">
+            <div class="glass card-glow fade-up" style="padding:28px 28px 24px; margin-bottom:16px; transition-delay:0.08s;">
                 <div class="section-header">
                     <i data-lucide="git-merge" class="section-icon"></i>
                     <h2>Cara Kerja</h2>
                 </div>
-                <div class="content-padding" style="display:flex; flex-direction:column; gap:6px;">
+                <div class="content-padding" style="display:flex; flex-direction:column; gap:5px;">
                     <div class="bullet-point">
                         <span class="dot"></span>
-                        <span>Anda memilih produk dari <a href="/veldion/" style="color:#CBD5E1; font-weight:500;">katalog Veldion</a></span>
+                        <span>Pilih produk dari <a href="/veldion/katalog/" style="color:#CBD5E1; font-weight:500; border-bottom:1px solid rgba(255,255,255,0.06);">katalog Veldion</a></span>
                     </div>
                     <div class="bullet-point">
                         <span class="dot"></span>
-                        <span>Kami telusuri ketersediaan stok melalui <span style="color:white; font-weight:500;">jaringan supplier dan mitra</span> kami</span>
+                        <span>Kami telusuri ketersediaan stok melalui jaringan supplier dan mitra</span>
                     </div>
                     <div class="bullet-point">
                         <span class="dot"></span>
@@ -300,21 +378,24 @@
                     </div>
                     <div class="bullet-point">
                         <span class="dot"></span>
-                        <span>Produk segera <span style="color:white; font-weight:500;">dikirim</span> ke alamat Anda</span>
+                        <span>Produk <span style="color:white; font-weight:500;">dikirim</span> ke alamat Anda dengan bukti resi</span>
+                    </div>
+                    <div style="margin-top:10px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.03);">
+                        <p style="color:#64748B; font-size:11px; text-align:center; letter-spacing:0.3px;">Setiap transaksi tercatat dan dilacak</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 4. KOMITMEN & BUYBACK -->
-            <div class="glass card-glow fade-up" style="padding:24px; margin-bottom:20px; transition-delay:0.15s;">
+            <!-- 4. KOMITMEN -->
+            <div class="glass card-glow fade-up" style="padding:28px 28px 24px; margin-bottom:16px; transition-delay:0.12s;">
                 <div class="section-header">
                     <i data-lucide="shield-check" class="section-icon"></i>
-                    <h2>Komitmen & Layanan</h2>
+                    <h2>Komitmen</h2>
                 </div>
-                <div class="content-padding" style="display:flex; flex-direction:column; gap:6px;">
+                <div class="content-padding" style="display:flex; flex-direction:column; gap:5px;">
                     <div class="bullet-point">
                         <span class="dot"></span>
-                        <span><span style="color:white; font-weight:500;">100% Produk Asli</span> — dari supplier resmi bersertifikat dengan kadar kemurnian 999.0 - 999.9</span>
+                        <span><span style="color:white; font-weight:500;">Produk Asli</span> — dari supplier resmi bersertifikat, kadar 999.0 – 999.9</span>
                     </div>
                     <div class="bullet-point">
                         <span class="dot"></span>
@@ -326,87 +407,116 @@
                     </div>
                     <div class="bullet-point">
                         <span class="dot"></span>
-                        <span><span style="color:white; font-weight:500;">Buyback Tersedia</span> — kami bantu proses jual kembali perak fisik Anda sesuai dengan aturan dan kebijakan masing-masing supplier resmi, atau Anda bisa langsung ke supplier terkait.</span>
+                        <span><span style="color:white; font-weight:500;">Buyback</span> — bantu proses jual kembali sesuai aturan supplier resmi</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 5. TESTIMONI -->
-            <div class="fade-up" style="margin-top:40px; margin-bottom:32px; transition-delay:0.2s;">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-                    <i data-lucide="message-circle" style="width:20px; height:20px; color:#94A3B8;"></i>
-                    <h2 style="color:white; font-weight:600; font-size:16px;">Apa Kata Mereka</h2>
+            <!-- 5. JARINGAN SUPPLIER -->
+            <div class="glass card-glow fade-up" style="padding:28px 28px 24px; margin-bottom:16px; transition-delay:0.16s;">
+                <div class="section-header">
+                    <i data-lucide="link-2" class="section-icon"></i>
+                    <h2>Jaringan Supplier</h2>
+                </div>
+                <div class="content-padding">
+                    <p style="color:#94A3B8; font-size:13px; line-height:1.7; margin-bottom:12px;">
+                        Veldion terhubung dengan berbagai supplier perak fisik terpercaya di Indonesia. Jaringan kami terus berkembang untuk memastikan akses stok yang lebih luas.
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                        <span class="network-tag highlight">Silverium</span>
+                        <span class="network-tag highlight">Key Silver</span>
+                        <span class="network-tag highlight">JSG</span>
+                        <span class="network-tag">+ jaringan mitra lainnya</span>
+                    </div>
+                    <p style="color:#64748B; font-size:11px; margin-top:12px; letter-spacing:0.2px;">Kami terus memperluas koneksi dengan supplier-supplier berkualitas.</p>
+                </div>
+            </div>
+
+            <!-- 6. TESTIMONI -->
+            <div class="fade-up" style="margin-top:36px; margin-bottom:28px; transition-delay:0.2s;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+                    <i data-lucide="message-circle" style="width:18px; height:18px; color:#64748B;"></i>
+                    <h2 style="color:white; font-weight:600; font-size:15px; letter-spacing:-0.2px;">Testimoni</h2>
                 </div>
 
-                <div style="display:flex; flex-direction:column; gap:12px;">
+                <div style="display:flex; flex-direction:column; gap:10px;">
                     <div class="testimonial-card">
-                        <div class="star">★★★★★</div>
-                        <p style="color:#94A3B8; font-size:14px; line-height:1.7; margin:6px 0 8px; font-style:italic;">
+                        <div class="star">★ ★ ★ ★ ★</div>
+                        <p style="color:#94A3B8; font-size:13px; line-height:1.8; margin:6px 0 8px; font-style:italic;">
                             "Cari Coin ABA 1 Dirham & 5 Dirham Silverium lagi susah. Di toko lain pada PO 2 bulan. Veldion ready langsung. Transfer pagi, sore dikirim. Mantap!"
                         </p>
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <span style="display:inline-block; width:6px; height:6px; background:#94A3B8; border-radius:50%;"></span>
-                            <span style="color:#CBD5E1; font-size:13px; font-weight:500;">Hendra</span>
-                            <span style="color:#64748B; font-size:12px;">• Medan</span>
+                            <span style="display:inline-block; width:5px; height:5px; background:#64748B; border-radius:50%;"></span>
+                            <span style="color:#CBD5E1; font-size:12px; font-weight:500;">Hendra</span>
+                            <span style="color:#64748B; font-size:11px;">• Medan</span>
                         </div>
                     </div>
 
                     <div class="testimonial-card">
-                        <div class="star">★★★★★</div>
-                        <p style="color:#94A3B8; font-size:14px; line-height:1.7; margin:6px 0 8px; font-style:italic;">
+                        <div class="star">★ ★ ★ ★ ★</div>
+                        <p style="color:#94A3B8; font-size:13px; line-height:1.8; margin:6px 0 8px; font-style:italic;">
                             "Bullion Key Silver 25g lagi langka di Bandung. Semua seller bilang pre-order. Iseng cek Veldion, ternyata ready. Langsung beli, 3 hari sampai. Makasih Veldion!"
                         </p>
                         <div style="display:flex; align-items:center; gap:8px;">
-                            <span style="display:inline-block; width:6px; height:6px; background:#94A3B8; border-radius:50%;"></span>
-                            <span style="color:#CBD5E1; font-size:13px; font-weight:500;">Rini Septianingsih</span>
-                            <span style="color:#64748B; font-size:12px;">• Bandung</span>
+                            <span style="display:inline-block; width:5px; height:5px; background:#64748B; border-radius:50%;"></span>
+                            <span style="color:#CBD5E1; font-size:12px; font-weight:500;">Rini</span>
+                            <span style="color:#64748B; font-size:11px;">• Bandung</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- STATISTIK -->
-            <div class="fade-up" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:8px; text-align:center; transition-delay:0.25s;">
-                <div class="glass stat-card" style="padding:16px 12px;">
-                    <div class="stat-number">120+</div>
+            <!-- 7. STATISTIK -->
+            <div class="fade-up" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:4px; text-align:center; transition-delay:0.24s;">
+                <div class="glass stat-card" style="padding:18px 12px;">
+                    <div class="stat-number">110+</div>
                     <div class="stat-label">Transaksi</div>
                 </div>
-                <div class="glass stat-card" style="padding:16px 12px;">
-                    <div class="stat-number">3+</div>
-                    <div class="stat-label">Supplier Resmi</div>
+                <div class="glass stat-card" style="padding:18px 12px;">
+                    <div class="stat-number" style="font-size:20px;">3+</div>
+                    <div class="stat-label">Jaringan Supplier Luas</div>
                 </div>
-                <div class="glass stat-card" style="padding:16px 12px;">
-                    <div class="stat-number">1-5</div>
+                <div class="glass stat-card" style="padding:18px 12px;">
+                    <div class="stat-number">1–5</div>
                     <div class="stat-label">Hari Kirim</div>
                 </div>
             </div>
 
-            <!-- FOMO + CTA -->
-            <div class="fade-up" style="text-align:center; margin-top:44px; transition-delay:0.3s;">
+            <!-- 8. LIVE PRESENCE -->
+            <div class="fade-up" style="margin:20px 0 28px; text-align:center; transition-delay:0.28s;">
+                <div style="display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,0.015); border:1px solid rgba(255,255,255,0.04); padding:8px 22px; border-radius:30px;">
+                    <span style="display:inline-block; width:6px; height:6px; background:#10B981; border-radius:50%;" class="pulse-dot"></span>
+                    <span style="color:#94A3B8; font-size:12px; font-weight:500; letter-spacing:0.2px;">Tim aktif — siap bantu</span>
+                </div>
+                <p style="color:#64748B; font-size:11px; margin-top:6px; letter-spacing:0.2px;">Respons dalam 5–15 menit via WhatsApp</p>
+            </div>
 
-                <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:14px 20px; margin-bottom:24px;">
-                    <p style="color:#94A3B8; font-size:13px; line-height:1.6;">
-                        <i data-lucide="clock" style="width:16px; height:16px; display:inline-block; vertical-align:middle; margin-right:6px; color:#94A3B8;"></i>
-                        Stok terbatas dan harga dapat berubah setiap hari. Hubungi kami sekarang untuk cek ketersediaan terbaru!
+            <!-- 9. CTA -->
+            <div class="fade-up" style="text-align:center; transition-delay:0.32s;">
+
+                <div style="background:rgba(255,255,255,0.015); border:1px solid rgba(255,255,255,0.04); border-radius:12px; padding:14px 20px; margin-bottom:24px;">
+                    <p style="color:#64748B; font-size:12px; line-height:1.6; letter-spacing:0.2px;">
+                        <i data-lucide="clock" style="width:14px; height:14px; display:inline-block; vertical-align:middle; margin-right:6px; color:#64748B;"></i>
+                        Stok terbatas — harga berubah setiap hari. Hubungi kami untuk cek ketersediaan terbaru.
                     </p>
                 </div>
 
-                <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
-                    <a href="/veldion/" class="btn-shine" style="display:inline-flex; align-items:center; gap:8px; padding:12px 32px; background:linear-gradient(135deg,#E2E8F0,#C0C5CE); color:#080A0F; font-weight:700; border-radius:40px; font-size:14px; border:none; cursor:pointer;">
-                        <i data-lucide="arrow-right" style="width:18px; height:18px;"></i> Lihat Katalog Produk
+                <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                    <a href="/veldion/katalog/" class="btn-shine" style="display:inline-flex; align-items:center; gap:8px; padding:12px 36px; background:linear-gradient(135deg,#E2E8F0,#C0C5CE); color:#080A0F; font-weight:700; border-radius:40px; font-size:13px; border:none; cursor:pointer; letter-spacing:0.2px;">
+                        <i data-lucide="arrow-right" style="width:16px; height:16px;"></i> Lihat Katalog
                     </a>
-                    <a href="https://wa.me/628137271517" target="_blank" class="btn-outline" style="display:inline-flex; align-items:center; gap:8px; padding:12px 32px; border-radius:40px; font-size:14px; font-weight:600; border:1px solid rgba(255,255,255,0.15); transition:all 0.3s ease;">
-                        <i data-lucide="message-circle" style="width:18px; height:18px;"></i> Hubungi Veldion
+                    <a href="https://wa.me/628137271517" target="_blank" class="btn-outline" style="display:inline-flex; align-items:center; gap:8px; padding:12px 36px; border-radius:40px; font-size:13px; font-weight:600; border:1px solid rgba(255,255,255,0.08); transition:all 0.4s cubic-bezier(0.16, 1, 0.3, 1); letter-spacing:0.2px;">
+                        <i data-lucide="message-circle" style="width:16px; height:16px;"></i> Hubungi Veldion
                     </a>
                 </div>
-                <p style="color:#64748B; font-size:12px; margin-top:14px;">
+                <p style="color:#64748B; font-size:11px; margin-top:12px; letter-spacing:0.2px;">
                     Konsultasi via <a href="https://wa.me/628137271517" style="color:#CBD5E1; font-weight:500;">WhatsApp</a>
                 </p>
             </div>
 
             <!-- FOOTER -->
-            <div class="fade-up" style="border-top:1px solid rgba(255,255,255,0.04); margin-top:48px; padding-top:20px; text-align:center; color:#64748B; font-size:11px; transition-delay:0.35s;">
-                Veldion Silver &bull; Banda Aceh &bull; 2026
+            <div class="fade-up" style="border-top:1px solid rgba(255,255,255,0.03); margin-top:44px; padding-top:18px; text-align:center; color:#64748B; font-size:10px; letter-spacing:0.3px; transition-delay:0.36s;">
+                Veldion Silver · Platform Agregator Perak Fisik · 2026
             </div>
 
         </div>
@@ -416,7 +526,6 @@
     <script>
         lucide.createIcons();
 
-        // ===== INTERSECTION OBSERVER UNTUK FADE-UP =====
         const fadeElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -425,8 +534,8 @@
                 }
             });
         }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -20px 0px'
+            threshold: 0.08,
+            rootMargin: '0px 0px -30px 0px'
         });
 
         fadeElements.forEach(el => observer.observe(el));
