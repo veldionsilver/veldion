@@ -10,9 +10,9 @@ const MARKET_OPEN = true;
 
 // 2. HARGA PASAR (update dari XAG/USD & XAG/IDR)
 const MARKET = {
-    xagUsd: "$66.66",
+    xagUsd: "$65.36",
     xagIdr: "~Rp52.096",
-    date: "14 Agustus 2026"
+    date: "18 Agustus 2026"
 };
 
 // 3. PRODUK READY STOCK
@@ -104,10 +104,10 @@ const PRODUCTS = [
 
 // 4. HARGA BUYBACK (update harian)
 const BUYBACK_RATES = [
-    { name: "Antam", price: "Rp 27.767/gr" },
-    { name: "Silverium", price: "Rp 39.000/gr" },
+    { name: "Antam", price: "Rp 28.225/gr" },
+    { name: "Silverium", price: "Rp 39.500/gr" },
     { name: "Key Silver", price: "Rp 39.000/gr" },
-    { name: "JSG / TDS", price: "Rp 39.000/gr" }
+    { name: "JSG / TDS", price: "Rp 38.000/gr" }
 ];
 
 // 5. STATISTIK
