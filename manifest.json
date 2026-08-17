@@ -1,7 +1,7 @@
 {
   "name": "Veldion Silver",
   "short_name": "Veldion",
-  "description": "Distributor perak fisik murni 999.5 & 999.9 Ready Stock Indonesia",
+  "description": "Platform agregator perak fisik — Silver Bridge. Bisnis perseorangan Indonesia.",
   "start_url": "/veldion/",
   "display": "standalone",
   "background_color": "#0C0F14",
@@ -54,7 +54,7 @@
       "sizes": "1200x630",
       "type": "image/webp",
       "form_factor": "wide",
-      "label": "Veldion Silver Homepage"
+      "label": "Veldion Silver — Platform Agregator Perak Fisik"
     }
   ],
   "related_applications": [],
