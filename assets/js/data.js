@@ -28,7 +28,8 @@ const PRODUCTS = [
         purity: "999.5",
         price: "Rp783.000",
         initial: "P",
-        image: "assets/images/products/key-silver-press-10gr.webp"
+        image: "assets/images/products/key-silver-press-10gr.webp",
+        alt: "Veldion Silver — Perak fisik Press 10gr dari Key Silver, kemurnian 999.5"
     },
     {
         name: "Argentum 10gr",
@@ -38,7 +39,8 @@ const PRODUCTS = [
         purity: "999",
         price: "Rp774.000",
         initial: "A",
-        image: "assets/images/products/key-silver-argentum-10gr.webp"
+        image: "assets/images/products/key-silver-argentum-10gr.webp",
+        alt: "Veldion Silver — Perak fisik Argentum 10gr dari Key Silver, kemurnian 999"
     },
     {
         name: "Bullion Klasik 50gr",
@@ -48,7 +50,8 @@ const PRODUCTS = [
         purity: "999.5",
         price: "Rp2.641.000",
         initial: "B",
-        image: "assets/images/products/key-silver-bullion-klasik-50gr.webp"
+        image: "assets/images/products/key-silver-bullion-klasik-50gr.webp",
+        alt: "Veldion Silver — Perak fisik Bullion Klasik 50gr dari Key Silver, kemurnian 999.5"
     },
     {
         name: "SAC Silver 1gr",
@@ -58,7 +61,8 @@ const PRODUCTS = [
         purity: "999",
         price: "Rp73.000",
         initial: "S",
-        image: "assets/images/products/key-silver-sac-silver-1gr.webp"
+        image: "assets/images/products/key-silver-sac-silver-1gr.webp",
+        alt: "Veldion Silver — Perak fisik SAC Silver 1gr dari Key Silver, kemurnian 999"
     },
     {
         name: "Reguler 3.3gr",
@@ -68,7 +72,8 @@ const PRODUCTS = [
         purity: "999.9",
         price: "Rp227.000",
         initial: "P",
-        image: "assets/images/products/silverium-reguler-3.3gr.webp"
+        image: "assets/images/products/silverium-reguler-3.3gr.webp",
+        alt: "Veldion Silver — Perak fisik Reguler 3.3gr dari Silverium, kemurnian 999.9"
     },
     {
         name: "Reguler 9.9gr",
@@ -78,7 +83,8 @@ const PRODUCTS = [
         purity: "999.9",
         price: "Rp642.000",
         initial: "P",
-        image: "assets/images/products/silverium-reguler-9.9gr.webp"
+        image: "assets/images/products/silverium-reguler-9.9gr.webp",
+        alt: "Veldion Silver — Perak fisik Reguler 9.9gr dari Silverium, kemurnian 999.9"
     },
     {
         name: "Coin ABA 1 Dirham",
@@ -88,7 +94,8 @@ const PRODUCTS = [
         purity: "999.9",
         price: "Rp226.000",
         initial: "C",
-        image: "assets/images/products/silverium-coin-aba-1-dirham.webp"
+        image: "assets/images/products/silverium-coin-aba-1-dirham.webp",
+        alt: "Veldion Silver — Perak fisik Coin ABA 1 Dirham dari Silverium, kemurnian 999.9"
     },
     {
         name: "Medalion 10gr",
@@ -98,7 +105,8 @@ const PRODUCTS = [
         purity: "999.5",
         price: "Rp703.000",
         initial: "M",
-        image: "assets/images/products/jsg-medalion-10gr.webp"
+        image: "assets/images/products/jsg-medalion-10gr.webp",
+        alt: "Veldion Silver — Perak fisik Medalion 10gr dari JSG, kemurnian 999.5"
     }
 ];
 
