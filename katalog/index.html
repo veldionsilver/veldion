@@ -212,7 +212,7 @@
         }
         @media (min-width: 769px) { .product-badge { top: 12px; right: 12px; padding: 4px 12px; font-size: 9px; } }
 
-        /* ===== IMAGE WRAPPER - SAMA SEPERTI INDEX UTAMA ===== */
+        /* ===== IMAGE WRAPPER ===== */
         .product-image-wrapper {
             width: 80px;
             height: 80px;
@@ -355,7 +355,7 @@
         .filter-reset svg { width: 12px; height: 12px; }
         @media (min-width: 769px) { .filter-reset svg { width: 14px; height: 14px; } }
 
-        /* ===== MODAL - SAMA SEPERTI CARD ===== */
+        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -386,7 +386,7 @@
         @media (min-width: 769px) { .modal-content { padding: 32px; max-width: 440px; } }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
 
-        /* ===== MODAL IMAGE - SAMA DENGAN CARD ===== */
+        /* ===== MODAL IMAGE ===== */
         .modal-image {
             width: 80px;
             height: 80px;
@@ -573,19 +573,19 @@
     <main class="max-w-7xl mx-auto px-3 md:px-4 py-4 md:py-8">
 
         <div class="page-header">
-    <h1 class="flex items-center flex-wrap gap-2">
-        <span>Katalog Perak Fisik <span class="text-silver-gradient">Veldion Silver</span></span>
-        <a href="#download-section" class="inline-flex items-center gap-1.5 text-sm font-medium text-steel hover:text-silver-light transition-colors duration-300 group border border-steel/10 hover:border-steel/30 rounded-full px-3 py-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform duration-300">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            <span>Download Katalog</span>
-        </a>
-    </h1>
-    <p>Klik produk untuk detail &amp; pesan via WhatsApp</p>
-</div>
+            <h1 class="flex items-center flex-wrap gap-2">
+                <span>Katalog Perak Fisik <span class="text-silver-gradient">Veldion Silver</span></span>
+                <a href="#download-section" class="inline-flex items-center gap-1.5 text-sm font-medium text-steel hover:text-silver-light transition-colors duration-300 group border border-steel/10 hover:border-steel/30 rounded-full px-3 py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform duration-300">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <span>Download Katalog</span>
+                </a>
+            </h1>
+            <p>Klik produk untuk detail &amp; pesan via WhatsApp</p>
+        </div>
 
         <div class="filter-bar">
             <span class="filter-label">
@@ -863,7 +863,7 @@
         }
 
         // ============================================================
-        // RENDER — SAMA SEPERTI INDEX UTAMA
+        // RENDER — DIPERBAIKI ALT TEXT
         // ============================================================
         function renderProducts(products) {
             const grid = document.getElementById('productGrid');
@@ -885,10 +885,11 @@
 
                 if (imageFile) {
                     const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
+                    // ===== PERBAIKAN: alt lebih deskriptif =====
                     imgHtml = `
                         <img 
                             src="${imgPath}" 
-                            alt="${p.name}" 
+                            alt="Veldion Silver — ${p.name}, ${p.supplier}, kemurnian ${p.purity}" 
                             loading="lazy"
                             onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback').style.display='flex'"
                         >
@@ -989,7 +990,7 @@
         }
 
         // ============================================================
-        // MODAL — SAMA PERSIS DENGAN CARD
+        // MODAL — DIPERBAIKI ALT TEXT
         // ============================================================
         function openModal(idx) {
             const p = allProducts[idx];
@@ -1001,11 +1002,11 @@
 
             if (imageFile) {
                 const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
-                // ===== SAMA PERSIS DENGAN CARD =====
+                // ===== PERBAIKAN: alt lebih deskriptif =====
                 imgHtml = `
                     <img 
                         src="${imgPath}" 
-                        alt="${p.name}"
+                        alt="Veldion Silver — ${p.name}, ${p.supplier}, kemurnian ${p.purity}"
                         onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback-modal').style.display='flex'"
                     >
                     <div class="placeholder-fallback-modal" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">
