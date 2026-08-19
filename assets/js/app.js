@@ -60,8 +60,9 @@ function renderProducts() {
     for (var i = 0; i < PRODUCTS.length; i++) {
         (function(idx) {
             var p = PRODUCTS[idx];
+            // ===== PERBAIKAN: pakai p.alt kalau ada, fallback ke p.name =====
             var imgHtml = p.image
-                ? '<img src="' + p.image + '" alt="' + p.name + '" class="w-full h-full object-cover rounded-xl" loading="lazy">'
+                ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl" loading="lazy">'
                 : '<span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
 
             var card = document.createElement("div");
@@ -112,8 +113,9 @@ function renderBuyback() {
 // ====== PRODUCT MODAL ======
 function openProduct(idx) {
     var p = PRODUCTS[idx];
+    // ===== PERBAIKAN: pakai p.alt kalau ada, fallback ke p.name =====
     var imgHtml = p.image
-        ? '<img src="' + p.image + '" alt="' + p.name + '" class="w-full h-full object-cover rounded-xl">'
+        ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl">'
         : '<span class="text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
 
     document.getElementById("modalInitial").innerHTML = imgHtml;
