@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080A0F">
+    
+    <title>Supplier Perak Fisik Terpercaya • Veldion Silver</title>
+    <meta name="description" content="Veldion Silver terhubung dengan supplier perak fisik terpercaya: Silverium, Key Silver, dan JSG/TDS. Semua produk 999.5 - 999.9, asli, dan siap kirim.">
+    <link rel="canonical" href="https://veldionsilver.github.io/veldion/supplier/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
+                    colors: {
+                        void: { DEFAULT: '#080A0F' },
+                        steel: { DEFAULT: '#94A3B8', light: '#CBD5E1', dark: '#64748B' },
+                        silver: { DEFAULT: '#C0C5CE', light: '#E2E8F0' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: #080A0F; 
+            font-family: 'Inter', sans-serif;
+            color: #CBD5E1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .text-silver-gradient {
+            background: linear-gradient(135deg, #E2E8F0, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        a { text-decoration: none; }
+        .container-custom { max-width: 960px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+        /* ===== SUPPLIER CARD ===== */
+        .supplier-card {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 16px;
+            padding: 24px 20px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+        .supplier-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(192,197,206,0.25), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .supplier-card:hover {
+            border-color: rgba(255,255,255,0.08);
+            transform: translateY(-4px) scale(1.005);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .supplier-card:hover::before {
+            opacity: 1;
+        }
+        .supplier-card.expanded {
+            border-color: rgba(192,197,206,0.12);
+            background: rgba(255,255,255,0.025);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+        }
+        .supplier-card.expanded::before {
+            opacity: 1;
+            background: linear-gradient(90deg, transparent, #C0C5CE, transparent);
+        }
+        .supplier-card:active {
+            transform: scale(0.98);
+            transition-duration: 0.1s;
+        }
+
+        .supplier-logo {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            padding: 8px;
+            border: 1px solid rgba(255,255,255,0.04);
+            flex-shrink: 0;
+            transition: all 0.4s ease;
+        }
+        .supplier-card:hover .supplier-logo {
+            border-color: rgba(255,255,255,0.08);
+        }
+
+        .supplier-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .supplier-purity {
+            font-size: 12px;
+            color: #94A3B8;
+            transition: color 0.3s ease;
+        }
+
+        .supplier-arrow {
+            color: #64748B;
+            flex-shrink: 0;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .supplier-card.expanded .supplier-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* ===== DETAIL EXPAND — SMOOTH ===== */
+        .supplier-detail {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin-top: 0;
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        margin-top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .supplier-card.expanded .supplier-detail {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 16px;
+        }
+        .supplier-detail-inner {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 16px;
+            transform: translateY(-6px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .supplier-card.expanded .supplier-detail-inner {
+            transform: translateY(0);
+        }
+
+        .supplier-detail p {
+            color: #94A3B8;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.1s;
+        }
+        .supplier-card.expanded .supplier-detail p {
+            opacity: 1;
+        }
+
+        .supplier-detail .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+            opacity: 0;
+            transition: opacity 0.5s ease 0.15s;
+        }
+        .supplier-card.expanded .supplier-detail .products {
+            opacity: 1;
+        }
+        .supplier-detail .products span {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 10px;
+            color: #CBD5E1;
+            transition: all 0.3s ease;
+        }
+        .supplier-detail .products span:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-1px);
+        }
+
+        .supplier-detail .official-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px 6px 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 30px;
+            color: #CBD5E1;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateX(-6px);
+        }
+        .supplier-card.expanded .supplier-detail .official-link {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.2s;
+        }
+        .supplier-detail .official-link:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateX(4px) scale(1.02);
+            box-shadow: 0 0 30px rgba(192,197,206,0.04);
+        }
+        .supplier-detail .official-link i {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s ease;
+        }
+        .supplier-detail .official-link:hover i {
+            transform: translateX(2px);
+        }
+
+        /* ===== FADE-UP ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== BUTTON SHINE ===== */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-shine:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+        .btn-shine:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(192,197,206,0.15);
+        }
+        .btn-shine:active {
+            transform: scale(0.95);
+            transition-duration: 0.1s;
+        }
+
+        @media (max-width: 640px) {
+            .supplier-logo { width: 56px; height: 56px; padding: 6px; }
+            .supplier-card { padding: 16px 14px; }
+            .supplier-name { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header style="position:fixed; top:0; left:0; right:0; z-index:50; background:#080A0F; border-bottom:1px solid rgba(255,255,255,0.04); height:60px; display:flex; align-items:center;">
+        <div class="container-custom" style="display:flex; justify-content:space-between; align-items:center; max-width:960px;">
+            <a href="/veldion/" style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;">VELDION</a>
+            <a href="/veldion/" style="font-size:12px; color:#64748B; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.04); transition:all 0.3s ease; font-weight:500;">← Kembali</a>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main style="flex:1; padding-top:100px; padding-bottom:60px;">
+        <div class="container-custom">
+
+            <!-- HERO -->
+            <div class="text-center" style="margin-bottom:40px;">
+                <span class="text-xs font-bold text-silver tracking-[0.3em] uppercase">Network</span>
+                <h1 style="font-family:'Sora',sans-serif; font-size:28px; font-weight:700; color:white; margin-top:4px; margin-bottom:6px; letter-spacing:-0.5px;">
+                    Supplier Perak Fisik <span class="text-silver-gradient">Veldion Silver</span>
+                </h1>
+                <p style="color:#64748B; font-size:14px; max-width:520px; margin:0 auto; line-height:1.7;">
+                    Veldion terhubung dengan supplier-supplier perak fisik terpercaya di Indonesia.<br>
+                </p>
+            </div>
+
+            <!-- SUPPLIER GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="supplierGrid">
+
+                <!-- SILVERIUM -->
+                <div class="supplier-card fade-up" data-supplier="silverium" style="transition-delay:0s;">
+                    <div class="flex items-center gap-4">
+                        <img src="assets/supplier/logosilverium.webp" alt="Logo Silverium — Supplier perak fisik 999.9" class="supplier-logo" loading="lazy">
+                        <div class="flex-1 min-w-0">
+                            <div class="supplier-name">Silverium</div>
+                            <div class="supplier-purity">Kemurnian 999.9</div>
+                        </div>
+                        <i data-lucide="chevron-down" class="supplier-arrow w-5 h-5"></i>
+                    </div>
+                    <div class="supplier-detail">
+                        <div class="supplier-detail-inner">
+                            <p>Supplier perak modern dengan kualitas presisi tinggi. Produk bersertifikat dan teruji dengan kemurnian 999.9. Didesain premium dengan segel resmi yang mudah diverifikasi.</p>
+                            <div class="products">
+                                <span>Reguler 3.3gr</span>
+                                <span>Reguler 9.9gr</span>
+                                <span>Reguler 33gr</span>
+                                <span>Coin ABA 1 Dirham</span>
+                                <span>Coin ABA 5 Dirham</span>
+                            </div>
+                            <a href="https://www.silveriumofficial.com/" target="_blank" class="official-link">
+                                <i data-lucide="external-link"></i>
+                                silveriumofficial.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KEY SILVER -->
+                <div class="supplier-card fade-up" data-supplier="keysilver" style="transition-delay:0.06s;">
+                    <div class="flex items-center gap-4">
+                        <img src="assets/supplier/logokeysilver.webp" alt="Logo Key Silver — Supplier perak fisik 999.5" class="supplier-logo" loading="lazy">
+                        <div class="flex-1 min-w-0">
+                            <div class="supplier-name">Key Silver</div>
+                            <div class="supplier-purity">Kemurnian 999.5</div>
+                        </div>
+                        <i data-lucide="chevron-down" class="supplier-arrow w-5 h-5"></i>
+                    </div>
+                    <div class="supplier-detail">
+                        <div class="supplier-detail-inner">
+                            <p>Spesialis perak press dan beragam jenis khusus. Finishing premium dan harga kompetitif. Investasi perak sesuai syariat dengan transaksi tunai langsung dan bi yadin tanpa penundaan.</p>
+                            <div class="products">
+                                <span>Press 1-100gr</span>
+                                <span>Argentum 1-250gr</span>
+                                <span>Bullion Klasik 10-250gr</span>
+                                <span>Coin ABA 1-5 Dirham</span>
+                                <span>SAC Silver 1-100gr</span>
+                            </div>
+                            <a href="https://keysilver.id/" target="_blank" class="official-link">
+                                <i data-lucide="external-link"></i>
+                                keysilver.id
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSG / TDS -->
+                <div class="supplier-card fade-up" data-supplier="jsg" style="transition-delay:0.12s;">
+                    <div class="flex items-center gap-4">
+                        <img src="assets/supplier/logotds.webp" alt="Logo JSG TDS — Supplier perak fisik medalion 999.5" class="supplier-logo" loading="lazy">
+                        <div class="flex-1 min-w-0">
+                            <div class="supplier-name">JSG / TDS</div>
+                            <div class="supplier-purity">Kemurnian 999.5</div>
+                        </div>
+                        <i data-lucide="chevron-down" class="supplier-arrow w-5 h-5"></i>
+                    </div>
+                    <div class="supplier-detail">
+                        <div class="supplier-detail-inner">
+                            <p>Spesialis Silver berjenis bulat medalion dan bullion. Desain eksklusif dan kualitas terpercaya. Produk tersedia dalam berbagai gramasi dengan kemasan premium.</p>
+                            <div class="products">
+                                <span>Medalion 1gr</span>
+                                <span>Medalion 5gr</span>
+                                <span>Medalion 10gr</span>
+                                <span>Medalion 25gr</span>
+                                <span>Medalion 50gr</span>
+                            </div>
+                            <a href="https://tdssilver.com/" target="_blank" class="official-link">
+                                <i data-lucide="external-link"></i>
+                                tdssilver.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="fade-up" style="text-align:center; margin-top:44px; transition-delay:0.18s;">
+                <a href="/veldion/katalog/" class="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full btn-shine">
+                    <i data-lucide="box" class="w-4 h-4"></i>
+                    Cek Katalog Veldion
+                </a>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="fade-up" style="border-top:1px solid rgba(255,255,255,0.03); margin-top:44px; padding-top:18px; text-align:center; color:#64748B; font-size:10px; letter-spacing:0.3px; transition-delay:0.24s;">
+                Veldion Silver · Platform Agregator Perak Fisik · 2026
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        // ===== CARD EXPAND — SMOOTH =====
+        const cards = document.querySelectorAll('.supplier-card');
+        let activeCard = null;
+
+        cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+
+                const isExpanded = this.classList.contains('expanded');
+
+                // Tutup semua
+                cards.forEach(c => c.classList.remove('expanded'));
+
+                if (!isExpanded) {
+                    this.classList.add('expanded');
+                    activeCard = this;
+                } else {
+                    activeCard = null;
+                }
+
+                setTimeout(() => lucide.createIcons(), 100);
+            });
+        });
+
+        // Klik di luar — tutup semua
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.supplier-card')) {
+                cards.forEach(c => c.classList.remove('expanded'));
+                activeCard = null;
+            }
+        });
+
+        // ===== FADE-UP OBSERVER =====
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
