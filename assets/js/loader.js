@@ -24,6 +24,7 @@
                 <div class="loader-progress-wrapper">
                     <div class="loader-progress-bar"></div>
                 </div>
+                <div class="loader-status-text">Memuat</div>
             </div>
         </div>
     `;
@@ -36,7 +37,7 @@
     var progress = 0;
     var progressBar = document.querySelector('.loader-progress-bar');
     var startTime = Date.now();
-    var minDuration = 1500; // 1.5 detik
+    var minDuration = 2000; // 2 detik
 
     // Animasi progress bar
     function updateProgress() {
@@ -82,7 +83,7 @@
     // Tunggu semua konten selesai dimuat
     function checkReady() {
         if (document.readyState === 'complete') {
-            // Pastikan durasi minimal 1.5 detik
+            // Pastikan durasi minimal 2 detik
             var elapsed = Date.now() - startTime;
             var remaining = Math.max(0, minDuration - elapsed);
             setTimeout(hideLoader, remaining);
@@ -95,10 +96,10 @@
         }
     }
 
-    // Fallback: maksimal 4 detik
+    // Fallback: maksimal 5 detik
     setTimeout(function() {
         if (!isHidden) hideLoader();
-    }, 4000);
+    }, 5000);
 
     checkReady();
 })();
