@@ -392,6 +392,18 @@ body{padding-top:0}
     box-shadow: 0 0 20px rgba(192,197,206,0.2);
 }
 
+/* ---- STATUS TEXT ---- */
+#veldion-loader .loader-status-text {
+    font-size: 12px;
+    color: var(--steel-dark);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 8px;
+    opacity: 0;
+    animation: textFade 0.6s ease 1s forwards;
+}
+
 /* ---- PAGE ENTRY TRANSITION ---- */
 body.page-enter {
     opacity: 0;
@@ -425,6 +437,9 @@ body.page-visible {
     #veldion-loader .loader-progress-wrapper {
         width: 140px;
     }
+    #veldion-loader .loader-status-text {
+        font-size: 10px;
+    }
 }
 
 @media (max-width: 400px) {
@@ -439,6 +454,9 @@ body.page-visible {
     }
     #veldion-loader .loader-brand {
         font-size: 17px;
+    }
+    #veldion-loader .loader-status-text {
+        font-size: 9px;
     }
 }
 
@@ -457,7 +475,8 @@ body.page-visible {
     }
     #veldion-loader .loader-brand,
     #veldion-loader .loader-subtitle,
-    #veldion-loader .loader-progress-wrapper {
+    #veldion-loader .loader-progress-wrapper,
+    #veldion-loader .loader-status-text {
         animation: none !important;
         opacity: 1 !important;
     }
