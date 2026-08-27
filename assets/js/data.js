@@ -19,7 +19,7 @@ const CONTACT = {
     email: "veldionsilver@gmail.com"
 };
 
-// 3. STATISTIK (bisa tetap statis atau nanti dari sheets juga)
+// 3. STATISTIK
 const STATS = {
     transactions: "110+",
     deliveryDays: "1-5"
@@ -29,3 +29,5 @@ const STATS = {
 window.CATEGORIES = CATEGORIES;
 window.CONTACT = CONTACT;
 window.STATS = STATS;
+
+console.log("✅ data.js loaded:", { CATEGORIES: CATEGORIES.length, CONTACT, STATS });
