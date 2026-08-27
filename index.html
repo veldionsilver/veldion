@@ -111,6 +111,11 @@
     <!-- Preload Logo -->
     <img src="assets/images/logo.webp" class="preload-logo" alt="Veldion Silver — Silver Bridge. Platform Agregator Perak Fisik" aria-hidden="true">
 
+    <!-- ===== FLOATING DATE — MOBILE ONLY ===== -->
+    <div id="floatingDate" class="md:hidden fixed top-[60px] right-3 z-40 bg-void/80 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1 text-[9px] font-medium text-steel pointer-events-none select-none">
+        <!-- Isi akan diisi oleh app.js -->
+    </div>
+
     <!-- Desktop Top Bar -->
     <div class="desktop-top-bar text-xs font-medium text-steel">
         <div class="max-w-7xl mx-auto px-4 w-full">
@@ -128,8 +133,12 @@
                         <span class="text-[10px] uppercase">XAG/IDR:</span>
                         <span class="text-white font-bold" id="xagIdr">Rp 545.000</span>
                     </div>
+                    <!-- ===== TANGGAL — DESKTOP ONLY ===== -->
+                    <span class="hidden xl:inline text-[10px] text-steel-dark border-l border-white/10 pl-4" id="headerDate">
+                        <!-- Isi akan diisi oleh app.js -->
+                    </span>
                 </div>
-                <span class="text-[10px] text-steel-dark">Pengiriman aman ke seluruh Indonesia</span>
+                <span class="text-[10px] text-steel-dark hidden lg:inline">Pengiriman aman ke seluruh Indonesia</span>
             </div>
         </div>
     </div>
