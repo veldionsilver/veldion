@@ -18,36 +18,21 @@ function getSheetUrl(tabName) {
 
 // ============================================================
 // DATA STATIS — Ambil dari window (data.js)
+// JANGAN DEKLARASIKAN ULANG!
 // ============================================================
-const CATEGORIES = window.CATEGORIES || [];
-const CONTACT = window.CONTACT || { whatsapp: "628137271517", email: "veldionsilver@gmail.com" };
-const STATS = window.STATS || { transactions: "110+", deliveryDays: "1-5" };
-
-console.log("✅ Data statis loaded:", { CATEGORIES: CATEGORIES.length, CONTACT, STATS });
-
-// ============================================================
-// FALLBACK DATA (kalau fetch gagal)
-// ============================================================
-const FALLBACK_DATA = {
-    marketStatus: true,
-    marketData: { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" },
-    products: [
-        { name: "Press 10gr", category: "Press", supplier: "Key Silver", weight: "10gr", purity: "999.5", price: "Rp774.000", initial: "P", image: "key-silver-press-10gr.webp", alt: "Veldion Silver — Perak fisik Press 10gr" },
-        { name: "Argentum 10gr", category: "Argentum", supplier: "Key Silver", weight: "10gr", purity: "999", price: "Rp768.000", initial: "A", image: "key-silver-argentum-10gr.webp", alt: "Veldion Silver — Perak fisik Argentum 10gr" }
-    ],
-    buybackRates: [
-        { name: "Antam", price: "Rp 28.915/gr" },
-        { name: "Silverium", price: "Rp 39.340/gr" }
-    ]
-};
+console.log("✅ Data statis from window:", { 
+    CATEGORIES: window.CATEGORIES ? window.CATEGORIES.length : 0,
+    CONTACT: window.CONTACT,
+    STATS: window.STATS
+});
 
 // ============================================================
 // STATE
 // ============================================================
-let marketStatus = FALLBACK_DATA.marketStatus;
-let marketData = FALLBACK_DATA.marketData;
-let products = FALLBACK_DATA.products;
-let buybackRates = FALLBACK_DATA.buybackRates;
+let marketStatus = true;
+let marketData = { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" };
+let products = [];
+let buybackRates = [];
 
 // ============================================================
 // FETCH DATA DARI GOOGLE SHEETS
@@ -55,31 +40,19 @@ let buybackRates = FALLBACK_DATA.buybackRates;
 async function fetchAllData() {
     try {
         console.log("🔄 Fetching data from Google Sheets...");
-        console.log("Sheet ID:", SHEET_ID);
 
         const [statusCsv, marketCsv, productsCsv, buybackCsv] = await Promise.all([
-            fetch(getSheetUrl("MarketStatus")).then(r => { console.log("MarketStatus status:", r.status); return r.text(); }),
-            fetch(getSheetUrl("MarketPrice")).then(r => { console.log("MarketPrice status:", r.status); return r.text(); }),
-            fetch(getSheetUrl("Products")).then(r => { console.log("Products status:", r.status); return r.text(); }),
-            fetch(getSheetUrl("Buyback")).then(r => { console.log("Buyback status:", r.status); return r.text(); })
+            fetch(getSheetUrl("MarketStatus")).then(r => r.text()),
+            fetch(getSheetUrl("MarketPrice")).then(r => r.text()),
+            fetch(getSheetUrl("Products")).then(r => r.text()),
+            fetch(getSheetUrl("Buyback")).then(r => r.text())
         ]);
 
-        console.log("📊 MarketStatus CSV length:", statusCsv.length);
-        console.log("📊 MarketPrice CSV length:", marketCsv.length);
-        console.log("📊 Products CSV length:", productsCsv.length);
-        console.log("📊 Buyback CSV length:", buybackCsv.length);
-
         // Parse data
-        const parsedStatus = parseMarketStatus(statusCsv);
-        const parsedMarket = parseMarketData(marketCsv);
-        const parsedProducts = parseProducts(productsCsv);
-        const parsedBuyback = parseBuyback(buybackCsv);
-
-        // Update state hanya jika parsing berhasil
-        if (parsedStatus !== null) marketStatus = parsedStatus;
-        if (parsedMarket !== null) marketData = parsedMarket;
-        if (parsedProducts !== null && parsedProducts.length > 0) products = parsedProducts;
-        if (parsedBuyback !== null && parsedBuyback.length > 0) buybackRates = parsedBuyback;
+        marketStatus = parseMarketStatus(statusCsv);
+        marketData = parseMarketData(marketCsv);
+        products = parseProducts(productsCsv);
+        buybackRates = parseBuyback(buybackCsv);
 
         console.log("✅ Data loaded:", {
             marketStatus,
@@ -91,7 +64,6 @@ async function fetchAllData() {
         return true;
     } catch (err) {
         console.error("❌ Failed to fetch data:", err);
-        console.log("⚠️ Using fallback data");
         return false;
     }
 }
@@ -103,38 +75,30 @@ async function fetchAllData() {
 function parseMarketStatus(csv) {
     try {
         const lines = csv.split('\n').filter(line => line.trim() !== '');
-        if (lines.length < 2) return null;
+        if (lines.length < 2) return true;
         const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        const status = values[0] || 'TRUE';
-        return status.toUpperCase() === 'TRUE';
-    } catch (e) { 
-        console.warn("Parse MarketStatus error:", e);
-        return null; 
-    }
+        return values[0]?.toUpperCase() === 'TRUE';
+    } catch (e) { return true; }
 }
 
 function parseMarketData(csv) {
     try {
         const lines = csv.split('\n').filter(line => line.trim() !== '');
-        if (lines.length < 2) return null;
+        if (lines.length < 2) return { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" };
         const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
         return {
-            xagUsd: values[0] || FALLBACK_DATA.marketData.xagUsd,
-            xagIdr: values[1] || FALLBACK_DATA.marketData.xagIdr,
-            date: values[2] || FALLBACK_DATA.marketData.date
+            xagUsd: values[0] || "$68.07",
+            xagIdr: values[1] || "~Rp54.231",
+            date: values[2] || "27 Agustus 2026"
         };
-    } catch (e) { 
-        console.warn("Parse MarketData error:", e);
-        return null; 
-    }
+    } catch (e) { return { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" }; }
 }
 
 function parseProducts(csv) {
     try {
         const lines = csv.split('\n').filter(line => line.trim() !== '');
-        if (lines.length < 2) return null;
+        if (lines.length < 2) return [];
         
-        // Header
         const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
         const result = [];
         
@@ -147,17 +111,14 @@ function parseProducts(csv) {
             if (obj.name) result.push(obj);
         }
         
-        return result.length > 0 ? result : null;
-    } catch (e) { 
-        console.warn("Parse Products error:", e);
-        return null; 
-    }
+        return result;
+    } catch (e) { return []; }
 }
 
 function parseBuyback(csv) {
     try {
         const lines = csv.split('\n').filter(line => line.trim() !== '');
-        if (lines.length < 2) return null;
+        if (lines.length < 2) return [];
         
         const result = [];
         for (let i = 1; i < lines.length; i++) {
@@ -166,11 +127,8 @@ function parseBuyback(csv) {
                 result.push({ name: values[0], price: values[1] });
             }
         }
-        return result.length > 0 ? result : null;
-    } catch (e) { 
-        console.warn("Parse Buyback error:", e);
-        return null; 
-    }
+        return result;
+    } catch (e) { return []; }
 }
 
 // ============================================================
@@ -211,10 +169,7 @@ function renderMarketPrices() {
 
 function renderProducts() {
     const grid = document.getElementById("productGrid");
-    if (!grid) {
-        console.error("productGrid not found!");
-        return;
-    }
+    if (!grid) return;
     grid.innerHTML = "";
 
     if (!products || products.length === 0) {
@@ -252,10 +207,7 @@ function renderProducts() {
 
 function renderBuyback() {
     const el = document.getElementById("buybackRates");
-    if (!el) {
-        console.error("buybackRates not found!");
-        return;
-    }
+    if (!el) return;
 
     let html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
 
@@ -301,8 +253,9 @@ function openProduct(idx) {
     document.getElementById("modalPurity").textContent = p.purity || '-';
     document.getElementById("modalPrice").textContent = p.price || 'Rp -';
     
+    const contact = window.CONTACT || { whatsapp: "628137271517" };
     const waMsg = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(p.name)}`;
-    document.getElementById("modalLink").href = `https://wa.me/${CONTACT.whatsapp}?text=${waMsg}`;
+    document.getElementById("modalLink").href = `https://wa.me/${contact.whatsapp}?text=${waMsg}`;
 
     document.getElementById("productModal").classList.add("active");
     document.body.classList.add("no-scroll");
@@ -312,8 +265,9 @@ function openProduct(idx) {
 // SEARCH
 // ============================================================
 function defaultSearch() {
+    const cats = window.CATEGORIES || [];
     let catsHtml = "";
-    CATEGORIES.forEach(c => {
+    cats.forEach(c => {
         catsHtml += `
             <a href="#produk" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border border-white/5">
                 <div class="w-6 h-6 rounded bg-silver/10 flex items-center justify-center text-xs font-bold text-silver-light">${c.icon}</div>
@@ -392,10 +346,11 @@ function setupEvents() {
                 return;
             }
 
+            const contact = window.CONTACT || { whatsapp: "628137271517" };
             let resultsHtml = "";
             filtered.forEach(p => {
                 resultsHtml += `
-                    <a href="https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent("Halo Veldion, saya mau tanya stok " + p.name)}" target="_blank" class="search-item flex justify-between p-2 rounded-lg border-b border-white/5">
+                    <a href="https://wa.me/${contact.whatsapp}?text=${encodeURIComponent("Halo Veldion, saya mau tanya stok " + p.name)}" target="_blank" class="search-item flex justify-between p-2 rounded-lg border-b border-white/5">
                         <div>
                             <div class="text-white text-sm">${p.name}</div>
                             <div class="text-[10px] text-steel">${p.category || ''} ${p.supplier ? '• ' + p.supplier : ''}</div>
@@ -580,7 +535,7 @@ async function init() {
     if (loading) loading.style.display = "flex";
 
     // Fetch data dari Google Sheets
-    const success = await fetchAllData();
+    await fetchAllData();
 
     if (loading) loading.style.display = "none";
 
