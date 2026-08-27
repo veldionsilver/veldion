@@ -3,88 +3,34 @@
 // ============================================================
 
 // ====== KONFIGURASI SHEET ======
-const SHEET_ID = '1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E';
-const SHEET_URL = `https://docs.google.comspreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
+// Gunakan ID dari tautan publikasi (bukan file ID)
+const SHEET_ID = '2PACX-1vSktAMpTekHKV0LjM2DSnGRmfyFbDLvUcqA3-6TX_Lnh-yIxjtTtig8YJ0Lhq3qS4ov18WXpYMZ8g3O';
+// Format URL sama seperti katalog
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv&sheet=main_data`;
 
 // ====== DOMContentLoaded ======
 document.addEventListener("DOMContentLoaded", function() {
     if (typeof lucide !== "undefined") lucide.createIcons();
-    fetchSheetData();
+    fetchMainData();
 });
 
-// ====== FETCH DATA DARI GOOGLE SHEETS ======
-function fetchSheetData() {
-    const tabs = ['Market', 'Products', 'Buyback'];
-    const promises = tabs.map(tab => 
-        fetch(`${SHEET_URL}&sheet=${tab}`)
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                return res.text();
-            })
-            .then(csv => parseCSV(csv))
-            .catch(err => {
-                console.warn(`Gagal fetch tab ${tab}:`, err);
-                return null;
-            })
-    );
-
-    Promise.all(promises)
-        .then(results => {
-            const [marketData, productsData, buybackData] = results;
-            
-            // ===== CEK APAKAH SEMUA DATA BERHASIL =====
-            const marketOk = marketData && marketData.length > 0;
-            const productsOk = productsData && productsData.length > 0;
-            const buybackOk = buybackData && buybackData.length > 0;
-
-            if (!marketOk || !productsOk || !buybackOk) {
-                showErrorMessage('Gagal memuat data dari server. Silakan refresh halaman.');
-                return;
+// ====== FETCH DATA DARI SHEET ======
+function fetchMainData() {
+    fetch(SHEET_URL)
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.text();
+        })
+        .then(csv => {
+            const data = parseCSV(csv);
+            if (!data || data.length === 0) {
+                throw new Error('Data kosong dari Google Sheets');
             }
-
-            // ===== PROSES MARKET =====
-            const row = marketData[0];
-            // Gunakan data dari sheet, fallback ke nilai default jika undefined
-            MARKET.xagUsd = row.xagUsd || "$68.07";
-            MARKET.xagIdr = row.xagIdr || "~Rp54.231";
-            MARKET.date = row.date || "27 Agustus 2026";
-            MARKET_OPEN = (row.marketOpen === 'TRUE' || row.marketOpen === 'true' || row.marketOpen === true);
-
-            // ===== PROSES PRODUCTS =====
-            const newProducts = productsData.map(row => {
-                const imgData = PRODUCT_IMAGES[row.name] || {};
-                return {
-                    name: row.name || '',
-                    category: row.category || 'Umum',
-                    supplier: row.supplier || '-',
-                    weight: row.weight || '-',
-                    purity: row.purity || '-',
-                    price: row.price || 'Rp -',
-                    image: imgData.image || null,
-                    alt: imgData.alt || row.name || '',
-                    initial: (row.name || 'P').charAt(0).toUpperCase()
-                };
-            });
-            PRODUCTS.length = 0;
-            PRODUCTS.push(...newProducts);
-
-            // ===== PROSES BUYBACK =====
-            const newBuyback = buybackData.map(row => ({
-                name: row.name || '-',
-                price: row.price || 'Rp -'
-            }));
-            BUYBACK_RATES.length = 0;
-            BUYBACK_RATES.push(...newBuyback);
-
-            // ===== TAMPILKAN INDIKATOR LIVE DATA =====
-            showDataSource('sheet');
-
-            // ===== RENDER =====
-            init();
+            processData(data);
         })
         .catch(err => {
-            console.error('Gagal fetch data sheet:', err);
-            showErrorMessage('Gagal terhubung ke server. Periksa koneksi internet Anda.');
+            console.error('Gagal fetch data:', err);
+            showErrorMessage('Gagal memuat data dari server. Silakan refresh halaman.');
         });
 }
 
@@ -146,6 +92,74 @@ function parseCSV(csv) {
     return result;
 }
 
+// ====== PROSES DATA ======
+function processData(data) {
+    let marketFound = false;
+    let productsFound = false;
+    let buybackFound = false;
+
+    // Ambil data Market dari baris pertama
+    const firstRow = data[0];
+    if (firstRow.marketOpen && firstRow.marketOpen !== '') {
+        MARKET_OPEN = (firstRow.marketOpen === 'TRUE' || firstRow.marketOpen === 'true' || firstRow.marketOpen === true);
+        MARKET.xagUsd = firstRow.xagUsd || MARKET.xagUsd;
+        MARKET.xagIdr = firstRow.xagIdr || MARKET.xagIdr;
+        MARKET.date = firstRow.date || MARKET.date;
+        marketFound = true;
+    }
+
+    // Ambil data Products (semua baris yang punya name dan category)
+    const productRows = data.filter(row => row.name && row.name !== '' && row.category && row.category !== '');
+    if (productRows.length > 0) {
+        const newProducts = productRows.map(row => {
+            const imgData = PRODUCT_IMAGES[row.name] || {};
+            return {
+                name: row.name || '',
+                category: row.category || 'Umum',
+                supplier: row.supplier || '-',
+                weight: row.weight || '-',
+                purity: row.purity || '-',
+                price: row.price || 'Rp -',
+                image: imgData.image || null,
+                alt: imgData.alt || row.name || '',
+                initial: (row.name || 'P').charAt(0).toUpperCase()
+            };
+        });
+        PRODUCTS.length = 0;
+        PRODUCTS.push(...newProducts);
+        productsFound = true;
+    }
+
+    // Ambil data Buyback (baris yang punya name dan price, tapi bukan produk)
+    // Dari gambar, buyback ada di kolom K-L (name dan price setelah produk)
+    // Kita filter: baris yang punya name dan price, tapi tidak punya category
+    const buybackRows = data.filter(row => 
+        row.name && row.name !== '' && 
+        row.price && row.price !== '' &&
+        !row.category // Bedakan dengan produk
+    );
+    if (buybackRows.length > 0) {
+        const newBuyback = buybackRows.map(row => ({
+            name: row.name || '-',
+            price: row.price || 'Rp -'
+        }));
+        BUYBACK_RATES.length = 0;
+        BUYBACK_RATES.push(...newBuyback);
+        buybackFound = true;
+    }
+
+    // Cek apakah semua data ditemukan
+    if (!marketFound || !productsFound || !buybackFound) {
+        console.warn('Beberapa data tidak ditemukan:', { marketFound, productsFound, buybackFound });
+    }
+
+    // Tampilkan indikator Live Data
+    showDataSource('sheet');
+
+    // Panggil init
+    init();
+}
+
 // ====== TAMPILKAN PESAN ERROR ======
 function showErrorMessage(message) {
     var grid = document.getElementById("productGrid");
@@ -158,9 +172,6 @@ function showErrorMessage(message) {
             </div>
         `;
     }
-
-    var loading = document.getElementById('loadingIndicator');
-    if (loading) loading.style.display = 'none';
 }
 
 // ====== INDIKATOR DATA SOURCE ======
