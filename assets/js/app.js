@@ -524,9 +524,18 @@ function setupPWA() {
 }
 
 // ============================================================
-// INIT
+// INIT — HANYA SEKALI
 // ============================================================
+let initialized = false;
+
 async function init() {
+    // Cegah double init
+    if (initialized) {
+        console.log("⏭️ Init sudah dijalankan, skip.");
+        return;
+    }
+    initialized = true;
+
     console.log("🚀 Veldion Silver initializing...");
 
     // Tampilkan loading
@@ -555,7 +564,7 @@ async function init() {
     console.log("✅ Veldion Silver ready!");
 }
 
-// Auto-init jika DOM sudah siap
+// Auto-init jika DOM sudah siap — PASTIKAN HANYA SATU YANG AKTIF
 if (document.readyState === "complete" || document.readyState === "interactive") {
     init();
 } else {
