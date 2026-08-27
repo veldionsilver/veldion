@@ -579,19 +579,8 @@ async function init() {
 
     console.log("🚀 Veldion Silver initializing...");
 
-    // Instant loader sudah tampil dari HTML (inline)
-
     // Fetch data dari Google Sheets
     const success = await fetchAllData();
-
-    // ===== SEMBUNYIKAN INSTANT LOADER =====
-    const loader = document.getElementById('instantLoader');
-    if (loader) {
-        loader.classList.add('hide');
-        setTimeout(function() {
-            loader.style.display = 'none';
-        }, 700);
-    }
 
     // Jika gagal, stop di sini (error message sudah ditampilkan)
     if (!success) {
