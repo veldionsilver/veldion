@@ -4,7 +4,7 @@
 
 // ====== KONFIGURASI SHEET ======
 const SHEET_ID = '1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E';
-const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
+const SHEET_URL = `https://docs.google.comspreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
 // ====== DOMContentLoaded ======
 document.addEventListener("DOMContentLoaded", function() {
@@ -32,72 +32,59 @@ function fetchSheetData() {
         .then(results => {
             const [marketData, productsData, buybackData] = results;
             
-            let hasError = false;
+            // ===== CEK APAKAH SEMUA DATA BERHASIL =====
+            const marketOk = marketData && marketData.length > 0;
+            const productsOk = productsData && productsData.length > 0;
+            const buybackOk = buybackData && buybackData.length > 0;
+
+            if (!marketOk || !productsOk || !buybackOk) {
+                showErrorMessage('Gagal memuat data dari server. Silakan refresh halaman.');
+                return;
+            }
 
             // ===== PROSES MARKET =====
-            if (marketData && marketData.length > 0) {
-                const row = marketData[0];
-                if (row.xagUsd) MARKET.xagUsd = row.xagUsd;
-                if (row.xagIdr) MARKET.xagIdr = row.xagIdr;
-                if (row.date) MARKET.date = row.date;
-                if (row.marketOpen !== undefined) {
-                    const isOpen = row.marketOpen === 'TRUE' || row.marketOpen === 'true' || row.marketOpen === true;
-                    MARKET_OPEN = isOpen;
-                }
-            } else {
-                hasError = true;
-            }
+            const row = marketData[0];
+            // Gunakan data dari sheet, fallback ke nilai default jika undefined
+            MARKET.xagUsd = row.xagUsd || "$68.07";
+            MARKET.xagIdr = row.xagIdr || "~Rp54.231";
+            MARKET.date = row.date || "27 Agustus 2026";
+            MARKET_OPEN = (row.marketOpen === 'TRUE' || row.marketOpen === 'true' || row.marketOpen === true);
 
             // ===== PROSES PRODUCTS =====
-            if (productsData && productsData.length > 0) {
-                const newProducts = productsData.map(row => {
-                    const imgData = PRODUCT_IMAGES[row.name] || {};
-                    return {
-                        name: row.name || '',
-                        category: row.category || 'Umum',
-                        supplier: row.supplier || '-',
-                        weight: row.weight || '-',
-                        purity: row.purity || '-',
-                        price: row.price || 'Rp -',
-                        image: imgData.image || null,
-                        alt: imgData.alt || row.name || '',
-                        initial: (row.name || 'P').charAt(0).toUpperCase()
-                    };
-                });
-                PRODUCTS.length = 0;
-                PRODUCTS.push(...newProducts);
-            } else {
-                hasError = true;
-                // Gunakan fallback jika ada
-                if (typeof PRODUCTS_FALLBACK !== 'undefined' && PRODUCTS_FALLBACK.length > 0) {
-                    PRODUCTS.length = 0;
-                    PRODUCTS.push(...PRODUCTS_FALLBACK);
-                }
-            }
+            const newProducts = productsData.map(row => {
+                const imgData = PRODUCT_IMAGES[row.name] || {};
+                return {
+                    name: row.name || '',
+                    category: row.category || 'Umum',
+                    supplier: row.supplier || '-',
+                    weight: row.weight || '-',
+                    purity: row.purity || '-',
+                    price: row.price || 'Rp -',
+                    image: imgData.image || null,
+                    alt: imgData.alt || row.name || '',
+                    initial: (row.name || 'P').charAt(0).toUpperCase()
+                };
+            });
+            PRODUCTS.length = 0;
+            PRODUCTS.push(...newProducts);
 
             // ===== PROSES BUYBACK =====
-            if (buybackData && buybackData.length > 0) {
-                const newBuyback = buybackData.map(row => ({
-                    name: row.name || '-',
-                    price: row.price || 'Rp -'
-                }));
-                BUYBACK_RATES.length = 0;
-                BUYBACK_RATES.push(...newBuyback);
-            } else {
-                hasError = true;
-                if (typeof BUYBACK_FALLBACK !== 'undefined' && BUYBACK_FALLBACK.length > 0) {
-                    BUYBACK_RATES.length = 0;
-                    BUYBACK_RATES.push(...BUYBACK_FALLBACK);
-                }
-            }
+            const newBuyback = buybackData.map(row => ({
+                name: row.name || '-',
+                price: row.price || 'Rp -'
+            }));
+            BUYBACK_RATES.length = 0;
+            BUYBACK_RATES.push(...newBuyback);
+
+            // ===== TAMPILKAN INDIKATOR LIVE DATA =====
+            showDataSource('sheet');
 
             // ===== RENDER =====
             init();
         })
         .catch(err => {
             console.error('Gagal fetch data sheet:', err);
-            // Fallback ke data.js
-            useFallbackData();
+            showErrorMessage('Gagal terhubung ke server. Periksa koneksi internet Anda.');
         });
 }
 
@@ -159,19 +146,65 @@ function parseCSV(csv) {
     return result;
 }
 
-// ====== FALLBACK ======
-function useFallbackData() {
-    console.log('Menggunakan fallback data dari data.js');
-    // Jika PRODUCTS kosong, coba ambil dari PRODUCTS_FALLBACK
-    if (typeof PRODUCTS_FALLBACK !== 'undefined' && PRODUCTS_FALLBACK.length > 0 && PRODUCTS.length === 0) {
-        PRODUCTS.length = 0;
-        PRODUCTS.push(...PRODUCTS_FALLBACK);
+// ====== TAMPILKAN PESAN ERROR ======
+function showErrorMessage(message) {
+    var grid = document.getElementById("productGrid");
+    if (grid) {
+        grid.innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <div class="text-red-400 text-4xl mb-4">⚠️</div>
+                <p class="text-white font-medium mb-2">${message}</p>
+                <p class="text-steel text-sm">Data tidak dapat dimuat. Silakan refresh halaman atau coba lagi nanti.</p>
+            </div>
+        `;
     }
-    if (typeof BUYBACK_FALLBACK !== 'undefined' && BUYBACK_FALLBACK.length > 0 && BUYBACK_RATES.length === 0) {
-        BUYBACK_RATES.length = 0;
-        BUYBACK_RATES.push(...BUYBACK_FALLBACK);
+
+    var loading = document.getElementById('loadingIndicator');
+    if (loading) loading.style.display = 'none';
+}
+
+// ====== INDIKATOR DATA SOURCE ======
+function showDataSource(source) {
+    var oldIndicator = document.getElementById('dataSourceIndicator');
+    if (oldIndicator) oldIndicator.remove();
+
+    var badge = document.createElement('div');
+    badge.id = 'dataSourceIndicator';
+    badge.style.cssText = [
+        'position:fixed',
+        'bottom:80px',
+        'right:16px',
+        'z-index:999',
+        'padding:4px 12px',
+        'border-radius:20px',
+        'font-size:9px',
+        'font-weight:600',
+        'letter-spacing:0.05em',
+        'text-transform:uppercase',
+        'backdrop-filter:blur(12px)',
+        'border:1px solid rgba(255,255,255,0.06)',
+        'box-shadow:0 4px 12px rgba(0,0,0,0.3)',
+        'transition:all 0.3s ease'
+    ].join(';');
+
+    if (source === 'sheet') {
+        badge.textContent = '● Live Data';
+        badge.style.background = 'rgba(74,222,128,0.12)';
+        badge.style.color = '#4ADE80';
+        badge.style.borderColor = 'rgba(74,222,128,0.2)';
     }
-    init();
+
+    document.body.appendChild(badge);
+
+    // Auto hilang setelah 6 detik
+    setTimeout(function() {
+        if (badge) {
+            badge.style.opacity = '0';
+            setTimeout(function() {
+                if (badge) badge.remove();
+            }, 500);
+        }
+    }, 6000);
 }
 
 // ====== INIT ======
