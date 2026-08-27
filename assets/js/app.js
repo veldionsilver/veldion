@@ -5,6 +5,12 @@
 // ====== KONFIGURASI SHEET ======
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E/gviz/tq?tqx=out:csv&sheet=main_data';
 
+// ====== DOMContentLoaded ======
+document.addEventListener("DOMContentLoaded", function() {
+    if (typeof lucide !== "undefined") lucide.createIcons();
+    fetchMainData();
+});
+
 // ====== FETCH DATA DARI SHEET ======
 function fetchMainData() {
     fetch(SHEET_URL)
@@ -21,8 +27,7 @@ function fetchMainData() {
         })
         .catch(err => {
             console.error('Gagal fetch data:', err);
-            // Jika gagal, tetap jalankan init dengan data dari data.js
-            init();
+            showErrorMessage('Gagal memuat data dari server. Silakan refresh halaman.');
         });
 }
 
@@ -84,56 +89,76 @@ function parseCSV(csv) {
 
 // ====== PROSES DATA ======
 function processData(data) {
-    // MARKET (Kolom A-D) — dari baris pertama
+    // ===== MARKET (Kolom A-D) =====
     const firstRow = data[0];
-    if (firstRow.marketOpen && firstRow.marketOpen !== '') {
-        MARKET_OPEN = (firstRow.marketOpen === 'TRUE' || firstRow.marketOpen === 'true' || firstRow.marketOpen === true);
-        MARKET.xagUsd = firstRow.xagUsd || MARKET.xagUsd;
-        MARKET.xagIdr = firstRow.xagIdr || MARKET.xagIdr;
-        MARKET.date = firstRow.date || MARKET.date;
+    if (!firstRow.marketOpen || firstRow.marketOpen === '') {
+        showErrorMessage('Data Market tidak ditemukan di spreadsheet.');
+        return;
     }
+    
+    MARKET_OPEN = (firstRow.marketOpen === 'TRUE' || firstRow.marketOpen === 'true' || firstRow.marketOpen === true);
+    MARKET.xagUsd = firstRow.xagUsd || MARKET.xagUsd;
+    MARKET.xagIdr = firstRow.xagIdr || MARKET.xagIdr;
+    MARKET.date = firstRow.date || MARKET.date;
 
-    // PRODUCTS (Kolom E-J) — baris 2-9
+    // ===== PRODUCTS (Kolom E-J) =====
     const productRows = data.slice(1, 9);
-    if (productRows.length > 0) {
-        const newProducts = productRows.map(row => {
-            const imgData = PRODUCT_IMAGES[row.name] || {};
-            return {
-                name: row.name || '',
-                category: row.category || 'Umum',
-                supplier: row.supplier || '-',
-                weight: row.weight || '-',
-                purity: row.purity || '-',
-                price: row.price || 'Rp -',
-                image: imgData.image || null,
-                alt: imgData.alt || row.name || '',
-                initial: (row.name || 'P').charAt(0).toUpperCase()
-            };
-        });
-        PRODUCTS.length = 0;
-        PRODUCTS.push(...newProducts);
+    if (!productRows || productRows.length === 0) {
+        showErrorMessage('Data Products tidak ditemukan di spreadsheet.');
+        return;
     }
 
-    // BUYBACK (Kolom K-L) — baris 10-13
+    const newProducts = productRows.map(row => {
+        const imgData = PRODUCT_IMAGES[row.name] || {};
+        return {
+            name: row.name || '',
+            category: row.category || 'Umum',
+            supplier: row.supplier || '-',
+            weight: row.weight || '-',
+            purity: row.purity || '-',
+            price: row.price || 'Rp -',
+            image: imgData.image || null,
+            alt: imgData.alt || row.name || '',
+            initial: (row.name || 'P').charAt(0).toUpperCase()
+        };
+    });
+    PRODUCTS.length = 0;
+    PRODUCTS.push(...newProducts);
+
+    // ===== BUYBACK (Kolom K-L) =====
     const buybackRows = data.slice(9, 13);
-    if (buybackRows.length > 0) {
-        const newBuyback = buybackRows.map(row => ({
-            name: row.name || '-',
-            price: row.price || 'Rp -'
-        }));
-        BUYBACK_RATES.length = 0;
-        BUYBACK_RATES.push(...newBuyback);
+    if (!buybackRows || buybackRows.length === 0) {
+        showErrorMessage('Data Buyback tidak ditemukan di spreadsheet.');
+        return;
     }
 
-    // Jalankan init
+    const newBuyback = buybackRows.map(row => ({
+        name: row.name || '-',
+        price: row.price || 'Rp -'
+    }));
+    BUYBACK_RATES.length = 0;
+    BUYBACK_RATES.push(...newBuyback);
+
+    // ===== SEMUA DATA BERHASIL =====
     init();
 }
 
-// ====== DOMContentLoaded ======
-document.addEventListener("DOMContentLoaded", function() {
-    if (typeof lucide !== "undefined") lucide.createIcons();
-    fetchMainData(); // <-- INI PERUBAHAN: panggil fetch dulu
-});
+// ====== TAMPILKAN PESAN ERROR ======
+function showErrorMessage(message) {
+    var grid = document.getElementById("productGrid");
+    if (grid) {
+        grid.innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <div class="text-red-400 text-4xl mb-4">⚠️</div>
+                <p class="text-white font-medium mb-2">${message}</p>
+                <p class="text-steel text-sm">Pastikan spreadsheet sudah dipublikasikan dan tab "main_data" berisi data.</p>
+            </div>
+        `;
+    }
+    // Sembunyikan elemen lain yang tidak terpakai
+    var buybackEl = document.getElementById("buybackRates");
+    if (buybackEl) buybackEl.innerHTML = '';
+}
 
 // ============================================================
 // ====== FUNGSI ASLI ANDA (TIDAK BERUBAH) ======
@@ -189,6 +214,11 @@ function renderProducts() {
 
     grid.innerHTML = "";
 
+    if (!PRODUCTS || PRODUCTS.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center text-steel py-8">Belum ada produk tersedia.</div>';
+        return;
+    }
+
     for (var i = 0; i < PRODUCTS.length; i++) {
         (function(idx) {
             var p = PRODUCTS[idx];
@@ -224,6 +254,11 @@ function renderBuyback() {
     var el = document.getElementById("buybackRates");
     if (!el) return;
 
+    if (!BUYBACK_RATES || BUYBACK_RATES.length === 0) {
+        el.innerHTML = '<div class="text-center text-steel py-4">Data buyback belum tersedia.</div>';
+        return;
+    }
+
     var html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
 
     for (var i = 0; i < BUYBACK_RATES.length; i++) {
@@ -244,6 +279,8 @@ function renderBuyback() {
 // ====== PRODUCT MODAL ======
 function openProduct(idx) {
     var p = PRODUCTS[idx];
+    if (!p) return;
+    
     var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl">'
         : '<span class="text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
