@@ -3,7 +3,7 @@
 // ⭐ FILE KONFIGURASI STATIS + MAPPING GAMBAR
 // ============================================================
 // Data dinamis (Market, Products, Buyback) diambil dari Google Sheets
-// File ini hanya untuk data yang jarang berubah.
+// File ini hanya untuk data yang jarang berubah & mapping gambar.
 // ============================================================
 
 // 1. KONTAK (jarang berubah)
@@ -66,8 +66,105 @@ const PRODUCT_IMAGES = {
 };
 
 // 5. FALLBACK DATA (jika Google Sheets gagal dimuat)
-// Data ini akan ditimpa oleh data dari sheet jika berhasil di-fetch
+const PRODUCTS_FALLBACK = [
+    {
+        name: "Press 10gr",
+        category: "Press",
+        supplier: "Key Silver",
+        weight: "10gr",
+        purity: "999.5",
+        price: "Rp774.000",
+        initial: "P",
+        image: "assets/images/products/key-silver-press-10gr.webp",
+        alt: "Veldion Silver — Perak fisik Press 10gr dari Key Silver, kemurnian 999.5"
+    },
+    {
+        name: "Argentum 10gr",
+        category: "Argentum",
+        supplier: "Key Silver",
+        weight: "10gr",
+        purity: "999",
+        price: "Rp768.000",
+        initial: "A",
+        image: "assets/images/products/key-silver-argentum-10gr.webp",
+        alt: "Veldion Silver — Perak fisik Argentum 10gr dari Key Silver, kemurnian 999"
+    },
+    {
+        name: "Bullion Klasik 50gr",
+        category: "Bullion",
+        supplier: "Key Silver",
+        weight: "50gr",
+        purity: "999.5",
+        price: "Rp2.655.000",
+        initial: "B",
+        image: "assets/images/products/key-silver-bullion-klasik-50gr.webp",
+        alt: "Veldion Silver — Perak fisik Bullion Klasik 50gr dari Key Silver, kemurnian 999.5"
+    },
+    {
+        name: "SAC Silver 1gr",
+        category: "SAC",
+        supplier: "Key Silver",
+        weight: "1gr",
+        purity: "999",
+        price: "Rp75.000",
+        initial: "S",
+        image: "assets/images/products/key-silver-sac-silver-1gr.webp",
+        alt: "Veldion Silver — Perak fisik SAC Silver 1gr dari Key Silver, kemurnian 999"
+    },
+    {
+        name: "Reguler 3.3gr",
+        category: "Press",
+        supplier: "Silverium",
+        weight: "3.3gr",
+        purity: "999.9",
+        price: "Rp230.000",
+        initial: "P",
+        image: "assets/images/products/silverium-reguler-3.3gr.webp",
+        alt: "Veldion Silver — Perak fisik Reguler 3.3gr dari Silverium, kemurnian 999.9"
+    },
+    {
+        name: "Reguler 9.9gr",
+        category: "Press",
+        supplier: "Silverium",
+        weight: "9.9gr",
+        purity: "999.9",
+        price: "Rp651.000",
+        initial: "P",
+        image: "assets/images/products/silverium-reguler-9.9gr.webp",
+        alt: "Veldion Silver — Perak fisik Reguler 9.9gr dari Silverium, kemurnian 999.9"
+    },
+    {
+        name: "Coin ABA 1 Dirham",
+        category: "Coin",
+        supplier: "Silverium",
+        weight: "3.11gr",
+        purity: "999.9",
+        price: "Rp229.000",
+        initial: "C",
+        image: "assets/images/products/silverium-coin-aba-1-dirham.webp",
+        alt: "Veldion Silver — Perak fisik Coin ABA 1 Dirham dari Silverium, kemurnian 999.9"
+    },
+    {
+        name: "Medalion 10gr",
+        category: "Medalion",
+        supplier: "JSG",
+        weight: "10gr",
+        purity: "999.5",
+        price: "Rp723.000",
+        initial: "M",
+        image: "assets/images/products/jsg-medalion-10gr.webp",
+        alt: "Veldion Silver — Perak fisik Medalion 10gr dari JSG, kemurnian 999.5"
+    }
+];
 
+const BUYBACK_FALLBACK = [
+    { name: "Antam", price: "Rp 28.905/gr" },
+    { name: "Silverium", price: "Rp 39.340/gr" },
+    { name: "Key Silver", price: "Rp 39.000/gr" },
+    { name: "JSG / TDS", price: "Rp 38.800/gr" }
+];
+
+// 6. DATA UTAMA (akan ditimpa oleh sheet jika berhasil)
 const MARKET_OPEN = true;
 
 const MARKET = {
@@ -76,10 +173,6 @@ const MARKET = {
     date: "27 Agustus 2026"
 };
 
-const PRODUCTS = [
-    // Data dari sheet akan menggantikan ini
-];
+const PRODUCTS = [...PRODUCTS_FALLBACK]; // Mulai dengan fallback
 
-const BUYBACK_RATES = [
-    // Data dari sheet akan menggantikan ini
-];
+const BUYBACK_RATES = [...BUYBACK_FALLBACK]; // Mulai dengan fallback
