@@ -30,4 +30,4 @@ window.CATEGORIES = CATEGORIES;
 window.CONTACT = CONTACT;
 window.STATS = STATS;
 
-console.log("✅ data.js loaded:", { CATEGORIES: CATEGORIES.length, CONTACT, STATS });
+console.log("✅ data.js loaded");
