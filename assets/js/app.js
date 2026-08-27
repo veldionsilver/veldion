@@ -37,14 +37,29 @@ let buybackRates = [];
 // FETCH DATA DARI GOOGLE SHEETS
 // ============================================================
 async function fetchAllData() {
+    // Sembunyikan error jika sebelumnya muncul
+    hideErrorMessage();
+    
     try {
         console.log("🔄 Fetching data from Google Sheets...");
 
         const [statusCsv, marketCsv, productsCsv, buybackCsv] = await Promise.all([
-            fetch(getSheetUrl("MarketStatus")).then(r => r.text()),
-            fetch(getSheetUrl("MarketPrice")).then(r => r.text()),
-            fetch(getSheetUrl("Products")).then(r => r.text()),
-            fetch(getSheetUrl("Buyback")).then(r => r.text())
+            fetch(getSheetUrl("MarketStatus")).then(r => {
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                return r.text();
+            }),
+            fetch(getSheetUrl("MarketPrice")).then(r => {
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                return r.text();
+            }),
+            fetch(getSheetUrl("Products")).then(r => {
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                return r.text();
+            }),
+            fetch(getSheetUrl("Buyback")).then(r => {
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                return r.text();
+            })
         ]);
 
         // Parse data
@@ -63,8 +78,25 @@ async function fetchAllData() {
         return true;
     } catch (err) {
         console.error("❌ Failed to fetch data:", err);
+        showErrorMessage();
         return false;
     }
+}
+
+// ============================================================
+// ERROR MESSAGE FUNCTIONS
+// ============================================================
+function showErrorMessage() {
+    const el = document.getElementById('globalErrorMessage');
+    if (el) {
+        el.classList.remove('hidden');
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+}
+
+function hideErrorMessage() {
+    const el = document.getElementById('globalErrorMessage');
+    if (el) el.classList.add('hidden');
 }
 
 // ============================================================
@@ -547,16 +579,27 @@ async function init() {
 
     console.log("🚀 Veldion Silver initializing...");
 
-    // Tampilkan loading
-    const loading = document.getElementById("loadingIndicator");
-    if (loading) loading.style.display = "flex";
+    // Instant loader sudah tampil dari HTML (inline)
 
     // Fetch data dari Google Sheets
-    await fetchAllData();
+    const success = await fetchAllData();
 
-    if (loading) loading.style.display = "none";
+    // ===== SEMBUNYIKAN INSTANT LOADER =====
+    const loader = document.getElementById('instantLoader');
+    if (loader) {
+        loader.classList.add('hide');
+        setTimeout(function() {
+            loader.style.display = 'none';
+        }, 700);
+    }
 
-    // Render semua
+    // Jika gagal, stop di sini (error message sudah ditampilkan)
+    if (!success) {
+        console.warn("⚠️ Data gagal dimuat, tampilkan error message.");
+        return;
+    }
+
+    // Render semua (hanya jika sukses)
     renderMarketStatus();
     renderMarketPrices();
     renderProducts();
