@@ -39,22 +39,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
-                    colors: {
-                        void: { DEFAULT: '#080A0F', 50: '#0C0F14', 100: '#12151C', 200: '#181C26', 300: '#1E2430' },
-                        steel: { DEFAULT: '#94A3B8', light: '#CBD5E1', dark: '#64748B' },
-                        silver: { DEFAULT: '#C0C5CE', light: '#E2E8F0', dark: '#94A3B8', glow: 'rgba(192, 197, 206, 0.15)' }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind CSS Production -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -104,6 +90,57 @@
     </script>
 
     <meta name="google-site-verification" content="hueLadxQV3ytbYXVwY32gKQ-DfvkyDTe_XkMoimWN5c">
+
+    <style>
+        /* ============================================================
+           CUSTOM TAILWIND EXTENSIONS (karena pakai CDN production)
+           ============================================================ */
+
+        /* Font */
+        .font-display {
+            font-family: 'Sora', sans-serif;
+        }
+        .font-body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Colors - void */
+        .bg-void { background-color: #080A0F; }
+        .bg-void-50 { background-color: #0C0F14; }
+        .bg-void-100 { background-color: #12151C; }
+        .bg-void-200 { background-color: #181C26; }
+        .bg-void-300 { background-color: #1E2430; }
+        .text-void { color: #080A0F; }
+        .border-void { border-color: #080A0F; }
+
+        /* Colors - steel */
+        .text-steel { color: #94A3B8; }
+        .text-steel-light { color: #CBD5E1; }
+        .text-steel-dark { color: #64748B; }
+        .bg-steel { background-color: #94A3B8; }
+        .bg-steel-dark { background-color: #64748B; }
+        .border-steel { border-color: #94A3B8; }
+        .border-steel-dark { border-color: #64748B; }
+
+        /* Colors - silver */
+        .text-silver { color: #C0C5CE; }
+        .text-silver-light { color: #E2E8F0; }
+        .text-silver-dark { color: #94A3B8; }
+        .bg-silver { background-color: #C0C5CE; }
+        .bg-silver-light { background-color: #E2E8F0; }
+        .bg-silver-dark { background-color: #94A3B8; }
+        .border-silver { border-color: #C0C5CE; }
+        .from-silver-light { --tw-gradient-from: #E2E8F0; }
+        .to-silver { --tw-gradient-to: #C0C5CE; }
+
+        /* Silver gradient */
+        .text-silver-gradient {
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
 </head>
 
 <body class="bg-void text-gray-200 font-body">
@@ -224,6 +261,7 @@
         </nav>
     </div>
 
+    <!-- ===================== MAIN CONTENT ===================== -->
     <main>
         <!-- Hero -->
         <section id="hero" class="bg-gradient-to-b from-void-50 to-void">
