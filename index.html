@@ -62,8 +62,272 @@
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Loader JS — Premium Loading Screen -->
-    <script src="assets/js/loader.js" defer></script>
+    <!-- ============================================================
+         PREMIUM LOADING SCREEN — INLINE (langsung muncul)
+         ============================================================ -->
+
+    <!-- LOADER STYLES -->
+    <style>
+        /* === SEMUA STYLE DARI loader.js === */
+        @keyframes shimmerFade {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+        @keyframes loaderEntry {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes ringSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.04); filter: brightness(1.1); }
+        }
+        @keyframes textFade {
+            0% { opacity: 0; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        #veldion-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #080A0F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+
+        #veldion-loader .loader-shimmer {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(192, 197, 206, 0.03) 0%, transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(192, 197, 206, 0.02) 0%, transparent 50%);
+            opacity: 0;
+            animation: shimmerFade 2s ease-in-out infinite alternate;
+        }
+
+        #veldion-loader .loader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            animation: loaderEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        #veldion-loader .loader-ring-wrap {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #veldion-loader .loader-ring-outer {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+        }
+
+        #veldion-loader .loader-ring-inner {
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            padding: 2px;
+            background: conic-gradient(from 0deg, transparent 0%, #C0C5CE 20%, #E2E8F0 40%, #94A3B8 60%, transparent 80%, transparent 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: ringSpin 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+
+        #veldion-loader .loader-ring-border {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid rgba(192, 197, 206, 0.06);
+        }
+
+        #veldion-loader .loader-logo {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+            border-radius: 50%;
+            background: #080A0F;
+            padding: 8px;
+            animation: logoPulse 2.5s ease-in-out infinite;
+        }
+
+        #veldion-loader .loader-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+            opacity: 0;
+            animation: textFade 0.6s ease 0.4s forwards;
+        }
+
+        #veldion-loader .loader-sub {
+            font-size: 11px;
+            color: #64748B;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 500;
+            opacity: 0;
+            animation: textFade 0.6s ease 0.6s forwards;
+        }
+
+        #veldion-loader .loader-bar-wrap {
+            width: 180px;
+            height: 2px;
+            background: rgba(192, 197, 206, 0.06);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 12px;
+            opacity: 0;
+            animation: textFade 0.6s ease 0.8s forwards;
+        }
+
+        #veldion-loader .loader-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 20px rgba(192, 197, 206, 0.2);
+        }
+
+        #veldion-loader .loader-status {
+            font-size: 12px;
+            color: #64748B;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-top: 8px;
+            opacity: 0;
+            animation: textFade 0.6s ease 1s forwards;
+        }
+
+        @media (max-width: 768px) {
+            #veldion-loader .loader-ring-wrap { width: 80px; height: 80px; }
+            #veldion-loader .loader-logo { width: 50px; height: 50px; padding: 6px; }
+            #veldion-loader .loader-title { font-size: 20px; }
+            #veldion-loader .loader-bar-wrap { width: 140px; }
+            #veldion-loader .loader-status { font-size: 10px; }
+        }
+
+        @media (max-width: 400px) {
+            #veldion-loader .loader-ring-wrap { width: 64px; height: 64px; }
+            #veldion-loader .loader-logo { width: 40px; height: 40px; padding: 5px; }
+            #veldion-loader .loader-title { font-size: 17px; }
+            #veldion-loader .loader-status { font-size: 9px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #veldion-loader * { animation-duration: 0.01ms !important; }
+        }
+    </style>
+
+    <!-- LOADER HTML -->
+    <div id="veldion-loader">
+        <div class="loader-shimmer"></div>
+        <div class="loader-content">
+            <div class="loader-ring-wrap">
+                <div class="loader-ring-outer">
+                    <div class="loader-ring-inner"></div>
+                    <div class="loader-ring-border"></div>
+                </div>
+                <img src="assets/images/logo.webp" alt="Veldion Silver" class="loader-logo">
+            </div>
+            <div class="loader-title">Veldion Silver</div>
+            <div class="loader-sub">Agregator Perak Fisik</div>
+            <div class="loader-bar-wrap">
+                <div class="loader-bar" id="loaderProgressBar"></div>
+            </div>
+            <div class="loader-status">Memuat</div>
+        </div>
+    </div>
+
+    <!-- LOADER SCRIPT (logika progress bar & hide) -->
+    <script>
+        (function() {
+            if (document.getElementById('veldion-loader')) {
+                var isHidden = false;
+                var progressBar = document.getElementById('loaderProgressBar');
+                var startTime = Date.now();
+                var minDuration = 2000;
+
+                function updateProgress() {
+                    if (isHidden) return;
+                    var elapsed = Date.now() - startTime;
+                    var targetProgress = Math.min((elapsed / minDuration) * 100, 95);
+                    if (progressBar) {
+                        progressBar.style.width = targetProgress + '%';
+                    }
+                    if (elapsed < minDuration) {
+                        requestAnimationFrame(updateProgress);
+                    }
+                }
+
+                requestAnimationFrame(updateProgress);
+
+                function hideLoader() {
+                    if (isHidden) return;
+                    isHidden = true;
+
+                    if (progressBar) {
+                        progressBar.style.width = '100%';
+                    }
+
+                    var el = document.getElementById('veldion-loader');
+                    if (!el) return;
+
+                    el.style.opacity = '0';
+                    el.style.transform = 'scale(1.05)';
+                    el.style.pointerEvents = 'none';
+
+                    setTimeout(function() {
+                        el.remove();
+                    }, 800);
+                }
+
+                function checkReady() {
+                    if (document.readyState === 'complete') {
+                        var elapsed = Date.now() - startTime;
+                        var remaining = Math.max(0, minDuration - elapsed);
+                        setTimeout(hideLoader, remaining);
+                    } else {
+                        window.addEventListener('load', function() {
+                            var elapsed = Date.now() - startTime;
+                            var remaining = Math.max(0, minDuration - elapsed);
+                            setTimeout(hideLoader, remaining);
+                        });
+                    }
+                }
+
+                setTimeout(function() {
+                    if (!isHidden) hideLoader();
+                }, 5000);
+
+                checkReady();
+            }
+        })();
+    </script>
 
     <!-- Schema.org -->
     <script type="application/ld+json">
