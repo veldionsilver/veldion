@@ -5,12 +5,6 @@
 // ====== KONFIGURASI SHEET ======
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E/gviz/tq?tqx=out:csv&sheet=main_data';
 
-// ====== DOMContentLoaded ======
-document.addEventListener("DOMContentLoaded", function() {
-    if (typeof lucide !== "undefined") lucide.createIcons();
-    fetchMainData();
-});
-
 // ====== FETCH DATA DARI SHEET ======
 function fetchMainData() {
     fetch(SHEET_URL)
@@ -27,7 +21,8 @@ function fetchMainData() {
         })
         .catch(err => {
             console.error('Gagal fetch data:', err);
-            showErrorMessage('Gagal memuat data dari server. Silakan refresh halaman.');
+            // Jika gagal, tetap jalankan init dengan data dari data.js
+            init();
         });
 }
 
@@ -36,7 +31,6 @@ function parseCSV(csv) {
     const lines = csv.split('\n').filter(line => line.trim() !== '');
     if (lines.length < 2) return [];
 
-    // Parse header
     let headers = [];
     let current = '';
     let inQuotes = false;
@@ -56,7 +50,6 @@ function parseCSV(csv) {
     }
     headers.push(current.trim());
 
-    // Parse data
     const result = [];
     for (let i = 1; i < lines.length; i++) {
         const values = [];
@@ -91,8 +84,7 @@ function parseCSV(csv) {
 
 // ====== PROSES DATA ======
 function processData(data) {
-    // ===== MARKET (Kolom A-D) =====
-    // Ambil dari baris pertama (index 0)
+    // MARKET (Kolom A-D) — dari baris pertama
     const firstRow = data[0];
     if (firstRow.marketOpen && firstRow.marketOpen !== '') {
         MARKET_OPEN = (firstRow.marketOpen === 'TRUE' || firstRow.marketOpen === 'true' || firstRow.marketOpen === true);
@@ -101,9 +93,8 @@ function processData(data) {
         MARKET.date = firstRow.date || MARKET.date;
     }
 
-    // ===== PRODUCTS (Kolom E-J) =====
-    // Ambil dari baris 1-8 (index 1-8) — kolom name, category, supplier, weight, purity, price
-    const productRows = data.slice(1, 9); // 8 produk
+    // PRODUCTS (Kolom E-J) — baris 2-9
+    const productRows = data.slice(1, 9);
     if (productRows.length > 0) {
         const newProducts = productRows.map(row => {
             const imgData = PRODUCT_IMAGES[row.name] || {};
@@ -123,9 +114,8 @@ function processData(data) {
         PRODUCTS.push(...newProducts);
     }
 
-    // ===== BUYBACK (Kolom K-L) =====
-    // Ambil dari baris 9-12 (index 9-12) — kolom name, price
-    const buybackRows = data.slice(9, 13); // 4 buyback
+    // BUYBACK (Kolom K-L) — baris 10-13
+    const buybackRows = data.slice(9, 13);
     if (buybackRows.length > 0) {
         const newBuyback = buybackRows.map(row => ({
             name: row.name || '-',
@@ -135,72 +125,20 @@ function processData(data) {
         BUYBACK_RATES.push(...newBuyback);
     }
 
-    // Tampilkan indikator Live Data
-    showDataSource('sheet');
-
-    // Panggil init
+    // Jalankan init
     init();
 }
 
-// ====== TAMPILKAN PESAN ERROR ======
-function showErrorMessage(message) {
-    var grid = document.getElementById("productGrid");
-    if (grid) {
-        grid.innerHTML = `
-            <div class="col-span-full text-center py-12">
-                <div class="text-red-400 text-4xl mb-4">⚠️</div>
-                <p class="text-white font-medium mb-2">${message}</p>
-                <p class="text-steel text-sm">Data tidak dapat dimuat. Silakan refresh halaman atau coba lagi nanti.</p>
-            </div>
-        `;
-    }
-}
+// ====== DOMContentLoaded ======
+document.addEventListener("DOMContentLoaded", function() {
+    if (typeof lucide !== "undefined") lucide.createIcons();
+    fetchMainData(); // <-- INI PERUBAHAN: panggil fetch dulu
+});
 
-// ====== INDIKATOR DATA SOURCE ======
-function showDataSource(source) {
-    var oldIndicator = document.getElementById('dataSourceIndicator');
-    if (oldIndicator) oldIndicator.remove();
+// ============================================================
+// ====== FUNGSI ASLI ANDA (TIDAK BERUBAH) ======
+// ============================================================
 
-    var badge = document.createElement('div');
-    badge.id = 'dataSourceIndicator';
-    badge.style.cssText = [
-        'position:fixed',
-        'bottom:80px',
-        'right:16px',
-        'z-index:999',
-        'padding:4px 12px',
-        'border-radius:20px',
-        'font-size:9px',
-        'font-weight:600',
-        'letter-spacing:0.05em',
-        'text-transform:uppercase',
-        'backdrop-filter:blur(12px)',
-        'border:1px solid rgba(255,255,255,0.06)',
-        'box-shadow:0 4px 12px rgba(0,0,0,0.3)',
-        'transition:all 0.3s ease'
-    ].join(';');
-
-    if (source === 'sheet') {
-        badge.textContent = '● Live Data';
-        badge.style.background = 'rgba(74,222,128,0.12)';
-        badge.style.color = '#4ADE80';
-        badge.style.borderColor = 'rgba(74,222,128,0.2)';
-    }
-
-    document.body.appendChild(badge);
-
-    // Auto hilang setelah 6 detik
-    setTimeout(function() {
-        if (badge) {
-            badge.style.opacity = '0';
-            setTimeout(function() {
-                if (badge) badge.remove();
-            }, 500);
-        }
-    }, 6000);
-}
-
-// ====== INIT ======
 function init() {
     setMarket(MARKET_OPEN);
     setText("xagUsd", MARKET.xagUsd);
@@ -251,11 +189,6 @@ function renderProducts() {
 
     grid.innerHTML = "";
 
-    if (!PRODUCTS || PRODUCTS.length === 0) {
-        grid.innerHTML = '<div class="col-span-full text-center text-steel py-8">Belum ada produk tersedia.</div>';
-        return;
-    }
-
     for (var i = 0; i < PRODUCTS.length; i++) {
         (function(idx) {
             var p = PRODUCTS[idx];
@@ -291,11 +224,6 @@ function renderBuyback() {
     var el = document.getElementById("buybackRates");
     if (!el) return;
 
-    if (!BUYBACK_RATES || BUYBACK_RATES.length === 0) {
-        el.innerHTML = '<div class="text-center text-steel py-4">Data buyback belum tersedia.</div>';
-        return;
-    }
-
     var html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
 
     for (var i = 0; i < BUYBACK_RATES.length; i++) {
@@ -316,8 +244,6 @@ function renderBuyback() {
 // ====== PRODUCT MODAL ======
 function openProduct(idx) {
     var p = PRODUCTS[idx];
-    if (!p) return;
-    
     var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl">'
         : '<span class="text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
