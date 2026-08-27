@@ -12,48 +12,76 @@ document.addEventListener("DOMContentLoaded", function() {
 // ============================================================
 const SHEET_ID = "1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E";
 
-// URL untuk fetch CSV per tab
 function getSheetUrl(tabName) {
     return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}`;
 }
 
 // ============================================================
-// DATA STATIS (tetap di sini)
+// DATA STATIS — Ambil dari window (data.js)
 // ============================================================
-// CATEGORIES, CONTACT, STATS tetap dari data.js
-// Tapi kita ambil dari window agar kompatibel
 const CATEGORIES = window.CATEGORIES || [];
 const CONTACT = window.CONTACT || { whatsapp: "628137271517", email: "veldionsilver@gmail.com" };
 const STATS = window.STATS || { transactions: "110+", deliveryDays: "1-5" };
 
+console.log("✅ Data statis loaded:", { CATEGORIES: CATEGORIES.length, CONTACT, STATS });
+
+// ============================================================
+// FALLBACK DATA (kalau fetch gagal)
+// ============================================================
+const FALLBACK_DATA = {
+    marketStatus: true,
+    marketData: { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" },
+    products: [
+        { name: "Press 10gr", category: "Press", supplier: "Key Silver", weight: "10gr", purity: "999.5", price: "Rp774.000", initial: "P", image: "key-silver-press-10gr.webp", alt: "Veldion Silver — Perak fisik Press 10gr" },
+        { name: "Argentum 10gr", category: "Argentum", supplier: "Key Silver", weight: "10gr", purity: "999", price: "Rp768.000", initial: "A", image: "key-silver-argentum-10gr.webp", alt: "Veldion Silver — Perak fisik Argentum 10gr" }
+    ],
+    buybackRates: [
+        { name: "Antam", price: "Rp 28.915/gr" },
+        { name: "Silverium", price: "Rp 39.340/gr" }
+    ]
+};
+
 // ============================================================
 // STATE
 // ============================================================
-let marketStatus = true;
-let marketData = { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" };
-let products = [];
-let buybackRates = [];
+let marketStatus = FALLBACK_DATA.marketStatus;
+let marketData = FALLBACK_DATA.marketData;
+let products = FALLBACK_DATA.products;
+let buybackRates = FALLBACK_DATA.buybackRates;
 
 // ============================================================
-// FETCH SEMUA DATA DARI GOOGLE SHEETS
+// FETCH DATA DARI GOOGLE SHEETS
 // ============================================================
 async function fetchAllData() {
     try {
-        // Fetch semua tab paralel
+        console.log("🔄 Fetching data from Google Sheets...");
+        console.log("Sheet ID:", SHEET_ID);
+
         const [statusCsv, marketCsv, productsCsv, buybackCsv] = await Promise.all([
-            fetch(getSheetUrl("MarketStatus")).then(r => r.text()),
-            fetch(getSheetUrl("MarketPrice")).then(r => r.text()),
-            fetch(getSheetUrl("Products")).then(r => r.text()),
-            fetch(getSheetUrl("Buyback")).then(r => r.text())
+            fetch(getSheetUrl("MarketStatus")).then(r => { console.log("MarketStatus status:", r.status); return r.text(); }),
+            fetch(getSheetUrl("MarketPrice")).then(r => { console.log("MarketPrice status:", r.status); return r.text(); }),
+            fetch(getSheetUrl("Products")).then(r => { console.log("Products status:", r.status); return r.text(); }),
+            fetch(getSheetUrl("Buyback")).then(r => { console.log("Buyback status:", r.status); return r.text(); })
         ]);
 
-        // Parse masing-masing
-        marketStatus = parseMarketStatus(statusCsv);
-        marketData = parseMarketData(marketCsv);
-        products = parseProducts(productsCsv);
-        buybackRates = parseBuyback(buybackCsv);
+        console.log("📊 MarketStatus CSV length:", statusCsv.length);
+        console.log("📊 MarketPrice CSV length:", marketCsv.length);
+        console.log("📊 Products CSV length:", productsCsv.length);
+        console.log("📊 Buyback CSV length:", buybackCsv.length);
 
-        console.log("✅ Data loaded from Google Sheets:", {
+        // Parse data
+        const parsedStatus = parseMarketStatus(statusCsv);
+        const parsedMarket = parseMarketData(marketCsv);
+        const parsedProducts = parseProducts(productsCsv);
+        const parsedBuyback = parseBuyback(buybackCsv);
+
+        // Update state hanya jika parsing berhasil
+        if (parsedStatus !== null) marketStatus = parsedStatus;
+        if (parsedMarket !== null) marketData = parsedMarket;
+        if (parsedProducts !== null && parsedProducts.length > 0) products = parsedProducts;
+        if (parsedBuyback !== null && parsedBuyback.length > 0) buybackRates = parsedBuyback;
+
+        console.log("✅ Data loaded:", {
             marketStatus,
             marketData,
             products: products.length,
@@ -63,6 +91,7 @@ async function fetchAllData() {
         return true;
     } catch (err) {
         console.error("❌ Failed to fetch data:", err);
+        console.log("⚠️ Using fallback data");
         return false;
     }
 }
@@ -71,77 +100,87 @@ async function fetchAllData() {
 // PARSER FUNCTIONS
 // ============================================================
 
-// Parse MarketStatus
 function parseMarketStatus(csv) {
-    const lines = csv.split('\n').filter(line => line.trim() !== '');
-    if (lines.length < 2) return true;
-    
-    const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-    const status = values[0] || 'TRUE';
-    return status.toUpperCase() === 'TRUE';
+    try {
+        const lines = csv.split('\n').filter(line => line.trim() !== '');
+        if (lines.length < 2) return null;
+        const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        const status = values[0] || 'TRUE';
+        return status.toUpperCase() === 'TRUE';
+    } catch (e) { 
+        console.warn("Parse MarketStatus error:", e);
+        return null; 
+    }
 }
 
-// Parse MarketPrice
 function parseMarketData(csv) {
-    const lines = csv.split('\n').filter(line => line.trim() !== '');
-    if (lines.length < 2) return { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" };
-    
-    const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-    return {
-        xagUsd: values[0] || "$68.07",
-        xagIdr: values[1] || "~Rp54.231",
-        date: values[2] || "27 Agustus 2026"
-    };
+    try {
+        const lines = csv.split('\n').filter(line => line.trim() !== '');
+        if (lines.length < 2) return null;
+        const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        return {
+            xagUsd: values[0] || FALLBACK_DATA.marketData.xagUsd,
+            xagIdr: values[1] || FALLBACK_DATA.marketData.xagIdr,
+            date: values[2] || FALLBACK_DATA.marketData.date
+        };
+    } catch (e) { 
+        console.warn("Parse MarketData error:", e);
+        return null; 
+    }
 }
 
-// Parse Products
 function parseProducts(csv) {
-    const lines = csv.split('\n').filter(line => line.trim() !== '');
-    if (lines.length < 2) return [];
-    
-    // Header
-    const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
-    
-    const products = [];
-    for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+    try {
+        const lines = csv.split('\n').filter(line => line.trim() !== '');
+        if (lines.length < 2) return null;
         
-        const obj = {};
-        header.forEach((key, idx) => {
-            obj[key] = values[idx] || '';
-        });
+        // Header
+        const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+        const result = [];
         
-        // Validasi minimal ada name
-        if (obj.name) {
-            products.push(obj);
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+            const obj = {};
+            header.forEach((key, idx) => {
+                obj[key] = values[idx] || '';
+            });
+            if (obj.name) result.push(obj);
         }
+        
+        return result.length > 0 ? result : null;
+    } catch (e) { 
+        console.warn("Parse Products error:", e);
+        return null; 
     }
-    
-    return products;
 }
 
-// Parse Buyback
 function parseBuyback(csv) {
-    const lines = csv.split('\n').filter(line => line.trim() !== '');
-    if (lines.length < 2) return [];
-    
-    const products = [];
-    for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        if (values[0] && values[1]) {
-            products.push({
-                name: values[0],
-                price: values[1]
-            });
+    try {
+        const lines = csv.split('\n').filter(line => line.trim() !== '');
+        if (lines.length < 2) return null;
+        
+        const result = [];
+        for (let i = 1; i < lines.length; i++) {
+            const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+            if (values[0] && values[1]) {
+                result.push({ name: values[0], price: values[1] });
+            }
         }
+        return result.length > 0 ? result : null;
+    } catch (e) { 
+        console.warn("Parse Buyback error:", e);
+        return null; 
     }
-    
-    return products;
 }
 
 // ============================================================
 // RENDER FUNCTIONS
 // ============================================================
+
+function setText(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+}
 
 function renderMarketStatus() {
     const dot = document.getElementById("marketDot");
@@ -170,14 +209,12 @@ function renderMarketPrices() {
     setText("buybackDate", marketData.date);
 }
 
-function setText(id, val) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = val;
-}
-
 function renderProducts() {
     const grid = document.getElementById("productGrid");
-    if (!grid) return;
+    if (!grid) {
+        console.error("productGrid not found!");
+        return;
+    }
     grid.innerHTML = "";
 
     if (!products || products.length === 0) {
@@ -187,7 +224,7 @@ function renderProducts() {
 
     products.forEach((p, idx) => {
         const imgHtml = p.image
-            ? `<img src="assets/images/products/${p.image}" alt="${p.alt || p.name}" class="w-full h-full object-cover rounded-xl" loading="lazy">`
+            ? `<img src="assets/images/products/${p.image}" alt="${p.alt || p.name}" class="w-full h-full object-cover rounded-xl" loading="lazy" onerror="this.style.display='none'">`
             : `<span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient">${p.initial || p.name.charAt(0).toUpperCase()}</span>`;
 
         const card = document.createElement("div");
@@ -215,7 +252,10 @@ function renderProducts() {
 
 function renderBuyback() {
     const el = document.getElementById("buybackRates");
-    if (!el) return;
+    if (!el) {
+        console.error("buybackRates not found!");
+        return;
+    }
 
     let html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
 
@@ -248,10 +288,12 @@ function openProduct(idx) {
     if (!p) return;
 
     const imgHtml = p.image
-        ? `<img src="assets/images/products/${p.image}" alt="${p.alt || p.name}" class="w-full h-full object-cover rounded-xl">`
+        ? `<img src="assets/images/products/${p.image}" alt="${p.alt || p.name}" class="w-full h-full object-cover rounded-xl" onerror="this.style.display='none'">`
         : `<span class="text-3xl font-display font-bold text-silver-gradient">${p.initial || p.name.charAt(0).toUpperCase()}</span>`;
 
-    document.getElementById("modalInitial").innerHTML = imgHtml;
+    const container = document.getElementById("modalImageContainer");
+    if (container) container.innerHTML = imgHtml;
+
     document.getElementById("modalName").textContent = p.name;
     document.getElementById("modalCategory").textContent = p.category || '-';
     document.getElementById("modalSupplier").textContent = p.supplier || '-';
@@ -531,6 +573,8 @@ function setupPWA() {
 // INIT
 // ============================================================
 async function init() {
+    console.log("🚀 Veldion Silver initializing...");
+
     // Tampilkan loading
     const loading = document.getElementById("loadingIndicator");
     if (loading) loading.style.display = "flex";
@@ -539,14 +583,6 @@ async function init() {
     const success = await fetchAllData();
 
     if (loading) loading.style.display = "none";
-
-    if (!success) {
-        // Tampilkan error
-        const error = document.getElementById("errorMessage");
-        if (error) error.classList.remove("hidden");
-        console.error("Gagal memuat data dari Google Sheets");
-        return;
-    }
 
     // Render semua
     renderMarketStatus();
@@ -562,10 +598,12 @@ async function init() {
         if (typeof lucide !== "undefined") lucide.createIcons();
     }, 200);
 
-    console.log("✅ Veldion Silver initialized with Google Sheets data");
+    console.log("✅ Veldion Silver ready!");
 }
 
-// Fallback jika DOM sudah ready
+// Auto-init jika DOM sudah siap
 if (document.readyState === "complete" || document.readyState === "interactive") {
     init();
+} else {
+    document.addEventListener("DOMContentLoaded", init);
 }
