@@ -1,200 +1,155 @@
 // ============================================================
-// Veldion Silver — App Logic
+// Veldion Silver — App Logic (Dengan Google Sheets)
 // ============================================================
 
-// ====== KONFIGURASI SHEET ======
-const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E/gviz/tq?tqx=out:csv&sheet=main_data';
-
-// ====== DOMContentLoaded ======
 document.addEventListener("DOMContentLoaded", function() {
     if (typeof lucide !== "undefined") lucide.createIcons();
-    fetchMainData();
+    init();
 });
 
-// ====== FETCH DATA DARI SHEET ======
-function fetchMainData() {
-    fetch(SHEET_URL)
-        .then(res => {
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            return res.text();
-        })
-        .then(csv => {
-            const data = parseCSV(csv);
-            if (!data || data.length === 0) {
-                throw new Error('Data kosong dari Google Sheets');
-            }
-            processData(data);
-        })
-        .catch(err => {
-            console.error('Gagal fetch data:', err);
-            showErrorMessage('Gagal memuat data dari server. Silakan refresh halaman.');
-        });
+// ============================================================
+// KONFIGURASI GOOGLE SHEETS
+// ============================================================
+const SHEET_ID = "1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E";
+
+// URL untuk fetch CSV per tab
+function getSheetUrl(tabName) {
+    return `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tabName)}`;
 }
 
-// ====== PARSE CSV ======
-function parseCSV(csv) {
+// ============================================================
+// DATA STATIS (tetap di sini)
+// ============================================================
+// CATEGORIES, CONTACT, STATS tetap dari data.js
+// Tapi kita ambil dari window agar kompatibel
+const CATEGORIES = window.CATEGORIES || [];
+const CONTACT = window.CONTACT || { whatsapp: "628137271517", email: "veldionsilver@gmail.com" };
+const STATS = window.STATS || { transactions: "110+", deliveryDays: "1-5" };
+
+// ============================================================
+// STATE
+// ============================================================
+let marketStatus = true;
+let marketData = { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" };
+let products = [];
+let buybackRates = [];
+
+// ============================================================
+// FETCH SEMUA DATA DARI GOOGLE SHEETS
+// ============================================================
+async function fetchAllData() {
+    try {
+        // Fetch semua tab paralel
+        const [statusCsv, marketCsv, productsCsv, buybackCsv] = await Promise.all([
+            fetch(getSheetUrl("MarketStatus")).then(r => r.text()),
+            fetch(getSheetUrl("MarketPrice")).then(r => r.text()),
+            fetch(getSheetUrl("Products")).then(r => r.text()),
+            fetch(getSheetUrl("Buyback")).then(r => r.text())
+        ]);
+
+        // Parse masing-masing
+        marketStatus = parseMarketStatus(statusCsv);
+        marketData = parseMarketData(marketCsv);
+        products = parseProducts(productsCsv);
+        buybackRates = parseBuyback(buybackCsv);
+
+        console.log("✅ Data loaded from Google Sheets:", {
+            marketStatus,
+            marketData,
+            products: products.length,
+            buybackRates: buybackRates.length
+        });
+
+        return true;
+    } catch (err) {
+        console.error("❌ Failed to fetch data:", err);
+        return false;
+    }
+}
+
+// ============================================================
+// PARSER FUNCTIONS
+// ============================================================
+
+// Parse MarketStatus
+function parseMarketStatus(csv) {
+    const lines = csv.split('\n').filter(line => line.trim() !== '');
+    if (lines.length < 2) return true;
+    
+    const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+    const status = values[0] || 'TRUE';
+    return status.toUpperCase() === 'TRUE';
+}
+
+// Parse MarketPrice
+function parseMarketData(csv) {
+    const lines = csv.split('\n').filter(line => line.trim() !== '');
+    if (lines.length < 2) return { xagUsd: "$68.07", xagIdr: "~Rp54.231", date: "27 Agustus 2026" };
+    
+    const values = lines[1].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+    return {
+        xagUsd: values[0] || "$68.07",
+        xagIdr: values[1] || "~Rp54.231",
+        date: values[2] || "27 Agustus 2026"
+    };
+}
+
+// Parse Products
+function parseProducts(csv) {
     const lines = csv.split('\n').filter(line => line.trim() !== '');
     if (lines.length < 2) return [];
-
-    let headers = [];
-    let current = '';
-    let inQuotes = false;
     
-    for (let j = 0; j < lines[0].length; j++) {
-        const char = lines[0][j];
-        if (char === '"') { 
-            inQuotes = !inQuotes; 
-            continue; 
-        }
-        if (char === ',' && !inQuotes) {
-            headers.push(current.trim());
-            current = '';
-            continue;
-        }
-        current += char;
-    }
-    headers.push(current.trim());
-
-    const result = [];
+    // Header
+    const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+    
+    const products = [];
     for (let i = 1; i < lines.length; i++) {
-        const values = [];
-        current = '';
-        inQuotes = false;
-        const line = lines[i];
+        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
         
-        for (let j = 0; j < line.length; j++) {
-            const char = line[j];
-            if (char === '"') { 
-                inQuotes = !inQuotes; 
-                continue; 
-            }
-            if (char === ',' && !inQuotes) {
-                values.push(current.trim());
-                current = '';
-                continue;
-            }
-            current += char;
-        }
-        values.push(current.trim());
-
-        const row = {};
-        headers.forEach((h, idx) => {
-            row[h] = values[idx] || '';
+        const obj = {};
+        header.forEach((key, idx) => {
+            obj[key] = values[idx] || '';
         });
-        result.push(row);
-    }
-
-    return result;
-}
-
-// ====== PROSES DATA ======
-function processData(data) {
-    // ===== MARKET (Kolom A-D) =====
-    const firstRow = data[0];
-    if (!firstRow.marketOpen || firstRow.marketOpen === '') {
-        showErrorMessage('Data Market tidak ditemukan di spreadsheet.');
-        return;
+        
+        // Validasi minimal ada name
+        if (obj.name) {
+            products.push(obj);
+        }
     }
     
-    MARKET_OPEN = (firstRow.marketOpen === 'TRUE' || firstRow.marketOpen === 'true' || firstRow.marketOpen === true);
-    MARKET.xagUsd = firstRow.xagUsd || MARKET.xagUsd;
-    MARKET.xagIdr = firstRow.xagIdr || MARKET.xagIdr;
-    MARKET.date = firstRow.date || MARKET.date;
-
-    // ===== PRODUCTS (Kolom E-J) =====
-    const productRows = data.slice(1, 9);
-    if (!productRows || productRows.length === 0) {
-        showErrorMessage('Data Products tidak ditemukan di spreadsheet.');
-        return;
-    }
-
-    const newProducts = productRows.map(row => {
-        const imgData = PRODUCT_IMAGES[row.name] || {};
-        return {
-            name: row.name || '',
-            category: row.category || 'Umum',
-            supplier: row.supplier || '-',
-            weight: row.weight || '-',
-            purity: row.purity || '-',
-            price: row.price || 'Rp -',
-            image: imgData.image || null,
-            alt: imgData.alt || row.name || '',
-            initial: (row.name || 'P').charAt(0).toUpperCase()
-        };
-    });
-    PRODUCTS.length = 0;
-    PRODUCTS.push(...newProducts);
-
-    // ===== BUYBACK (Kolom K-L) =====
-    const buybackRows = data.slice(9, 13);
-    if (!buybackRows || buybackRows.length === 0) {
-        showErrorMessage('Data Buyback tidak ditemukan di spreadsheet.');
-        return;
-    }
-
-    const newBuyback = buybackRows.map(row => ({
-        name: row.name || '-',
-        price: row.price || 'Rp -'
-    }));
-    BUYBACK_RATES.length = 0;
-    BUYBACK_RATES.push(...newBuyback);
-
-    // ===== SEMUA DATA BERHASIL =====
-    init();
+    return products;
 }
 
-// ====== TAMPILKAN PESAN ERROR ======
-function showErrorMessage(message) {
-    var grid = document.getElementById("productGrid");
-    if (grid) {
-        grid.innerHTML = `
-            <div class="col-span-full text-center py-12">
-                <div class="text-red-400 text-4xl mb-4">⚠️</div>
-                <p class="text-white font-medium mb-2">${message}</p>
-                <p class="text-steel text-sm">Pastikan spreadsheet sudah dipublikasikan dan tab "main_data" berisi data.</p>
-            </div>
-        `;
+// Parse Buyback
+function parseBuyback(csv) {
+    const lines = csv.split('\n').filter(line => line.trim() !== '');
+    if (lines.length < 2) return [];
+    
+    const products = [];
+    for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values[0] && values[1]) {
+            products.push({
+                name: values[0],
+                price: values[1]
+            });
+        }
     }
-    // Sembunyikan elemen lain yang tidak terpakai
-    var buybackEl = document.getElementById("buybackRates");
-    if (buybackEl) buybackEl.innerHTML = '';
+    
+    return products;
 }
 
 // ============================================================
-// ====== FUNGSI ASLI ANDA (TIDAK BERUBAH) ======
+// RENDER FUNCTIONS
 // ============================================================
 
-function init() {
-    setMarket(MARKET_OPEN);
-    setText("xagUsd", MARKET.xagUsd);
-    setText("xagIdr", MARKET.xagIdr);
-    setText("xagUsdMobile", MARKET.xagUsd);
-    setText("xagIdrMobile", MARKET.xagIdr);
-    setText("statTransactions", STATS.transactions);
-    setText("buybackDate", MARKET.date);
-    renderProducts();
-    renderBuyback();
-    setupReveal();
-    setupEvents();
-    setupPWA();
-    setTimeout(function() {
-        if (typeof lucide !== "undefined") lucide.createIcons();
-    }, 200);
-}
+function renderMarketStatus() {
+    const dot = document.getElementById("marketDot");
+    const txt = document.getElementById("marketText");
+    const dotM = document.getElementById("marketDotMobile");
+    const txtM = document.getElementById("marketTextMobile");
 
-function setText(id, val) {
-    var el = document.getElementById(id);
-    if (el) el.textContent = val;
-}
-
-// ====== MARKET STATUS ======
-function setMarket(open) {
-    var dot = document.getElementById("marketDot");
-    var txt = document.getElementById("marketText");
-    var dotM = document.getElementById("marketDotMobile");
-    var txtM = document.getElementById("marketTextMobile");
-
-    if (open) {
+    if (marketStatus) {
         if (dot) dot.className = "w-1.5 h-1.5 rounded-full bg-silver pulse-silver";
         if (txt) { txt.textContent = "Market Open"; txt.className = "font-semibold tracking-wider text-[10px] uppercase text-silver-light"; }
         if (dotM) dotM.className = "w-1.5 h-1.5 rounded-full bg-silver pulse-silver";
@@ -207,136 +162,153 @@ function setMarket(open) {
     }
 }
 
-// ====== RENDER PRODUCTS ======
-function renderProducts() {
-    var grid = document.getElementById("productGrid");
-    if (!grid) return;
-
-    grid.innerHTML = "";
-
-    if (!PRODUCTS || PRODUCTS.length === 0) {
-        grid.innerHTML = '<div class="col-span-full text-center text-steel py-8">Belum ada produk tersedia.</div>';
-        return;
-    }
-
-    for (var i = 0; i < PRODUCTS.length; i++) {
-        (function(idx) {
-            var p = PRODUCTS[idx];
-            var imgHtml = p.image
-                ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl" loading="lazy">'
-                : '<span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
-
-            var card = document.createElement("div");
-            card.className = "product-card glass-card-hover p-4 md:p-5 rounded-xl";
-            card.setAttribute("data-idx", idx);
-            card.innerHTML =
-                '<span class="product-badge">' + p.category + '</span>' +
-                '<div class="flex flex-col items-center text-center">' +
-                    '<div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-silver/10 to-white/5 rounded-xl flex items-center justify-center border border-silver/10 mb-4 overflow-hidden">' +
-                        imgHtml +
-                    '</div>' +
-                    '<h4 class="font-semibold text-white text-sm truncate w-full">' + p.name + '</h4>' +
-                    '<p class="text-[10px] text-steel mt-1 mb-2">' + p.supplier + ' • ' + p.purity + '</p>' +
-                    '<div class="text-sm md:text-base font-display font-bold text-silver-gradient">' + p.price + '</div>' +
-                '</div>';
-
-            card.addEventListener("click", function() {
-                openProduct(parseInt(this.dataset.idx));
-            });
-
-            grid.appendChild(card);
-        })(i);
-    }
+function renderMarketPrices() {
+    setText("xagUsd", marketData.xagUsd);
+    setText("xagIdr", marketData.xagIdr);
+    setText("xagUsdMobile", marketData.xagUsd);
+    setText("xagIdrMobile", marketData.xagIdr);
+    setText("buybackDate", marketData.date);
 }
 
-// ====== RENDER BUYBACK ======
-function renderBuyback() {
-    var el = document.getElementById("buybackRates");
-    if (!el) return;
+function setText(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+}
 
-    if (!BUYBACK_RATES || BUYBACK_RATES.length === 0) {
-        el.innerHTML = '<div class="text-center text-steel py-4">Data buyback belum tersedia.</div>';
+function renderProducts() {
+    const grid = document.getElementById("productGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    if (!products || products.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center text-steel py-8">Tidak ada produk saat ini.</div>';
         return;
     }
 
-    var html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
+    products.forEach((p, idx) => {
+        const imgHtml = p.image
+            ? `<img src="assets/images/products/${p.image}" alt="${p.alt || p.name}" class="w-full h-full object-cover rounded-xl" loading="lazy">`
+            : `<span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient">${p.initial || p.name.charAt(0).toUpperCase()}</span>`;
 
-    for (var i = 0; i < BUYBACK_RATES.length; i++) {
-        var r = BUYBACK_RATES[i];
-        html +=
-            '<div class="flex justify-between items-center py-3 border-b border-white/5 hover:bg-silver/5 transition px-2">' +
-                '<div class="flex items-center gap-2">' +
-                    '<span class="w-1.5 h-1.5 bg-silver rounded-full pulse-silver"></span>' +
-                    '<span class="text-white font-medium">' + r.name + '</span>' +
-                '</div>' +
-                '<span class="font-bold text-white">' + r.price + '</span>' +
-            '</div>';
+        const card = document.createElement("div");
+        card.className = "product-card glass-card-hover p-4 md:p-5 rounded-xl";
+        card.setAttribute("data-idx", idx);
+        card.innerHTML = `
+            <span class="product-badge">${p.category || ''}</span>
+            <div class="flex flex-col items-center text-center">
+                <div class="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-silver/10 to-white/5 rounded-xl flex items-center justify-center border border-silver/10 mb-4 overflow-hidden">
+                    ${imgHtml}
+                </div>
+                <h4 class="font-semibold text-white text-sm truncate w-full">${p.name}</h4>
+                <p class="text-[10px] text-steel mt-1 mb-2">${p.supplier || ''} ${p.purity ? '• ' + p.purity : ''}</p>
+                <div class="text-sm md:text-base font-display font-bold text-silver-gradient">${p.price || 'Rp -'}</div>
+            </div>
+        `;
+
+        card.addEventListener("click", function() {
+            openProduct(parseInt(this.dataset.idx));
+        });
+
+        grid.appendChild(card);
+    });
+}
+
+function renderBuyback() {
+    const el = document.getElementById("buybackRates");
+    if (!el) return;
+
+    let html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
+
+    if (!buybackRates || buybackRates.length === 0) {
+        html += '<div class="py-4 text-center text-steel">Belum ada data buyback.</div>';
+        el.innerHTML = html;
+        return;
     }
+
+    buybackRates.forEach(r => {
+        html += `
+            <div class="flex justify-between items-center py-3 border-b border-white/5 hover:bg-silver/5 transition px-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-silver rounded-full pulse-silver"></span>
+                    <span class="text-white font-medium">${r.name}</span>
+                </div>
+                <span class="font-bold text-white">${r.price}</span>
+            </div>
+        `;
+    });
 
     el.innerHTML = html;
 }
 
-// ====== PRODUCT MODAL ======
+// ============================================================
+// PRODUCT MODAL
+// ============================================================
 function openProduct(idx) {
-    var p = PRODUCTS[idx];
+    const p = products[idx];
     if (!p) return;
-    
-    var imgHtml = p.image
-        ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl">'
-        : '<span class="text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
+
+    const imgHtml = p.image
+        ? `<img src="assets/images/products/${p.image}" alt="${p.alt || p.name}" class="w-full h-full object-cover rounded-xl">`
+        : `<span class="text-3xl font-display font-bold text-silver-gradient">${p.initial || p.name.charAt(0).toUpperCase()}</span>`;
 
     document.getElementById("modalInitial").innerHTML = imgHtml;
     document.getElementById("modalName").textContent = p.name;
-    document.getElementById("modalCategory").textContent = p.category;
-    document.getElementById("modalSupplier").textContent = p.supplier;
-    document.getElementById("modalWeight").textContent = p.weight;
-    document.getElementById("modalPurity").textContent = p.purity;
-    document.getElementById("modalPrice").textContent = p.price;
-    document.getElementById("modalLink").href = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent("Halo Veldion, saya mau tanya stok " + p.name);
+    document.getElementById("modalCategory").textContent = p.category || '-';
+    document.getElementById("modalSupplier").textContent = p.supplier || '-';
+    document.getElementById("modalWeight").textContent = p.weight || '-';
+    document.getElementById("modalPurity").textContent = p.purity || '-';
+    document.getElementById("modalPrice").textContent = p.price || 'Rp -';
+    
+    const waMsg = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(p.name)}`;
+    document.getElementById("modalLink").href = `https://wa.me/${CONTACT.whatsapp}?text=${waMsg}`;
 
     document.getElementById("productModal").classList.add("active");
     document.body.classList.add("no-scroll");
 }
 
-// ====== SEARCH ======
+// ============================================================
+// SEARCH
+// ============================================================
 function defaultSearch() {
-    var catsHtml = "";
-    for (var i = 0; i < CATEGORIES.length; i++) {
-        var c = CATEGORIES[i];
-        catsHtml +=
-            '<a href="#produk" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border border-white/5">' +
-                '<div class="w-6 h-6 rounded bg-silver/10 flex items-center justify-center text-xs font-bold text-silver-light">' + c.icon + '</div>' +
-                '<div><div class="text-xs text-white">' + c.name + '</div></div>' +
-            '</a>';
-    }
+    let catsHtml = "";
+    CATEGORIES.forEach(c => {
+        catsHtml += `
+            <a href="#produk" onclick="closeSearchM()" class="search-item flex items-center gap-2 p-2 rounded-lg border border-white/5">
+                <div class="w-6 h-6 rounded bg-silver/10 flex items-center justify-center text-xs font-bold text-silver-light">${c.icon}</div>
+                <div><div class="text-xs text-white">${c.name}</div></div>
+            </a>
+        `;
+    });
 
-    return '<div class="p-4">' +
-        '<div class="mb-4">' +
-            '<div class="flex items-center gap-2 mb-2">' +
-                '<i data-lucide="layers" class="w-4 h-4 text-steel"></i>' +
-                '<span class="text-xs font-semibold text-white uppercase">Kategori</span>' +
-            '</div>' +
-            '<div class="grid grid-cols-2 gap-2">' + catsHtml + '</div>' +
-        '</div>' +
-        '<a href="#produk" onclick="closeSearchM()" class="flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5">' +
-            '<span class="w-2 h-2 bg-silver rounded-full animate-pulse"></span>' +
-            '<span class="text-sm font-semibold text-white">Lihat Semua Produk</span>' +
-        '</a>' +
-    '</div>';
+    return `<div class="p-4">
+        <div class="mb-4">
+            <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="layers" class="w-4 h-4 text-steel"></i>
+                <span class="text-xs font-semibold text-white uppercase">Kategori</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">${catsHtml}</div>
+        </div>
+        <a href="#produk" onclick="closeSearchM()" class="flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5 border border-white/5">
+            <span class="w-2 h-2 bg-silver rounded-full animate-pulse"></span>
+            <span class="text-sm font-semibold text-white">Lihat Semua Produk</span>
+        </a>
+    </div>`;
 }
 
 function closeSearchM() {
-    var modal = document.getElementById("searchModal");
+    const modal = document.getElementById("searchModal");
     if (modal) modal.classList.remove("active");
     document.body.classList.remove("no-scroll");
-    var input = document.getElementById("searchInput");
+    const input = document.getElementById("searchInput");
     if (input) input.value = "";
 }
 window.closeSearchM = closeSearchM;
 
-// ====== REVEAL ANIMATIONS ======
+// ============================================================
+// REVEAL ANIMATIONS
+// ============================================================
 function setupReveal() {
-    var observer = new IntersectionObserver(function(entries) {
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
             if (entry.isIntersecting) entry.target.classList.add("active");
         });
@@ -350,14 +322,16 @@ function setupReveal() {
     });
 }
 
-// ====== EVENT LISTENERS ======
+// ============================================================
+// EVENT LISTENERS
+// ============================================================
 function setupEvents() {
-    var searchInput = document.getElementById("searchInput");
-    var searchResults = document.getElementById("searchResults");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
 
     if (searchInput) {
         searchInput.addEventListener("input", function(e) {
-            var q = e.target.value.toLowerCase().trim();
+            const q = e.target.value.toLowerCase().trim();
             if (!q) {
                 if (searchResults) searchResults.innerHTML = defaultSearch();
                 return;
@@ -367,8 +341,8 @@ function setupEvents() {
                 return;
             }
 
-            var filtered = PRODUCTS.filter(function(p) {
-                return p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+            const filtered = products.filter(function(p) {
+                return p.name.toLowerCase().includes(q) || (p.category && p.category.toLowerCase().includes(q));
             });
 
             if (!filtered.length) {
@@ -376,18 +350,18 @@ function setupEvents() {
                 return;
             }
 
-            var resultsHtml = "";
-            for (var i = 0; i < filtered.length; i++) {
-                var p = filtered[i];
-                resultsHtml +=
-                    '<a href="https://wa.me/' + CONTACT.whatsapp + "?text=" + encodeURIComponent("Halo Veldion, saya mau tanya stok " + p.name) + '" target="_blank" class="search-item flex justify-between p-2 rounded-lg border-b border-white/5">' +
-                        '<div>' +
-                            '<div class="text-white text-sm">' + p.name + '</div>' +
-                            '<div class="text-[10px] text-steel">' + p.category + ' • ' + p.supplier + '</div>' +
-                        '</div>' +
-                        '<i data-lucide="external-link" class="w-4 h-4 text-steel"></i>' +
-                    '</a>';
-            }
+            let resultsHtml = "";
+            filtered.forEach(p => {
+                resultsHtml += `
+                    <a href="https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent("Halo Veldion, saya mau tanya stok " + p.name)}" target="_blank" class="search-item flex justify-between p-2 rounded-lg border-b border-white/5">
+                        <div>
+                            <div class="text-white text-sm">${p.name}</div>
+                            <div class="text-[10px] text-steel">${p.category || ''} ${p.supplier ? '• ' + p.supplier : ''}</div>
+                        </div>
+                        <i data-lucide="external-link" class="w-4 h-4 text-steel"></i>
+                    </a>
+                `;
+            });
 
             if (searchResults) searchResults.innerHTML = '<div class="p-4 space-y-2">' + resultsHtml + '</div>';
         });
@@ -395,7 +369,7 @@ function setupEvents() {
 
     // Modal click outside
     ["productModal", "searchModal"].forEach(function(id) {
-        var modal = document.getElementById(id);
+        const modal = document.getElementById(id);
         if (modal) {
             modal.addEventListener("click", function(e) {
                 if (e.target.id === id) {
@@ -407,7 +381,7 @@ function setupEvents() {
     });
 
     // Close buttons
-    var closeProduct = document.getElementById("closeProductModal");
+    const closeProduct = document.getElementById("closeProductModal");
     if (closeProduct) {
         closeProduct.addEventListener("click", function() {
             document.getElementById("productModal").classList.remove("active");
@@ -415,11 +389,11 @@ function setupEvents() {
         });
     }
 
-    var closeSearchBtn = document.getElementById("closeSearch");
+    const closeSearchBtn = document.getElementById("closeSearch");
     if (closeSearchBtn) closeSearchBtn.addEventListener("click", closeSearchM);
 
     // Search button
-    var searchBtn = document.getElementById("searchBtn");
+    const searchBtn = document.getElementById("searchBtn");
     if (searchBtn) {
         searchBtn.addEventListener("click", function() {
             document.getElementById("searchModal").classList.add("active");
@@ -433,7 +407,7 @@ function setupEvents() {
     document.addEventListener("keydown", function(e) {
         if (e.key === "Escape") {
             ["productModal", "searchModal"].forEach(function(id) {
-                var m = document.getElementById(id);
+                const m = document.getElementById(id);
                 if (m) m.classList.remove("active");
             });
             document.body.classList.remove("no-scroll");
@@ -443,13 +417,13 @@ function setupEvents() {
     // FAQ toggle
     document.querySelectorAll(".faq-toggle").forEach(function(toggle) {
         toggle.addEventListener("click", function() {
-            var faqItem = this.closest(".faq-item");
-            var content = faqItem.querySelector(".faq-content");
-            var isOpen = faqItem.classList.contains("open");
+            const faqItem = this.closest(".faq-item");
+            const content = faqItem.querySelector(".faq-content");
+            const isOpen = faqItem.classList.contains("open");
 
             document.querySelectorAll(".faq-item").forEach(function(item) {
                 item.classList.remove("open");
-                var c = item.querySelector(".faq-content");
+                const c = item.querySelector(".faq-content");
                 if (c) c.style.maxHeight = null;
             });
 
@@ -463,12 +437,12 @@ function setupEvents() {
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
         a.addEventListener("click", function(e) {
-            var href = this.getAttribute("href");
+            const href = this.getAttribute("href");
             if (href === "#") return;
             e.preventDefault();
-            var target = document.querySelector(href);
+            const target = document.querySelector(href);
             if (target) {
-                var offset = window.innerWidth < 768 ? 70 : 100;
+                const offset = window.innerWidth < 768 ? 70 : 100;
                 window.scrollTo({ top: target.offsetTop - offset, behavior: "smooth" });
 
                 document.querySelectorAll(".mobile-nav-item").forEach(function(item) {
@@ -480,7 +454,7 @@ function setupEvents() {
     });
 
     // Back to top
-    var toTop = document.getElementById("toTopBtn");
+    const toTop = document.getElementById("toTopBtn");
     if (toTop) {
         window.addEventListener("scroll", function() {
             toTop.classList.toggle("visible", window.scrollY > 500);
@@ -491,17 +465,17 @@ function setupEvents() {
     }
 
     // Active nav on scroll
-    var mobileNavItems = document.querySelectorAll(".mobile-nav-item");
-    var sections = document.querySelectorAll("section[id]");
+    const mobileNavItems = document.querySelectorAll(".mobile-nav-item");
+    const sections = document.querySelectorAll("section[id]");
 
     function updateActiveNav() {
-        var scrollY = window.scrollY;
-        var offset = 150;
+        const scrollY = window.scrollY;
+        const offset = 150;
 
         sections.forEach(function(section) {
-            var top = section.offsetTop - offset;
-            var bottom = top + section.offsetHeight;
-            var id = section.getAttribute("id");
+            const top = section.offsetTop - offset;
+            const bottom = top + section.offsetHeight;
+            const id = section.getAttribute("id");
 
             if (scrollY >= top && scrollY < bottom) {
                 mobileNavItems.forEach(function(item) {
@@ -516,7 +490,9 @@ function setupEvents() {
     setTimeout(updateActiveNav, 100);
 }
 
-// ====== PWA ======
+// ============================================================
+// PWA
+// ============================================================
 function setupPWA() {
     if (window.location.protocol === "file:") {
         console.log("PWA: file:// detected, skipping SW registration.");
@@ -529,11 +505,11 @@ function setupPWA() {
             .catch(function(err) { console.log("SW registration failed:", err); });
     }
 
-    var deferredPrompt;
+    let deferredPrompt;
     window.addEventListener("beforeinstallprompt", function(e) {
         e.preventDefault();
         deferredPrompt = e;
-        var installBtn = document.getElementById("installPWA");
+        const installBtn = document.getElementById("installPWA");
         if (installBtn) {
             installBtn.style.display = "block";
             installBtn.addEventListener("click", function() {
@@ -549,4 +525,47 @@ function setupPWA() {
             });
         }
     });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+    // Tampilkan loading
+    const loading = document.getElementById("loadingIndicator");
+    if (loading) loading.style.display = "flex";
+
+    // Fetch data dari Google Sheets
+    const success = await fetchAllData();
+
+    if (loading) loading.style.display = "none";
+
+    if (!success) {
+        // Tampilkan error
+        const error = document.getElementById("errorMessage");
+        if (error) error.classList.remove("hidden");
+        console.error("Gagal memuat data dari Google Sheets");
+        return;
+    }
+
+    // Render semua
+    renderMarketStatus();
+    renderMarketPrices();
+    renderProducts();
+    renderBuyback();
+    setupReveal();
+    setupEvents();
+    setupPWA();
+
+    // Re-init Lucide icons
+    setTimeout(function() {
+        if (typeof lucide !== "undefined") lucide.createIcons();
+    }, 200);
+
+    console.log("✅ Veldion Silver initialized with Google Sheets data");
+}
+
+// Fallback jika DOM sudah ready
+if (document.readyState === "complete" || document.readyState === "interactive") {
+    init();
 }
