@@ -6,12 +6,6 @@
 const SHEET_ID = '1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E';
 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
 
-// ====== DATA GLOBAL ======
-let sheetMarket = null;
-let sheetProducts = [];
-let sheetBuyback = [];
-let dataLoaded = false;
-
 // ====== DOMContentLoaded ======
 document.addEventListener("DOMContentLoaded", function() {
     if (typeof lucide !== "undefined") lucide.createIcons();
@@ -20,15 +14,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // ====== FETCH DATA DARI GOOGLE SHEETS ======
 function fetchSheetData() {
-    // Ambil data dari 3 tab sekaligus
     const tabs = ['Market', 'Products', 'Buyback'];
     const promises = tabs.map(tab => 
         fetch(`${SHEET_URL}&sheet=${tab}`)
-            .then(res => res.text())
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.text();
+            })
             .then(csv => parseCSV(csv))
             .catch(err => {
                 console.warn(`Gagal fetch tab ${tab}:`, err);
-                return [];
+                return null;
             })
     );
 
@@ -36,24 +32,25 @@ function fetchSheetData() {
         .then(results => {
             const [marketData, productsData, buybackData] = results;
             
-            // Proses Market
-            if (marketData.length > 0) {
+            let hasError = false;
+
+            // ===== PROSES MARKET =====
+            if (marketData && marketData.length > 0) {
                 const row = marketData[0];
-                sheetMarket = {
-                    xagUsd: row.xagUsd || MARKET.xagUsd,
-                    xagIdr: row.xagIdr || MARKET.xagIdr,
-                    date: row.date || MARKET.date,
-                    marketOpen: row.marketOpen === 'TRUE' || row.marketOpen === 'true' || row.marketOpen === true
-                };
-                // Update global MARKET
-                Object.assign(MARKET, sheetMarket);
-                MARKET_OPEN = sheetMarket.marketOpen;
+                if (row.xagUsd) MARKET.xagUsd = row.xagUsd;
+                if (row.xagIdr) MARKET.xagIdr = row.xagIdr;
+                if (row.date) MARKET.date = row.date;
+                if (row.marketOpen !== undefined) {
+                    const isOpen = row.marketOpen === 'TRUE' || row.marketOpen === 'true' || row.marketOpen === true;
+                    MARKET_OPEN = isOpen;
+                }
+            } else {
+                hasError = true;
             }
 
-            // Proses Products
-            if (productsData.length > 0) {
-                sheetProducts = productsData.map(row => {
-                    // Cari image & alt dari data.js berdasarkan nama produk
+            // ===== PROSES PRODUCTS =====
+            if (productsData && productsData.length > 0) {
+                const newProducts = productsData.map(row => {
                     const imgData = PRODUCT_IMAGES[row.name] || {};
                     return {
                         name: row.name || '',
@@ -67,29 +64,40 @@ function fetchSheetData() {
                         initial: (row.name || 'P').charAt(0).toUpperCase()
                     };
                 });
-                // Update global PRODUCTS
                 PRODUCTS.length = 0;
-                PRODUCTS.push(...sheetProducts);
+                PRODUCTS.push(...newProducts);
+            } else {
+                hasError = true;
+                // Gunakan fallback jika ada
+                if (typeof PRODUCTS_FALLBACK !== 'undefined' && PRODUCTS_FALLBACK.length > 0) {
+                    PRODUCTS.length = 0;
+                    PRODUCTS.push(...PRODUCTS_FALLBACK);
+                }
             }
 
-            // Proses Buyback
-            if (buybackData.length > 0) {
-                sheetBuyback = buybackData.map(row => ({
+            // ===== PROSES BUYBACK =====
+            if (buybackData && buybackData.length > 0) {
+                const newBuyback = buybackData.map(row => ({
                     name: row.name || '-',
                     price: row.price || 'Rp -'
                 }));
-                // Update global BUYBACK_RATES
                 BUYBACK_RATES.length = 0;
-                BUYBACK_RATES.push(...sheetBuyback);
+                BUYBACK_RATES.push(...newBuyback);
+            } else {
+                hasError = true;
+                if (typeof BUYBACK_FALLBACK !== 'undefined' && BUYBACK_FALLBACK.length > 0) {
+                    BUYBACK_RATES.length = 0;
+                    BUYBACK_RATES.push(...BUYBACK_FALLBACK);
+                }
             }
 
-            dataLoaded = true;
+            // ===== RENDER =====
             init();
         })
         .catch(err => {
             console.error('Gagal fetch data sheet:', err);
             // Fallback ke data.js
-            init();
+            useFallbackData();
         });
 }
 
@@ -151,6 +159,21 @@ function parseCSV(csv) {
     return result;
 }
 
+// ====== FALLBACK ======
+function useFallbackData() {
+    console.log('Menggunakan fallback data dari data.js');
+    // Jika PRODUCTS kosong, coba ambil dari PRODUCTS_FALLBACK
+    if (typeof PRODUCTS_FALLBACK !== 'undefined' && PRODUCTS_FALLBACK.length > 0 && PRODUCTS.length === 0) {
+        PRODUCTS.length = 0;
+        PRODUCTS.push(...PRODUCTS_FALLBACK);
+    }
+    if (typeof BUYBACK_FALLBACK !== 'undefined' && BUYBACK_FALLBACK.length > 0 && BUYBACK_RATES.length === 0) {
+        BUYBACK_RATES.length = 0;
+        BUYBACK_RATES.push(...BUYBACK_FALLBACK);
+    }
+    init();
+}
+
 // ====== INIT ======
 function init() {
     setMarket(MARKET_OPEN);
@@ -202,6 +225,11 @@ function renderProducts() {
 
     grid.innerHTML = "";
 
+    if (!PRODUCTS || PRODUCTS.length === 0) {
+        grid.innerHTML = '<div class="col-span-full text-center text-steel py-8">Belum ada produk tersedia.</div>';
+        return;
+    }
+
     for (var i = 0; i < PRODUCTS.length; i++) {
         (function(idx) {
             var p = PRODUCTS[idx];
@@ -237,6 +265,11 @@ function renderBuyback() {
     var el = document.getElementById("buybackRates");
     if (!el) return;
 
+    if (!BUYBACK_RATES || BUYBACK_RATES.length === 0) {
+        el.innerHTML = '<div class="text-center text-steel py-4">Data buyback belum tersedia.</div>';
+        return;
+    }
+
     var html = '<div class="flex justify-between py-3 border-b border-white/10 text-xs font-bold text-steel uppercase"><span>Supplier</span><span>Harga</span></div>';
 
     for (var i = 0; i < BUYBACK_RATES.length; i++) {
@@ -257,6 +290,8 @@ function renderBuyback() {
 // ====== PRODUCT MODAL ======
 function openProduct(idx) {
     var p = PRODUCTS[idx];
+    if (!p) return;
+    
     var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl">'
         : '<span class="text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
