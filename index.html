@@ -62,7 +62,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Loader JS (tetap dipertahankan, tapi akan ditimpa oleh inline loader) -->
+    <!-- Loader JS — Premium Loading Screen -->
     <script src="assets/js/loader.js" defer></script>
 
     <!-- Schema.org -->
@@ -104,159 +104,9 @@
     </script>
 
     <meta name="google-site-verification" content="hueLadxQV3ytbYXVwY32gKQ-DfvkyDTe_XkMoimWN5c">
-
-    <!-- ============================================================
-         INSTANT LOADER — INLINE (muncul langsung tanpa menunggu JS)
-         ============================================================ -->
-    <style>
-        /* Loader animasi */
-        #instantLoader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: #080A0F;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 16px;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            will-change: transform, opacity;
-        }
-        #instantLoader.hide {
-            opacity: 0;
-            transform: scale(1.05);
-            pointer-events: none;
-        }
-        #instantLoader .loader-ring {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #instantLoader .loader-ring .ring {
-            position: absolute;
-            inset: -6px;
-            border-radius: 50%;
-        }
-        #instantLoader .loader-ring .ring-inner {
-            position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            padding: 2px;
-            background: conic-gradient(from 0deg, transparent 0%, #C0C5CE 20%, #E2E8F0 40%, #94A3B8 60%, transparent 80%, transparent 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            animation: ringSpin 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-        }
-        #instantLoader .loader-ring .ring-border {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 1px solid rgba(192, 197, 206, 0.06);
-        }
-        #instantLoader .loader-logo {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-            position: relative;
-            z-index: 1;
-            border-radius: 50%;
-            background: #080A0F;
-            padding: 8px;
-            animation: logoPulse 2.5s ease-in-out infinite;
-        }
-        #instantLoader .loader-title {
-            font-family: 'Sora', sans-serif;
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.08em;
-            margin-top: 4px;
-        }
-        #instantLoader .loader-sub {
-            font-size: 11px;
-            color: #64748B;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-        #instantLoader .loader-bar-wrap {
-            width: 180px;
-            height: 2px;
-            background: rgba(192, 197, 206, 0.06);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 12px;
-        }
-        #instantLoader .loader-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
-            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 20px rgba(192, 197, 206, 0.2);
-        }
-        #instantLoader .loader-status {
-            font-size: 12px;
-            color: #64748B;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-top: 8px;
-        }
-
-        @keyframes ringSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.04); filter: brightness(1.1); }
-        }
-
-        @media (max-width: 768px) {
-            #instantLoader .loader-ring { width: 80px; height: 80px; }
-            #instantLoader .loader-logo { width: 50px; height: 50px; padding: 6px; }
-            #instantLoader .loader-title { font-size: 20px; }
-            #instantLoader .loader-bar-wrap { width: 140px; }
-            #instantLoader .loader-status { font-size: 10px; }
-        }
-        @media (max-width: 400px) {
-            #instantLoader .loader-ring { width: 64px; height: 64px; }
-            #instantLoader .loader-logo { width: 40px; height: 40px; padding: 5px; }
-            #instantLoader .loader-title { font-size: 17px; }
-        }
-    </style>
-
-    <!-- ===== INSTANT LOADER (langsung tampil, tanpa JS) ===== -->
-    <div id="instantLoader">
-        <div class="loader-ring">
-            <div class="ring">
-                <div class="ring-inner"></div>
-                <div class="ring-border"></div>
-            </div>
-            <img src="assets/images/logo.webp" alt="Veldion Silver" class="loader-logo">
-        </div>
-        <div class="loader-title">Veldion Silver</div>
-        <div class="loader-sub">Agregator Perak Fisik</div>
-        <div class="loader-bar-wrap">
-            <div class="loader-bar" id="loaderProgressBarInline"></div>
-        </div>
-        <div class="loader-status">Memuat</div>
-    </div>
 </head>
 
 <body class="bg-void text-gray-200 font-body">
-
-    <!-- ============================================================
-         SEMUA KONTEN UTAMA
-         ============================================================ -->
 
     <!-- Preload Logo -->
     <img src="assets/images/logo.webp" class="preload-logo" alt="Veldion Silver — Silver Bridge. Platform Agregator Perak Fisik" aria-hidden="true">
