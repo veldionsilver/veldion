@@ -18,7 +18,6 @@ function getSheetUrl(tabName) {
 
 // ============================================================
 // DATA STATIS — Ambil dari window (data.js)
-// JANGAN DEKLARASIKAN ULANG!
 // ============================================================
 console.log("✅ Data statis from window:", { 
     CATEGORIES: window.CATEGORIES ? window.CATEGORIES.length : 0,
