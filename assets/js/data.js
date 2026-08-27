@@ -10,9 +10,9 @@ const MARKET_OPEN = true;
 
 // 2. HARGA PASAR (update dari XAG/USD & XAG/IDR)
 const MARKET = {
-    xagUsd: "$66.99",
-    xagIdr: "~Rp54.275",
-    date: "20 Agustus 2026"
+    xagUsd: "$68.07",
+    xagIdr: "~Rp54.231",
+    date: "27 Agustus 2026"
 };
 
 // 3. PRODUK READY STOCK
@@ -26,7 +26,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "10gr",
         purity: "999.5",
-        price: "Rp809.000",
+        price: "Rp774.000",
         initial: "P",
         image: "assets/images/products/key-silver-press-10gr.webp",
         alt: "Veldion Silver — Perak fisik Press 10gr dari Key Silver, kemurnian 999.5"
@@ -37,7 +37,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "10gr",
         purity: "999",
-        price: "Rp799.000",
+        price: "Rp768.000",
         initial: "A",
         image: "assets/images/products/key-silver-argentum-10gr.webp",
         alt: "Veldion Silver — Perak fisik Argentum 10gr dari Key Silver, kemurnian 999"
@@ -48,7 +48,7 @@ const PRODUCTS = [
         supplier: "Key Silver",
         weight: "50gr",
         purity: "999.5",
-        price: "Rp2.759.000",
+        price: "Rp2.655.000",
         initial: "B",
         image: "assets/images/products/key-silver-bullion-klasik-50gr.webp",
         alt: "Veldion Silver — Perak fisik Bullion Klasik 50gr dari Key Silver, kemurnian 999.5"
@@ -70,7 +70,7 @@ const PRODUCTS = [
         supplier: "Silverium",
         weight: "3.3gr",
         purity: "999.9",
-        price: "Rp236.000",
+        price: "Rp230.000",
         initial: "P",
         image: "assets/images/products/silverium-reguler-3.3gr.webp",
         alt: "Veldion Silver — Perak fisik Reguler 3.3gr dari Silverium, kemurnian 999.9"
@@ -81,7 +81,7 @@ const PRODUCTS = [
         supplier: "Silverium",
         weight: "9.9gr",
         purity: "999.9",
-        price: "Rp667.000",
+        price: "Rp651.000",
         initial: "P",
         image: "assets/images/products/silverium-reguler-9.9gr.webp",
         alt: "Veldion Silver — Perak fisik Reguler 9.9gr dari Silverium, kemurnian 999.9"
@@ -92,7 +92,7 @@ const PRODUCTS = [
         supplier: "Silverium",
         weight: "3.11gr",
         purity: "999.9",
-        price: "Rp234.000",
+        price: "Rp229.000",
         initial: "C",
         image: "assets/images/products/silverium-coin-aba-1-dirham.webp",
         alt: "Veldion Silver — Perak fisik Coin ABA 1 Dirham dari Silverium, kemurnian 999.9"
@@ -103,7 +103,7 @@ const PRODUCTS = [
         supplier: "JSG",
         weight: "10gr",
         purity: "999.5",
-        price: "Rp722.000",
+        price: "Rp723.000",
         initial: "M",
         image: "assets/images/products/jsg-medalion-10gr.webp",
         alt: "Veldion Silver — Perak fisik Medalion 10gr dari JSG, kemurnian 999.5"
@@ -112,10 +112,10 @@ const PRODUCTS = [
 
 // 4. HARGA BUYBACK (update harian)
 const BUYBACK_RATES = [
-    { name: "Antam", price: "Rp 28.929/gr" },
-    { name: "Silverium", price: "Rp 40.640/gr" },
+    { name: "Antam", price: "Rp 28.905/gr" },
+    { name: "Silverium", price: "Rp 39.340/gr" },
     { name: "Key Silver", price: "Rp 39.000/gr" },
-    { name: "JSG / TDS", price: "Rp 38.700/gr" }
+    { name: "JSG / TDS", price: "Rp 38.800/gr" }
 ];
 
 // 5. STATISTIK
