@@ -2,11 +2,156 @@
 // Veldion Silver — App Logic
 // ============================================================
 
+// ====== KONFIGURASI SHEET ======
+const SHEET_ID = '1FqjCgrHRO9lXohk_ZasEANdSmJ_xBCjKmAq4mYxid5E';
+const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv`;
+
+// ====== DATA GLOBAL ======
+let sheetMarket = null;
+let sheetProducts = [];
+let sheetBuyback = [];
+let dataLoaded = false;
+
+// ====== DOMContentLoaded ======
 document.addEventListener("DOMContentLoaded", function() {
     if (typeof lucide !== "undefined") lucide.createIcons();
-    init();
+    fetchSheetData();
 });
 
+// ====== FETCH DATA DARI GOOGLE SHEETS ======
+function fetchSheetData() {
+    // Ambil data dari 3 tab sekaligus
+    const tabs = ['Market', 'Products', 'Buyback'];
+    const promises = tabs.map(tab => 
+        fetch(`${SHEET_URL}&sheet=${tab}`)
+            .then(res => res.text())
+            .then(csv => parseCSV(csv))
+            .catch(err => {
+                console.warn(`Gagal fetch tab ${tab}:`, err);
+                return [];
+            })
+    );
+
+    Promise.all(promises)
+        .then(results => {
+            const [marketData, productsData, buybackData] = results;
+            
+            // Proses Market
+            if (marketData.length > 0) {
+                const row = marketData[0];
+                sheetMarket = {
+                    xagUsd: row.xagUsd || MARKET.xagUsd,
+                    xagIdr: row.xagIdr || MARKET.xagIdr,
+                    date: row.date || MARKET.date,
+                    marketOpen: row.marketOpen === 'TRUE' || row.marketOpen === 'true' || row.marketOpen === true
+                };
+                // Update global MARKET
+                Object.assign(MARKET, sheetMarket);
+                MARKET_OPEN = sheetMarket.marketOpen;
+            }
+
+            // Proses Products
+            if (productsData.length > 0) {
+                sheetProducts = productsData.map(row => {
+                    // Cari image & alt dari data.js berdasarkan nama produk
+                    const imgData = PRODUCT_IMAGES[row.name] || {};
+                    return {
+                        name: row.name || '',
+                        category: row.category || 'Umum',
+                        supplier: row.supplier || '-',
+                        weight: row.weight || '-',
+                        purity: row.purity || '-',
+                        price: row.price || 'Rp -',
+                        image: imgData.image || null,
+                        alt: imgData.alt || row.name || '',
+                        initial: (row.name || 'P').charAt(0).toUpperCase()
+                    };
+                });
+                // Update global PRODUCTS
+                PRODUCTS.length = 0;
+                PRODUCTS.push(...sheetProducts);
+            }
+
+            // Proses Buyback
+            if (buybackData.length > 0) {
+                sheetBuyback = buybackData.map(row => ({
+                    name: row.name || '-',
+                    price: row.price || 'Rp -'
+                }));
+                // Update global BUYBACK_RATES
+                BUYBACK_RATES.length = 0;
+                BUYBACK_RATES.push(...sheetBuyback);
+            }
+
+            dataLoaded = true;
+            init();
+        })
+        .catch(err => {
+            console.error('Gagal fetch data sheet:', err);
+            // Fallback ke data.js
+            init();
+        });
+}
+
+// ====== PARSE CSV ======
+function parseCSV(csv) {
+    const lines = csv.split('\n').filter(line => line.trim() !== '');
+    if (lines.length < 2) return [];
+
+    // Parse header
+    let headers = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let j = 0; j < lines[0].length; j++) {
+        const char = lines[0][j];
+        if (char === '"') { 
+            inQuotes = !inQuotes; 
+            continue; 
+        }
+        if (char === ',' && !inQuotes) {
+            headers.push(current.trim());
+            current = '';
+            continue;
+        }
+        current += char;
+    }
+    headers.push(current.trim());
+
+    // Parse data
+    const result = [];
+    for (let i = 1; i < lines.length; i++) {
+        const values = [];
+        current = '';
+        inQuotes = false;
+        const line = lines[i];
+        
+        for (let j = 0; j < line.length; j++) {
+            const char = line[j];
+            if (char === '"') { 
+                inQuotes = !inQuotes; 
+                continue; 
+            }
+            if (char === ',' && !inQuotes) {
+                values.push(current.trim());
+                current = '';
+                continue;
+            }
+            current += char;
+        }
+        values.push(current.trim());
+
+        const row = {};
+        headers.forEach((h, idx) => {
+            row[h] = values[idx] || '';
+        });
+        result.push(row);
+    }
+
+    return result;
+}
+
+// ====== INIT ======
 function init() {
     setMarket(MARKET_OPEN);
     setText("xagUsd", MARKET.xagUsd);
@@ -60,7 +205,6 @@ function renderProducts() {
     for (var i = 0; i < PRODUCTS.length; i++) {
         (function(idx) {
             var p = PRODUCTS[idx];
-            // ===== PERBAIKAN: pakai p.alt kalau ada, fallback ke p.name =====
             var imgHtml = p.image
                 ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl" loading="lazy">'
                 : '<span class="text-2xl md:text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
@@ -113,7 +257,6 @@ function renderBuyback() {
 // ====== PRODUCT MODAL ======
 function openProduct(idx) {
     var p = PRODUCTS[idx];
-    // ===== PERBAIKAN: pakai p.alt kalau ada, fallback ke p.name =====
     var imgHtml = p.image
         ? '<img src="' + p.image + '" alt="' + (p.alt || p.name) + '" class="w-full h-full object-cover rounded-xl">'
         : '<span class="text-3xl font-display font-bold text-silver-gradient">' + p.initial + '</span>';
