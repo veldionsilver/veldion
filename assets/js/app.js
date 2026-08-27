@@ -164,6 +164,15 @@ function renderMarketPrices() {
     setText("xagUsdMobile", marketData.xagUsd);
     setText("xagIdrMobile", marketData.xagIdr);
     setText("buybackDate", marketData.date);
+    
+    // ===== DESKTOP DATE =====
+    setText("headerDate", marketData.date);
+    
+    // ===== MOBILE FLOATING DATE =====
+    const floatingDate = document.getElementById("floatingDate");
+    if (floatingDate) {
+        floatingDate.textContent = marketData.date;
+    }
 }
 
 function renderProducts() {
