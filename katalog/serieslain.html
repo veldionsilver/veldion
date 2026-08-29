@@ -322,11 +322,13 @@
             transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             margin-top: 24px;
+            display: none;
         }
         @media (min-width: 640px) {
             .product-list-wrap { margin-top: 32px; }
         }
         .product-list-wrap.visible {
+            display: block;
             opacity: 1;
             transform: translateY(0);
         }
@@ -445,6 +447,7 @@
         @media (min-width: 640px) {
             .modal-content .modal-sub { font-size: 13px; margin-bottom: 16px; }
         }
+
         .modal-content .detail-row {
             display: flex;
             justify-content: space-between;
@@ -484,6 +487,7 @@
         @media (min-width: 640px) {
             .modal-content .detail-row .value.price { font-size: 20px; }
         }
+
         .modal-content .wa-btn {
             display: flex;
             align-items: center;
@@ -539,17 +543,15 @@
             }
         }
         .modal-image .placeholder {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             font-family: 'Sora', sans-serif;
-            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #94A3B8;
+            letter-spacing: 0.5px;
         }
         @media (min-width: 769px) {
             .modal-image .placeholder {
-                font-size: 36px;
+                font-size: 28px;
             }
         }
 
@@ -678,12 +680,12 @@
     <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
-            <button id="closeProductModal" class="absolute top-4 right-4 text-steel hover:text-white">
+            <button id="closeProductModal" class="close-btn">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             <div class="flex items-center gap-4 mb-5">
                 <div class="modal-image" id="modalImageContainer">
-                    <span class="placeholder">P</span>
+                    <span class="placeholder" id="modalInitial">SOS</span>
                 </div>
                 <div>
                     <h3 class="font-display text-lg md:text-xl font-bold text-white" id="modalName">Produk</h3>
@@ -691,13 +693,13 @@
                 </div>
             </div>
             <div class="space-y-2 md:space-y-3 mb-5 md:mb-6">
-                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Supplier</span><span class="text-white font-medium text-sm" id="modalSupplier">-</span></div>
-                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Berat</span><span class="text-white font-medium text-sm" id="modalWeight">-</span></div>
-                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Kadar</span><span class="text-white font-medium text-sm" id="modalPurity">-</span></div>
-                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Buyback</span><span class="text-white font-medium text-sm" id="modalBuyback">-</span></div>
-                <div class="flex justify-between py-2"><span class="text-steel text-sm">Harga</span><span class="text-xl font-display font-bold text-silver-gradient" id="modalPrice">-</span></div>
+                <div class="detail-row"><span class="label">Supplier</span><span class="value" id="modalSupplier">-</span></div>
+                <div class="detail-row"><span class="label">Berat</span><span class="value" id="modalWeight">-</span></div>
+                <div class="detail-row"><span class="label">Kadar</span><span class="value" id="modalPurity">-</span></div>
+                <div class="detail-row"><span class="label">Buyback</span><span class="value" id="modalBuyback">-</span></div>
+                <div class="detail-row"><span class="label">Harga</span><span class="value price" id="modalPrice">-</span></div>
             </div>
-            <a id="modalLink" href="#" target="_blank" class="w-full py-3.5 md:py-4 bg-gradient-to-r from-silver-light to-silver text-void font-bold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(192,197,206,0.3)] transition btn-shine text-sm md:text-base">
+            <a id="modalLink" href="#" target="_blank" class="wa-btn">
                 <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
                 Tanya Stok via WhatsApp
             </a>
@@ -717,6 +719,7 @@
 
         let products = [];
         let currentSupplier = null;
+        let isListVisible = false;
 
         // ============================================================
         // FETCH DATA
@@ -745,9 +748,6 @@
                 loading.style.display = 'none';
                 console.log(`✅ ${products.length} produk dimuat dari SERIESLAIN`);
 
-                // Tampilkan produk SOSSilver
-                showSupplier('SOSSilver');
-
             } catch (err) {
                 console.error('❌ Fetch error:', err);
                 loading.style.display = 'none';
@@ -763,7 +763,7 @@
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
             const result = [];
 
             for (let i = 1; i < lines.length; i++) {
@@ -772,7 +772,7 @@
                 header.forEach((key, idx) => {
                     obj[key] = values[idx] || '';
                 });
-                if (obj['Nama Produk'] || obj['nama produk'] || obj['name']) {
+                if (obj['nama produk'] || obj['name']) {
                     result.push(obj);
                 }
             }
@@ -781,16 +781,24 @@
         }
 
         // ============================================================
-        // SHOW SUPPLIER + SCROLL
+        // TOGGLE SUPPLIER LIST
         // ============================================================
-        function showSupplier(supplierName) {
-            currentSupplier = supplierName;
+        function toggleSupplier(supplierName) {
             const listWrap = document.getElementById('productList');
             const itemsContainer = document.getElementById('productItems');
             const countEl = document.getElementById('productCount');
 
+            // Jika list sedang terbuka dan supplier sama → tutup
+            if (isListVisible && currentSupplier === supplierName) {
+                listWrap.classList.remove('visible');
+                isListVisible = false;
+                currentSupplier = null;
+                return;
+            }
+
+            // Filter produk
             const filtered = products.filter(p => {
-                const sup = p['Supplier'] || p.supplier || p['supplier'] || '';
+                const sup = p.supplier || p['supplier'] || '';
                 return sup.toLowerCase() === supplierName.toLowerCase();
             });
 
@@ -798,6 +806,8 @@
                 itemsContainer.innerHTML = `<p class="text-steel text-center py-6 md:py-8">Belum ada produk dari supplier ini.</p>`;
                 countEl.textContent = '0 produk';
                 listWrap.classList.add('visible');
+                isListVisible = true;
+                currentSupplier = supplierName;
                 return;
             }
 
@@ -805,7 +815,7 @@
 
             let html = '';
             filtered.forEach((p, idx) => {
-                const name = p['Nama Produk'] || p['nama produk'] || p['name'] || 'Produk';
+                const name = p['nama produk'] || p['name'] || 'Produk';
                 html += `
                     <div class="product-item" data-idx="${idx}">
                         <span class="name">${name}</span>
@@ -818,13 +828,26 @@
 
             itemsContainer.innerHTML = html;
             listWrap.classList.add('visible');
+            isListVisible = true;
+            currentSupplier = supplierName;
 
+            // Event listener untuk setiap produk
             document.querySelectorAll('.product-item').forEach(el => {
-                el.addEventListener('click', function() {
+                el.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     const idx = parseInt(this.dataset.idx);
                     openModal(filtered[idx]);
                 });
             });
+
+            // Scroll ke list
+            setTimeout(() => {
+                if (listWrap.classList.contains('visible')) {
+                    const offset = 80;
+                    const top = listWrap.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            }, 350);
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
@@ -835,16 +858,19 @@
         function openModal(product) {
             const p = product;
 
-            document.getElementById('modalName').textContent = p['Nama Produk'] || p['nama produk'] || p['name'] || 'Produk';
-            document.getElementById('modalCategory').textContent = p['Kategori'] || p.kategori || p['category'] || 'Reguler';
-            document.getElementById('modalSupplier').textContent = p['Supplier'] || p.supplier || p['supplier'] || '-';
-            document.getElementById('modalWeight').textContent = (p['Berat (gr)'] || p['berat (gr)'] || p['berat'] || p['weight'] || '-') + 'gr';
-            document.getElementById('modalPurity').textContent = p['Kadar'] || p.kadar || p['purity'] || '-';
-            document.getElementById('modalBuyback').textContent = p['Buyback'] || p.buyback || p['buyback'] || '-';
-            document.getElementById('modalPrice').textContent = p['Harga'] || p.harga || p['price'] || 'Rp -';
+            document.getElementById('modalName').textContent = p['nama produk'] || p['name'] || 'Produk';
+            document.getElementById('modalCategory').textContent = p['kategori'] || p['category'] || 'Reguler';
+            document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
+            document.getElementById('modalWeight').textContent = (p['berat'] || p['weight'] || '-') + 'gr';
+            document.getElementById('modalPurity').textContent = p['kadar'] || p['purity'] || '-';
+            document.getElementById('modalBuyback').textContent = p['buyback'] || '-';
+            document.getElementById('modalPrice').textContent = p['harga'] || p['price'] || 'Rp -';
 
-            const name = p['Nama Produk'] || p['nama produk'] || p['name'] || 'Produk';
-            const category = p['Kategori'] || p.kategori || p['category'] || 'Reguler';
+            // Set initial SOS
+            document.getElementById('modalInitial').textContent = 'SOS';
+
+            const name = p['nama produk'] || p['name'] || 'Produk';
+            const category = p['kategori'] || p['category'] || 'Reguler';
             const waMsg = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(name)}%20(${category})`;
             document.getElementById('modalLink').href = `https://wa.me/628137271517?text=${waMsg}`;
 
@@ -862,18 +888,27 @@
         // EVENT LISTENERS
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('cardSOSSilver').addEventListener('click', function() {
-                showSupplier('SOSSilver');
-                setTimeout(() => {
-                    const list = document.getElementById('productList');
-                    if (list && list.classList.contains('visible')) {
-                        const offset = 80;
-                        const top = list.getBoundingClientRect().top + window.pageYOffset - offset;
-                        window.scrollTo({ top, behavior: 'smooth' });
-                    }
-                }, 350);
+            // Card SOSSilver — toggle
+            document.getElementById('cardSOSSilver').addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleSupplier('SOSSilver');
             });
 
+            // Klik di luar list → tutup list
+            document.addEventListener('click', function(e) {
+                const listWrap = document.getElementById('productList');
+                const card = document.getElementById('cardSOSSilver');
+
+                if (isListVisible && 
+                    !listWrap.contains(e.target) && 
+                    !card.contains(e.target)) {
+                    listWrap.classList.remove('visible');
+                    isListVisible = false;
+                    currentSupplier = null;
+                }
+            });
+
+            // Modal close
             document.getElementById('closeProductModal').addEventListener('click', closeModal);
             document.getElementById('productModal').addEventListener('click', function(e) {
                 if (e.target.id === 'productModal') closeModal();
@@ -882,13 +917,11 @@
                 if (e.key === 'Escape') closeModal();
             });
 
+            // Fetch data
             fetchData();
+
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
-
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            // sudah dihandle di atas
-        }
     </script>
 
 </body>
