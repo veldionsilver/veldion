@@ -62,10 +62,8 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        /* ================================================================
-           BACKGROUND LUXURY — Vignette + Diagonal Stripes + Parallax
-           ================================================================ */
-        .bg-luxury {
+        /* ===== AURA BACKGROUND ===== */
+        .bg-aura {
             position: fixed;
             inset: 0;
             z-index: 0;
@@ -73,23 +71,23 @@
             overflow: hidden;
         }
 
-        /* Vignette — fokus ke tengah */
-        .bg-luxury .vignette {
+        /* Vignette overlay — tambahan elegan */
+        .bg-aura .vignette {
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at center, rgba(192,197,206,0.06) 0%, rgba(192,197,206,0.015) 35%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(192,197,206,0.05) 0%, rgba(192,197,206,0.015) 35%, transparent 70%);
+            z-index: 2;
         }
 
-        /* Parallax layer untuk stripes */
-        .bg-luxury .parallax-layer {
+        /* Diagonal stripes — tambahan mewah */
+        .bg-aura .stripes-layer {
             position: absolute;
             inset: 0;
+            z-index: 1;
             transition: transform 0.08s ease-out;
             will-change: transform;
         }
-
-        /* Diagonal stripes — lebih sedikit & elegan */
-        .bg-luxury .stripes {
+        .bg-aura .stripes {
             position: absolute;
             inset: 0;
             background: 
@@ -97,8 +95,8 @@
                     45deg,
                     transparent,
                     transparent 80px,
-                    rgba(192,197,206,0.015) 80px,
-                    rgba(192,197,206,0.03) 81px,
+                    rgba(192,197,206,0.012) 80px,
+                    rgba(192,197,206,0.025) 81px,
                     transparent 81px,
                     transparent 160px
                 ),
@@ -106,91 +104,81 @@
                     -45deg,
                     transparent,
                     transparent 80px,
-                    rgba(192,197,206,0.01) 80px,
-                    rgba(192,197,206,0.025) 81px,
+                    rgba(192,197,206,0.008) 80px,
+                    rgba(192,197,206,0.02) 81px,
                     transparent 81px,
                     transparent 160px
                 );
         }
 
-        /* Orb silver — glow lembut */
-        .bg-luxury .orb {
+        .bg-aura .gem-line {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
             will-change: transform, opacity;
+            opacity: 0.06;
+            z-index: 0;
         }
-        .bg-luxury .orb:nth-child(4) {
-            width: 60vw;
-            height: 60vw;
-            max-width: 700px;
-            max-height: 700px;
+        .bg-aura .gem-line:nth-child(3) {
+            width: 700px;
+            height: 700px;
             top: -20%;
-            left: -25%;
-            background: radial-gradient(circle, rgba(192,197,206,0.12), transparent 70%);
-            animation: orbFloat1 18s ease-in-out infinite alternate;
+            left: -20%;
+            background: radial-gradient(circle at 30% 40%, rgba(192,197,206,0.15), transparent 70%);
+            animation: gemFloat1 20s ease-in-out infinite alternate;
         }
-        .bg-luxury .orb:nth-child(5) {
-            width: 50vw;
-            height: 50vw;
-            max-width: 550px;
-            max-height: 550px;
-            bottom: -20%;
-            right: -20%;
-            background: radial-gradient(circle, rgba(192,197,206,0.08), transparent 65%);
-            animation: orbFloat2 22s ease-in-out infinite alternate;
+        .bg-aura .gem-line:nth-child(4) {
+            width: 600px;
+            height: 600px;
+            bottom: -15%;
+            right: -15%;
+            background: radial-gradient(circle at 70% 60%, rgba(192,197,206,0.1), transparent 65%);
+            animation: gemFloat2 22s ease-in-out infinite alternate;
         }
-        .bg-luxury .orb:nth-child(6) {
-            width: 30vw;
-            height: 30vw;
-            max-width: 350px;
-            max-height: 350px;
-            top: 35%;
+        .bg-aura .gem-line:nth-child(5) {
+            width: 500px;
+            height: 500px;
+            top: 30%;
             left: 50%;
-            transform: translate(-50%, -35%);
-            background: radial-gradient(circle, rgba(192,197,206,0.06), transparent 60%);
-            animation: orbFloat3 16s ease-in-out infinite alternate;
+            transform: translate(-50%, -30%);
+            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.08), transparent 60%);
+            animation: gemFloat3 18s ease-in-out infinite alternate;
+        }
+        .bg-aura .gem-line:nth-child(6) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            background: radial-gradient(circle at 60% 40%, rgba(192,197,206,0.12), transparent 60%);
+            animation: gemFloat1 16s ease-in-out infinite alternate-reverse;
+        }
+        .bg-aura .gem-line:nth-child(7) {
+            width: 400px;
+            height: 400px;
+            bottom: 20%;
+            left: 5%;
+            background: radial-gradient(circle at 40% 60%, rgba(192,197,206,0.07), transparent 55%);
+            animation: gemFloat2 24s ease-in-out infinite alternate-reverse;
+        }
+        .bg-aura .gem-line:nth-child(8) {
+            width: 200px;
+            height: 200px;
+            top: 55%;
+            right: 20%;
+            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.15), transparent 50%);
+            animation: gemFloat3 14s ease-in-out infinite alternate;
         }
 
-        @keyframes orbFloat1 {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.25; }
-            100% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
+        @keyframes gemFloat1 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.04; }
+            100% { transform: translate(50px, -30px) scale(1.1) rotate(5deg); opacity: 0.08; }
         }
-        @keyframes orbFloat2 {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
-            100% { transform: translate(-40px, 40px) scale(1.15); opacity: 0.4; }
+        @keyframes gemFloat2 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.03; }
+            100% { transform: translate(-40px, 40px) scale(1.15) rotate(-5deg); opacity: 0.07; }
         }
-        @keyframes orbFloat3 {
-            0% { transform: translate(-50%, -35%) scale(1); opacity: 0.12; }
-            100% { transform: translate(-50%, -35%) scale(1.2); opacity: 0.35; }
-        }
-
-        /* Shimmer particles */
-        .bg-luxury .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(192,197,206,0.3);
-            border-radius: 50%;
-            animation: particleDrift linear infinite;
-        }
-        .bg-luxury .particle:nth-child(7) { left: 10%; top: 20%; animation-duration: 14s; animation-delay: 0s; width: 3px; height: 3px; }
-        .bg-luxury .particle:nth-child(8) { left: 25%; top: 60%; animation-duration: 18s; animation-delay: 2s; }
-        .bg-luxury .particle:nth-child(9) { left: 45%; top: 10%; animation-duration: 12s; animation-delay: 4s; width: 4px; height: 4px; }
-        .bg-luxury .particle:nth-child(10) { left: 65%; top: 75%; animation-duration: 20s; animation-delay: 1s; }
-        .bg-luxury .particle:nth-child(11) { left: 80%; top: 30%; animation-duration: 16s; animation-delay: 3s; width: 3px; height: 3px; }
-        .bg-luxury .particle:nth-child(12) { left: 15%; top: 85%; animation-duration: 22s; animation-delay: 5s; }
-        .bg-luxury .particle:nth-child(13) { left: 55%; top: 50%; animation-duration: 13s; animation-delay: 7s; width: 4px; height: 4px; }
-        .bg-luxury .particle:nth-child(14) { left: 90%; top: 55%; animation-duration: 17s; animation-delay: 2s; }
-        .bg-luxury .particle:nth-child(15) { left: 35%; top: 35%; animation-duration: 15s; animation-delay: 6s; }
-        .bg-luxury .particle:nth-child(16) { left: 70%; top: 15%; animation-duration: 19s; animation-delay: 4s; width: 3px; height: 3px; }
-
-        @keyframes particleDrift {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.05; }
-            25% { transform: translate(40px, -20px) scale(1.8); opacity: 0.5; }
-            50% { transform: translate(-30px, 30px) scale(0.6); opacity: 0.1; }
-            75% { transform: translate(50px, 15px) scale(1.5); opacity: 0.4; }
-            100% { transform: translate(-15px, -25px) scale(1); opacity: 0.05; }
+        @keyframes gemFloat3 {
+            0% { transform: translate(-50%, -30%) scale(1) rotate(0deg); opacity: 0.02; }
+            100% { transform: translate(-50%, -30%) scale(1.2) rotate(8deg); opacity: 0.06; }
         }
 
         .glass-card {
@@ -806,25 +794,22 @@
 </head>
 <body>
 
-    <!-- ===== BACKGROUND LUXURY ===== -->
-    <div class="bg-luxury" aria-hidden="true">
+    <div class="bg-aura">
+        <!-- Vignette overlay -->
         <div class="vignette"></div>
-        <div class="parallax-layer" id="parallaxStripes">
+
+        <!-- Diagonal stripes dengan parallax -->
+        <div class="stripes-layer" id="parallaxStripes">
             <div class="stripes"></div>
         </div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+
+        <!-- Gem lines original -->
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
     </div>
 
     <header class="desktop-nav">
