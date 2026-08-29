@@ -716,13 +716,14 @@
         }
 
         // ============================================================
-        // PARSE CSV
+        // PARSE CSV — TIDAK MENGUBAH HEADER KE LOWERCASE
         // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+            // ===== PENTING: HEADER TETAP DENGAN HURUF BESAR/KECIL ASLI =====
+            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
             const result = [];
 
             for (let i = 1; i < lines.length; i++) {
@@ -731,7 +732,8 @@
                 header.forEach((key, idx) => {
                     obj[key] = values[idx] || '';
                 });
-                if (obj['nama produk'] || obj['name']) {
+                // Cek apakah ada kolom "Nama Produk" (dengan huruf besar) atau "nama produk"
+                if (obj['Nama Produk'] || obj['nama produk'] || obj['name']) {
                     result.push(obj);
                 }
             }
@@ -749,7 +751,8 @@
             const countEl = document.getElementById('productCount');
 
             const filtered = products.filter(p => {
-                const sup = p.supplier || p['supplier'] || '';
+                // Cek kolom "Supplier" (dengan huruf besar S)
+                const sup = p['Supplier'] || p.supplier || p['supplier'] || '';
                 return sup.toLowerCase() === supplierName.toLowerCase();
             });
 
@@ -764,7 +767,7 @@
 
             let html = '';
             filtered.forEach((p, idx) => {
-                const name = p['nama produk'] || p['name'] || 'Produk';
+                const name = p['Nama Produk'] || p['nama produk'] || p['name'] || 'Produk';
                 html += `
                     <div class="product-item" data-idx="${idx}">
                         <span class="name">${name}</span>
@@ -793,15 +796,16 @@
         // MODAL
         // ============================================================
         function openModal(product) {
-            const name = product['nama produk'] || product['name'] || 'Produk';
-            const supplier = product.supplier || product['supplier'] || '-';
-            const weight = product['berat (gr)'] || product['berat'] || product['weight'] || '-';
-            const purity = product.kadar || product['purity'] || '-';
-            const supplierPrice = product['harga supplier'] || product['harga_supplier'] || '-';
-            const price = product.harga || product['price'] || '-';
-            const fluctuation = product.fluktuasi || product['fluctuation'] || '-';
-            const buyback = product.buyback || product['buyback'] || '-';
-            const category = product.kategori || product['category'] || 'Reguler';
+            // ===== PAKAI HEADER SESUAI DI SHEETS =====
+            const name = product['Nama Produk'] || product['nama produk'] || product['name'] || 'Produk';
+            const supplier = product['Supplier'] || product.supplier || product['supplier'] || '-';
+            const weight = product['Berat (gr)'] || product['berat (gr)'] || product['berat'] || product['weight'] || '-';
+            const purity = product['Kadar'] || product.kadar || product['purity'] || '-';
+            const supplierPrice = product['Harga Supplier'] || product['harga supplier'] || product['harga_supplier'] || '-';
+            const price = product['Harga'] || product.harga || product['price'] || '-';
+            const fluctuation = product['Fluktuasi'] || product.fluktuasi || product['fluctuation'] || '-';
+            const buyback = product['Buyback'] || product.buyback || product['buyback'] || '-';
+            const category = product['Kategori'] || product.kategori || product['category'] || 'Reguler';
 
             document.getElementById('modalName').textContent = name;
             document.getElementById('modalCategory').textContent = category;
