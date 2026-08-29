@@ -62,7 +62,6 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        /* ===== AURA BACKGROUND ===== */
         .bg-aura {
             position: fixed;
             inset: 0;
@@ -70,16 +69,12 @@
             pointer-events: none;
             overflow: hidden;
         }
-
-        /* Vignette overlay */
         .bg-aura .vignette {
             position: absolute;
             inset: 0;
             background: radial-gradient(ellipse at center, rgba(192,197,206,0.05) 0%, rgba(192,197,206,0.015) 35%, transparent 70%);
             z-index: 2;
         }
-
-        /* Diagonal stripes */
         .bg-aura .stripes-layer {
             position: absolute;
             inset: 0;
@@ -91,26 +86,9 @@
             position: absolute;
             inset: 0;
             background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 80px,
-                    rgba(192,197,206,0.012) 80px,
-                    rgba(192,197,206,0.025) 81px,
-                    transparent 81px,
-                    transparent 160px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 80px,
-                    rgba(192,197,206,0.008) 80px,
-                    rgba(192,197,206,0.02) 81px,
-                    transparent 81px,
-                    transparent 160px
-                );
+                repeating-linear-gradient(45deg, transparent, transparent 80px, rgba(192,197,206,0.012) 80px, rgba(192,197,206,0.025) 81px, transparent 81px, transparent 160px),
+                repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(192,197,206,0.008) 80px, rgba(192,197,206,0.02) 81px, transparent 81px, transparent 160px);
         }
-
         .bg-aura .gem-line {
             position: absolute;
             border-radius: 50%;
@@ -292,7 +270,6 @@
             transform: translateY(-1px);
         }
 
-        /* ===== SUPPLIER CARD ===== */
         .supplier-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -329,7 +306,6 @@
             .supplier-card { padding: 36px 24px; min-height: 160px; border-radius: 20px; }
         }
 
-        /* ===== SHIMMER OTOMATIS — PELAN ===== */
         .supplier-card::before {
             content: '';
             position: absolute;
@@ -498,7 +474,6 @@
             50% { opacity: 1; }
         }
 
-        /* ===== PRODUCT LIST ===== */
         .product-list-wrap {
             opacity: 0;
             transform: translateY(20px) scale(0.98);
@@ -571,7 +546,6 @@
             transform: translateX(3px);
         }
 
-        /* ===== MODAL — TETAP DI TENGAH ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -791,15 +765,10 @@
 <body>
 
     <div class="bg-aura">
-        <!-- Vignette overlay -->
         <div class="vignette"></div>
-
-        <!-- Diagonal stripes dengan parallax -->
         <div class="stripes-layer" id="parallaxStripes">
             <div class="stripes"></div>
         </div>
-
-        <!-- Gem lines -->
         <div class="gem-line"></div>
         <div class="gem-line"></div>
         <div class="gem-line"></div>
@@ -925,6 +894,7 @@
         let products = [];
         let currentSupplier = null;
         let isListVisible = false;
+        let isClosingModal = false;
 
         async function fetchData() {
             const loading = document.getElementById('loadingIndicator');
@@ -1077,9 +1047,6 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // ============================================================
-        // FORMATTER UNTUK INDONESIA
-        // ============================================================
         function formatPurity(value) {
             if (!value) return '-';
             return value.toString().replace(/\./g, ',');
@@ -1117,6 +1084,10 @@
         function closeModal() {
             document.getElementById('productModal').classList.remove('active');
             document.body.classList.remove('no-scroll');
+            isClosingModal = true;
+            setTimeout(() => {
+                isClosingModal = false;
+            }, 300);
         }
 
         function initParallax() {
@@ -1209,9 +1180,8 @@
                 const card = document.getElementById('cardSOSSilver');
                 const modal = document.getElementById('productModal');
 
-                if (modal.classList.contains('active')) {
-                    return;
-                }
+                if (modal.classList.contains('active')) return;
+                if (isClosingModal) return;
 
                 if (isListVisible && 
                     !listWrap.contains(e.target) && 
