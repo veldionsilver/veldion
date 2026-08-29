@@ -5,7 +5,7 @@
   "start_url": "/veldion/",
   "display": "standalone",
   "background_color": "#0C0F14",
-  "theme_color": "#14B8A6",
+  "theme_color": "#0C0F14",
   "orientation": "portrait-primary",
   "scope": "/veldion/",
   "lang": "id",
