@@ -62,7 +62,7 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        /* ===== AURA BACKGROUND — ELEGAN ===== */
+        /* ===== AURA BACKGROUND ===== */
         .bg-aura {
             position: fixed;
             inset: 0;
@@ -529,7 +529,7 @@
             transform: translateX(3px);
         }
 
-        /* ===== MODAL ===== */
+        /* ===== MODAL — TETAP DI TENGAH ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -561,6 +561,7 @@
             .modal-content { padding: 28px; }
         }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
         .modal-content .close-btn {
             position: absolute;
             top: 14px;
@@ -576,6 +577,7 @@
             .modal-content .close-btn { top: 16px; right: 16px; }
         }
         .modal-content .close-btn:hover { color: white; }
+
         .modal-content .modal-title {
             font-family: 'Sora', sans-serif;
             font-size: 16px;
