@@ -757,22 +757,59 @@
         }
 
         // ============================================================
-        // PARSE CSV
+        // PARSE CSV - PERBAIKAN
         // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+            // Parse header dengan benar (handle koma dalam data)
+            const header = [];
+            let current = '';
+            let inQuotes = false;
+            const headerLine = lines[0];
+            
+            for (let char of headerLine) {
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    header.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            header.push(current.trim());
+
             const result = [];
 
             for (let i = 1; i < lines.length; i++) {
-                const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+                const values = [];
+                let currentVal = '';
+                let inQuotesVal = false;
+                const line = lines[i];
+                
+                for (let char of line) {
+                    if (char === '"') {
+                        inQuotesVal = !inQuotesVal;
+                    } else if (char === ',' && !inQuotesVal) {
+                        values.push(currentVal.trim());
+                        currentVal = '';
+                    } else {
+                        currentVal += char;
+                    }
+                }
+                values.push(currentVal.trim());
+                
                 const obj = {};
                 header.forEach((key, idx) => {
-                    obj[key] = values[idx] || '';
+                    // Bersihkan header dari karakter aneh
+                    const cleanKey = key.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+                    obj[cleanKey] = values[idx] || '';
                 });
-                if (obj['nama produk'] || obj['kode produk']) {
+                
+                // Cek apakah ini data valid (punya kode produk atau nama produk)
+                if (obj['kode produk'] || obj['nama produk']) {
                     result.push(obj);
                 }
             }
@@ -854,7 +891,7 @@
         function openModal(product) {
             const p = product;
 
-            // Gunakan field yang SESUAI dengan header CSV Anda
+            // Mapping field sesuai header: supplier(D), berat(C), kadar(G), buyback(J), harga(H)
             document.getElementById('modalName').textContent = p['nama produk'] || 'Produk';
             document.getElementById('modalCategory').textContent = p['supplier'] || 'Reguler';
             document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
