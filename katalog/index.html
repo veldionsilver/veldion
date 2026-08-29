@@ -8,7 +8,6 @@
     <meta name="description" content="Katalog lengkap perak fisik dari Silverium, Key Silver, dan JSG. Stok ready, harga update harian, buyback tersedia. Cek semua produk Veldion Silver di sini.">
     <link rel="canonical" href="https://veldionsilver.github.io/veldion/katalog/">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://veldionsilver.github.io/veldion/katalog/">
     <meta property="og:title" content="Katalog Perak Fisik Ready Stock - Veldion Silver">
@@ -16,7 +15,6 @@
     <meta property="og:image" content="https://veldionsilver.github.io/veldion/assets/images/og-image.webp">
     <meta property="og:site_name" content="Veldion Silver">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Katalog Perak Fisik Ready Stock - Veldion Silver">
     <meta name="twitter:description" content="Katalog lengkap perak fisik dari Silverium, Key Silver, dan JSG. Stok ready, harga update harian.">
@@ -178,7 +176,6 @@
             transform: translateY(-1px);
         }
 
-        /* ===== PRODUCT CARD ===== */
         .product-card {
             position: relative;
             cursor: pointer;
@@ -227,7 +224,6 @@
         }
         @media (min-width: 769px) { .product-badge { top: 12px; right: 12px; padding: 4px 12px; font-size: 9px; } }
 
-        /* ===== IMAGE WRAPPER ===== */
         .product-image-wrapper {
             width: 80px;
             height: 80px;
@@ -294,7 +290,6 @@
         }
         @media (min-width: 769px) { .product-price { font-size: 17px; } }
 
-        /* ===== FILTER ===== */
         .filter-bar {
             display: flex;
             flex-wrap: wrap;
@@ -370,7 +365,6 @@
         .filter-reset svg { width: 12px; height: 12px; }
         @media (min-width: 769px) { .filter-reset svg { width: 14px; height: 14px; } }
 
-        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -401,7 +395,6 @@
         @media (min-width: 769px) { .modal-content { padding: 32px; max-width: 440px; } }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
 
-        /* ===== MODAL IMAGE ===== */
         .modal-image {
             width: 80px;
             height: 80px;
@@ -444,7 +437,6 @@
             }
         }
 
-        /* ===== LOADING ===== */
         .spinner {
             width: 36px;
             height: 36px;
@@ -531,6 +523,14 @@
             text-decoration: none;
             transition: all .3s ease;
         }
+        
+        .btn-download-glow {
+            animation: glowPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(192,197,206,0.05); }
+            50% { box-shadow: 0 0 20px rgba(192,197,206,0.12); }
+        }
         @media (min-width: 769px) {
             .btn-download {
                 padding: 14px 32px;
@@ -545,7 +545,6 @@
             box-shadow: 0 0 20px rgba(192,197,206,.1);
         }
 
-        /* ===== ARROW DI HEADER ===== */
         .page-header h1 a {
             text-decoration: none;
         }
@@ -561,6 +560,43 @@
         }
         .page-header h1 a .animate-pulse {
             animation: pulse-arrow 1.5s ease-in-out infinite;
+        }
+
+        .btn-download-pulse {
+            animation: heartbeat 2.2s ease-in-out infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.04); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.04); }
+            70% { transform: scale(1); }
+        }
+
+        .btn-limited-shimmer {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(192,197,206,0.2);
+        }
+        .btn-limited-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                110deg,
+                transparent 30%,
+                rgba(192,197,206,0.15) 50%,
+                transparent 70%
+            );
+            animation: shimmerMove 3.5s ease-in-out infinite;
+        }
+        @keyframes shimmerMove {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
         }
     </style>
 </head>
@@ -590,13 +626,19 @@
         <div class="page-header">
             <h1 class="flex items-center flex-wrap gap-2">
                 <span>Katalog Perak Fisik <span class="text-silver-gradient">Veldion Silver</span></span>
-                <a href="#download-section" class="inline-flex items-center gap-1.5 text-sm font-medium text-steel hover:text-silver-light transition-colors duration-300 group border border-steel/10 hover:border-steel/30 rounded-full px-3 py-1">
+
+                <a href="#download-section" class="inline-flex items-center gap-1.5 text-sm font-medium text-silver-light hover:text-white transition-colors duration-300 group border border-silver/20 hover:border-silver/40 rounded-full px-3 py-1 btn-download-glow">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition-transform duration-300">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                         <polyline points="7 10 12 15 17 10"/>
                         <line x1="12" y1="15" x2="12" y2="3"/>
                     </svg>
                     <span>Download Katalog</span>
+                </a>
+
+                <a href="serieslain.html" class="inline-flex items-center gap-1.5 text-sm font-medium text-silver-light hover:text-white transition-colors duration-300 group border border-silver/20 hover:border-silver/40 rounded-full px-3 py-1 btn-limited-shimmer">
+                    <i data-lucide="gem" class="w-4 h-4 group-hover:scale-110 transition-transform duration-300"></i>
+                    <span>Limited Edition</span>
                 </a>
             </h1>
             <p>Klik produk untuk detail &amp; pesan via WhatsApp</p>
@@ -641,7 +683,6 @@
 
     </main>
 
-    <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button id="closeProductModal" class="absolute top-4 right-4 text-steel hover:text-white">
@@ -670,23 +711,12 @@
     </div>
 
     <script>
-        // ============================================================
-        // KATALOG — IMAGE HARDCODE (SAMA SEPERTI INDEX UTAMA)
-        // Data lain dari Google Sheets
-        // ============================================================
-
-        const SHEET_URL =
-            'https://docs.google.com/spreadsheets/d/1lu-Hs6HelTvKs5yjZZXfnh4kJUkMUFUxEHxRX_8zX2o/gviz/tq?tqx=out:csv&sheet=Veldion_Catalog';
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/1lu-Hs6HelTvKs5yjZZXfnh4kJUkMUFUxEHxRX_8zX2o/gviz/tq?tqx=out:csv&sheet=Veldion_Catalog';
 
         let allProducts = [];
         let filteredProducts = [];
 
-        // ============================================================
-        // MAPPING GAMBAR — LENGKAP BERDASARKAN FILE YANG ADA
-        // ============================================================
         const PRODUCT_IMAGES = {
-
-            // ===== KEY SILVER - PRESS =====
             "Press 1gr": "key-silver-press-1gr.webp",
             "Press 2gr": "key-silver-press-2gr.webp",
             "Press 5gr": "key-silver-press-5gr.webp",
@@ -694,8 +724,6 @@
             "Press 25gr": "key-silver-press-25gr.webp",
             "Press 50gr": "key-silver-press-50gr.webp",
             "Press 100gr": "key-silver-press-100gr.webp",
-
-            // ===== KEY SILVER - ARGENTUM =====
             "Argentum 1gr": "key-silver-argentum-1gr.webp",
             "Argentum 5gr": "key-silver-argentum-5gr.webp",
             "Argentum 10gr": "key-silver-argentum-10gr.webp",
@@ -703,105 +731,67 @@
             "Argentum 50gr": "key-silver-argentum-50gr.webp",
             "Argentum 100gr": "key-silver-argentum-100gr.webp",
             "Argentum 250gr": "key-silver-argentum-250gr.webp",
-
-            // ===== KEY SILVER - BULLION KLASIK =====
             "Bullion Klasik 10gr": "key-silver-bullion-klasik-10gr.webp",
             "Bullion Klasik 25gr": "key-silver-bullion-klasik-25gr.webp",
             "Bullion Klasik 50gr": "key-silver-bullion-klasik-50gr.webp",
             "Bullion Klasik 100gr": "key-silver-bullion-klasik-100gr.webp",
             "Bullion Klasik 250gr": "key-silver-bullion-klasik-250gr.webp",
-
-            // ===== KEY SILVER - COIN ABA =====
             "Coin ABA 1 Dirham": "key-silver-coin-aba-1-dirham.webp",
             "Coin ABA 2 Dirham": "key-silver-coin-aba-2-dirham.webp",
             "Coin ABA 5 Dirham": "key-silver-coin-aba-5-dirham.webp",
-
-            // ===== KEY SILVER - SAC =====
             "SAC Silver 1gr": "key-silver-sac-silver-1gr.webp",
             "SAC Silver 5gr": "key-silver-sac-silver-5gr.webp",
             "SAC Silver 10gr": "key-silver-sac-silver-10gr.webp",
             "SAC Silver 25gr": "key-silver-sac-silver-25gr.webp",
             "SAC Silver 50gr": "key-silver-sac-silver-50gr.webp",
             "SAC Silver 100gr": "key-silver-sac-silver-100gr.webp",
-
-            // ===== SILVERIUM - REGULER =====
             "Reguler 1gr": "silverium-reguler-1gr.webp",
             "Reguler 3.3gr": "silverium-reguler-3.3gr.webp",
             "Reguler 5gr": "silverium-reguler-5gr.webp",
             "Reguler 9.9gr": "silverium-reguler-9.9gr.webp",
             "Reguler 33gr": "silverium-reguler-33gr.webp",
-
-            // ===== SILVERIUM - COIN ABA =====
             "Coin ABA 1 Dirham": "silverium-coin-aba-1-dirham.webp",
             "Coin ABA 5 Dirham": "silverium-coin-aba-5-dirham.webp",
-
-            // ===== JSG - MEDALION =====
             "Medalion 1gr": "jsg-medalion-1gr.webp",
             "Medalion 5gr": "jsg-medalion-5gr.webp",
             "Medalion 10gr": "jsg-medalion-10gr.webp",
             "Medalion 25gr": "jsg-medalion-25gr.webp",
-            "Medalion 50gr": "jsg-medalion-50gr.webp",
+            "Medalion 50gr": "jsg-medalion-50gr.webp"
         };
 
-        // ===== FUNGSI AMBIL GAMBAR =====
         function getProductImage(productName) {
             return PRODUCT_IMAGES[productName] || null;
         }
 
-        // ============================================================
-        // FORMAT HARGA
-        // ============================================================
         function formatPrice(raw) {
             if (!raw || raw === '-') return 'Rp -';
-            
-            let clean = raw.replace(/Rp/gi, '').trim();
-            clean = clean.replace(/\./g, '');
-            
+            let clean = raw.replace(/Rp/gi, '').trim().replace(/\./g, '');
             let numStr = clean;
             if (clean.includes(',')) {
                 const parts = clean.split(',');
                 numStr = parts[0] + parts.slice(1).join('');
             }
-            
             const numMatch = numStr.match(/\d+/);
             if (!numMatch) return 'Rp -';
-            
             const num = parseInt(numMatch[0], 10);
             if (isNaN(num) || num === 0) return 'Rp -';
-            
             return 'Rp' + num.toLocaleString('id-ID');
         }
 
-        // ============================================================
-        // PARSE CSV — TANPA KOLOM IMAGE
-        // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
-            if (lines.length < 2) {
-                console.warn('CSV terlalu pendek:', lines.length);
-                return [];
-            }
+            if (lines.length < 2) return [];
 
             const headers = [];
             let current = '';
             let inQuotes = false;
-            
             for (let j = 0; j < lines[0].length; j++) {
                 const char = lines[0][j];
-                if (char === '"') { 
-                    inQuotes = !inQuotes; 
-                    continue; 
-                }
-                if (char === ',' && !inQuotes) {
-                    headers.push(current.trim());
-                    current = '';
-                    continue;
-                }
+                if (char === '"') { inQuotes = !inQuotes; continue; }
+                if (char === ',' && !inQuotes) { headers.push(current.trim()); current = ''; continue; }
                 current += char;
             }
             headers.push(current.trim());
-
-            console.log('Headers:', headers);
 
             const findIndex = (keywords) => {
                 for (const kw of keywords) {
@@ -818,27 +808,16 @@
             const purityIdx = findIndex(['kemurnian', 'purity', 'kadar']);
             const priceIdx = findIndex(['harga personal', 'harga', 'price']);
 
-            console.log('Index mapping:', { nameIdx, catIdx, supIdx, weightIdx, purityIdx, priceIdx });
-
             const products = [];
-
             for (let i = 1; i < lines.length; i++) {
                 const values = [];
                 current = '';
                 inQuotes = false;
                 const line = lines[i];
-                
                 for (let j = 0; j < line.length; j++) {
                     const char = line[j];
-                    if (char === '"') { 
-                        inQuotes = !inQuotes; 
-                        continue; 
-                    }
-                    if (char === ',' && !inQuotes) {
-                        values.push(current.trim());
-                        current = '';
-                        continue;
-                    }
+                    if (char === '"') { inQuotes = !inQuotes; continue; }
+                    if (char === ',' && !inQuotes) { values.push(current.trim()); current = ''; continue; }
                     current += char;
                 }
                 values.push(current.trim());
@@ -872,18 +851,12 @@
                     });
                 }
             }
-
-            console.log('Produk terparse:', products.length);
             return products;
         }
 
-        // ============================================================
-        // RENDER — DIPERBAIKI ALT TEXT
-        // ============================================================
         function renderProducts(products) {
             const grid = document.getElementById('productGrid');
             const empty = document.getElementById('emptyState');
-
             grid.innerHTML = '';
 
             if (!products || products.length === 0) {
@@ -894,20 +867,13 @@
 
             products.forEach((p, idx) => {
                 const realIdx = allProducts.indexOf(p);
-
                 const imageFile = getProductImage(p.name);
                 let imgHtml = '';
 
                 if (imageFile) {
                     const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
-                    // ===== PERBAIKAN: alt lebih deskriptif =====
                     imgHtml = `
-                        <img 
-                            src="${imgPath}" 
-                            alt="Veldion Silver — ${p.name}, ${p.supplier}, kemurnian ${p.purity}" 
-                            loading="lazy"
-                            onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback').style.display='flex'"
-                        >
+                        <img src="${imgPath}" alt="Veldion Silver — ${p.name}, ${p.supplier}, kemurnian ${p.purity}" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback').style.display='flex'">
                         <div class="placeholder-fallback" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">
                             <span class="placeholder">${p.initial}</span>
                         </div>
@@ -921,14 +887,11 @@
                 card.dataset.idx = realIdx;
                 card.innerHTML = `
                     <span class="product-badge">${p.category}</span>
-                    <div class="product-image-wrapper">
-                        ${imgHtml}
-                    </div>
+                    <div class="product-image-wrapper">${imgHtml}</div>
                     <div class="product-name">${p.name}</div>
                     <div class="product-meta">${p.supplier} • ${p.purity}</div>
                     <div class="product-price">${p.price}</div>
                 `;
-
                 card.addEventListener('click', () => openModal(realIdx));
                 grid.appendChild(card);
             });
@@ -936,9 +899,6 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // ============================================================
-        // FILTER
-        // ============================================================
         function applyFilters() {
             const catFilter = document.getElementById('filterCategory').value;
             const supFilter = document.getElementById('filterSupplier').value;
@@ -953,7 +913,6 @@
                 if (purityFilter && p.purity !== purityFilter) match = false;
                 return match;
             });
-
             renderProducts(filteredProducts);
         }
 
@@ -1004,9 +963,6 @@
             if (currentVal) select.value = currentVal;
         }
 
-        // ============================================================
-        // MODAL — DIPERBAIKI ALT TEXT
-        // ============================================================
         function openModal(idx) {
             const p = allProducts[idx];
             if (!p) return;
@@ -1017,13 +973,8 @@
 
             if (imageFile) {
                 const imgPath = `/veldion/assets/images/katalog/${imageFile}`;
-                // ===== PERBAIKAN: alt lebih deskriptif =====
                 imgHtml = `
-                    <img 
-                        src="${imgPath}" 
-                        alt="Veldion Silver — ${p.name}, ${p.supplier}, kemurnian ${p.purity}"
-                        onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback-modal').style.display='flex'"
-                    >
+                    <img src="${imgPath}" alt="Veldion Silver — ${p.name}, ${p.supplier}, kemurnian ${p.purity}" onerror="this.style.display='none';this.parentElement.querySelector('.placeholder-fallback-modal').style.display='flex'">
                     <div class="placeholder-fallback-modal" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">
                         <span class="placeholder">${p.initial}</span>
                     </div>
@@ -1032,7 +983,6 @@
                 imgHtml = `<span class="placeholder">${p.initial}</span>`;
             }
 
-            // ===== GANTI SELURUH ISI CONTAINER =====
             container.innerHTML = imgHtml;
 
             document.getElementById('modalName').textContent = p.name;
@@ -1041,7 +991,7 @@
             document.getElementById('modalWeight').textContent = p.weight + 'gr';
             document.getElementById('modalPurity').textContent = p.purity;
             document.getElementById('modalPrice').textContent = p.price;
-            
+
             const waMessage = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(p.name)}%20(${p.category})`;
             document.getElementById('modalLink').href = `https://wa.me/628137271517?text=${waMessage}`;
 
@@ -1055,9 +1005,6 @@
             document.body.classList.remove('no-scroll');
         }
 
-        // ============================================================
-        // FETCH
-        // ============================================================
         async function fetchProducts() {
             const loading = document.getElementById('loadingIndicator');
             const error = document.getElementById('errorMessage');
@@ -1070,18 +1017,10 @@
                 if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
 
                 const csvText = await response.text();
-                
-                if (!csvText || csvText.trim() === '') {
-                    throw new Error('Data kosong dari Google Sheets');
-                }
-
-                console.log('CSV length:', csvText.length);
+                if (!csvText || csvText.trim() === '') throw new Error('Data kosong dari Google Sheets');
 
                 const parsed = parseCSV(csvText);
-
-                if (!parsed || parsed.length === 0) {
-                    throw new Error('Tidak ada data yang ditemukan. Periksa header CSV.');
-                }
+                if (!parsed || parsed.length === 0) throw new Error('Tidak ada data yang ditemukan.');
 
                 allProducts = parsed;
                 loading.style.display = 'none';
@@ -1094,22 +1033,14 @@
                 console.error('Fetch error:', err);
                 loading.style.display = 'none';
                 error.classList.remove('hidden');
-                
                 const errorMsg = document.querySelector('#errorMessage p');
-                if (errorMsg) {
-                    errorMsg.textContent = `Error: ${err.message}`;
-                }
-                
+                if (errorMsg) errorMsg.textContent = `Error: ${err.message}`;
                 if (typeof lucide !== 'undefined') lucide.createIcons();
             }
         }
 
-        // ============================================================
-        // INIT
-        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('loadingIndicator').style.display = 'flex';
-            
             fetchProducts();
 
             ['filterCategory', 'filterSupplier', 'filterWeight', 'filterPurity'].forEach(id => {
