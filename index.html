@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Veldion Silver">
 
-    <!-- SEO -->
     <title>Veldion Silver • Platform Agregator Perak Fisik Indonesia</title>
     <meta name="description" content="Veldion Silver — Silver Bridge. Platform agregator perak fisik yang menghubungkan Anda dengan jaringan supplier terpercaya. Stok ready dari Silverium, Key Silver, JSG, & lainnya. Tanpa PO, transparan, dan terpercaya. Bisnis perseorangan Indonesia.">
     <meta name="keywords" content="Veldion Silver, jual perak fisik, perak murni 999.9, perak 999.5, perak Silverium, perak Key Silver, perak JSG, perak ready, perak terpercaya, agregator perak, beli perak tanpa PO, perak fisik Indonesia, bisnis perak perseorangan">
@@ -16,7 +15,6 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://veldionsilver.github.io/veldion/">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="business.business">
     <meta property="og:url" content="https://veldionsilver.github.io/veldion/">
     <meta property="og:title" content="Veldion Silver - Platform Agregator Perak Fisik Indonesia">
@@ -24,28 +22,23 @@
     <meta property="og:image" content="https://veldionsilver.github.io/veldion/assets/images/og-image.webp">
     <meta property="og:site_name" content="Veldion Silver">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Veldion Silver - Platform Agregator Perak Fisik Indonesia">
     <meta name="twitter:description" content="Veldion Silver — Silver Bridge. Platform agregator perak fisik. Stok ready tanpa PO. Hubungkan Anda dengan jaringan supplier terpercaya.">
     <meta name="twitter:image" content="https://veldionsilver.github.io/veldion/assets/images/og-image.webp">
 
-    <!-- PWA -->
     <link rel="manifest" href="/veldion/manifest.json">
     <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 
-    <!-- Preload Critical Assets -->
     <link rel="preload" as="image" href="assets/images/logo.webp">
     <link rel="preload" as="style" href="assets/css/style.css">
     <link rel="preload" as="script" href="assets/js/data.js">
     <link rel="preload" as="script" href="assets/js/app.js">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -62,19 +55,11 @@
         }
     </script>
 
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- ============================================================
-         PREMIUM LOADING SCREEN — INLINE (langsung muncul)
-         ============================================================ -->
-
-    <!-- LOADER STYLES -->
     <style>
-        /* === SEMUA STYLE DARI loader.js === */
         @keyframes shimmerFade {
             0% { opacity: 0.3; }
             100% { opacity: 0.8; }
@@ -249,7 +234,6 @@
         }
     </style>
 
-    <!-- LOADER HTML -->
     <div id="veldion-loader">
         <div class="loader-shimmer"></div>
         <div class="loader-content">
@@ -269,7 +253,6 @@
         </div>
     </div>
 
-    <!-- LOADER SCRIPT (logika progress bar & hide) -->
     <script>
         (function() {
             if (document.getElementById('veldion-loader')) {
@@ -335,7 +318,6 @@
         })();
     </script>
 
-    <!-- Schema.org -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -378,15 +360,11 @@
 
 <body class="bg-void text-gray-200 font-body">
 
-    <!-- Preload Logo -->
     <img src="assets/images/logo.webp" class="preload-logo" alt="Veldion Silver — Silver Bridge. Platform Agregator Perak Fisik" aria-hidden="true">
 
-    <!-- ===== FLOATING DATE — MOBILE ONLY ===== -->
     <div id="floatingDate" class="md:hidden fixed top-[60px] right-3 z-40 bg-void/80 backdrop-blur-sm border border-white/10 rounded-full px-3 py-1 text-[9px] font-medium text-steel pointer-events-none select-none">
-        <!-- Isi akan diisi oleh app.js -->
     </div>
 
-    <!-- Desktop Top Bar -->
     <div class="desktop-top-bar text-xs font-medium text-steel">
         <div class="max-w-7xl mx-auto px-4 w-full">
             <div class="flex justify-between items-center">
@@ -403,9 +381,7 @@
                         <span class="text-[10px] uppercase">XAG/IDR:</span>
                         <span class="text-white font-bold" id="xagIdr">Rp 545.000</span>
                     </div>
-                    <!-- ===== TANGGAL — DESKTOP ONLY ===== -->
                     <span class="hidden xl:inline text-[10px] text-steel-dark border-l border-white/10 pl-4" id="headerDate">
-                        <!-- Isi akan diisi oleh app.js -->
                     </span>
                 </div>
                 <span class="text-[10px] text-steel-dark hidden lg:inline">Pengiriman aman ke seluruh Indonesia</span>
@@ -413,7 +389,6 @@
         </div>
     </div>
 
-    <!-- Mobile Top Bar -->
     <div class="mobile-top-bar" id="mobileTopBar">
         <div class="flex justify-between items-center w-full">
             <div class="flex items-center gap-2">
@@ -433,7 +408,6 @@
         </div>
     </div>
 
-    <!-- Desktop Navigation -->
     <header class="desktop-nav" id="desktopNav">
         <div class="max-w-7xl mx-auto px-4 w-full flex items-center justify-between">
             <a href="#hero" class="flex flex-col items-start cursor-pointer">
@@ -459,7 +433,6 @@
         </div>
     </header>
 
-    <!-- Mobile Scroll Header -->
     <header class="mobile-scroll-header" id="mobileScrollHeader">
         <a href="#hero" class="mobile-scroll-logo">
             <span class="brand-name">VELDION</span>
@@ -468,7 +441,6 @@
         <a href="https://wa.me/628137271517" target="_blank" class="mobile-scroll-cta">Hubungi</a>
     </header>
 
-    <!-- Mobile Bottom Navigation -->
     <div class="mobile-nav-wrapper" id="mobileNavWrapper">
         <nav class="mobile-nav-bar" role="navigation" aria-label="Mobile Navigation">
             <a href="#hero" class="mobile-nav-item active" data-section="hero">
@@ -495,7 +467,6 @@
     </div>
 
     <main>
-        <!-- Hero -->
         <section id="hero" class="bg-gradient-to-b from-void-50 to-void">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float"></div>
@@ -508,7 +479,11 @@
                     <span class="text-[10px] font-semibold text-silver-light uppercase tracking-widest">Always Ready</span>
                 </div>
                 <h1 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tighter mb-4 reveal active" style="transition-delay:100ms">Perak Fisik Siap Miliki<br><span class="text-silver-gradient">Tanpa Antrean Panjang</span></h1>
-                <p class="text-sm md:text-base text-steel max-w-2xl mx-auto mb-6 leading-relaxed reveal active" style="transition-delay:200ms">Supplier besar butuh <span class="text-white font-medium">2-3 bulan Pre-Order</span>. Veldion — Silver Bridge — menyediakan stok ready. <br><span class="text-white font-medium">Tanpa menunggu lama.</span></p>
+                <p class="text-sm md:text-base text-steel max-w-2xl mx-auto mb-6 leading-relaxed reveal active" style="transition-delay:200ms">
+                    Stok ready, <span class="text-white font-medium">tanpa pre-order</span><br>
+                    platform <span class="text-white font-medium">agregator</span> perak fisik — jembatan ke <span class="text-white font-medium">supplier terpercaya</span><br>
+                    <span class="text-white font-medium">Siap kirim ke seluruh Indonesia</span>
+                </p>
                 <div class="flex flex-col sm:flex-row gap-3 justify-center reveal active" style="transition-delay:300ms">
                     <a href="/veldion/katalog/" class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(192,197,206,0.3)] transition btn-shine flex items-center justify-center gap-2">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
                     <a href="#privilege" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/10 text-white font-bold text-sm rounded-full hover:bg-white/5 transition flex items-center justify-center gap-2">Keunggulan Veldion</a>
@@ -516,7 +491,6 @@
             </div>
         </section>
 
-        <!-- Banner Infinite -->
         <section class="py-6 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
@@ -541,7 +515,6 @@
                         </div>
                         <p class="text-white/70 text-sm">Veldion menyediakan stok <strong class="text-white">READY STOCK</strong>.</p>
                     </div>
-                    <!-- Duplikat untuk seamless loop -->
                     <div class="banner-card banner-card-red">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 text-red-400"></i></div>
@@ -567,7 +540,6 @@
             </div>
         </section>
 
-        <!-- Supplier -->
         <section id="supplier" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12 md:mb-16 reveal">
@@ -600,7 +572,6 @@
                         <div class="mt-3 text-[10px] text-steel-dark">4.8 rating</div>
                     </div>
                 </div>
-                <!-- Tombol Detail Suppliers -->
                 <div class="text-center mt-6 reveal">
                     <a href="/veldion/supplier.html" class="inline-flex items-center gap-2 px-6 py-2.5 bg-transparent border border-white/10 text-white font-medium text-sm rounded-full hover:bg-white/5 transition">
                         Detail Suppliers
@@ -610,7 +581,6 @@
             </div>
         </section>
 
-        <!-- Produk -->
         <section id="produk" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="text-center mb-12 md:mb-16 reveal">
@@ -638,7 +608,6 @@
             </div>
         </section>
 
-        <!-- Privilege -->
         <section id="privilege" class="py-20 md:py-24 relative overflow-hidden bg-void-100">
             <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-silver/[0.03] rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-3xl animate-float"></div>
@@ -760,7 +729,6 @@
             </div>
         </section>
 
-        <!-- Buyback -->
         <section id="buyback" class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -791,7 +759,6 @@
             </div>
         </section>
 
-        <!-- FAQ -->
         <section id="faq" class="py-16 md:py-20 bg-void-50 border-t border-white/5">
             <div class="max-w-3xl mx-auto px-4">
                 <div class="text-center mb-12 reveal">
@@ -878,11 +845,9 @@
             </div>
         </section>
 
-        <!-- CTA -->
         <section class="py-20 md:py-24 bg-void border-t border-white/5">
             <div class="max-w-3xl mx-auto px-4 text-center">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    <!-- Card 1: Katalog -->
                     <div class="glass-card p-8 md:p-10 rounded-2xl text-center reveal">
                         <div class="relative z-10">
                             <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3">Siap Miliki Perak Fisik?</h3>
@@ -890,7 +855,6 @@
                             <a href="/veldion/katalog/" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(192,197,206,0.3)] transition btn-shine">Jelajahi Katalog <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
                         </div>
                     </div>
-                    <!-- Card 2: Tentang Veldion -->
                     <div class="glass-card p-8 md:p-10 rounded-2xl text-center reveal">
                         <div class="relative z-10">
                             <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3">Tentang Veldion</h3>
@@ -903,7 +867,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-void-100 border-t border-white/5 pt-12 pb-6">
         <div class="max-w-7xl mx-auto px-4">
             <div class="footer-grid">
@@ -934,16 +897,17 @@
                 </div>
                 <div>
                     <div>
-    <h4 class="footer-section-title">Kontak & Alamat</h4>
-    <a href="https://wa.me/628137271517" class="footer-link">WhatsApp</a>
-    <a href="mailto:veldionsilver@gmail.com" class="footer-link">Email</a>
-    <a href="http://veldionsilver.github.io/veldion/tentang-kami" class="footer-link">Tentang Kami</a>
-    <span class="footer-link" style="cursor:default; font-size:11px; color:#64748B; line-height:1.6; padding-top:2px;">
-        Jeulingke, Jl. Cendana Utama,<br>
-        Komplek Perumahan Levita Yalzy, Lorong 2. No. A18,<br>
-        Kec. Syiah Kuala, Banda Aceh, Aceh
-    </span>
-</div>
+                        <h4 class="footer-section-title">Kontak & Alamat</h4>
+                        <a href="https://wa.me/628137271517" class="footer-link">WhatsApp</a>
+                        <a href="mailto:veldionsilver@gmail.com" class="footer-link">Email</a>
+                        <a href="http://veldionsilver.github.io/veldion/tentang-kami" class="footer-link">Tentang Kami</a>
+                        <span class="footer-link" style="cursor:default; font-size:11px; color:#64748B; line-height:1.6; padding-top:2px;">
+                            Jeulingke, Jl. Cendana Utama,<br>
+                            Komplek Perumahan Levita Yalzy, Lorong 2. No. A18,<br>
+                            Kec. Syiah Kuala, Banda Aceh, Aceh
+                        </span>
+                    </div>
+                </div>
             </div>
             <div class="border-t border-white/5 mt-8 pt-6 text-center">
                 <p class="text-[11px] text-steel-dark">&copy; 2026 Veldion Silver — Bisnis Perseorangan. All rights reserved.</p>
@@ -952,10 +916,8 @@
         </div>
     </footer>
 
-    <!-- Back to Top -->
     <button id="toTopBtn" class="floating-btn" aria-label="Kembali ke atas"><i data-lucide="arrow-up" class="w-5 h-5"></i></button>
 
-    <!-- ===== ERROR MESSAGE ===== -->
     <div id="globalErrorMessage" class="hidden glass-card p-8 rounded-xl text-center max-w-lg mx-auto my-8 border border-red-500/20">
         <i data-lucide="alert-circle" class="w-10 h-10 text-red-400 mx-auto mb-3"></i>
         <h4 class="text-white font-semibold text-lg mb-2">Gagal Memuat Data</h4>
@@ -967,7 +929,6 @@
         </button>
     </div>
 
-    <!-- Modals -->
     <div class="modal-overlay" id="searchModal">
         <div class="modal-content max-w-lg">
             <div class="flex items-center gap-3 border-b border-white/5 pb-4 mb-4">
@@ -1004,11 +965,9 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="assets/js/data.js"></script>
     <script src="assets/js/app.js"></script>
 
-    <!-- Install Banner -->
     <style>
         #installBanner {
             display: none;
@@ -1092,7 +1051,7 @@
     <div id="installBanner">
         <div class="msg">
             <i data-lucide="smartphone" class="w-5 h-5"></i>
-            <span>Install <span>Veldion Silver</span> untuk akses cepat</span>
+            <span>Pasang <span>Veldion Silver</span> untuk akses lebih cepat</span>
         </div>
         <div class="actions">
             <button class="btn-install" id="installBtn">Install</button>
