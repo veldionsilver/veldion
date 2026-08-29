@@ -62,7 +62,10 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        .bg-luxury {
+        /* ================================================================
+           ELEGANT BACKGROUND — AURA GEMSTONE
+           ================================================================ */
+        .bg-aura {
             position: fixed;
             inset: 0;
             z-index: 0;
@@ -70,71 +73,40 @@
             overflow: hidden;
         }
 
-        .bg-luxury .vignette {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(192,197,206,0.07) 0%, rgba(192,197,206,0.02) 35%, transparent 70%);
-        }
-
-        .bg-luxury .parallax-layer {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            transition: transform 0.08s ease-out;
-            will-change: transform;
-        }
-
-        .bg-luxury .stripes {
-            position: absolute;
-            inset: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 80px,
-                    rgba(192,197,206,0.015) 80px,
-                    rgba(192,197,206,0.03) 81px,
-                    transparent 81px,
-                    transparent 160px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent,
-                    transparent 80px,
-                    rgba(192,197,206,0.01) 80px,
-                    rgba(192,197,206,0.025) 81px,
-                    transparent 81px,
-                    transparent 160px
-                );
-        }
-
-        .bg-luxury .orb {
+        .bg-aura .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
             will-change: transform, opacity;
+            filter: blur(60px);
+            opacity: 0.3;
         }
-        .bg-luxury .orb:nth-child(4) {
-            width: 60vw;
-            height: 60vw;
-            max-width: 700px;
-            max-height: 700px;
-            top: -20%;
-            left: -25%;
-            background: radial-gradient(circle, rgba(192,197,206,0.12), transparent 70%);
-            animation: orbFloat1 18s ease-in-out infinite alternate;
-        }
-        .bg-luxury .orb:nth-child(5) {
+
+        /* Orb 1 — Silver besar di kiri atas */
+        .bg-aura .orb:nth-child(1) {
             width: 50vw;
             height: 50vw;
-            max-width: 550px;
-            max-height: 550px;
-            bottom: -20%;
-            right: -20%;
-            background: radial-gradient(circle, rgba(192,197,206,0.08), transparent 65%);
+            max-width: 600px;
+            max-height: 600px;
+            top: -15%;
+            left: -20%;
+            background: radial-gradient(circle at 30% 40%, rgba(192,197,206,0.25), transparent 70%);
+            animation: orbFloat1 18s ease-in-out infinite alternate;
+        }
+
+        /* Orb 2 — Silver medium di kanan bawah */
+        .bg-aura .orb:nth-child(2) {
+            width: 40vw;
+            height: 40vw;
+            max-width: 500px;
+            max-height: 500px;
+            bottom: -15%;
+            right: -15%;
+            background: radial-gradient(circle at 70% 60%, rgba(192,197,206,0.2), transparent 65%);
             animation: orbFloat2 22s ease-in-out infinite alternate;
         }
-        .bg-luxury .orb:nth-child(6) {
+
+        /* Orb 3 — Silver kecil di tengah */
+        .bg-aura .orb:nth-child(3) {
             width: 30vw;
             height: 30vw;
             max-width: 350px;
@@ -142,49 +114,85 @@
             top: 35%;
             left: 50%;
             transform: translate(-50%, -35%);
-            background: radial-gradient(circle, rgba(192,197,206,0.06), transparent 60%);
+            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.15), transparent 60%);
             animation: orbFloat3 16s ease-in-out infinite alternate;
         }
 
-        @keyframes orbFloat1 {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-            100% { transform: translate(50px, -30px) scale(1.1); opacity: 0.6; }
-        }
-        @keyframes orbFloat2 {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-            100% { transform: translate(-40px, 40px) scale(1.15); opacity: 0.5; }
-        }
-        @keyframes orbFloat3 {
-            0% { transform: translate(-50%, -35%) scale(1); opacity: 0.15; }
-            100% { transform: translate(-50%, -35%) scale(1.2); opacity: 0.4; }
+        /* Orb 4 — Silver kecil di kanan atas */
+        .bg-aura .orb:nth-child(4) {
+            width: 25vw;
+            height: 25vw;
+            max-width: 280px;
+            max-height: 280px;
+            top: 5%;
+            right: 5%;
+            background: radial-gradient(circle at 60% 40%, rgba(192,197,206,0.18), transparent 60%);
+            animation: orbFloat1 20s ease-in-out infinite alternate-reverse;
         }
 
-        .bg-luxury .particle {
+        /* Orb 5 — Silver kecil di kiri bawah */
+        .bg-aura .orb:nth-child(5) {
+            width: 30vw;
+            height: 30vw;
+            max-width: 320px;
+            max-height: 320px;
+            bottom: 10%;
+            left: 5%;
+            background: radial-gradient(circle at 40% 60%, rgba(192,197,206,0.12), transparent 55%);
+            animation: orbFloat2 24s ease-in-out infinite alternate-reverse;
+        }
+
+        /* Animasi orbital */
+        @keyframes orbFloat1 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+            100% { transform: translate(40px, -25px) scale(1.08); opacity: 0.4; }
+        }
+        @keyframes orbFloat2 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+            100% { transform: translate(-35px, 30px) scale(1.12); opacity: 0.35; }
+        }
+        @keyframes orbFloat3 {
+            0% { transform: translate(-50%, -35%) scale(1); opacity: 0.12; }
+            100% { transform: translate(-50%, -35%) scale(1.15); opacity: 0.3; }
+        }
+
+        /* ===== SHIMMER PARTICLE OVERLAY ===== */
+        .bg-shimmer {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.3;
+        }
+        .bg-shimmer .particle {
             position: absolute;
             width: 2px;
             height: 2px;
-            background: rgba(192,197,206,0.3);
+            background: rgba(192,197,206,0.4);
             border-radius: 50%;
             animation: particleDrift linear infinite;
         }
-        .bg-luxury .particle:nth-child(7) { left: 10%; top: 20%; animation-duration: 14s; animation-delay: 0s; width: 3px; height: 3px; }
-        .bg-luxury .particle:nth-child(8) { left: 25%; top: 60%; animation-duration: 18s; animation-delay: 2s; }
-        .bg-luxury .particle:nth-child(9) { left: 45%; top: 10%; animation-duration: 12s; animation-delay: 4s; width: 4px; height: 4px; }
-        .bg-luxury .particle:nth-child(10) { left: 65%; top: 75%; animation-duration: 20s; animation-delay: 1s; }
-        .bg-luxury .particle:nth-child(11) { left: 80%; top: 30%; animation-duration: 16s; animation-delay: 3s; width: 3px; height: 3px; }
-        .bg-luxury .particle:nth-child(12) { left: 15%; top: 85%; animation-duration: 22s; animation-delay: 5s; }
-        .bg-luxury .particle:nth-child(13) { left: 55%; top: 50%; animation-duration: 13s; animation-delay: 7s; width: 4px; height: 4px; }
-        .bg-luxury .particle:nth-child(14) { left: 90%; top: 55%; animation-duration: 17s; animation-delay: 2s; }
-        .bg-luxury .particle:nth-child(15) { left: 35%; top: 35%; animation-duration: 15s; animation-delay: 6s; }
-        .bg-luxury .particle:nth-child(16) { left: 70%; top: 15%; animation-duration: 19s; animation-delay: 4s; width: 3px; height: 3px; }
+        .bg-shimmer .particle:nth-child(1) { left: 10%; top: 20%; animation-duration: 12s; animation-delay: 0s; width: 3px; height: 3px; }
+        .bg-shimmer .particle:nth-child(2) { left: 25%; top: 60%; animation-duration: 15s; animation-delay: 2s; }
+        .bg-shimmer .particle:nth-child(3) { left: 45%; top: 10%; animation-duration: 10s; animation-delay: 4s; width: 4px; height: 4px; }
+        .bg-shimmer .particle:nth-child(4) { left: 65%; top: 75%; animation-duration: 18s; animation-delay: 1s; }
+        .bg-shimmer .particle:nth-child(5) { left: 80%; top: 30%; animation-duration: 14s; animation-delay: 3s; width: 3px; height: 3px; }
+        .bg-shimmer .particle:nth-child(6) { left: 15%; top: 85%; animation-duration: 20s; animation-delay: 5s; }
+        .bg-shimmer .particle:nth-child(7) { left: 55%; top: 50%; animation-duration: 11s; animation-delay: 7s; width: 4px; height: 4px; }
+        .bg-shimmer .particle:nth-child(8) { left: 90%; top: 55%; animation-duration: 16s; animation-delay: 2s; }
+        .bg-shimmer .particle:nth-child(9) { left: 35%; top: 35%; animation-duration: 13s; animation-delay: 6s; }
+        .bg-shimmer .particle:nth-child(10) { left: 70%; top: 15%; animation-duration: 17s; animation-delay: 4s; width: 3px; height: 3px; }
 
         @keyframes particleDrift {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.05; }
-            25% { transform: translate(40px, -20px) scale(1.8); opacity: 0.5; }
-            50% { transform: translate(-30px, 30px) scale(0.6); opacity: 0.1; }
-            75% { transform: translate(50px, 15px) scale(1.5); opacity: 0.4; }
-            100% { transform: translate(-15px, -25px) scale(1); opacity: 0.05; }
+            0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+            25% { transform: translate(30px, -15px) scale(1.4); opacity: 0.6; }
+            50% { transform: translate(-20px, 25px) scale(0.8); opacity: 0.2; }
+            75% { transform: translate(40px, 10px) scale(1.2); opacity: 0.5; }
+            100% { transform: translate(-10px, -20px) scale(1); opacity: 0.1; }
         }
+
+        /* ================================================================ */
 
         .glass-card {
             background: linear-gradient(145deg, rgba(18,21,28,.9) 0%, rgba(8,10,15,.95) 100%);
@@ -297,6 +305,7 @@
             transform: translateY(-1px);
         }
 
+        /* ===== SUPPLIER CARD ===== */
         .supplier-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -440,6 +449,7 @@
             border-color: rgba(251,191,36,0.2);
         }
 
+        /* ===== PRODUCT LIST ===== */
         .product-list-wrap {
             opacity: 0;
             transform: translateY(20px);
@@ -506,6 +516,7 @@
             transform: translateX(3px);
         }
 
+        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -644,6 +655,7 @@
             .modal-content .wa-btn i { width: 18px; height: 18px; }
         }
 
+        /* ===== MODAL IMAGE ===== */
         .modal-image {
             width: 80px;
             height: 80px;
@@ -713,6 +725,7 @@
 
         .no-scroll { overflow: hidden; }
 
+        /* ===== SEMUA KONTEN DI ATAS BACKGROUND ===== */
         .desktop-nav,
         main,
         .modal-overlay {
@@ -723,14 +736,17 @@
 </head>
 <body>
 
-    <div class="bg-luxury" aria-hidden="true">
-        <div class="vignette"></div>
-        <div class="parallax-layer" id="parallaxStripes">
-            <div class="stripes"></div>
-        </div>
+    <!-- ===== ELEGANT BACKGROUND AURA ===== -->
+    <div class="bg-aura" aria-hidden="true">
         <div class="orb"></div>
         <div class="orb"></div>
         <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+
+    <!-- ===== SHIMMER PARTICLES ===== -->
+    <div class="bg-shimmer" aria-hidden="true">
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
@@ -769,7 +785,9 @@
             <p>Supplier mitra Veldion Silver — produk pilihan dengan harga kompetitif</p>
         </div>
 
+        <!-- ===== SUPPLIER GRID ===== -->
         <div class="supplier-grid" id="supplierGrid">
+            <!-- SOSSilver -->
             <div class="supplier-card" data-supplier="SOSSilver" id="cardSOSSilver">
                 <div class="icon-wrap">
                     <i data-lucide="gem"></i>
@@ -779,6 +797,7 @@
                 <span class="badge active">● Aktif</span>
             </div>
 
+            <!-- Coming Soon 1 -->
             <div class="supplier-card coming-soon">
                 <div class="icon-wrap">
                     <i data-lucide="clock"></i>
@@ -788,6 +807,7 @@
                 <span class="badge coming">● Persiapan</span>
             </div>
 
+            <!-- Coming Soon 2 -->
             <div class="supplier-card coming-soon">
                 <div class="icon-wrap">
                     <i data-lucide="clock"></i>
@@ -798,6 +818,7 @@
             </div>
         </div>
 
+        <!-- ===== PRODUCT LIST ===== -->
         <div class="product-list-wrap glass-card" id="productList">
             <div class="p-3 md:p-6">
                 <div class="flex items-center justify-between mb-3 md:mb-4">
@@ -808,10 +829,12 @@
             </div>
         </div>
 
+        <!-- ===== LOADING ===== -->
         <div id="loadingIndicator" class="flex justify-center py-12">
             <div class="spinner"></div>
         </div>
 
+        <!-- ===== ERROR ===== -->
         <div id="errorMessage" class="text-center py-8 text-steel hidden">
             <i data-lucide="alert-circle" class="w-10 h-10 mx-auto mb-3 text-red-400"></i>
             <p>Gagal memuat data. Coba refresh halaman.</p>
@@ -819,6 +842,7 @@
 
     </main>
 
+    <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button id="closeProductModal" class="close-btn">
@@ -848,6 +872,9 @@
     </div>
 
     <script>
+        // ============================================================
+        // GOOGLE SHEETS — SERIESLAIN
+        // ============================================================
         const SHEET_ID = "15uusNM9BmtibWXb0ZN5k1qPlZJvGWWEtO3Cm-69m06o";
         const SHEET_NAME = "SERIESLAIN";
 
@@ -859,6 +886,9 @@
         let currentSupplier = null;
         let isListVisible = false;
 
+        // ============================================================
+        // FETCH DATA
+        // ============================================================
         async function fetchData() {
             const loading = document.getElementById('loadingIndicator');
             const error = document.getElementById('errorMessage');
@@ -891,10 +921,14 @@
             }
         }
 
+        // ============================================================
+        // PARSE CSV - PERBAIKAN
+        // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
+            // Parse header dengan benar (handle koma dalam data)
             const header = [];
             let current = '';
             let inQuotes = false;
@@ -934,10 +968,12 @@
                 
                 const obj = {};
                 header.forEach((key, idx) => {
+                    // Bersihkan header dari karakter aneh
                     const cleanKey = key.replace(/[^a-zA-Z0-9\s]/g, '').trim();
                     obj[cleanKey] = values[idx] || '';
                 });
                 
+                // Cek apakah ini data valid (punya kode produk atau nama produk)
                 if (obj['kode produk'] || obj['nama produk']) {
                     result.push(obj);
                 }
@@ -946,6 +982,9 @@
             return result;
         }
 
+        // ============================================================
+        // TOGGLE SUPPLIER LIST
+        // ============================================================
         function toggleSupplier(supplierName) {
             const listWrap = document.getElementById('productList');
             const itemsContainer = document.getElementById('productItems');
@@ -1011,9 +1050,13 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
+        // ============================================================
+        // MODAL - PERBAIKAN
+        // ============================================================
         function openModal(product) {
             const p = product;
 
+            // Mapping field sesuai header: supplier(D), berat(C), kadar(G), buyback(J), harga(H)
             document.getElementById('modalName').textContent = p['nama produk'] || 'Produk';
             document.getElementById('modalCategory').textContent = p['supplier'] || 'Reguler';
             document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
@@ -1038,115 +1081,30 @@
         function closeModal() {
             document.getElementById('productModal').classList.remove('active');
             document.body.classList.remove('no-scroll');
+            // LIST TETAP ADA - tidak ada perubahan pada list
         }
 
-        function initParallax() {
-            const layer = document.getElementById('parallaxStripes');
-            let targetX = 0;
-            let targetY = 0;
-            let currentX = 0;
-            let currentY = 0;
-            let isInteracting = false;
-
-            function updateParallax() {
-                currentX += (targetX - currentX) * 0.08;
-                currentY += (targetY - currentY) * 0.08;
-                layer.style.transform = `translate(${currentX}px, ${currentY}px)`;
-                requestAnimationFrame(updateParallax);
-            }
-
-            document.addEventListener('mousemove', function(e) {
-                const modal = document.getElementById('productModal');
-                if (modal.classList.contains('active')) return;
-
-                const x = (e.clientX / window.innerWidth - 0.5) * 2;
-                const y = (e.clientY / window.innerHeight - 0.5) * 2;
-                targetX = x * 15;
-                targetY = y * 10;
-            });
-
-            if (window.DeviceOrientationEvent) {
-                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-                    DeviceOrientationEvent.requestPermission().then(state => {
-                        if (state === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation);
-                        }
-                    }).catch(() => {});
-                } else {
-                    window.addEventListener('deviceorientation', handleOrientation);
-                }
-            }
-
-            function handleOrientation(e) {
-                const modal = document.getElementById('productModal');
-                if (modal.classList.contains('active')) return;
-
-                const beta = e.beta || 0;
-                const gamma = e.gamma || 0;
-                const x = gamma / 45;
-                const y = beta / 45;
-                targetX = x * 20;
-                targetY = y * 15;
-            }
-
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let isTouching = false;
-
-            document.addEventListener('touchstart', function(e) {
-                const modal = document.getElementById('productModal');
-                if (modal.classList.contains('active')) return;
-
-                const touch = e.touches[0];
-                if (touch) {
-                    touchStartX = touch.clientX;
-                    touchStartY = touch.clientY;
-                    isTouching = true;
-                }
-            }, { passive: true });
-
-            document.addEventListener('touchmove', function(e) {
-                const modal = document.getElementById('productModal');
-                if (modal.classList.contains('active')) return;
-
-                if (!isTouching) return;
-                const touch = e.touches[0];
-                if (!touch) return;
-
-                const deltaX = (touch.clientX - touchStartX) / window.innerWidth;
-                const deltaY = (touch.clientY - touchStartY) / window.innerHeight;
-
-                targetX = deltaX * 30;
-                targetY = deltaY * 20;
-
-                touchStartX = touch.clientX;
-                touchStartY = touch.clientY;
-            }, { passive: true });
-
-            document.addEventListener('touchend', function() {
-                isTouching = false;
-                targetX = 0;
-                targetY = 0;
-            }, { passive: true });
-
-            updateParallax();
-        }
-
+        // ============================================================
+        // EVENT LISTENERS
+        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cardSOSSilver').addEventListener('click', function(e) {
                 e.stopPropagation();
                 toggleSupplier('SOSSilver');
             });
 
+            // Klik di luar list - cek apakah modal aktif
             document.addEventListener('click', function(e) {
                 const listWrap = document.getElementById('productList');
                 const card = document.getElementById('cardSOSSilver');
                 const modal = document.getElementById('productModal');
 
+                // Jika modal aktif, jangan tutup list
                 if (modal.classList.contains('active')) {
                     return;
                 }
 
+                // Jika modal tidak aktif, tutup list jika klik di luar
                 if (isListVisible && 
                     !listWrap.contains(e.target) && 
                     !card.contains(e.target)) {
@@ -1169,8 +1127,6 @@
             fetchData();
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
-
-            initParallax();
         });
     </script>
 
