@@ -71,7 +71,7 @@
             overflow: hidden;
         }
 
-        /* Vignette overlay — tambahan elegan */
+        /* Vignette overlay */
         .bg-aura .vignette {
             position: absolute;
             inset: 0;
@@ -79,7 +79,7 @@
             z-index: 2;
         }
 
-        /* Diagonal stripes — tambahan mewah */
+        /* Diagonal stripes */
         .bg-aura .stripes-layer {
             position: absolute;
             inset: 0;
@@ -329,6 +329,7 @@
             .supplier-card { padding: 36px 24px; min-height: 160px; border-radius: 20px; }
         }
 
+        /* ===== SHIMMER OTOMATIS — PELAN ===== */
         .supplier-card::before {
             content: '';
             position: absolute;
@@ -570,7 +571,7 @@
             transform: translateX(3px);
         }
 
-        /* ===== MODAL ===== */
+        /* ===== MODAL — TETAP DI TENGAH ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -602,6 +603,7 @@
             .modal-content { padding: 28px; }
         }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+
         .modal-content .close-btn {
             position: absolute;
             top: 14px;
@@ -617,6 +619,7 @@
             .modal-content .close-btn { top: 16px; right: 16px; }
         }
         .modal-content .close-btn:hover { color: white; }
+
         .modal-content .modal-title {
             font-family: 'Sora', sans-serif;
             font-size: 16px;
@@ -783,13 +786,6 @@
         }
 
         .no-scroll { overflow: hidden; }
-
-        .desktop-nav,
-        main,
-        .modal-overlay {
-            position: relative;
-            z-index: 1;
-        }
     </style>
 </head>
 <body>
@@ -803,7 +799,7 @@
             <div class="stripes"></div>
         </div>
 
-        <!-- Gem lines original -->
+        <!-- Gem lines -->
         <div class="gem-line"></div>
         <div class="gem-line"></div>
         <div class="gem-line"></div>
@@ -831,7 +827,7 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8">
+    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8 relative z-10">
 
         <div class="page-header">
             <h1>Edisi Khusus</h1>
