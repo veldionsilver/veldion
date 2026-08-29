@@ -763,7 +763,7 @@
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+            const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
             const result = [];
 
             for (let i = 1; i < lines.length; i++) {
@@ -772,7 +772,7 @@
                 header.forEach((key, idx) => {
                     obj[key] = values[idx] || '';
                 });
-                if (obj['nama produk'] || obj['name']) {
+                if (obj['nama produk'] || obj['kode produk']) {
                     result.push(obj);
                 }
             }
@@ -788,7 +788,6 @@
             const itemsContainer = document.getElementById('productItems');
             const countEl = document.getElementById('productCount');
 
-            // Jika list sedang terbuka dan supplier sama → tutup
             if (isListVisible && currentSupplier === supplierName) {
                 listWrap.classList.remove('visible');
                 isListVisible = false;
@@ -796,9 +795,8 @@
                 return;
             }
 
-            // Filter produk
             const filtered = products.filter(p => {
-                const sup = p.supplier || p['supplier'] || '';
+                const sup = p['supplier'] || '';
                 return sup.toLowerCase() === supplierName.toLowerCase();
             });
 
@@ -815,7 +813,7 @@
 
             let html = '';
             filtered.forEach((p, idx) => {
-                const name = p['nama produk'] || p['name'] || 'Produk';
+                const name = p['nama produk'] || 'Produk';
                 html += `
                     <div class="product-item" data-idx="${idx}">
                         <span class="name">${name}</span>
@@ -831,7 +829,6 @@
             isListVisible = true;
             currentSupplier = supplierName;
 
-            // Event listener untuk setiap produk
             document.querySelectorAll('.product-item').forEach(el => {
                 el.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -840,7 +837,6 @@
                 });
             });
 
-            // Scroll ke list
             setTimeout(() => {
                 if (listWrap.classList.contains('visible')) {
                     const offset = 80;
@@ -853,25 +849,25 @@
         }
 
         // ============================================================
-        // MODAL
+        // MODAL - PERBAIKAN
         // ============================================================
         function openModal(product) {
             const p = product;
 
-            document.getElementById('modalName').textContent = p['nama produk'] || p['name'] || 'Produk';
-            document.getElementById('modalCategory').textContent = p['kategori'] || p['category'] || 'Reguler';
+            document.getElementById('modalName').textContent = p['nama produk'] || 'Produk';
+            document.getElementById('modalCategory').textContent = p['supplier'] || 'Reguler';
             document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
-            document.getElementById('modalWeight').textContent = (p['berat'] || p['weight'] || '-') + 'gr';
-            document.getElementById('modalPurity').textContent = p['kadar'] || p['purity'] || '-';
+            document.getElementById('modalWeight').textContent = (p['berat'] || '-') + 'gr';
+            document.getElementById('modalPurity').textContent = p['kadar'] || '-';
             document.getElementById('modalBuyback').textContent = p['buyback'] || '-';
-            document.getElementById('modalPrice').textContent = p['harga'] || p['price'] || 'Rp -';
+            document.getElementById('modalPrice').textContent = p['harga'] || 'Rp -';
 
-            // Set initial SOS
-            document.getElementById('modalInitial').textContent = 'SOS';
+            const supplier = p['supplier'] || 'SOS';
+            document.getElementById('modalInitial').textContent = supplier.substring(0, 3).toUpperCase();
 
-            const name = p['nama produk'] || p['name'] || 'Produk';
-            const category = p['kategori'] || p['category'] || 'Reguler';
-            const waMsg = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(name)}%20(${category})`;
+            const name = p['nama produk'] || 'Produk';
+            const supplierName = p['supplier'] || 'Veldion';
+            const waMsg = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(name)}%20dari%20${encodeURIComponent(supplierName)}`;
             document.getElementById('modalLink').href = `https://wa.me/628137271517?text=${waMsg}`;
 
             document.getElementById('productModal').classList.add('active');
@@ -888,13 +884,11 @@
         // EVENT LISTENERS
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Card SOSSilver — toggle
             document.getElementById('cardSOSSilver').addEventListener('click', function(e) {
                 e.stopPropagation();
                 toggleSupplier('SOSSilver');
             });
 
-            // Klik di luar list → tutup list
             document.addEventListener('click', function(e) {
                 const listWrap = document.getElementById('productList');
                 const card = document.getElementById('cardSOSSilver');
@@ -908,7 +902,6 @@
                 }
             });
 
-            // Modal close
             document.getElementById('closeProductModal').addEventListener('click', closeModal);
             document.getElementById('productModal').addEventListener('click', function(e) {
                 if (e.target.id === 'productModal') closeModal();
@@ -917,7 +910,6 @@
                 if (e.key === 'Escape') closeModal();
             });
 
-            // Fetch data
             fetchData();
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
