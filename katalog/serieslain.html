@@ -62,81 +62,133 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        /* ===== AURA BACKGROUND — ELEGAN ===== */
-        .bg-aura {
+        /* ===== BACKGROUND LUXURY WITH PARALLAX ===== */
+        .bg-luxury {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
         }
-        .bg-aura .gem-line {
+
+        /* Vignette silver — fokus ke tengah */
+        .bg-luxury .vignette {
             position: absolute;
-            border-radius: 50%;
-            will-change: transform, opacity;
-            opacity: 0.06;
-        }
-        .bg-aura .gem-line:nth-child(1) {
-            width: 700px;
-            height: 700px;
-            top: -20%;
-            left: -20%;
-            background: radial-gradient(circle at 30% 40%, rgba(192,197,206,0.15), transparent 70%);
-            animation: gemFloat1 20s ease-in-out infinite alternate;
-        }
-        .bg-aura .gem-line:nth-child(2) {
-            width: 600px;
-            height: 600px;
-            bottom: -15%;
-            right: -15%;
-            background: radial-gradient(circle at 70% 60%, rgba(192,197,206,0.1), transparent 65%);
-            animation: gemFloat2 22s ease-in-out infinite alternate;
-        }
-        .bg-aura .gem-line:nth-child(3) {
-            width: 500px;
-            height: 500px;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -30%);
-            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.08), transparent 60%);
-            animation: gemFloat3 18s ease-in-out infinite alternate;
-        }
-        .bg-aura .gem-line:nth-child(4) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            right: 5%;
-            background: radial-gradient(circle at 60% 40%, rgba(192,197,206,0.12), transparent 60%);
-            animation: gemFloat1 16s ease-in-out infinite alternate-reverse;
-        }
-        .bg-aura .gem-line:nth-child(5) {
-            width: 400px;
-            height: 400px;
-            bottom: 20%;
-            left: 5%;
-            background: radial-gradient(circle at 40% 60%, rgba(192,197,206,0.07), transparent 55%);
-            animation: gemFloat2 24s ease-in-out infinite alternate-reverse;
-        }
-        .bg-aura .gem-line:nth-child(6) {
-            width: 200px;
-            height: 200px;
-            top: 55%;
-            right: 20%;
-            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.15), transparent 50%);
-            animation: gemFloat3 14s ease-in-out infinite alternate;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(192,197,206,0.07) 0%, rgba(192,197,206,0.02) 35%, transparent 70%);
         }
 
-        @keyframes gemFloat1 {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.04; }
-            100% { transform: translate(50px, -30px) scale(1.1) rotate(5deg); opacity: 0.08; }
+        /* Parallax container untuk stripes */
+        .bg-luxury .parallax-layer {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.08s ease-out;
+            will-change: transform;
         }
-        @keyframes gemFloat2 {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.03; }
-            100% { transform: translate(-40px, 40px) scale(1.15) rotate(-5deg); opacity: 0.07; }
+
+        /* Diagonal stripes — lebih sedikit, lebih elegan */
+        .bg-luxury .stripes {
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(192,197,206,0.015) 80px,
+                    rgba(192,197,206,0.03) 81px,
+                    transparent 81px,
+                    transparent 160px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(192,197,206,0.01) 80px,
+                    rgba(192,197,206,0.025) 81px,
+                    transparent 81px,
+                    transparent 160px
+                );
         }
-        @keyframes gemFloat3 {
-            0% { transform: translate(-50%, -30%) scale(1) rotate(0deg); opacity: 0.02; }
-            100% { transform: translate(-50%, -30%) scale(1.2) rotate(8deg); opacity: 0.06; }
+
+        /* Orb silver — glow lembut */
+        .bg-luxury .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            will-change: transform, opacity;
+        }
+        .bg-luxury .orb:nth-child(4) {
+            width: 60vw;
+            height: 60vw;
+            max-width: 700px;
+            max-height: 700px;
+            top: -20%;
+            left: -25%;
+            background: radial-gradient(circle, rgba(192,197,206,0.12), transparent 70%);
+            animation: orbFloat1 18s ease-in-out infinite alternate;
+        }
+        .bg-luxury .orb:nth-child(5) {
+            width: 50vw;
+            height: 50vw;
+            max-width: 550px;
+            max-height: 550px;
+            bottom: -20%;
+            right: -20%;
+            background: radial-gradient(circle, rgba(192,197,206,0.08), transparent 65%);
+            animation: orbFloat2 22s ease-in-out infinite alternate;
+        }
+        .bg-luxury .orb:nth-child(6) {
+            width: 30vw;
+            height: 30vw;
+            max-width: 350px;
+            max-height: 350px;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -35%);
+            background: radial-gradient(circle, rgba(192,197,206,0.06), transparent 60%);
+            animation: orbFloat3 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat1 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            100% { transform: translate(50px, -30px) scale(1.1); opacity: 0.6; }
+        }
+        @keyframes orbFloat2 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+            100% { transform: translate(-40px, 40px) scale(1.15); opacity: 0.5; }
+        }
+        @keyframes orbFloat3 {
+            0% { transform: translate(-50%, -35%) scale(1); opacity: 0.15; }
+            100% { transform: translate(-50%, -35%) scale(1.2); opacity: 0.4; }
+        }
+
+        /* Shimmer particles */
+        .bg-luxury .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(192,197,206,0.3);
+            border-radius: 50%;
+            animation: particleDrift linear infinite;
+        }
+        .bg-luxury .particle:nth-child(7) { left: 10%; top: 20%; animation-duration: 14s; animation-delay: 0s; width: 3px; height: 3px; }
+        .bg-luxury .particle:nth-child(8) { left: 25%; top: 60%; animation-duration: 18s; animation-delay: 2s; }
+        .bg-luxury .particle:nth-child(9) { left: 45%; top: 10%; animation-duration: 12s; animation-delay: 4s; width: 4px; height: 4px; }
+        .bg-luxury .particle:nth-child(10) { left: 65%; top: 75%; animation-duration: 20s; animation-delay: 1s; }
+        .bg-luxury .particle:nth-child(11) { left: 80%; top: 30%; animation-duration: 16s; animation-delay: 3s; width: 3px; height: 3px; }
+        .bg-luxury .particle:nth-child(12) { left: 15%; top: 85%; animation-duration: 22s; animation-delay: 5s; }
+        .bg-luxury .particle:nth-child(13) { left: 55%; top: 50%; animation-duration: 13s; animation-delay: 7s; width: 4px; height: 4px; }
+        .bg-luxury .particle:nth-child(14) { left: 90%; top: 55%; animation-duration: 17s; animation-delay: 2s; }
+        .bg-luxury .particle:nth-child(15) { left: 35%; top: 35%; animation-duration: 15s; animation-delay: 6s; }
+        .bg-luxury .particle:nth-child(16) { left: 70%; top: 15%; animation-duration: 19s; animation-delay: 4s; width: 3px; height: 3px; }
+
+        @keyframes particleDrift {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.05; }
+            25% { transform: translate(40px, -20px) scale(1.8); opacity: 0.5; }
+            50% { transform: translate(-30px, 30px) scale(0.6); opacity: 0.1; }
+            75% { transform: translate(50px, 15px) scale(1.5); opacity: 0.4; }
+            100% { transform: translate(-15px, -25px) scale(1); opacity: 0.05; }
         }
 
         .glass-card {
@@ -250,11 +302,10 @@
             transform: translateY(-1px);
         }
 
-        /* ===== SUPPLIER CARD ===== */
         .supplier-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
         @media (min-width: 640px) {
             .supplier-grid { gap: 16px; }
@@ -264,95 +315,52 @@
         }
 
         .supplier-card {
-            position: relative;
             background: rgba(255,255,255,0.015);
             border: 1px solid rgba(255,255,255,0.04);
             border-radius: 14px;
-            padding: 22px 12px;
+            padding: 18px 10px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
             min-height: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            will-change: transform;
-            overflow: hidden;
         }
         @media (min-width: 640px) {
-            .supplier-card { padding: 28px 16px; min-height: 140px; border-radius: 16px; }
+            .supplier-card { padding: 24px 16px; min-height: 140px; border-radius: 16px; }
         }
         @media (min-width: 1024px) {
-            .supplier-card { padding: 36px 24px; min-height: 160px; border-radius: 20px; }
+            .supplier-card { padding: 32px 24px; min-height: 160px; border-radius: 20px; }
         }
 
-        /* ===== SHIMMER OTOMATIS — PELAN ===== */
         .supplier-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(110deg, 
-                transparent 25%, 
-                rgba(192,197,206,0.03) 45%, 
-                rgba(192,197,206,0.05) 50%, 
-                rgba(192,197,206,0.03) 55%, 
-                transparent 75%
-            );
-            background-size: 300% 100%;
-            opacity: 0.5;
-            pointer-events: none;
-            animation: shimmerAuto 8s ease-in-out infinite;
-            z-index: 0;
-        }
-        @keyframes shimmerAuto {
-            0% { background-position: -300% 0; }
-            100% { background-position: 300% 0; }
-        }
-
-        .supplier-card:hover:not(.coming-soon)::before {
-            opacity: 0.8;
-            animation-duration: 4s;
-        }
-
-        .supplier-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(192,197,206,0.12), transparent);
-            opacity: 0.3;
+            background: linear-gradient(90deg, transparent, rgba(192,197,206,0.2), transparent);
+            opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 1;
         }
-        .supplier-card:hover:not(.coming-soon)::after {
-            opacity: 0.8;
-        }
-
         .supplier-card:hover:not(.coming-soon) {
             border-color: rgba(255,255,255,0.08);
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(192,197,206,0.03);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
         }
-
+        .supplier-card:hover:not(.coming-soon)::before {
+            opacity: 1;
+        }
         .supplier-card.coming-soon {
-            opacity: 0.6;
-            cursor: default;
-            border-style: dashed;
-            border-color: rgba(255,255,255,0.06);
+            opacity: 0.5;
+            cursor: not-allowed;
         }
-        .supplier-card.coming-soon::before {
-            display: none;
-        }
-        .supplier-card.coming-soon .icon-wrap {
-            opacity: 0.4;
-        }
-
         .supplier-card .icon-wrap {
-            position: relative;
-            z-index: 1;
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -363,7 +371,6 @@
             justify-content: center;
             margin-bottom: 6px;
             flex-shrink: 0;
-            transition: all 0.4s ease;
         }
         @media (min-width: 640px) {
             .supplier-card .icon-wrap { width: 52px; height: 52px; margin-bottom: 8px; }
@@ -384,8 +391,6 @@
         }
 
         .supplier-card h3 {
-            position: relative;
-            z-index: 1;
             font-family: 'Sora', sans-serif;
             font-size: 13px;
             font-weight: 700;
@@ -400,8 +405,6 @@
         }
 
         .supplier-card p {
-            position: relative;
-            z-index: 1;
             color: #64748B;
             font-size: 9px;
         }
@@ -413,8 +416,6 @@
         }
 
         .supplier-card .badge {
-            position: relative;
-            z-index: 1;
             display: inline-block;
             padding: 1px 8px;
             border-radius: 20px;
@@ -425,7 +426,6 @@
             border: 1px solid rgba(192,197,206,0.06);
             margin-top: 4px;
             letter-spacing: 0.3px;
-            transition: all 0.3s ease;
         }
         @media (min-width: 640px) {
             .supplier-card .badge { font-size: 9px; padding: 2px 10px; margin-top: 6px; }
@@ -435,36 +435,23 @@
         }
 
         .supplier-card .badge.active {
-            background: rgba(16,185,129,0.08);
+            background: rgba(16,185,129,0.1);
             color: #10B981;
-            border-color: rgba(16,185,129,0.15);
-            animation: pulseReady 2.4s ease-in-out infinite;
+            border-color: rgba(16,185,129,0.2);
         }
-        @keyframes pulseReady {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.04); }
-        }
-
         .supplier-card .badge.coming {
-            background: rgba(251,191,36,0.08);
+            background: rgba(251,191,36,0.1);
             color: #F59E0B;
-            border-color: rgba(251,191,36,0.15);
-            animation: pulseComing 2s ease-in-out infinite;
-        }
-        @keyframes pulseComing {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+            border-color: rgba(251,191,36,0.2);
         }
 
-        /* ===== PRODUCT LIST ===== */
         .product-list-wrap {
             opacity: 0;
-            transform: translateY(20px) scale(0.98);
+            transform: translateY(20px);
             transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             margin-top: 24px;
             display: none;
-            transform-origin: top center;
         }
         @media (min-width: 640px) {
             .product-list-wrap { margin-top: 32px; }
@@ -472,7 +459,7 @@
         .product-list-wrap.visible {
             display: block;
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
         .product-item {
@@ -481,19 +468,14 @@
             justify-content: space-between;
             padding: 12px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.3s ease;
             cursor: pointer;
-            border-radius: 8px;
         }
         @media (min-width: 640px) {
             .product-item { padding: 14px 20px; }
         }
         .product-item:hover {
-            background: rgba(255,255,255,0.03);
-            transform: translateX(4px);
-        }
-        .product-item:active {
-            transform: scale(0.98);
+            background: rgba(255,255,255,0.02);
         }
         .product-item .name {
             color: #E2E8F0;
@@ -529,7 +511,6 @@
             transform: translateX(3px);
         }
 
-        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -711,48 +692,63 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .page-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        @media (min-width: 640px) {
-            .page-header { margin-bottom: 40px; }
-        }
         .page-header h1 {
             font-family: 'Sora', sans-serif;
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
             color: white;
-            letter-spacing: -0.5px;
         }
         @media (min-width: 640px) {
-            .page-header h1 { font-size: 32px; }
+            .page-header h1 { font-size: 28px; }
         }
         @media (min-width: 1024px) {
-            .page-header h1 { font-size: 36px; }
+            .page-header h1 { font-size: 32px; }
         }
         .page-header p {
             color: #94A3B8;
-            font-size: 13px;
-            margin-top: 4px;
-            letter-spacing: 0.2px;
+            font-size: 12px;
+            margin-top: 2px;
         }
         @media (min-width: 640px) {
+            .page-header p { font-size: 13px; }
+        }
+        @media (min-width: 1024px) {
             .page-header p { font-size: 14px; }
         }
 
         .no-scroll { overflow: hidden; }
+
+        .desktop-nav,
+        main,
+        .modal-overlay {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-aura">
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
+    <div class="bg-luxury" aria-hidden="true">
+        <div class="vignette"></div>
+
+        <!-- Parallax Layer untuk stripes -->
+        <div class="parallax-layer" id="parallaxStripes">
+            <div class="stripes"></div>
+        </div>
+
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <header class="desktop-nav">
@@ -774,11 +770,11 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8 relative z-10">
+    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8">
 
-        <div class="page-header">
+        <div class="page-header mb-6 md:mb-8">
             <h1>Edisi Khusus</h1>
-            <p>Supplier Limited Edition — Edisi terbatas dengan kualitas premium.</p>
+            <p>Supplier mitra Veldion Silver — produk pilihan dengan harga kompetitif</p>
         </div>
 
         <div class="supplier-grid" id="supplierGrid">
@@ -787,8 +783,8 @@
                     <i data-lucide="gem"></i>
                 </div>
                 <h3>SOSSilver</h3>
-                <p>Perak Exclusive</p>
-                <span class="badge active">● Ready</span>
+                <p>Perak fisik</p>
+                <span class="badge active">● Aktif</span>
             </div>
 
             <div class="supplier-card coming-soon">
@@ -797,7 +793,7 @@
                 </div>
                 <h3>Coming Soon</h3>
                 <p>Segera hadir</p>
-                <span class="badge coming">● On Progress</span>
+                <span class="badge coming">● Persiapan</span>
             </div>
 
             <div class="supplier-card coming-soon">
@@ -806,7 +802,7 @@
                 </div>
                 <h3>Coming Soon</h3>
                 <p>Segera hadir</p>
-                <span class="badge coming">● On Progress</span>
+                <span class="badge coming">● Persiapan</span>
             </div>
         </div>
 
@@ -893,9 +889,10 @@
 
                 products = parsed;
                 loading.style.display = 'none';
+                console.log(`✅ ${products.length} produk dimuat dari SERIESLAIN`);
 
             } catch (err) {
-                console.error('Fetch error:', err);
+                console.error('❌ Fetch error:', err);
                 loading.style.display = 'none';
                 error.classList.remove('hidden');
                 if (typeof lucide !== 'undefined') lucide.createIcons();
@@ -1051,6 +1048,100 @@
             document.body.classList.remove('no-scroll');
         }
 
+        // ============================================================
+        // PARALLAX EFFECT — Mouse & Mobile Gyroscope
+        // ============================================================
+        function initParallax() {
+            const layer = document.getElementById('parallaxStripes');
+            let targetX = 0;
+            let targetY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            function updateParallax() {
+                // Smooth lerp
+                currentX += (targetX - currentX) * 0.08;
+                currentY += (targetY - currentY) * 0.08;
+
+                layer.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                requestAnimationFrame(updateParallax);
+            }
+
+            // === Mouse (PC) ===
+            document.addEventListener('mousemove', function(e) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                targetX = x * 15;
+                targetY = y * 10;
+            });
+
+            // === Mobile Gyroscope ===
+            if (window.DeviceOrientationEvent) {
+                // Request permission untuk iOS 13+
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    DeviceOrientationEvent.requestPermission().then(state => {
+                        if (state === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                        }
+                    }).catch(() => {});
+                } else {
+                    window.addEventListener('deviceorientation', handleOrientation);
+                }
+            }
+
+            function handleOrientation(e) {
+                const beta = e.beta || 0;   // -180 to 180 (tilt depan-belakang)
+                const gamma = e.gamma || 0; // -90 to 90 (tilt kiri-kanan)
+
+                // Normalize
+                const x = gamma / 45;
+                const y = beta / 45;
+
+                targetX = x * 20;
+                targetY = y * 15;
+            }
+
+            // === Fallback: touch drag untuk mobile tanpa gyroscope ===
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let isTouching = false;
+
+            document.addEventListener('touchstart', function(e) {
+                const touch = e.touches[0];
+                if (touch) {
+                    touchStartX = touch.clientX;
+                    touchStartY = touch.clientY;
+                    isTouching = true;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchmove', function(e) {
+                if (!isTouching) return;
+                const touch = e.touches[0];
+                if (!touch) return;
+
+                const deltaX = (touch.clientX - touchStartX) / window.innerWidth;
+                const deltaY = (touch.clientY - touchStartY) / window.innerHeight;
+
+                targetX = deltaX * 30;
+                targetY = deltaY * 20;
+
+                // Reset posisi touch untuk menghindari drift
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function() {
+                isTouching = false;
+                // Kembali perlahan ke posisi semula
+                targetX = 0;
+                targetY = 0;
+            }, { passive: true });
+
+            // Mulai animasi
+            updateParallax();
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cardSOSSilver').addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -1088,6 +1179,9 @@
             fetchData();
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            // Init parallax setelah semuanya siap
+            initParallax();
         });
     </script>
 
