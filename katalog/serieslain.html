@@ -54,11 +54,90 @@
             padding-top: 60px;
             padding-bottom: 80px;
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         @media (min-width: 769px) { body { padding-top: 80px; padding-bottom: 0; } }
 
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
+
+        /* ===== AURA BACKGROUND — ELEGAN ===== */
+        .bg-aura {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .bg-aura .gem-line {
+            position: absolute;
+            border-radius: 50%;
+            will-change: transform, opacity;
+            opacity: 0.06;
+        }
+        .bg-aura .gem-line:nth-child(1) {
+            width: 700px;
+            height: 700px;
+            top: -20%;
+            left: -20%;
+            background: radial-gradient(circle at 30% 40%, rgba(192,197,206,0.15), transparent 70%);
+            animation: gemFloat1 20s ease-in-out infinite alternate;
+        }
+        .bg-aura .gem-line:nth-child(2) {
+            width: 600px;
+            height: 600px;
+            bottom: -15%;
+            right: -15%;
+            background: radial-gradient(circle at 70% 60%, rgba(192,197,206,0.1), transparent 65%);
+            animation: gemFloat2 22s ease-in-out infinite alternate;
+        }
+        .bg-aura .gem-line:nth-child(3) {
+            width: 500px;
+            height: 500px;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.08), transparent 60%);
+            animation: gemFloat3 18s ease-in-out infinite alternate;
+        }
+        .bg-aura .gem-line:nth-child(4) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            background: radial-gradient(circle at 60% 40%, rgba(192,197,206,0.12), transparent 60%);
+            animation: gemFloat1 16s ease-in-out infinite alternate-reverse;
+        }
+        .bg-aura .gem-line:nth-child(5) {
+            width: 400px;
+            height: 400px;
+            bottom: 20%;
+            left: 5%;
+            background: radial-gradient(circle at 40% 60%, rgba(192,197,206,0.07), transparent 55%);
+            animation: gemFloat2 24s ease-in-out infinite alternate-reverse;
+        }
+        .bg-aura .gem-line:nth-child(6) {
+            width: 200px;
+            height: 200px;
+            top: 55%;
+            right: 20%;
+            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.15), transparent 50%);
+            animation: gemFloat3 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes gemFloat1 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.04; }
+            100% { transform: translate(50px, -30px) scale(1.1) rotate(5deg); opacity: 0.08; }
+        }
+        @keyframes gemFloat2 {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.03; }
+            100% { transform: translate(-40px, 40px) scale(1.15) rotate(-5deg); opacity: 0.07; }
+        }
+        @keyframes gemFloat3 {
+            0% { transform: translate(-50%, -30%) scale(1) rotate(0deg); opacity: 0.02; }
+            100% { transform: translate(-50%, -30%) scale(1.2) rotate(8deg); opacity: 0.06; }
+        }
 
         .glass-card {
             background: linear-gradient(145deg, rgba(18,21,28,.9) 0%, rgba(8,10,15,.95) 100%);
@@ -175,7 +254,7 @@
         .supplier-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
         @media (min-width: 640px) {
             .supplier-grid { gap: 16px; }
@@ -185,52 +264,95 @@
         }
 
         .supplier-card {
+            position: relative;
             background: rgba(255,255,255,0.015);
             border: 1px solid rgba(255,255,255,0.04);
             border-radius: 14px;
-            padding: 18px 10px;
+            padding: 22px 12px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             min-height: 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            will-change: transform;
+            overflow: hidden;
         }
         @media (min-width: 640px) {
-            .supplier-card { padding: 24px 16px; min-height: 140px; border-radius: 16px; }
+            .supplier-card { padding: 28px 16px; min-height: 140px; border-radius: 16px; }
         }
         @media (min-width: 1024px) {
-            .supplier-card { padding: 32px 24px; min-height: 160px; border-radius: 20px; }
+            .supplier-card { padding: 36px 24px; min-height: 160px; border-radius: 20px; }
         }
 
+        /* ===== SHIMMER OTOMATIS — PELAN ===== */
         .supplier-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(110deg, 
+                transparent 25%, 
+                rgba(192,197,206,0.03) 45%, 
+                rgba(192,197,206,0.05) 50%, 
+                rgba(192,197,206,0.03) 55%, 
+                transparent 75%
+            );
+            background-size: 300% 100%;
+            opacity: 0.5;
+            pointer-events: none;
+            animation: shimmerAuto 8s ease-in-out infinite;
+            z-index: 0;
+        }
+        @keyframes shimmerAuto {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+
+        .supplier-card:hover:not(.coming-soon)::before {
+            opacity: 0.8;
+            animation-duration: 4s;
+        }
+
+        .supplier-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(192,197,206,0.2), transparent);
-            opacity: 0;
+            background: linear-gradient(90deg, transparent, rgba(192,197,206,0.12), transparent);
+            opacity: 0.3;
             transition: opacity 0.5s ease;
+            z-index: 1;
         }
+        .supplier-card:hover:not(.coming-soon)::after {
+            opacity: 0.8;
+        }
+
         .supplier-card:hover:not(.coming-soon) {
             border-color: rgba(255,255,255,0.08);
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(192,197,206,0.03);
         }
-        .supplier-card:hover:not(.coming-soon)::before {
-            opacity: 1;
-        }
+
         .supplier-card.coming-soon {
-            opacity: 0.5;
-            cursor: not-allowed;
+            opacity: 0.6;
+            cursor: default;
+            border-style: dashed;
+            border-color: rgba(255,255,255,0.06);
         }
+        .supplier-card.coming-soon::before {
+            display: none;
+        }
+        .supplier-card.coming-soon .icon-wrap {
+            opacity: 0.4;
+        }
+
         .supplier-card .icon-wrap {
+            position: relative;
+            z-index: 1;
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -241,6 +363,7 @@
             justify-content: center;
             margin-bottom: 6px;
             flex-shrink: 0;
+            transition: all 0.4s ease;
         }
         @media (min-width: 640px) {
             .supplier-card .icon-wrap { width: 52px; height: 52px; margin-bottom: 8px; }
@@ -261,6 +384,8 @@
         }
 
         .supplier-card h3 {
+            position: relative;
+            z-index: 1;
             font-family: 'Sora', sans-serif;
             font-size: 13px;
             font-weight: 700;
@@ -275,6 +400,8 @@
         }
 
         .supplier-card p {
+            position: relative;
+            z-index: 1;
             color: #64748B;
             font-size: 9px;
         }
@@ -286,6 +413,8 @@
         }
 
         .supplier-card .badge {
+            position: relative;
+            z-index: 1;
             display: inline-block;
             padding: 1px 8px;
             border-radius: 20px;
@@ -296,6 +425,7 @@
             border: 1px solid rgba(192,197,206,0.06);
             margin-top: 4px;
             letter-spacing: 0.3px;
+            transition: all 0.3s ease;
         }
         @media (min-width: 640px) {
             .supplier-card .badge { font-size: 9px; padding: 2px 10px; margin-top: 6px; }
@@ -305,24 +435,36 @@
         }
 
         .supplier-card .badge.active {
-            background: rgba(16,185,129,0.1);
+            background: rgba(16,185,129,0.08);
             color: #10B981;
-            border-color: rgba(16,185,129,0.2);
+            border-color: rgba(16,185,129,0.15);
+            animation: pulseReady 2.4s ease-in-out infinite;
         }
+        @keyframes pulseReady {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.04); }
+        }
+
         .supplier-card .badge.coming {
-            background: rgba(251,191,36,0.1);
+            background: rgba(251,191,36,0.08);
             color: #F59E0B;
-            border-color: rgba(251,191,36,0.2);
+            border-color: rgba(251,191,36,0.15);
+            animation: pulseComing 2s ease-in-out infinite;
+        }
+        @keyframes pulseComing {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
 
         /* ===== PRODUCT LIST ===== */
         .product-list-wrap {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(20px) scale(0.98);
             transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             margin-top: 24px;
             display: none;
+            transform-origin: top center;
         }
         @media (min-width: 640px) {
             .product-list-wrap { margin-top: 32px; }
@@ -330,7 +472,7 @@
         .product-list-wrap.visible {
             display: block;
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         .product-item {
@@ -339,14 +481,19 @@
             justify-content: space-between;
             padding: 12px 16px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease;
             cursor: pointer;
+            border-radius: 8px;
         }
         @media (min-width: 640px) {
             .product-item { padding: 14px 20px; }
         }
         .product-item:hover {
-            background: rgba(255,255,255,0.02);
+            background: rgba(255,255,255,0.03);
+            transform: translateX(4px);
+        }
+        .product-item:active {
+            transform: scale(0.98);
         }
         .product-item .name {
             color: #E2E8F0;
@@ -521,7 +668,6 @@
             .modal-content .wa-btn i { width: 18px; height: 18px; }
         }
 
-        /* ===== MODAL IMAGE ===== */
         .modal-image {
             width: 80px;
             height: 80px;
@@ -565,27 +711,33 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .page-header h1 {
-            font-family: 'Sora', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: white;
+        .page-header {
+            text-align: center;
+            margin-bottom: 32px;
         }
         @media (min-width: 640px) {
-            .page-header h1 { font-size: 28px; }
+            .page-header { margin-bottom: 40px; }
+        }
+        .page-header h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+        @media (min-width: 640px) {
+            .page-header h1 { font-size: 32px; }
         }
         @media (min-width: 1024px) {
-            .page-header h1 { font-size: 32px; }
+            .page-header h1 { font-size: 36px; }
         }
         .page-header p {
             color: #94A3B8;
-            font-size: 12px;
-            margin-top: 2px;
+            font-size: 13px;
+            margin-top: 4px;
+            letter-spacing: 0.2px;
         }
         @media (min-width: 640px) {
-            .page-header p { font-size: 13px; }
-        }
-        @media (min-width: 1024px) {
             .page-header p { font-size: 14px; }
         }
 
@@ -593,6 +745,15 @@
     </style>
 </head>
 <body>
+
+    <div class="bg-aura">
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+        <div class="gem-line"></div>
+    </div>
 
     <header class="desktop-nav">
         <div class="w-full max-w-7xl mx-auto flex items-center justify-between">
@@ -613,47 +774,42 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8">
+    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8 relative z-10">
 
-        <div class="page-header mb-6 md:mb-8">
+        <div class="page-header">
             <h1>Edisi Khusus</h1>
-            <p>Supplier mitra Veldion Silver — produk pilihan dengan harga kompetitif</p>
+            <p>Supplier Limited Edition — Edisi terbatas dengan kualitas premium.</p>
         </div>
 
-        <!-- ===== SUPPLIER GRID ===== -->
         <div class="supplier-grid" id="supplierGrid">
-            <!-- SOSSilver -->
             <div class="supplier-card" data-supplier="SOSSilver" id="cardSOSSilver">
                 <div class="icon-wrap">
                     <i data-lucide="gem"></i>
                 </div>
                 <h3>SOSSilver</h3>
-                <p>Perak fisik</p>
-                <span class="badge active">● Aktif</span>
+                <p>Perak Exclusive</p>
+                <span class="badge active">● Ready</span>
             </div>
 
-            <!-- Coming Soon 1 -->
             <div class="supplier-card coming-soon">
                 <div class="icon-wrap">
                     <i data-lucide="clock"></i>
                 </div>
                 <h3>Coming Soon</h3>
                 <p>Segera hadir</p>
-                <span class="badge coming">● Persiapan</span>
+                <span class="badge coming">● On Progress</span>
             </div>
 
-            <!-- Coming Soon 2 -->
             <div class="supplier-card coming-soon">
                 <div class="icon-wrap">
                     <i data-lucide="clock"></i>
                 </div>
                 <h3>Coming Soon</h3>
                 <p>Segera hadir</p>
-                <span class="badge coming">● Persiapan</span>
+                <span class="badge coming">● On Progress</span>
             </div>
         </div>
 
-        <!-- ===== PRODUCT LIST ===== -->
         <div class="product-list-wrap glass-card" id="productList">
             <div class="p-3 md:p-6">
                 <div class="flex items-center justify-between mb-3 md:mb-4">
@@ -664,12 +820,10 @@
             </div>
         </div>
 
-        <!-- ===== LOADING ===== -->
         <div id="loadingIndicator" class="flex justify-center py-12">
             <div class="spinner"></div>
         </div>
 
-        <!-- ===== ERROR ===== -->
         <div id="errorMessage" class="text-center py-8 text-steel hidden">
             <i data-lucide="alert-circle" class="w-10 h-10 mx-auto mb-3 text-red-400"></i>
             <p>Gagal memuat data. Coba refresh halaman.</p>
@@ -677,7 +831,6 @@
 
     </main>
 
-    <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
             <button id="closeProductModal" class="close-btn">
@@ -707,9 +860,6 @@
     </div>
 
     <script>
-        // ============================================================
-        // GOOGLE SHEETS — SERIESLAIN
-        // ============================================================
         const SHEET_ID = "15uusNM9BmtibWXb0ZN5k1qPlZJvGWWEtO3Cm-69m06o";
         const SHEET_NAME = "SERIESLAIN";
 
@@ -721,9 +871,6 @@
         let currentSupplier = null;
         let isListVisible = false;
 
-        // ============================================================
-        // FETCH DATA
-        // ============================================================
         async function fetchData() {
             const loading = document.getElementById('loadingIndicator');
             const error = document.getElementById('errorMessage');
@@ -746,24 +893,19 @@
 
                 products = parsed;
                 loading.style.display = 'none';
-                console.log(`✅ ${products.length} produk dimuat dari SERIESLAIN`);
 
             } catch (err) {
-                console.error('❌ Fetch error:', err);
+                console.error('Fetch error:', err);
                 loading.style.display = 'none';
                 error.classList.remove('hidden');
                 if (typeof lucide !== 'undefined') lucide.createIcons();
             }
         }
 
-        // ============================================================
-        // PARSE CSV - PERBAIKAN
-        // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            // Parse header dengan benar (handle koma dalam data)
             const header = [];
             let current = '';
             let inQuotes = false;
@@ -803,12 +945,10 @@
                 
                 const obj = {};
                 header.forEach((key, idx) => {
-                    // Bersihkan header dari karakter aneh
                     const cleanKey = key.replace(/[^a-zA-Z0-9\s]/g, '').trim();
                     obj[cleanKey] = values[idx] || '';
                 });
                 
-                // Cek apakah ini data valid (punya kode produk atau nama produk)
                 if (obj['kode produk'] || obj['nama produk']) {
                     result.push(obj);
                 }
@@ -817,9 +957,6 @@
             return result;
         }
 
-        // ============================================================
-        // TOGGLE SUPPLIER LIST
-        // ============================================================
         function toggleSupplier(supplierName) {
             const listWrap = document.getElementById('productList');
             const itemsContainer = document.getElementById('productItems');
@@ -885,13 +1022,9 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
-        // ============================================================
-        // MODAL - PERBAIKAN
-        // ============================================================
         function openModal(product) {
             const p = product;
 
-            // Mapping field sesuai header: supplier(D), berat(C), kadar(G), buyback(J), harga(H)
             document.getElementById('modalName').textContent = p['nama produk'] || 'Produk';
             document.getElementById('modalCategory').textContent = p['supplier'] || 'Reguler';
             document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
@@ -918,9 +1051,6 @@
             document.body.classList.remove('no-scroll');
         }
 
-        // ============================================================
-        // EVENT LISTENERS
-        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cardSOSSilver').addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -930,6 +1060,11 @@
             document.addEventListener('click', function(e) {
                 const listWrap = document.getElementById('productList');
                 const card = document.getElementById('cardSOSSilver');
+                const modal = document.getElementById('productModal');
+
+                if (modal.classList.contains('active')) {
+                    return;
+                }
 
                 if (isListVisible && 
                     !listWrap.contains(e.target) && 
@@ -942,7 +1077,9 @@
 
             document.getElementById('closeProductModal').addEventListener('click', closeModal);
             document.getElementById('productModal').addEventListener('click', function(e) {
-                if (e.target.id === 'productModal') closeModal();
+                if (e.target.id === 'productModal') {
+                    closeModal();
+                }
             });
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') closeModal();
