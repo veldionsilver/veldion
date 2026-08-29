@@ -517,6 +517,42 @@
             .modal-content .wa-btn i { width: 18px; height: 18px; }
         }
 
+        /* ===== MODAL IMAGE ===== */
+        .modal-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(192,197,206,.05);
+            border: 1px solid rgba(192,197,206,.06);
+            flex-shrink: 0;
+            padding: 8px;
+        }
+        @media (min-width: 769px) {
+            .modal-image {
+                width: 100px;
+                height: 100px;
+                padding: 10px;
+            }
+        }
+        .modal-image .placeholder {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'Sora', sans-serif;
+            background: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (min-width: 769px) {
+            .modal-image .placeholder {
+                font-size: 36px;
+            }
+        }
+
         .spinner {
             width: 36px;
             height: 36px;
@@ -642,22 +678,27 @@
     <!-- ===== MODAL ===== -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-content">
-            <button class="close-btn" id="closeModal">
+            <button id="closeProductModal" class="absolute top-4 right-4 text-steel hover:text-white">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-            <div class="modal-title" id="modalName">Produk</div>
-            <div class="modal-sub" id="modalCategory">Kategori</div>
-            <div id="modalDetails">
-                <div class="detail-row"><span class="label">Supplier</span><span class="value" id="modalSupplier">-</span></div>
-                <div class="detail-row"><span class="label">Berat</span><span class="value" id="modalWeight">-</span></div>
-                <div class="detail-row"><span class="label">Kadar</span><span class="value" id="modalPurity">-</span></div>
-                <div class="detail-row"><span class="label">Harga Supplier</span><span class="value" id="modalSupplierPrice">-</span></div>
-                <div class="detail-row"><span class="label">Fluktuasi</span><span class="value" id="modalFluctuation">-</span></div>
-                <div class="detail-row"><span class="label">Buyback</span><span class="value" id="modalBuyback">-</span></div>
-                <div class="detail-row"><span class="label">Harga Jual</span><span class="value price" id="modalPrice">-</span></div>
+            <div class="flex items-center gap-4 mb-5">
+                <div class="modal-image" id="modalImageContainer">
+                    <span class="placeholder">P</span>
+                </div>
+                <div>
+                    <h3 class="font-display text-lg md:text-xl font-bold text-white" id="modalName">Produk</h3>
+                    <p class="text-sm text-steel-light" id="modalCategory">Kategori</p>
+                </div>
             </div>
-            <a href="#" target="_blank" class="wa-btn" id="modalWA">
-                <i data-lucide="message-circle"></i>
+            <div class="space-y-2 md:space-y-3 mb-5 md:mb-6">
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Supplier</span><span class="text-white font-medium text-sm" id="modalSupplier">-</span></div>
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Berat</span><span class="text-white font-medium text-sm" id="modalWeight">-</span></div>
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Kadar</span><span class="text-white font-medium text-sm" id="modalPurity">-</span></div>
+                <div class="flex justify-between py-2 border-b border-white/5"><span class="text-steel text-sm">Buyback</span><span class="text-white font-medium text-sm" id="modalBuyback">-</span></div>
+                <div class="flex justify-between py-2"><span class="text-steel text-sm">Harga</span><span class="text-xl font-display font-bold text-silver-gradient" id="modalPrice">-</span></div>
+            </div>
+            <a id="modalLink" href="#" target="_blank" class="w-full py-3.5 md:py-4 bg-gradient-to-r from-silver-light to-silver text-void font-bold rounded-xl flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(192,197,206,0.3)] transition btn-shine text-sm md:text-base">
+                <i data-lucide="message-circle" class="w-4 h-4 md:w-5 md:h-5"></i>
                 Tanya Stok via WhatsApp
             </a>
         </div>
@@ -716,13 +757,12 @@
         }
 
         // ============================================================
-        // PARSE CSV — TIDAK MENGUBAH HEADER KE LOWERCASE
+        // PARSE CSV
         // ============================================================
         function parseCSV(csv) {
             const lines = csv.split('\n').filter(line => line.trim() !== '');
             if (lines.length < 2) return [];
 
-            // ===== PENTING: HEADER TETAP DENGAN HURUF BESAR/KECIL ASLI =====
             const header = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
             const result = [];
 
@@ -732,7 +772,6 @@
                 header.forEach((key, idx) => {
                     obj[key] = values[idx] || '';
                 });
-                // Cek apakah ada kolom "Nama Produk" (dengan huruf besar) atau "nama produk"
                 if (obj['Nama Produk'] || obj['nama produk'] || obj['name']) {
                     result.push(obj);
                 }
@@ -751,7 +790,6 @@
             const countEl = document.getElementById('productCount');
 
             const filtered = products.filter(p => {
-                // Cek kolom "Supplier" (dengan huruf besar S)
                 const sup = p['Supplier'] || p.supplier || p['supplier'] || '';
                 return sup.toLowerCase() === supplierName.toLowerCase();
             });
@@ -781,7 +819,6 @@
             itemsContainer.innerHTML = html;
             listWrap.classList.add('visible');
 
-            // Event listener untuk setiap produk
             document.querySelectorAll('.product-item').forEach(el => {
                 el.addEventListener('click', function() {
                     const idx = parseInt(this.dataset.idx);
@@ -796,33 +833,23 @@
         // MODAL
         // ============================================================
         function openModal(product) {
-            // ===== PAKAI HEADER SESUAI DI SHEETS =====
-            const name = product['Nama Produk'] || product['nama produk'] || product['name'] || 'Produk';
-            const supplier = product['Supplier'] || product.supplier || product['supplier'] || '-';
-            const weight = product['Berat (gr)'] || product['berat (gr)'] || product['berat'] || product['weight'] || '-';
-            const purity = product['Kadar'] || product.kadar || product['purity'] || '-';
-            const supplierPrice = product['Harga Supplier'] || product['harga supplier'] || product['harga_supplier'] || '-';
-            const price = product['Harga'] || product.harga || product['price'] || '-';
-            const fluctuation = product['Fluktuasi'] || product.fluktuasi || product['fluctuation'] || '-';
-            const buyback = product['Buyback'] || product.buyback || product['buyback'] || '-';
-            const category = product['Kategori'] || product.kategori || product['category'] || 'Reguler';
+            const p = product;
 
-            document.getElementById('modalName').textContent = name;
-            document.getElementById('modalCategory').textContent = category;
-            document.getElementById('modalSupplier').textContent = supplier;
-            document.getElementById('modalWeight').textContent = weight + 'gr';
-            document.getElementById('modalPurity').textContent = purity;
-            document.getElementById('modalSupplierPrice').textContent = supplierPrice;
-            document.getElementById('modalFluctuation').textContent = fluctuation;
-            document.getElementById('modalBuyback').textContent = buyback;
-            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalName').textContent = p['Nama Produk'] || p['nama produk'] || p['name'] || 'Produk';
+            document.getElementById('modalCategory').textContent = p['Kategori'] || p.kategori || p['category'] || 'Reguler';
+            document.getElementById('modalSupplier').textContent = p['Supplier'] || p.supplier || p['supplier'] || '-';
+            document.getElementById('modalWeight').textContent = (p['Berat (gr)'] || p['berat (gr)'] || p['berat'] || p['weight'] || '-') + 'gr';
+            document.getElementById('modalPurity').textContent = p['Kadar'] || p.kadar || p['purity'] || '-';
+            document.getElementById('modalBuyback').textContent = p['Buyback'] || p.buyback || p['buyback'] || '-';
+            document.getElementById('modalPrice').textContent = p['Harga'] || p.harga || p['price'] || 'Rp -';
 
+            const name = p['Nama Produk'] || p['nama produk'] || p['name'] || 'Produk';
+            const category = p['Kategori'] || p.kategori || p['category'] || 'Reguler';
             const waMsg = `Halo%20Veldion%2C%20saya%20mau%20tanya%20stok%20${encodeURIComponent(name)}%20(${category})`;
-            document.getElementById('modalWA').href = `https://wa.me/628137271517?text=${waMsg}`;
+            document.getElementById('modalLink').href = `https://wa.me/628137271517?text=${waMsg}`;
 
             document.getElementById('productModal').classList.add('active');
             document.body.classList.add('no-scroll');
-
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
@@ -835,10 +862,8 @@
         // EVENT LISTENERS
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Card SOSSilver — klik + scroll
             document.getElementById('cardSOSSilver').addEventListener('click', function() {
                 showSupplier('SOSSilver');
-                // Scroll ke list produk setelah render
                 setTimeout(() => {
                     const list = document.getElementById('productList');
                     if (list && list.classList.contains('visible')) {
@@ -849,8 +874,7 @@
                 }, 350);
             });
 
-            // Modal close
-            document.getElementById('closeModal').addEventListener('click', closeModal);
+            document.getElementById('closeProductModal').addEventListener('click', closeModal);
             document.getElementById('productModal').addEventListener('click', function(e) {
                 if (e.target.id === 'productModal') closeModal();
             });
@@ -858,15 +882,10 @@
                 if (e.key === 'Escape') closeModal();
             });
 
-            // Fetch data
             fetchData();
-
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
 
-        // ============================================================
-        // FALLBACK — jika DOM sudah ready
-        // ============================================================
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
             // sudah dihandle di atas
         }
