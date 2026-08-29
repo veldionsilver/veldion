@@ -62,81 +62,135 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        /* ===== AURA BACKGROUND ===== */
-        .bg-aura {
+        /* ================================================================
+           BACKGROUND LUXURY — Vignette + Diagonal Stripes + Parallax
+           ================================================================ */
+        .bg-luxury {
             position: fixed;
             inset: 0;
             z-index: 0;
             pointer-events: none;
             overflow: hidden;
         }
-        .bg-aura .gem-line {
+
+        /* Vignette — fokus ke tengah */
+        .bg-luxury .vignette {
             position: absolute;
-            border-radius: 50%;
-            will-change: transform, opacity;
-            opacity: 0.06;
-        }
-        .bg-aura .gem-line:nth-child(1) {
-            width: 700px;
-            height: 700px;
-            top: -20%;
-            left: -20%;
-            background: radial-gradient(circle at 30% 40%, rgba(192,197,206,0.15), transparent 70%);
-            animation: gemFloat1 20s ease-in-out infinite alternate;
-        }
-        .bg-aura .gem-line:nth-child(2) {
-            width: 600px;
-            height: 600px;
-            bottom: -15%;
-            right: -15%;
-            background: radial-gradient(circle at 70% 60%, rgba(192,197,206,0.1), transparent 65%);
-            animation: gemFloat2 22s ease-in-out infinite alternate;
-        }
-        .bg-aura .gem-line:nth-child(3) {
-            width: 500px;
-            height: 500px;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -30%);
-            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.08), transparent 60%);
-            animation: gemFloat3 18s ease-in-out infinite alternate;
-        }
-        .bg-aura .gem-line:nth-child(4) {
-            width: 300px;
-            height: 300px;
-            top: 10%;
-            right: 5%;
-            background: radial-gradient(circle at 60% 40%, rgba(192,197,206,0.12), transparent 60%);
-            animation: gemFloat1 16s ease-in-out infinite alternate-reverse;
-        }
-        .bg-aura .gem-line:nth-child(5) {
-            width: 400px;
-            height: 400px;
-            bottom: 20%;
-            left: 5%;
-            background: radial-gradient(circle at 40% 60%, rgba(192,197,206,0.07), transparent 55%);
-            animation: gemFloat2 24s ease-in-out infinite alternate-reverse;
-        }
-        .bg-aura .gem-line:nth-child(6) {
-            width: 200px;
-            height: 200px;
-            top: 55%;
-            right: 20%;
-            background: radial-gradient(circle at 50% 50%, rgba(192,197,206,0.15), transparent 50%);
-            animation: gemFloat3 14s ease-in-out infinite alternate;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(192,197,206,0.06) 0%, rgba(192,197,206,0.015) 35%, transparent 70%);
         }
 
-        @keyframes gemFloat1 {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.04; }
-            100% { transform: translate(50px, -30px) scale(1.1) rotate(5deg); opacity: 0.08; }
+        /* Parallax layer untuk stripes */
+        .bg-luxury .parallax-layer {
+            position: absolute;
+            inset: 0;
+            transition: transform 0.08s ease-out;
+            will-change: transform;
         }
-        @keyframes gemFloat2 {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.03; }
-            100% { transform: translate(-40px, 40px) scale(1.15) rotate(-5deg); opacity: 0.07; }
+
+        /* Diagonal stripes — lebih sedikit & elegan */
+        .bg-luxury .stripes {
+            position: absolute;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(192,197,206,0.015) 80px,
+                    rgba(192,197,206,0.03) 81px,
+                    transparent 81px,
+                    transparent 160px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(192,197,206,0.01) 80px,
+                    rgba(192,197,206,0.025) 81px,
+                    transparent 81px,
+                    transparent 160px
+                );
         }
-        @keyframes gemFloat3 {
-            0% { transform: translate(-50%, -30%) scale(1) rotate(0deg); opacity: 0.02; }
-            100% { transform: translate(-50%, -30%) scale(1.2) rotate(8deg); opacity: 0.06; }
+
+        /* Orb silver — glow lembut */
+        .bg-luxury .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            will-change: transform, opacity;
+        }
+        .bg-luxury .orb:nth-child(4) {
+            width: 60vw;
+            height: 60vw;
+            max-width: 700px;
+            max-height: 700px;
+            top: -20%;
+            left: -25%;
+            background: radial-gradient(circle, rgba(192,197,206,0.12), transparent 70%);
+            animation: orbFloat1 18s ease-in-out infinite alternate;
+        }
+        .bg-luxury .orb:nth-child(5) {
+            width: 50vw;
+            height: 50vw;
+            max-width: 550px;
+            max-height: 550px;
+            bottom: -20%;
+            right: -20%;
+            background: radial-gradient(circle, rgba(192,197,206,0.08), transparent 65%);
+            animation: orbFloat2 22s ease-in-out infinite alternate;
+        }
+        .bg-luxury .orb:nth-child(6) {
+            width: 30vw;
+            height: 30vw;
+            max-width: 350px;
+            max-height: 350px;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -35%);
+            background: radial-gradient(circle, rgba(192,197,206,0.06), transparent 60%);
+            animation: orbFloat3 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat1 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.25; }
+            100% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
+        }
+        @keyframes orbFloat2 {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+            100% { transform: translate(-40px, 40px) scale(1.15); opacity: 0.4; }
+        }
+        @keyframes orbFloat3 {
+            0% { transform: translate(-50%, -35%) scale(1); opacity: 0.12; }
+            100% { transform: translate(-50%, -35%) scale(1.2); opacity: 0.35; }
+        }
+
+        /* Shimmer particles */
+        .bg-luxury .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(192,197,206,0.3);
+            border-radius: 50%;
+            animation: particleDrift linear infinite;
+        }
+        .bg-luxury .particle:nth-child(7) { left: 10%; top: 20%; animation-duration: 14s; animation-delay: 0s; width: 3px; height: 3px; }
+        .bg-luxury .particle:nth-child(8) { left: 25%; top: 60%; animation-duration: 18s; animation-delay: 2s; }
+        .bg-luxury .particle:nth-child(9) { left: 45%; top: 10%; animation-duration: 12s; animation-delay: 4s; width: 4px; height: 4px; }
+        .bg-luxury .particle:nth-child(10) { left: 65%; top: 75%; animation-duration: 20s; animation-delay: 1s; }
+        .bg-luxury .particle:nth-child(11) { left: 80%; top: 30%; animation-duration: 16s; animation-delay: 3s; width: 3px; height: 3px; }
+        .bg-luxury .particle:nth-child(12) { left: 15%; top: 85%; animation-duration: 22s; animation-delay: 5s; }
+        .bg-luxury .particle:nth-child(13) { left: 55%; top: 50%; animation-duration: 13s; animation-delay: 7s; width: 4px; height: 4px; }
+        .bg-luxury .particle:nth-child(14) { left: 90%; top: 55%; animation-duration: 17s; animation-delay: 2s; }
+        .bg-luxury .particle:nth-child(15) { left: 35%; top: 35%; animation-duration: 15s; animation-delay: 6s; }
+        .bg-luxury .particle:nth-child(16) { left: 70%; top: 15%; animation-duration: 19s; animation-delay: 4s; width: 3px; height: 3px; }
+
+        @keyframes particleDrift {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.05; }
+            25% { transform: translate(40px, -20px) scale(1.8); opacity: 0.5; }
+            50% { transform: translate(-30px, 30px) scale(0.6); opacity: 0.1; }
+            75% { transform: translate(50px, 15px) scale(1.5); opacity: 0.4; }
+            100% { transform: translate(-15px, -25px) scale(1); opacity: 0.05; }
         }
 
         .glass-card {
@@ -287,7 +341,6 @@
             .supplier-card { padding: 36px 24px; min-height: 160px; border-radius: 20px; }
         }
 
-        /* ===== SHIMMER OTOMATIS — PELAN ===== */
         .supplier-card::before {
             content: '';
             position: absolute;
@@ -529,7 +582,7 @@
             transform: translateX(3px);
         }
 
-        /* ===== MODAL — TETAP DI TENGAH ===== */
+        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -561,7 +614,6 @@
             .modal-content { padding: 28px; }
         }
         .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
-
         .modal-content .close-btn {
             position: absolute;
             top: 14px;
@@ -577,7 +629,6 @@
             .modal-content .close-btn { top: 16px; right: 16px; }
         }
         .modal-content .close-btn:hover { color: white; }
-
         .modal-content .modal-title {
             font-family: 'Sora', sans-serif;
             font-size: 16px;
@@ -744,17 +795,36 @@
         }
 
         .no-scroll { overflow: hidden; }
+
+        .desktop-nav,
+        main,
+        .modal-overlay {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-aura">
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
-        <div class="gem-line"></div>
+    <!-- ===== BACKGROUND LUXURY ===== -->
+    <div class="bg-luxury" aria-hidden="true">
+        <div class="vignette"></div>
+        <div class="parallax-layer" id="parallaxStripes">
+            <div class="stripes"></div>
+        </div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
     </div>
 
     <header class="desktop-nav">
@@ -776,7 +846,7 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8 relative z-10">
+    <main class="max-w-4xl mx-auto px-3 md:px-4 py-4 md:py-8">
 
         <div class="page-header">
             <h1>Edisi Khusus</h1>
@@ -1053,6 +1123,85 @@
             document.body.classList.remove('no-scroll');
         }
 
+        function initParallax() {
+            const layer = document.getElementById('parallaxStripes');
+            let targetX = 0, targetY = 0;
+            let currentX = 0, currentY = 0;
+
+            function updateParallax() {
+                currentX += (targetX - currentX) * 0.08;
+                currentY += (targetY - currentY) * 0.08;
+                layer.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                requestAnimationFrame(updateParallax);
+            }
+
+            document.addEventListener('mousemove', function(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+                const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                targetX = x * 15;
+                targetY = y * 10;
+            });
+
+            if (window.DeviceOrientationEvent) {
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    DeviceOrientationEvent.requestPermission().then(state => {
+                        if (state === 'granted') {
+                            window.addEventListener('deviceorientation', handleOrientation);
+                        }
+                    }).catch(() => {});
+                } else {
+                    window.addEventListener('deviceorientation', handleOrientation);
+                }
+            }
+
+            function handleOrientation(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+                const beta = e.beta || 0;
+                const gamma = e.gamma || 0;
+                targetX = (gamma / 45) * 20;
+                targetY = (beta / 45) * 15;
+            }
+
+            let touchStartX = 0, touchStartY = 0;
+            let isTouching = false;
+
+            document.addEventListener('touchstart', function(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+                const touch = e.touches[0];
+                if (touch) {
+                    touchStartX = touch.clientX;
+                    touchStartY = touch.clientY;
+                    isTouching = true;
+                }
+            }, { passive: true });
+
+            document.addEventListener('touchmove', function(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+                if (!isTouching) return;
+                const touch = e.touches[0];
+                if (!touch) return;
+                const deltaX = (touch.clientX - touchStartX) / window.innerWidth;
+                const deltaY = (touch.clientY - touchStartY) / window.innerHeight;
+                targetX = deltaX * 30;
+                targetY = deltaY * 20;
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+            }, { passive: true });
+
+            document.addEventListener('touchend', function() {
+                isTouching = false;
+                targetX = 0;
+                targetY = 0;
+            }, { passive: true });
+
+            updateParallax();
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('cardSOSSilver').addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -1090,6 +1239,8 @@
             fetchData();
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            initParallax();
         });
     </script>
 
