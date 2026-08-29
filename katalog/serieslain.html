@@ -832,7 +832,7 @@
         <div class="page-header">
             <h1>Edisi Khusus</h1>
             <p class="text-steel text-sm mt-2">
-                Supplier Eksklusif — <span class="text-silver-light font-medium">Edisi terbatas</span> dengan <span class="text-silver-light font-medium">kualitas premium<span class="text-silver-light font-medium">
+                Supplier Eksklusif — <span class="text-silver-light font-medium">Edisi terbatas</span> dengan <span class="text-silver-light font-medium">kualitas premium</span>
             </p>
         </div>
 
@@ -1077,6 +1077,19 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         }
 
+        // ============================================================
+        // FORMATTER UNTUK INDONESIA
+        // ============================================================
+        function formatPurity(value) {
+            if (!value) return '-';
+            return value.toString().replace(/\./g, ',');
+        }
+
+        function formatPrice(value) {
+            if (!value || value === 'Rp -') return 'Rp -';
+            return value.replace(/,/g, '.');
+        }
+
         function openModal(product) {
             const p = product;
 
@@ -1084,9 +1097,9 @@
             document.getElementById('modalCategory').textContent = p['supplier'] || 'Reguler';
             document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
             document.getElementById('modalWeight').textContent = (p['berat'] || '-') + 'gr';
-            document.getElementById('modalPurity').textContent = p['kadar'] || '-';
-            document.getElementById('modalBuyback').textContent = p['buyback'] || '-';
-            document.getElementById('modalPrice').textContent = p['harga'] || 'Rp -';
+            document.getElementById('modalPurity').textContent = formatPurity(p['kadar'] || '-');
+            document.getElementById('modalBuyback').textContent = formatPrice(p['buyback'] || '-');
+            document.getElementById('modalPrice').textContent = formatPrice(p['harga'] || 'Rp -');
 
             const supplier = p['supplier'] || 'SOS';
             document.getElementById('modalInitial').textContent = supplier.substring(0, 3).toUpperCase();
