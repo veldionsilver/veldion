@@ -62,7 +62,6 @@
         ::-webkit-scrollbar { width: 6px; background: #080A0F; }
         ::-webkit-scrollbar-thumb { background: #1E2430; border-radius: 4px; }
 
-        /* ===== BACKGROUND LUXURY WITH PARALLAX ===== */
         .bg-luxury {
             position: fixed;
             inset: 0;
@@ -71,22 +70,20 @@
             overflow: hidden;
         }
 
-        /* Vignette silver — fokus ke tengah */
         .bg-luxury .vignette {
             position: absolute;
             inset: 0;
             background: radial-gradient(ellipse at center, rgba(192,197,206,0.07) 0%, rgba(192,197,206,0.02) 35%, transparent 70%);
         }
 
-        /* Parallax container untuk stripes */
         .bg-luxury .parallax-layer {
             position: absolute;
             inset: 0;
+            pointer-events: none;
             transition: transform 0.08s ease-out;
             will-change: transform;
         }
 
-        /* Diagonal stripes — lebih sedikit, lebih elegan */
         .bg-luxury .stripes {
             position: absolute;
             inset: 0;
@@ -111,7 +108,6 @@
                 );
         }
 
-        /* Orb silver — glow lembut */
         .bg-luxury .orb {
             position: absolute;
             border-radius: 50%;
@@ -163,7 +159,6 @@
             100% { transform: translate(-50%, -35%) scale(1.2); opacity: 0.4; }
         }
 
-        /* Shimmer particles */
         .bg-luxury .particle {
             position: absolute;
             width: 2px;
@@ -730,12 +725,9 @@
 
     <div class="bg-luxury" aria-hidden="true">
         <div class="vignette"></div>
-
-        <!-- Parallax Layer untuk stripes -->
         <div class="parallax-layer" id="parallaxStripes">
             <div class="stripes"></div>
         </div>
-
         <div class="orb"></div>
         <div class="orb"></div>
         <div class="orb"></div>
@@ -1048,36 +1040,32 @@
             document.body.classList.remove('no-scroll');
         }
 
-        // ============================================================
-        // PARALLAX EFFECT — Mouse & Mobile Gyroscope
-        // ============================================================
         function initParallax() {
             const layer = document.getElementById('parallaxStripes');
             let targetX = 0;
             let targetY = 0;
             let currentX = 0;
             let currentY = 0;
+            let isInteracting = false;
 
             function updateParallax() {
-                // Smooth lerp
                 currentX += (targetX - currentX) * 0.08;
                 currentY += (targetY - currentY) * 0.08;
-
                 layer.style.transform = `translate(${currentX}px, ${currentY}px)`;
                 requestAnimationFrame(updateParallax);
             }
 
-            // === Mouse (PC) ===
             document.addEventListener('mousemove', function(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+
                 const x = (e.clientX / window.innerWidth - 0.5) * 2;
                 const y = (e.clientY / window.innerHeight - 0.5) * 2;
                 targetX = x * 15;
                 targetY = y * 10;
             });
 
-            // === Mobile Gyroscope ===
             if (window.DeviceOrientationEvent) {
-                // Request permission untuk iOS 13+
                 if (typeof DeviceOrientationEvent.requestPermission === 'function') {
                     DeviceOrientationEvent.requestPermission().then(state => {
                         if (state === 'granted') {
@@ -1090,23 +1078,25 @@
             }
 
             function handleOrientation(e) {
-                const beta = e.beta || 0;   // -180 to 180 (tilt depan-belakang)
-                const gamma = e.gamma || 0; // -90 to 90 (tilt kiri-kanan)
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
 
-                // Normalize
+                const beta = e.beta || 0;
+                const gamma = e.gamma || 0;
                 const x = gamma / 45;
                 const y = beta / 45;
-
                 targetX = x * 20;
                 targetY = y * 15;
             }
 
-            // === Fallback: touch drag untuk mobile tanpa gyroscope ===
             let touchStartX = 0;
             let touchStartY = 0;
             let isTouching = false;
 
             document.addEventListener('touchstart', function(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+
                 const touch = e.touches[0];
                 if (touch) {
                     touchStartX = touch.clientX;
@@ -1116,6 +1106,9 @@
             }, { passive: true });
 
             document.addEventListener('touchmove', function(e) {
+                const modal = document.getElementById('productModal');
+                if (modal.classList.contains('active')) return;
+
                 if (!isTouching) return;
                 const touch = e.touches[0];
                 if (!touch) return;
@@ -1126,19 +1119,16 @@
                 targetX = deltaX * 30;
                 targetY = deltaY * 20;
 
-                // Reset posisi touch untuk menghindari drift
                 touchStartX = touch.clientX;
                 touchStartY = touch.clientY;
             }, { passive: true });
 
             document.addEventListener('touchend', function() {
                 isTouching = false;
-                // Kembali perlahan ke posisi semula
                 targetX = 0;
                 targetY = 0;
             }, { passive: true });
 
-            // Mulai animasi
             updateParallax();
         }
 
@@ -1180,7 +1170,6 @@
 
             if (typeof lucide !== 'undefined') lucide.createIcons();
 
-            // Init parallax setelah semuanya siap
             initParallax();
         });
     </script>
