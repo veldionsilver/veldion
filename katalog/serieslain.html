@@ -854,6 +854,7 @@
         function openModal(product) {
             const p = product;
 
+            // Gunakan field yang SESUAI dengan header CSV Anda
             document.getElementById('modalName').textContent = p['nama produk'] || 'Produk';
             document.getElementById('modalCategory').textContent = p['supplier'] || 'Reguler';
             document.getElementById('modalSupplier').textContent = p['supplier'] || '-';
