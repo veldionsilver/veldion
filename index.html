@@ -233,7 +233,6 @@
             #veldion-loader * { animation-duration: 0.01ms !important; }
         }
 
-        /* ==== CARD BAWAH — COMPACT & SEJAJAR ==== */
         .card-cta {
             display: flex;
             flex-direction: column;
@@ -243,12 +242,8 @@
             padding: 24px 28px;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .card-cta .card-body {
-            flex: 1;
-        }
-        .card-cta .card-footer {
-            margin-top: 16px;
-        }
+        .card-cta .card-body { flex: 1; }
+        .card-cta .card-footer { margin-top: 16px; }
         .card-cta .card-footer a {
             display: inline-flex;
             align-items: center;
@@ -535,7 +530,9 @@
     </div>
 
     <main>
-        <section id="hero" class="bg-gradient-to-b from-void-50 to-void">
+        <!-- HERO DENGAN BACKGROUND OG-IMAGE -->
+        <section id="hero" class="bg-gradient-to-b from-void-50 to-void" 
+                 style="background-image: url('assets/images/og-image.webp') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-blend-mode: overlay !important;">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float"></div>
             <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float"></div>
             <div class="hero-content relative z-10 max-w-7xl mx-auto px-4 text-center">
@@ -913,7 +910,6 @@
             </div>
         </section>
 
-        <!-- SECTION CARD 3 KOLOM — COMPACT & SEJAJAR -->
         <section class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
