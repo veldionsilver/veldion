@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="theme-color" content="#080A0F">
+    <meta name="robots" content="index, follow">
+    
+    <title>Veldion Blog • Perak Fisik Indonesia</title>
+    <meta name="description" content="Kumpulan artikel tentang perak fisik dari Veldion Silver. Tips, edukasi, wawasan, dan catatan seputar perak.">
+    <link rel="canonical" href="https://veldionsilver.github.io/veldion/blog/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://veldionsilver.github.io/veldion/blog/">
+    <meta property="og:title" content="Veldion Blog • Perak Fisik Indonesia">
+    <meta property="og:description" content="Kumpulan artikel tentang perak fisik dari Veldion Silver.">
+    <meta property="og:image" content="https://veldionsilver.github.io/veldion/assets/images/og-image.webp">
+    <meta property="og:site_name" content="Veldion Silver">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Veldion Blog • Perak Fisik Indonesia">
+    <meta name="twitter:description" content="Kumpulan artikel tentang perak fisik dari Veldion Silver.">
+    <meta name="twitter:image" content="https://veldionsilver.github.io/veldion/assets/images/og-image.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
+                    colors: {
+                        void: { DEFAULT: '#080A0F' },
+                        steel: { DEFAULT: '#94A3B8', light: '#CBD5E1', dark: '#64748B' },
+                        silver: { DEFAULT: '#C0C5CE', light: '#E2E8F0' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: #080A0F; 
+            font-family: 'Inter', sans-serif;
+            color: #CBD5E1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .text-silver-gradient {
+            background: linear-gradient(135deg, #E2E8F0, #94A3B8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+        }
+        .glass:hover {
+            border-color: rgba(255,255,255,0.08);
+        }
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform .7s;
+        }
+        .btn-shine:hover::after { transform: rotate(45deg) translateX(100%); }
+        .btn-shine:hover { transform: scale(1.02); }
+        .btn-outline {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.25);
+            transform: scale(1.02);
+        }
+        a { text-decoration: none; }
+        .container-custom { max-width: 1024px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+        .hero-glow {
+            position: relative;
+        }
+        .hero-glow::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(192,197,206,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: #94A3B8;
+        }
+        .trust-badge .dot-indicator {
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.7); }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .featured-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+            cursor: pointer;
+            display: block;
+        }
+        .featured-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+        }
+        .featured-card .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: rgba(192,197,206,0.08);
+            border: 1px solid rgba(192,197,206,0.08);
+            color: #94A3B8;
+            margin-bottom: 10px;
+        }
+        .featured-card h2 {
+            font-family: 'Sora', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+        }
+        .featured-card p {
+            color: #94A3B8;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .featured-card .link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #CBD5E1;
+            font-weight: 600;
+            font-size: 13px;
+            transition: gap 0.3s ease;
+        }
+        .featured-card .link:hover {
+            gap: 10px;
+        }
+        .featured-card .link i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .article-card {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 18px 20px;
+            transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+        .article-card:hover {
+            border-color: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .article-card .category {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+            color: #64748B;
+            margin-bottom: 8px;
+            align-self: flex-start;
+        }
+        .article-card h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.3;
+            letter-spacing: -0.2px;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+        .article-card:hover h3 {
+            color: #E2E8F0;
+        }
+        .article-card .excerpt {
+            color: #94A3B8;
+            font-size: 13px;
+            line-height: 1.6;
+            flex: 1;
+        }
+        .article-card .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #64748B;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: color 0.3s ease, gap 0.3s ease;
+        }
+        .article-card:hover .read-more {
+            color: #CBD5E1;
+            gap: 8px;
+        }
+        .article-card .read-more i {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ===== HIDDEN ARTICLES ===== */
+        .hidden-article {
+            display: none !important;
+        }
+        .hidden-article.show {
+            display: flex !important;
+        }
+
+        /* ===== SEARCH SECTION ===== */
+        .search-section {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 50;
+        }
+        .search-section .search-box {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 40px;
+            padding: 10px 18px;
+            transition: border-color 0.3s ease;
+        }
+        .search-section .search-box:focus-within {
+            border-color: rgba(255,255,255,0.15);
+        }
+        .search-section .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+        }
+        .search-section .search-box input::placeholder {
+            color: #64748B;
+        }
+        .search-section .search-box i {
+            color: #64748B;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+        .search-section .search-box .search-btn {
+            background: transparent;
+            border: none;
+            color: #64748B;
+            cursor: pointer;
+            padding: 0;
+            display: none;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .search-section .search-box .search-btn.show {
+            display: flex;
+        }
+        .search-section .search-box .search-btn:hover {
+            color: #CBD5E1;
+        }
+        .search-section .search-box .search-btn i {
+            width: 18px;
+            height: 18px;
+        }
+
+        .custom-dropdown {
+            position: relative;
+            flex-shrink: 0;
+            min-width: 160px;
+            z-index: 100;
+        }
+        .custom-dropdown .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 40px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            color: #CBD5E1;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            min-width: 130px;
+        }
+        .custom-dropdown .dropdown-trigger:hover {
+            border-color: rgba(255,255,255,0.15);
+        }
+        .custom-dropdown .dropdown-trigger .arrow {
+            transition: transform 0.3s ease;
+            color: #64748B;
+            width: 16px;
+            height: 16px;
+        }
+        .custom-dropdown .dropdown-trigger .arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .custom-dropdown .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background: #12151C;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 6px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+        }
+        .custom-dropdown .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .custom-dropdown .dropdown-menu .option {
+            padding: 10px 18px;
+            color: #94A3B8;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .custom-dropdown .dropdown-menu .option:hover {
+            background: rgba(255,255,255,0.04);
+            color: white;
+        }
+        .custom-dropdown .dropdown-menu .option.active {
+            color: white;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .btn-load-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 36px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #CBD5E1;
+            font-weight: 600;
+            border-radius: 40px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-load-more:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.2);
+            transform: scale(1.02);
+        }
+        .btn-load-more i {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+        .btn-load-more:hover i {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 768px) {
+            .article-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .featured-card { padding: 20px 22px; }
+            .featured-card h2 { font-size: 18px; }
+            .search-section { flex-direction: column; align-items: stretch; }
+            .custom-dropdown { width: 100%; }
+            .custom-dropdown .dropdown-menu { left: 0; right: 0; }
+        }
+
+        @media (max-width: 480px) {
+            .container-custom { padding: 0 16px; }
+            .article-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .article-card { padding: 14px 16px; }
+            .featured-card { padding: 16px 18px; }
+            .featured-card h2 { font-size: 16px; }
+            .search-section .search-box { padding: 8px 14px; }
+            .custom-dropdown .dropdown-trigger { padding: 8px 14px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header style="position:fixed; top:0; left:0; right:0; z-index:50; background:#080A0F; border-bottom:1px solid rgba(255,255,255,0.04); height:60px; display:flex; align-items:center;">
+        <div class="container-custom" style="display:flex; justify-content:space-between; align-items:center;">
+            <a href="/veldion/" style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;" aria-label="Veldion Silver - Platform Agregator Perak Fisik">VELDION</a>
+            <div style="display:flex; gap:8px;">
+                <a href="/veldion/blog/" style="font-size:12px; color:#CBD5E1; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.08); transition:all 0.3s ease; font-weight:600;" aria-label="Veldion Blog - Kumpulan Artikel Perak Fisik">Blog</a>
+                <a href="/veldion/" style="font-size:12px; color:#64748B; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.04); transition:all 0.3s ease; font-weight:500;" aria-label="Veldion Silver - Home">Home</a>
+            </div>
+        </div>
+    </header>
+
+    <main style="flex:1; padding-top:100px; padding-bottom:60px;">
+        <div class="container-custom">
+
+            <div class="hero-glow text-center fade-up visible" style="margin-bottom:24px;">
+                <div class="trust-badge" style="margin-bottom:12px;">
+                    <span class="dot-indicator"></span>
+                    <span>Blog</span>
+                </div>
+                <h1 style="font-family:'Sora',sans-serif; font-size:32px; font-weight:700; color:white; margin-bottom:6px; letter-spacing:-0.5px;">
+                    Veldion Blog
+                </h1>
+                <p style="color:#94A3B8; font-size:14px; max-width:480px; margin:0 auto; line-height:1.7;">
+                    Kumpulan artikel tentang perak fisik. Tips, edukasi, wawasan, dan catatan.
+                </p>
+            </div>
+
+            <div class="search-section fade-up">
+                <div class="search-box">
+                    <i data-lucide="search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari artikel..." autocomplete="off">
+                    <button class="search-btn" id="searchBtn" aria-label="Hapus teks pencarian">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+
+                <div class="custom-dropdown" id="categoryDropdown">
+                    <div class="dropdown-trigger" id="dropdownTrigger">
+                        <span id="selectedCategory">Semua</span>
+                        <i data-lucide="chevron-down" class="arrow" id="dropdownArrow"></i>
+                    </div>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <div class="option active" data-value="semua">Semua</div>
+                        <div class="option" data-value="tips">Tips</div>
+                        <div class="option" data-value="edukasi">Edukasi</div>
+                        <div class="option" data-value="wawasan">Wawasan</div>
+                        <div class="option" data-value="catatan">Catatan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEATURED ARTICLE -->
+            <div class="fade-up" id="featuredWrapper" style="margin-bottom:28px;">
+                <a href="/veldion/blog/apa-itu-agregator.html" class="featured-card" id="featuredCard" aria-label="Baca artikel: Apa Itu Agregator? Dan Kenapa Veldion Memilih Jadi Agregator?">
+                    <span class="badge">Kamu harus tau</span>
+                    <h2>Apa Itu Agregator? Dan Kenapa Veldion Memilih Jadi Agregator?</h2>
+                    <p>Penjelasan sederhana tentang model agregator, contohnya, dan kenapa Veldion memilih jadi agregator perak fisik.</p>
+                    <span class="link">
+                        Baca Selengkapnya
+                        <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+
+            <!-- GRID ARTIKEL -->
+            <div class="article-grid" id="articleGrid">
+
+                <a href="/veldion/blog/panduan-punya-perak-fisik.html" class="article-card fade-up" data-category="tips" aria-label="Baca artikel: Panduan Punya Perak Fisik: Mulai dari Mana?">
+                    <span class="category">Tips</span>
+                    <h3>Panduan Punya Perak Fisik: Mulai dari Mana?</h3>
+                    <p class="excerpt">Langkah-langkah sederhana untuk memiliki perak fisik.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/jenis-produk-perak-batangan-koin-medalion.html" class="article-card fade-up" data-category="edukasi" aria-label="Baca artikel: Jenis Produk Perak: Batangan, Koin, Medalion">
+                    <span class="category">Edukasi</span>
+                    <h3>Jenis Produk Perak: Batangan, Koin, Medalion</h3>
+                    <p class="excerpt">Kenali berbagai bentuk produk perak yang tersedia.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/perak-vs-emas-mana-lebih-cocok.html" class="article-card fade-up" data-category="wawasan" aria-label="Baca artikel: Perak vs Emas: Mana yang Lebih Cocok?">
+                    <span class="category">Wawasan</span>
+                    <h3>Perak vs Emas: Mana yang Lebih Cocok?</h3>
+                    <p class="excerpt">Perbandingan santai antara dua logam mulia.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/perak-fisik-vs-perak-digital-mana-lebih-aman.html" class="article-card fade-up" data-category="catatan" aria-label="Baca artikel: Perak Fisik vs Perak Digital: Mana Lebih Aman?">
+                    <span class="category">Catatan</span>
+                    <h3>Perak Fisik vs Perak Digital: Mana Lebih Aman?</h3>
+                    <p class="excerpt">Perbandingan antara kepemilikan fisik dan digital.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/5-cara-simpan-perak-fisik-agar-tidak-rusak.html" class="article-card fade-up" data-category="tips" aria-label="Baca artikel: 5 Cara Simpan Perak Fisik Agar Tidak Rusak">
+                    <span class="category">Tips</span>
+                    <h3>5 Cara Simpan Perak Fisik Agar Tidak Rusak</h3>
+                    <p class="excerpt">Tips menyimpan perak agar tetap kinclong dan tidak tergores.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/mengapa-perak-logam-mulia.html" class="article-card fade-up" data-category="edukasi" aria-label="Baca artikel: Mengapa Perak Bisa Menjadi Logam Mulia yang Dicari?">
+                    <span class="category">Edukasi</span>
+                    <h3>Mengapa Perak Bisa Menjadi Logam Mulia yang Dicari?</h3>
+                    <p class="excerpt">Sejarah dan alasan perak menjadi logam berharga.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <!-- ===== HIDDEN ARTICLES (3 ARTIKEL BARU) ===== -->
+                <a href="/veldion/blog/sejarah-perak-logam-mulia.html" class="article-card fade-up hidden-article" data-category="wawasan" aria-label="Baca artikel: Sejarah Perak: Logam Mulia yang Tak Pernah Pudar">
+                    <span class="category">Wawasan</span>
+                    <h3>Sejarah Perak: Logam Mulia yang Tak Pernah Pudar</h3>
+                    <p class="excerpt">Sejarah panjang perak dari zaman kuno hingga era modern.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/dca-cara-klasik-sempurna.html" class="article-card fade-up hidden-article" data-category="edukasi" aria-label="Baca artikel: DCA: Cara Klasik yang Sempurna">
+                    <span class="category">Edukasi</span>
+                    <h3>DCA: Cara Klasik yang Sempurna</h3>
+                    <p class="excerpt">Cara orang tua dulu beli emas — dan kamu bisa terapkan dengan perak.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+                <a href="/veldion/blog/hunt-brothers-saat-pasar-perak-meledak.html" class="article-card fade-up hidden-article" data-category="wawasan" aria-label="Baca artikel: Kisah Dua Bersaudara yang Hampir Menguasai Perak Dunia">
+                    <span class="category">Wawasan</span>
+                    <h3>Kisah Dua Bersaudara yang Hampir Menguasai Perak Dunia</h3>
+                    <p class="excerpt">Kisah Nelson Bunker Hunt dan William Herbert Hunt yang hampir menguasai pasar perak dunia.</p>
+                    <span class="read-more">
+                        Baca Selengkapnya <i data-lucide="arrow-right"></i>
+                    </span>
+                </a>
+
+            </div>
+
+            <!-- TOMBOL LIAT SEMUA -->
+            <div class="fade-up" style="text-align:center; margin-top:28px;">
+                <button id="loadMoreBtn" class="btn-load-more" aria-label="Tampilkan semua artikel">
+                    Lihat Semua Artikel
+                    <i data-lucide="chevron-down"></i>
+                </button>
+            </div>
+
+            <!-- CTA -->
+            <div class="fade-up" style="text-align:center; margin-top:40px; padding-top:32px; border-top:1px solid rgba(255,255,255,0.04);">
+                <p style="color:#94A3B8; font-size:14px; margin-bottom:16px; line-height:1.7;">
+                    Ada pertanyaan tentang perak fisik?
+                </p>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                    <a href="https://wa.me/628137271517" target="_blank" class="btn-shine" style="display:inline-flex; align-items:center; gap:8px; padding:12px 36px; background:linear-gradient(135deg,#E2E8F0,#C0C5CE); color:#080A0F; font-weight:700; border-radius:40px; font-size:13px; border:none; cursor:pointer; letter-spacing:0.2px;" aria-label="Hubungi Veldion Silver via WhatsApp untuk tanya stok perak fisik">
+                        <i data-lucide="message-circle" style="width:16px; height:16px;"></i> Hubungi Veldion via WhatsApp
+                    </a>
+                    <a href="/veldion/katalog/" class="btn-outline" style="display:inline-flex; align-items:center; gap:8px; padding:12px 36px; background:transparent; border:1px solid rgba(255,255,255,0.12); color:#CBD5E1; font-weight:600; border-radius:40px; font-size:13px; letter-spacing:0.2px;" aria-label="Lihat Katalog Produk Perak Fisik Veldion Silver">
+                        <i data-lucide="arrow-right" style="width:16px; height:16px;"></i> Lihat Katalog Produk
+                    </a>
+                </div>
+            </div>
+
+            <div style="border-top:1px solid rgba(255,255,255,0.03); margin-top:44px; padding-top:18px; text-align:center; color:#64748B; font-size:10px; letter-spacing:0.3px;">
+                Veldion Silver · Silver Bridge · 2026
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+        fadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                el.classList.add('visible');
+            }
+            observer.observe(el);
+        });
+
+        // ===== DROPDOWN CUSTOM =====
+        const trigger = document.getElementById('dropdownTrigger');
+        const menu = document.getElementById('dropdownMenu');
+        const arrow = document.getElementById('dropdownArrow');
+        const selectedText = document.getElementById('selectedCategory');
+        const options = menu.querySelectorAll('.option');
+        let isOpen = false;
+
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isOpen = !isOpen;
+            menu.classList.toggle('open', isOpen);
+            arrow.classList.toggle('open', isOpen);
+        });
+
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                const value = this.dataset.value;
+                const text = this.textContent;
+
+                options.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+
+                selectedText.textContent = text;
+                isOpen = false;
+                menu.classList.remove('open');
+                arrow.classList.remove('open');
+
+                applyFilters();
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-dropdown')) {
+                isOpen = false;
+                menu.classList.remove('open');
+                arrow.classList.remove('open');
+            }
+        });
+
+        // ===== SEARCH =====
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const featuredWrapper = document.getElementById('featuredWrapper');
+        const featuredCard = document.getElementById('featuredCard');
+        const allCards = document.querySelectorAll('.article-card');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const hiddenArticles = document.querySelectorAll('.hidden-article');
+
+        let isExpanded = false;
+
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        function getVisibleCount() {
+            return isMobile() ? 4 : 6;
+        }
+
+        function isFiltering() {
+            const keyword = searchInput.value.trim();
+            const category = document.querySelector('.option.active')?.dataset?.value || 'semua';
+            return keyword.length > 0 || category !== 'semua';
+        }
+
+        function resetHiddenState() {
+            const visibleCount = getVisibleCount();
+            const cards = document.querySelectorAll('.article-card:not(.hidden-article)');
+
+            // Reset semua card
+            cards.forEach((card, index) => {
+                // Hapus class hidden-article dari semua card utama
+                card.classList.remove('hidden-article');
+                card.style.display = 'flex';
+            });
+
+            // Sembunyikan card yang melebihi batas
+            cards.forEach((card, index) => {
+                if (index >= visibleCount) {
+                    card.classList.add('hidden-article');
+                    card.style.display = 'none';
+                }
+            });
+
+            // Pastikan hidden-articles asli tetap hidden
+            document.querySelectorAll('.hidden-article').forEach(el => {
+                if (!el.classList.contains('show')) {
+                    el.style.display = 'none';
+                }
+            });
+
+            // Reset tombol
+            isExpanded = false;
+            loadMoreBtn.style.display = 'inline-flex';
+            loadMoreBtn.innerHTML = `
+                Lihat Semua Artikel
+                <i data-lucide="chevron-down" style="width:16px; height:16px;"></i>
+            `;
+            lucide.createIcons();
+        }
+
+        function applyFilters() {
+            const keyword = searchInput.value.toLowerCase().trim();
+            const category = document.querySelector('.option.active')?.dataset?.value || 'semua';
+            const filtering = isFiltering();
+
+            // Featured
+            if (featuredWrapper && featuredCard) {
+                const title = featuredCard.querySelector('h2')?.textContent?.toLowerCase() || '';
+                const desc = featuredCard.querySelector('p')?.textContent?.toLowerCase() || '';
+                const matchKeyword = !keyword || title.includes(keyword) || desc.includes(keyword);
+                featuredWrapper.style.display = matchKeyword ? 'block' : 'none';
+            }
+
+            // Grid cards
+            let anyMatch = false;
+            allCards.forEach(card => {
+                const cardCategory = card.dataset.category || '';
+                const title = card.querySelector('h3')?.textContent?.toLowerCase() || '';
+                const excerpt = card.querySelector('.excerpt')?.textContent?.toLowerCase() || '';
+
+                const matchCategory = category === 'semua' || cardCategory === category;
+                const matchKeyword = !keyword || title.includes(keyword) || excerpt.includes(keyword);
+
+                if (matchCategory && matchKeyword) {
+                    card.style.display = 'flex';
+                    anyMatch = true;
+                    // Jika filtering, tampilkan semua yang match (termasuk hidden)
+                    if (filtering) {
+                        card.classList.remove('hidden-article');
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (filtering) {
+                // Saat filtering, tombol disembunyikan
+                loadMoreBtn.style.display = 'none';
+                // Pastikan semua hidden-article yang tidak match tetap hidden
+                document.querySelectorAll('.hidden-article').forEach(el => {
+                    const title = el.querySelector('h3')?.textContent?.toLowerCase() || '';
+                    const excerpt = el.querySelector('.excerpt')?.textContent?.toLowerCase() || '';
+                    const cardCategory = el.dataset.category || '';
+                    const matchCategory = category === 'semua' || cardCategory === category;
+                    const matchKeyword = !keyword || title.includes(keyword) || excerpt.includes(keyword);
+                    if (!(matchCategory && matchKeyword)) {
+                        el.style.display = 'none';
+                    } else {
+                        el.style.display = 'flex';
+                        el.classList.remove('hidden-article');
+                    }
+                });
+            } else {
+                // Tidak filtering → kembali ke default
+                resetHiddenState();
+            }
+        }
+
+        // Toggle tombol X (clear) — muncul hanya saat ada teks
+        searchInput.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                searchBtn.classList.add('show');
+            } else {
+                searchBtn.classList.remove('show');
+            }
+            applyFilters();
+        });
+
+        // Tombol X = clear search
+        searchBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            searchBtn.classList.remove('show');
+            // Reset dropdown ke "Semua"
+            const allOption = document.querySelector('.option[data-value="semua"]');
+            if (allOption) {
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('active'));
+                allOption.classList.add('active');
+                document.getElementById('selectedCategory').textContent = 'Semua';
+            }
+            applyFilters();
+            searchInput.focus();
+        });
+
+        // Enter key = filter
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                applyFilters();
+            }
+        });
+
+        // ===== LOAD MORE =====
+        loadMoreBtn.addEventListener('click', function() {
+            if (isFiltering()) return;
+
+            isExpanded = !isExpanded;
+            const hiddenEls = document.querySelectorAll('.hidden-article');
+
+            hiddenEls.forEach(el => {
+                if (isExpanded) {
+                    el.classList.add('show');
+                    el.style.display = 'flex';
+                } else {
+                    el.classList.remove('show');
+                    el.style.display = 'none';
+                }
+            });
+
+            if (isExpanded) {
+                this.innerHTML = `
+                    Sembunyikan
+                    <i data-lucide="chevron-up" style="width:16px; height:16px;"></i>
+                `;
+            } else {
+                this.innerHTML = `
+                    Lihat Semua Artikel
+                    <i data-lucide="chevron-down" style="width:16px; height:16px;"></i>
+                `;
+            }
+
+            lucide.createIcons();
+        });
+
+        // ===== INIT =====
+        // Inisialisasi: atur hidden state sesuai device
+        resetHiddenState();
+
+        // Jalankan ulang saat resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                if (!isFiltering()) {
+                    resetHiddenState();
+                }
+            }, 200);
+        });
+    </script>
+
+</body>
+</html>
