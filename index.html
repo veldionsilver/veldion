@@ -27,9 +27,14 @@
     <meta name="twitter:description" content="Veldion Silver — Silver Bridge. Platform agregator perak fisik. Stok ready tanpa PO. Hubungkan Anda dengan jaringan supplier terpercaya.">
     <meta name="twitter:image" content="https://veldionsilver.github.io/veldion/assets/images/herocover-image.webp">
 
-    <link rel="manifest" href="/veldion/manifest.json">
-    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <!-- Favicon & PWA Icons -->
+    <link rel="icon" type="image/x-icon" href="/veldion/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/veldion/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/veldion/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/veldion/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/veldion/favicon/site.webmanifest">
 
+    <!-- Preload -->
     <link rel="preload" as="image" href="assets/images/logo.webp">
     <link rel="preload" as="style" href="assets/css/style.css">
     <link rel="preload" as="script" href="assets/js/data.js">
@@ -56,7 +61,6 @@
     </script>
 
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
@@ -92,7 +96,6 @@
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
         }
-
         #veldion-loader .loader-shimmer {
             position: absolute;
             inset: 0;
@@ -100,7 +103,6 @@
             opacity: 0;
             animation: shimmerFade 2s ease-in-out infinite alternate;
         }
-
         #veldion-loader .loader-content {
             display: flex;
             flex-direction: column;
@@ -113,7 +115,6 @@
             transform: translateY(20px) scale(0.95);
             animation: loaderEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
         }
-
         #veldion-loader .loader-ring-wrap {
             position: relative;
             width: 100px;
@@ -122,13 +123,11 @@
             align-items: center;
             justify-content: center;
         }
-
         #veldion-loader .loader-ring-outer {
             position: absolute;
             inset: -6px;
             border-radius: 50%;
         }
-
         #veldion-loader .loader-ring-inner {
             position: absolute;
             inset: -2px;
@@ -140,14 +139,12 @@
             mask-composite: exclude;
             animation: ringSpin 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
         }
-
         #veldion-loader .loader-ring-border {
             position: absolute;
             inset: 0;
             border-radius: 50%;
             border: 1px solid rgba(192, 197, 206, 0.06);
         }
-
         #veldion-loader .loader-logo {
             width: 64px;
             height: 64px;
@@ -159,7 +156,6 @@
             padding: 8px;
             animation: logoPulse 2.5s ease-in-out infinite;
         }
-
         #veldion-loader .loader-title {
             font-family: 'Sora', sans-serif;
             font-size: 26px;
@@ -173,7 +169,6 @@
             opacity: 0;
             animation: textFade 0.6s ease 0.4s forwards;
         }
-
         #veldion-loader .loader-sub {
             font-size: 11px;
             color: #64748B;
@@ -183,7 +178,6 @@
             opacity: 0;
             animation: textFade 0.6s ease 0.6s forwards;
         }
-
         #veldion-loader .loader-bar-wrap {
             width: 180px;
             height: 2px;
@@ -194,7 +188,6 @@
             opacity: 0;
             animation: textFade 0.6s ease 0.8s forwards;
         }
-
         #veldion-loader .loader-bar {
             width: 0%;
             height: 100%;
@@ -202,7 +195,6 @@
             transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             box-shadow: 0 0 20px rgba(192, 197, 206, 0.2);
         }
-
         #veldion-loader .loader-status {
             font-size: 12px;
             color: #64748B;
@@ -221,14 +213,12 @@
             #veldion-loader .loader-bar-wrap { width: 140px; }
             #veldion-loader .loader-status { font-size: 10px; }
         }
-
         @media (max-width: 400px) {
             #veldion-loader .loader-ring-wrap { width: 64px; height: 64px; }
             #veldion-loader .loader-logo { width: 40px; height: 40px; padding: 5px; }
             #veldion-loader .loader-title { font-size: 17px; }
             #veldion-loader .loader-status { font-size: 9px; }
         }
-
         @media (prefers-reduced-motion: reduce) {
             #veldion-loader * { animation-duration: 0.01ms !important; }
         }
@@ -443,8 +433,7 @@
                         <span class="text-[10px] uppercase">XAG/IDR:</span>
                         <span class="text-white font-bold" id="xagIdr">Rp 545.000</span>
                     </div>
-                    <span class="hidden xl:inline text-[10px] text-steel-dark border-l border-white/10 pl-4" id="headerDate">
-                    </span>
+                    <span class="hidden xl:inline text-[10px] text-steel-dark border-l border-white/10 pl-4" id="headerDate"></span>
                 </div>
                 <span class="text-[10px] text-steel-dark hidden lg:inline">Pengiriman aman ke seluruh Indonesia</span>
             </div>
@@ -530,7 +519,6 @@
     </div>
 
     <main>
-        <!-- HERO DENGAN BACKGROUND OG-IMAGE -->
         <section id="hero" class="bg-gradient-to-b from-void-50 to-void" 
                  style="background-image: url('assets/images/herocover-image.webp') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-blend-mode: overlay !important;">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float"></div>
@@ -556,6 +544,7 @@
             </div>
         </section>
 
+        <!-- Banner Section -->
         <section class="py-6 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
@@ -840,7 +829,6 @@
                             <p class="faq-answer">Veldion Silver adalah platform agregator perak fisik yang menghubungkan Anda dengan jaringan supplier terpercaya. Kami bukan distributor yang memiliki stok sendiri — kami adalah jembatan yang memastikan Anda mendapatkan produk asli dari sumber resmi, tanpa pre-order panjang.</p>
                         </div>
                     </div>
-
                     <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors" aria-label="Tampilkan jawaban: Bagaimana Veldion Bekerja?">
                             <span class="faq-question">Bagaimana Veldion Bekerja?</span>
@@ -856,7 +844,6 @@
                             Kami tidak memiliki stok sendiri — kami adalah jembatan yang memastikan produk asli sampai ke tangan Anda dengan cepat dan aman.</p>
                         </div>
                     </div>
-
                     <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors" aria-label="Tampilkan jawaban: Apakah Veldion memiliki izin resmi?">
                             <span class="faq-question">Apakah Veldion memiliki izin resmi?</span>
@@ -866,7 +853,6 @@
                             <p class="faq-answer">Veldion adalah bisnis perseorangan yang berpusat di Banda Aceh. Kami bukan lembaga keuangan dan tidak menghimpun dana masyarakat. Setiap transaksi adalah jual-beli perak fisik langsung antara pembeli dan supplier melalui jembatan Veldion. Kami berkomitmen untuk transparan dalam setiap proses.</p>
                         </div>
                     </div>
-
                     <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors" aria-label="Tampilkan jawaban: Apakah perak yang dijual dijamin keasliannya?">
                             <span class="faq-question">Apakah perak yang dijual dijamin keasliannya?</span>
@@ -876,7 +862,6 @@
                             <p class="faq-answer">Ya, setiap produk diverifikasi keasliannya. Kami hanya menjual perak dengan kadar kemurnian terjamin.</p>
                         </div>
                     </div>
-
                     <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors" aria-label="Tampilkan jawaban: Berapa lama proses pengiriman?">
                             <span class="faq-question">Berapa lama proses pengiriman?</span>
@@ -886,7 +871,6 @@
                             <p class="faq-answer">Pengiriman biasanya 1-5 hari kerja tergantung lokasi. Semua pengiriman dilengkapi nomor resi untuk tracking.</p>
                         </div>
                     </div>
-
                     <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors" aria-label="Tampilkan jawaban: Bagaimana cara melakukan buyback?">
                             <span class="faq-question">Bagaimana cara melakukan buyback?</span>
@@ -896,7 +880,6 @@
                             <p class="faq-answer">Hubungi kami via WhatsApp, kirim foto produk, dan kami akan berikan penawaran harga berdasarkan pasar saat ini.</p>
                         </div>
                     </div>
-
                     <div class="glass-card rounded-xl overflow-hidden faq-item reveal">
                         <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between hover:bg-white/[0.02] transition-colors" aria-label="Tampilkan jawaban: Apakah harga bisa dinegosiasi?">
                             <span class="faq-question">Apakah harga bisa dinegosiasi?</span>
@@ -910,6 +893,7 @@
             </div>
         </section>
 
+        <!-- CTA Cards -->
         <section class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
@@ -1077,9 +1061,7 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-        #installBanner.show {
-            display: flex;
-        }
+        #installBanner.show { display: flex; }
         #installBanner .msg {
             display: flex;
             align-items: center;
@@ -1090,13 +1072,8 @@
             flex: 1;
             min-width: 150px;
         }
-        #installBanner .msg .icon {
-            font-size: 22px;
-        }
-        #installBanner .msg span {
-            color: white;
-            font-weight: 700;
-        }
+        #installBanner .msg .icon { font-size: 22px; }
+        #installBanner .msg span { color: white; font-weight: 700; }
         #installBanner .actions {
             display: flex;
             align-items: center;
@@ -1129,9 +1106,7 @@
             transition: color 0.3s;
             font-family: inherit;
         }
-        #installBanner .btn-close:hover {
-            color: white;
-        }
+        #installBanner .btn-close:hover { color: white; }
         @media (max-width: 480px) {
             #installBanner .msg { font-size: 12px; }
             #installBanner .btn-install { padding: 6px 14px; font-size: 12px; }
