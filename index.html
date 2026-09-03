@@ -232,6 +232,73 @@
         @media (prefers-reduced-motion: reduce) {
             #veldion-loader * { animation-duration: 0.01ms !important; }
         }
+
+        /* ==== CARD BAWAH — COMPACT & SEJAJAR ==== */
+        .card-cta {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            min-height: 200px;
+            padding: 24px 28px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-cta .card-body {
+            flex: 1;
+        }
+        .card-cta .card-footer {
+            margin-top: 16px;
+        }
+        .card-cta .card-footer a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            width: 100%;
+            justify-content: center;
+        }
+        .card-cta .card-footer .btn-solid {
+            background: linear-gradient(135deg, #E2E8F0, #C0C5CE);
+            color: #080A0F;
+        }
+        .card-cta .card-footer .btn-solid:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(192, 197, 206, 0.3);
+        }
+        .card-cta .card-footer .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #CBD5E1;
+        }
+        .card-cta .card-footer .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+        .card-cta h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+        .card-cta p {
+            color: #94A3B8;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+            .card-cta { padding: 18px 20px; min-height: 170px; }
+            .card-cta h3 { font-size: 16px; }
+            .card-cta p { font-size: 12px; }
+            .card-cta .card-footer a { padding: 8px 16px; font-size: 12px; }
+        }
     </style>
 
     <div id="veldion-loader">
@@ -846,29 +913,47 @@
             </div>
         </section>
 
-        <!-- SECTION CARD 3 KOLOM -->
-        <section class="py-20 md:py-24 bg-void border-t border-white/5">
-            <div class="max-w-3xl mx-auto px-4 text-center">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                    <div class="glass-card p-8 md:p-10 rounded-2xl text-center reveal">
-                        <div class="relative z-10">
-                            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3">Siap Miliki Perak Fisik?</h3>
-                            <p class="text-steel text-sm leading-relaxed mb-6">Jelajahi katalog kami dan dapatkan perak fisik berkualitas tanpa antrean panjang.</p>
-                            <a href="/veldion/katalog/" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(192,197,206,0.3)] transition btn-shine" aria-label="Jelajahi Katalog Produk Perak Veldion">Jelajahi Katalog <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+        <!-- SECTION CARD 3 KOLOM — COMPACT & SEJAJAR -->
+        <section class="py-16 md:py-20 bg-void border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+                    <div class="glass-card glass-card-hover rounded-2xl reveal">
+                        <div class="card-cta">
+                            <div class="card-body">
+                                <h3>Siap Miliki Perak Fisik?</h3>
+                                <p>Jelajahi katalog kami dan dapatkan perak fisik berkualitas tanpa antrean panjang.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/veldion/katalog/" class="btn-solid" aria-label="Jelajahi Katalog Produk Perak Veldion">
+                                    Jelajahi Katalog <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="glass-card p-8 md:p-10 rounded-2xl text-center reveal">
-                        <div class="relative z-10">
-                            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3">Tentang Veldion</h3>
-                            <p class="text-steel text-sm leading-relaxed mb-6">Platform agregator perak fisik. Bisnis perseorangan di Banda Aceh. Transparan dan terpercaya.</p>
-                            <a href="/veldion/tentang-kami/" class="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/20 text-white font-bold text-sm rounded-full hover:bg-white/5 transition" aria-label="Pelajari lebih lanjut tentang Veldion Silver">Pelajari Lebih <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    <div class="glass-card glass-card-hover rounded-2xl reveal">
+                        <div class="card-cta">
+                            <div class="card-body">
+                                <h3>Tentang Veldion</h3>
+                                <p>Platform agregator perak fisik. Bisnis perseorangan di Banda Aceh. Transparan dan terpercaya.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/veldion/tentang-kami/" class="btn-outline" aria-label="Pelajari lebih lanjut tentang Veldion Silver">
+                                    Pelajari Lebih <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="glass-card p-8 md:p-10 rounded-2xl text-center reveal">
-                        <div class="relative z-10">
-                            <h3 class="font-display text-xl md:text-2xl font-bold text-white mb-3">Veldion Blog</h3>
-                            <p class="text-steel text-sm leading-relaxed mb-6">Baca artikel edukasi tentang perak fisik. Tips, edukasi, wawasan, dan catatan.</p>
-                            <a href="/veldion/blog/" class="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white/20 text-white font-bold text-sm rounded-full hover:bg-white/5 transition" aria-label="Kunjungi Blog Veldion - Artikel Edukasi Perak">Kunjungi Blog <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                    <div class="glass-card glass-card-hover rounded-2xl reveal">
+                        <div class="card-cta">
+                            <div class="card-body">
+                                <h3>Veldion Blog</h3>
+                                <p>Baca artikel edukasi tentang perak fisik. Tips, edukasi, wawasan, dan catatan.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/veldion/blog/" class="btn-outline" aria-label="Kunjungi Blog Veldion - Artikel Edukasi Perak">
+                                    Kunjungi Blog <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
