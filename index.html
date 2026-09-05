@@ -285,7 +285,7 @@
             .card-cta .card-footer a { padding: 8px 16px; font-size: 12px; }
         }
 
-        /* ===== HERO SECTION FIX ===== */
+        /* ===== HERO SECTION ===== */
         #hero {
             height: 100vh;
             max-height: 100vh;
@@ -298,6 +298,10 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-blend-mode: overlay !important;
             will-change: transform;
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
@@ -320,33 +324,7 @@
             backface-visibility: hidden;
         }
 
-        /* ===== DESKTOP: cover ===== */
-        @media (min-width: 768px) {
-            #hero {
-                background-size: cover !important;
-                background-position: center !important;
-                background-repeat: no-repeat !important;
-            }
-            #hero .hero-content {
-                padding: 30px 24px;
-            }
-        }
-
-        /* ===== MOBILE: contain dengan padding flexibel ===== */
-        @media (max-width: 767px) {
-            #hero {
-                background-size: contain !important;
-                background-position: center !important;
-                background-repeat: no-repeat !important;
-                background-color: #080A0F !important;
-            }
-            #hero .hero-content {
-                padding: 12px 16px;
-                justify-content: center;
-            }
-        }
-
-        /* ===== LOGO RESPONSIF ===== */
+        /* ===== LOGO ===== */
         .hero-logo {
             width: 100px;
             height: 100px;
@@ -372,7 +350,7 @@
             .hero-logo { width: 150px; height: 150px; }
         }
 
-        /* ===== TITLE RESPONSIF ===== */
+        /* ===== TITLE ===== */
         .hero-title {
             font-size: 1.6rem;
             line-height: 1.15;
@@ -400,7 +378,7 @@
             .hero-title { font-size: 4.5rem; }
         }
 
-        /* ===== DESCRIPTION RESPONSIF ===== */
+        /* ===== DESCRIPTION ===== */
         .hero-desc {
             font-size: 0.7rem;
             line-height: 1.5;
@@ -425,7 +403,7 @@
             .hero-desc { font-size: 1rem; }
         }
 
-        /* ===== BUTTONS RESPONSIF ===== */
+        /* ===== BUTTONS ===== */
         .hero-buttons a {
             font-size: 0.6rem;
             padding: 0.45rem 1rem;
@@ -476,7 +454,7 @@
             }
         }
 
-        /* ===== BADGE RESPONSIF ===== */
+        /* ===== BADGE ===== */
         .hero-badge span {
             font-size: 8px;
         }
@@ -520,7 +498,7 @@
             }
         }
 
-        /* ===== SPACING ADJUSTMENT UNTUK MOBILE ===== */
+        /* ===== MOBILE SPACING ===== */
         @media (max-width: 767px) {
             #hero .hero-content .mb-5 { margin-bottom: 0.5rem; }
             #hero .hero-content .mb-4 { margin-bottom: 0.35rem; }
@@ -772,6 +750,9 @@
         <section id="hero" 
                  class="bg-gradient-to-b from-void-50 to-void"
                  style="background-image: url('assets/images/herocover-image.webp') !important; 
+                        background-size: cover !important; 
+                        background-position: center !important; 
+                        background-repeat: no-repeat !important; 
                         background-blend-mode: overlay !important;">
             
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float pointer-events-none"></div>
