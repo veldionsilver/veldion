@@ -27,14 +27,12 @@
     <meta name="twitter:description" content="Veldion Silver — Silver Bridge. Platform agregator perak fisik. Stok ready tanpa PO. Hubungkan Anda dengan jaringan supplier terpercaya.">
     <meta name="twitter:image" content="https://veldionsilver.github.io/veldion/assets/images/herocover-image.webp">
 
-    <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/x-icon" href="/veldion/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/veldion/favicon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/veldion/favicon/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/veldion/favicon/apple-touch-icon.png">
     <link rel="manifest" href="/veldion/favicon/site.webmanifest">
 
-    <!-- Preload -->
     <link rel="preload" as="image" href="assets/images/logo.webp">
     <link rel="preload" as="style" href="assets/css/style.css">
     <link rel="preload" as="script" href="assets/js/data.js">
@@ -285,35 +283,116 @@
             .card-cta .card-footer a { padding: 8px 16px; font-size: 12px; }
         }
 
-        /* ===== HERO SECTION FIX - HANYA INI YANG DIUBAH ===== */
         #hero {
-            height: 100vh;
-            max-height: 100vh;
             min-height: 100vh;
-            height: 100dvh;
-            max-height: 100dvh;
             min-height: 100dvh;
+            min-height: 100svh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: 100px 0 80px 0;
         }
 
         #hero .hero-content {
             width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             padding: 20px 16px;
         }
 
         @supports (-webkit-touch-callout: none) {
             #hero {
-                height: -webkit-fill-available;
                 min-height: -webkit-fill-available;
+            }
+        }
+
+        @media (max-height: 600px) {
+            #hero {
+                padding: 60px 0 40px 0;
+                min-height: 100vh;
+                min-height: 100dvh;
+                min-height: 100svh;
+            }
+            #hero .hero-content {
+                padding: 10px 16px;
+            }
+        }
+
+        @media (min-height: 601px) and (max-height: 800px) {
+            #hero {
+                padding: 70px 0 50px 0;
+            }
+            #hero .hero-content {
+                padding: 15px 16px;
+            }
+        }
+
+        @media (min-height: 801px) and (max-height: 1000px) {
+            #hero {
+                padding: 85px 0 65px 0;
+            }
+        }
+
+        @media (min-height: 1001px) {
+            #hero {
+                min-height: 90vh;
+                min-height: 90dvh;
+                min-height: 90svh;
+                padding: 120px 0 90px 0;
+            }
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            #hero {
+                padding: 40px 0 25px 0;
+                min-height: 100vh;
+                min-height: 100dvh;
+                min-height: 100svh;
+            }
+            #hero .hero-content {
+                padding: 6px 16px;
+            }
+        }
+
+        @media (orientation: landscape) and (min-height: 501px) and (max-height: 700px) {
+            #hero {
+                padding: 50px 0 30px 0;
+            }
+            #hero .hero-content {
+                padding: 8px 16px;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            #hero {
+                background-blend-mode: overlay !important;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            #hero {
+                background-blend-mode: overlay !important;
+            }
+        }
+
+        @supports (padding: max(0px)) {
+            #hero .hero-content {
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+            }
+        }
+
+        @media (width < 768px) and (height > 800px) {
+            #hero {
+                min-height: 80vh;
+                min-height: 80dvh;
+                min-height: 80svh;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #hero .animate-float {
+                animation: none !important;
             }
         }
     </style>
@@ -551,7 +630,6 @@
     </div>
 
     <main>
-        <!-- ===== HERO SECTION - KONTEN TETAP SAMA PERSIS ===== -->
         <section id="hero" class="bg-gradient-to-b from-void-50 to-void" 
                  style="background-image: url('assets/images/herocover-image.webp') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-blend-mode: overlay !important;">
             <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float"></div>
@@ -577,7 +655,6 @@
             </div>
         </section>
 
-        <!-- Banner Section -->
         <section class="py-6 md:py-10 bg-void-50 border-y border-white/5">
             <div class="banner-container">
                 <div class="banner-track">
@@ -926,7 +1003,6 @@
             </div>
         </section>
 
-        <!-- CTA Cards -->
         <section class="py-16 md:py-20 bg-void border-t border-white/5">
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
