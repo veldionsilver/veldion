@@ -408,6 +408,77 @@
         font-size: 13px;
     }
 }
+
+/* ===== HERO SECTION - UNIVERSAL FIX ===== */
+#hero {
+    height: 100vh;
+    max-height: 100vh;
+    min-height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 100dvh;
+}
+
+#hero .hero-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 360px) {
+    #hero .hero-content h1 {
+        font-size: 1.25rem !important;
+    }
+    #hero .hero-content p {
+        font-size: 0.6rem !important;
+    }
+    #hero .hero-content .flex a {
+        font-size: 0.55rem !important;
+        padding: 0.4rem 0.8rem !important;
+        min-width: 90px !important;
+    }
+    #hero .hero-content img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+}
+
+@media (min-width: 361px) and (max-width: 390px) {
+    #hero .hero-content h1 {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (min-width: 1920px) {
+    #hero .hero-content h1 {
+        font-size: 4.5rem !important;
+    }
+    #hero .hero-content p {
+        font-size: 1.25rem !important;
+    }
+}
+
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+@supports (-webkit-touch-callout: none) {
+    #hero {
+        height: -webkit-fill-available;
+        min-height: -webkit-fill-available;
+    }
+}
+
+#hero {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
     </style>
 
     <div id="veldion-loader">
@@ -499,44 +570,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeBtn = document.getElementById('closeModalBtn');
     const ctaBtn = document.querySelector('.modal-cta');
 
-    // Cek apakah modal sudah pernah ditutup di sesi sebelumnya
     if (localStorage.getItem('splashClosed') === 'true') {
         return;
     }
 
-    // Tampilkan modal setelah 1,8 detik
     let timer = setTimeout(function() {
         modal.classList.add('active');
     }, 1800);
 
-    // Fungsi untuk menutup modal
     function closeModal() {
         modal.classList.remove('active');
         localStorage.setItem('splashClosed', 'true');
         clearTimeout(timer);
     }
 
-    // Event listener untuk tombol close
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
 
-    // Event listener untuk tombol CTA (bisa ditambah tracking jika perlu)
     if (ctaBtn) {
         ctaBtn.addEventListener('click', function() {
-            // Modal tetap tertutup setelah navigasi (opsional)
-            // closeModal(); // Hapus komen jika ingin langsung tutup setelah klik
         });
     }
 
-    // Menutup modal jika klik di luar area modal
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeModal();
         }
     });
 
-    // Opsional: Menutup modal dengan tombol Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
@@ -694,28 +756,57 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <main>
-        <section id="hero" class="bg-gradient-to-b from-void-50 to-void" 
-                 style="background-image: url('assets/images/herocover-image.webp') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; background-blend-mode: overlay !important;">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float"></div>
-            <div class="hero-content relative z-10 max-w-7xl mx-auto px-4 text-center">
-                <div class="mb-5 reveal active flex justify-center">
-                    <img src="assets/images/logo.webp" alt="Veldion Silver — Silver Bridge. Platform Agregator Perak Fisik" width="140" height="140" class="object-contain drop-shadow-2xl animate-float" loading="eager" decoding="async" fetchpriority="high">
+        <section id="hero" 
+                 class="relative w-full h-screen max-h-screen overflow-hidden bg-gradient-to-b from-void-50 to-void flex items-center justify-center"
+                 style="background-image: url('assets/images/herocover-image.webp') !important; 
+                        background-size: cover !important; 
+                        background-position: center !important; 
+                        background-repeat: no-repeat !important; 
+                        background-blend-mode: overlay !important;">
+            
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-silver/[0.03] rounded-full blur-3xl animate-float pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-white/[0.02] rounded-full blur-3xl animate-float pointer-events-none"></div>
+            
+            <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col items-center justify-center text-center hero-content">
+                
+                <div class="mb-3 sm:mb-4 md:mb-5 reveal active flex justify-center">
+                    <img src="assets/images/logo.webp" alt="Veldion Silver — Silver Bridge. Platform Agregator Perak Fisik" 
+                         width="140" height="140" 
+                         class="object-contain drop-shadow-2xl animate-float w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40" 
+                         loading="eager" decoding="async" fetchpriority="high">
                 </div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-silver/20 bg-silver/5 mb-5 reveal active backdrop-blur-sm">
+                
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-silver/20 bg-silver/5 mb-3 sm:mb-4 md:mb-5 reveal active backdrop-blur-sm">
                     <i data-lucide="zap" class="w-3 h-3 text-silver-light"></i>
-                    <span class="text-[10px] font-semibold text-silver-light uppercase tracking-widest">Always Ready</span>
+                    <span class="text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-silver-light uppercase tracking-widest">Always Ready</span>
                 </div>
-                <h1 class="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tighter mb-4 reveal active" style="transition-delay:100ms">Perak Fisik Siap Miliki<br><span class="text-silver-gradient">Tanpa Antrean Panjang</span></h1>
-                <p class="text-sm md:text-base text-steel max-w-2xl mx-auto mb-6 leading-relaxed reveal active" style="transition-delay:200ms">
-                    Stok ready, <span class="text-white font-medium">tanpa pre-order</span><br>
-                    platform <span class="text-white font-medium">agregator</span> perak fisik — jembatan ke <span class="text-white font-medium">supplier terpercaya</span><br>
+                
+                <h1 class="font-display font-bold text-white leading-[1.1] tracking-tighter mb-2 sm:mb-3 md:mb-4 reveal active
+                           text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+                    Perak Fisik Siap Miliki<br>
+                    <span class="text-silver-gradient">Tanpa Antrean Panjang</span>
+                </h1>
+                
+                <p class="text-steel max-w-2xl mx-auto leading-relaxed reveal active
+                          text-[10px] sm:text-xs md:text-sm lg:text-base
+                          px-2 sm:px-4">
+                    Stok ready, <span class="text-white font-medium">tanpa pre-order</span><br class="hidden xs:block">
+                    platform <span class="text-white font-medium">agregator</span> perak fisik — jembatan ke <span class="text-white font-medium">supplier terpercaya</span><br class="hidden xs:block">
                     <span class="text-white font-medium">Siap kirim ke seluruh Indonesia</span>
                 </p>
-                <div class="flex flex-col sm:flex-row gap-3 justify-center reveal active" style="transition-delay:300ms">
-                    <a href="/veldion/katalog/" class="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full hover:shadow-[0_0_25px_rgba(192,197,206,0.3)] transition btn-shine flex items-center justify-center gap-2" aria-label="Jelajahi Katalog Produk Perak Veldion">Jelajahi Katalog<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-                    <a href="#privilege" class="px-6 py-3 md:px-8 md:py-4 bg-transparent border border-white/10 text-white font-bold text-sm rounded-full hover:bg-white/5 transition flex items-center justify-center gap-2" aria-label="Keunggulan Veldion Silver">Keunggulan Veldion</a>
+                
+                <div class="flex flex-col xs:flex-row gap-2 sm:gap-3 md:gap-4 justify-center reveal active mt-4 sm:mt-5 md:mt-6 w-full xs:w-auto">
+                    <a href="/veldion/katalog/" 
+                       class="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-[11px] sm:text-xs md:text-sm rounded-full hover:shadow-[0_0_25px_rgba(192,197,206,0.3)] transition btn-shine flex items-center justify-center gap-2 min-w-[130px] sm:min-w-[160px] md:min-w-[180px]">
+                        Jelajahi Katalog
+                        <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4"></i>
+                    </a>
+                    <a href="#privilege" 
+                       class="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-transparent border border-white/10 text-white font-bold text-[11px] sm:text-xs md:text-sm rounded-full hover:bg-white/5 transition flex items-center justify-center gap-2 min-w-[130px] sm:min-w-[160px] md:min-w-[180px]">
+                        Keunggulan Veldion
+                    </a>
                 </div>
+                
             </div>
         </section>
 
