@@ -1282,5 +1282,15 @@
             });
         })();
     </script>
+    <!-- Popup Lynk.id -->
+    <div id="popupContainer"></div>
+    <script>
+    fetch('/popup.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('popupContainer').innerHTML = html;
+        })
+        .catch(err => console.log('Popup tidak dimuat:', err));
+    </script>
 </body>
 </html>
