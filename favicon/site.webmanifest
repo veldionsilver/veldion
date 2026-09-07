@@ -6,16 +6,51 @@
   "display": "standalone",
   "background_color": "#080A0F",
   "theme_color": "#080A0F",
+  "orientation": "portrait",
+  "categories": ["business", "finance"],
+  "lang": "id",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/veldion/favicon/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
       "src": "/veldion/favicon/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/veldion/assets/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/veldion/favicon/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/veldion/favicon/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "/veldion/assets/images/og-image.webp",
+      "sizes": "1200x630",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Veldion Silver - Platform Agregator Perak Fisik"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": []
 }
