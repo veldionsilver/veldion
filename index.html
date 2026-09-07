@@ -1290,7 +1290,7 @@
         var container = document.getElementById('popupContainer');
         if (!container) return;
 
-        fetch('/popup.html')
+        fetch('/veldion/popup.html')   // <-- TAMBAHKAN /veldion/
             .then(function(res) {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.text();
