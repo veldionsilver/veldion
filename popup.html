@@ -1,0 +1,395 @@
+<!-- popup.html - Veldion Silver Popup Promo -->
+<style>
+    #veldionPopupOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 10, 15, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 999999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        animation: popupFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #veldionPopupOverlay.show {
+        display: flex;
+    }
+
+    @keyframes popupFadeIn {
+        0% { opacity: 0; transform: scale(0.95); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    .popup-box {
+        background: linear-gradient(145deg, #12151C, #0C0F14);
+        border: 1px solid rgba(192, 197, 206, 0.12);
+        border-radius: 28px;
+        padding: 40px 32px 32px;
+        max-width: 440px;
+        width: 100%;
+        position: relative;
+        text-align: center;
+        box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(192,197,206,0.05);
+        animation: popupBoxIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popupBoxIn {
+        0% { opacity: 0; transform: translateY(20px) scale(0.96); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .popup-close {
+        position: absolute;
+        top: 14px;
+        right: 18px;
+        background: none;
+        border: none;
+        color: #64748B;
+        font-size: 26px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 8px;
+        transition: all 0.2s;
+        line-height: 1;
+    }
+
+    .popup-close:hover {
+        color: #E2E8F0;
+        background: rgba(255,255,255,0.05);
+    }
+
+    .popup-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(192, 197, 206, 0.08);
+        border: 1px solid rgba(192, 197, 206, 0.1);
+        padding: 4px 16px 4px 12px;
+        border-radius: 40px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #94A3B8;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+    }
+
+    .popup-badge i {
+        width: 12px;
+        height: 12px;
+        color: #CBD5E1;
+    }
+
+    .popup-title {
+        font-family: 'Sora', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 8px;
+        letter-spacing: -0.3px;
+    }
+
+    .popup-title span {
+        background: linear-gradient(135deg, #E2E8F0, #94A3B8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .popup-desc {
+        font-size: 14px;
+        color: #94A3B8;
+        line-height: 1.7;
+        margin-bottom: 4px;
+    }
+
+    .popup-desc strong {
+        color: white;
+        font-weight: 600;
+    }
+
+    .popup-highlight {
+        background: rgba(192, 197, 206, 0.05);
+        border: 1px solid rgba(192, 197, 206, 0.08);
+        border-radius: 16px;
+        padding: 16px 20px;
+        margin: 20px 0 24px;
+        text-align: left;
+    }
+
+    .popup-highlight .label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10px;
+        color: #64748B;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 600;
+    }
+
+    .popup-highlight .label i {
+        width: 14px;
+        height: 14px;
+    }
+
+    .popup-highlight .link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 6px;
+    }
+
+    .popup-highlight .link a {
+        color: #E2E8F0;
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 15px;
+        transition: color 0.2s;
+        word-break: break-all;
+    }
+
+    .popup-highlight .link a:hover {
+        color: white;
+    }
+
+    .popup-highlight .link .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.06);
+        color: #94A3B8;
+        padding: 6px 14px;
+        border-radius: 40px;
+        font-size: 11px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+        font-family: inherit;
+    }
+
+    .popup-highlight .link .copy-btn i {
+        width: 12px;
+        height: 12px;
+    }
+
+    .popup-highlight .link .copy-btn:hover {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
+
+    .popup-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, #E2E8F0, #C0C5CE);
+        color: #080A0F;
+        font-weight: 700;
+        font-size: 15px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        font-family: inherit;
+    }
+
+    .popup-btn:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 30px rgba(192, 197, 206, 0.25);
+    }
+
+    .popup-btn i {
+        width: 18px;
+        height: 18px;
+    }
+
+    .popup-footer {
+        margin-top: 16px;
+        font-size: 11px;
+        color: #475569;
+    }
+
+    @media (max-width: 480px) {
+        .popup-box { padding: 32px 20px 24px; }
+        .popup-title { font-size: 19px; }
+        .popup-desc { font-size: 13px; }
+        .popup-highlight .link { flex-wrap: wrap; }
+        .popup-highlight .link a { font-size: 13px; }
+    }
+</style>
+
+<div id="veldionPopupOverlay" role="dialog" aria-modal="true" aria-label="Promo Veldion Silver di Lynk.id">
+    <div class="popup-box">
+        <button class="popup-close" id="popupCloseBtn" aria-label="Tutup popup">✕</button>
+
+        <div class="popup-badge">
+            <i data-lucide="sparkles"></i>
+            Best Seller
+        </div>
+
+        <h2 class="popup-title">
+            Beli Langsung di <span>Lynk.id</span>
+        </h2>
+
+        <p class="popup-desc">
+            Veldion Silver kini hadir di Lynk.id.<br>
+            Dapatkan produk <strong>best seller</strong> kami dengan mudah dan cepat.
+        </p>
+
+        <div class="popup-highlight">
+            <div class="label">
+                <i data-lucide="link"></i>
+                Link Resmi
+            </div>
+            <div class="link">
+                <a href="https://lynk.id/veldionsilver" target="_blank" rel="noopener noreferrer">
+                    lynk.id/veldionsilver
+                </a>
+                <button class="copy-btn" id="copyLinkBtn" aria-label="Salin link">
+                    <i data-lucide="copy"></i>
+                    Salin
+                </button>
+            </div>
+        </div>
+
+        <a href="https://lynk.id/veldionsilver" target="_blank" rel="noopener noreferrer" class="popup-btn">
+            <i data-lucide="external-link"></i>
+            Kunjungi Toko
+        </a>
+
+        <div class="popup-footer">Tutup untuk lanjut berbelanja</div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // --- ELEMEN ---
+        var overlay = document.getElementById('veldionPopupOverlay');
+        var closeBtn = document.getElementById('popupCloseBtn');
+        var copyBtn = document.getElementById('copyLinkBtn');
+
+        // --- FUNGSI TUTUP ---
+        function closePopup() {
+            if (overlay) overlay.classList.remove('show');
+        }
+
+        // --- TAMPILKAN SETELAH LOADER HILANG ---
+        function showPopupWhenReady() {
+            var checkLoader = setInterval(function() {
+                var loader = document.getElementById('veldion-loader');
+                if (!loader) {
+                    clearInterval(checkLoader);
+                    setTimeout(function() {
+                        if (overlay) overlay.classList.add('show');
+                        // Init Lucide icons di dalam popup
+                        if (typeof lucide !== 'undefined') {
+                            lucide.createIcons();
+                        }
+                    }, 300);
+                }
+            }, 200);
+
+            setTimeout(function() {
+                clearInterval(checkLoader);
+                if (overlay && !overlay.classList.contains('show')) {
+                    overlay.classList.add('show');
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                }
+            }, 5000);
+        }
+
+        // --- EVENT CLOSE ---
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closePopup);
+        }
+
+        // --- KLIK DI LUAR POPUP ---
+        if (overlay) {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closePopup();
+                }
+            });
+        }
+
+        // --- ESC KEY ---
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (overlay && overlay.classList.contains('show')) {
+                    closePopup();
+                }
+            }
+        });
+
+        // --- COPY LINK ---
+        if (copyBtn) {
+            copyBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var link = 'https://lynk.id/veldionsilver';
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(link).then(function() {
+                        var original = copyBtn.innerHTML;
+                        copyBtn.innerHTML = '<i data-lucide="check"></i> Disalin!';
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                        setTimeout(function() {
+                            copyBtn.innerHTML = original;
+                            if (typeof lucide !== 'undefined') lucide.createIcons();
+                        }, 2000);
+                    }).catch(function() {
+                        fallbackCopy(link);
+                    });
+                } else {
+                    fallbackCopy(link);
+                }
+            });
+        }
+
+        function fallbackCopy(text) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                var original = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i data-lucide="check"></i> Disalin!';
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+                setTimeout(function() {
+                    copyBtn.innerHTML = original;
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }, 2000);
+            } catch (e) {
+                alert('Salin link: ' + text);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // --- JALANKAN ---
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            showPopupWhenReady();
+        } else {
+            document.addEventListener('DOMContentLoaded', showPopupWhenReady);
+        }
+
+        // --- EXPOSE UNTUK KEPERLUAN LAIN ---
+        window.showVeldionPopup = function() {
+            if (overlay) overlay.classList.add('show');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        };
+        window.closeVeldionPopup = closePopup;
+    })();
+</script>
