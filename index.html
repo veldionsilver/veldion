@@ -1282,5 +1282,27 @@
             });
         })();
     </script>
+
+    <!-- Popup Lynk.id -->
+<div id="popupContainer"></div>
+<script>
+    (function() {
+        var container = document.getElementById('popupContainer');
+        if (!container) return;
+
+        fetch('/popup.html')
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.text();
+            })
+            .then(function(html) {
+                container.innerHTML = html;
+            })
+            .catch(function(err) {
+                console.log('Popup tidak dimuat:', err);
+                container.style.display = 'none';
+            });
+    })();
+</script>
 </body>
 </html>
