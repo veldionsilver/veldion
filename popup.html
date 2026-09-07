@@ -125,55 +125,68 @@
 
 <script>
     (function() {
-        var overlay = document.getElementById('veldionPopupOverlay');
-        var closeBtn = document.getElementById('popupCloseBtn');
-
-        function closePopup() {
-            if (overlay) overlay.classList.remove('show');
-        }
-
-        function showPopupWhenReady() {
-            var checkLoader = setInterval(function() {
-                var loader = document.getElementById('veldion-loader');
-                if (!loader) {
-                    clearInterval(checkLoader);
-                    setTimeout(function() {
-                        if (overlay) overlay.classList.add('show');
-                    }, 300);
-                }
-            }, 200);
-
-            setTimeout(function() {
-                clearInterval(checkLoader);
-                if (overlay && !overlay.classList.contains('show')) {
-                    overlay.classList.add('show');
-                }
-            }, 5000);
-        }
-
-        if (closeBtn) closeBtn.addEventListener('click', closePopup);
-
-        if (overlay) {
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) closePopup();
-            });
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && overlay && overlay.classList.contains('show')) {
-                closePopup();
+        // Tunggu sampai elemen benar-benar ada di DOM
+        function waitForElement() {
+            var overlay = document.getElementById('veldionPopupOverlay');
+            if (overlay) {
+                // Elemen sudah ada, mulai logika popup
+                initPopup(overlay);
+            } else {
+                // Tunggu 50ms, cek lagi
+                setTimeout(waitForElement, 50);
             }
-        });
-
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            showPopupWhenReady();
-        } else {
-            document.addEventListener('DOMContentLoaded', showPopupWhenReady);
         }
 
-        window.showVeldionPopup = function() {
-            if (overlay) overlay.classList.add('show');
-        };
-        window.closeVeldionPopup = closePopup;
+        function initPopup(overlay) {
+            var closeBtn = document.getElementById('popupCloseBtn');
+
+            function closePopup() {
+                if (overlay) overlay.classList.remove('show');
+            }
+
+            function showPopupWhenReady() {
+                var checkLoader = setInterval(function() {
+                    var loader = document.getElementById('veldion-loader');
+                    if (!loader) {
+                        clearInterval(checkLoader);
+                        setTimeout(function() {
+                            if (overlay) overlay.classList.add('show');
+                        }, 300);
+                    }
+                }, 200);
+
+                setTimeout(function() {
+                    clearInterval(checkLoader);
+                    if (overlay && !overlay.classList.contains('show')) {
+                        overlay.classList.add('show');
+                    }
+                }, 5000);
+            }
+
+            if (closeBtn) closeBtn.addEventListener('click', closePopup);
+
+            if (overlay) {
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) closePopup();
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && overlay && overlay.classList.contains('show')) {
+                    closePopup();
+                }
+            });
+
+            // Jalankan popup
+            showPopupWhenReady();
+
+            window.showVeldionPopup = function() {
+                if (overlay) overlay.classList.add('show');
+            };
+            window.closeVeldionPopup = closePopup;
+        }
+
+        // Mulai cek elemen
+        waitForElement();
     })();
 </script>
