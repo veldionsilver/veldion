@@ -1,20 +1,26 @@
-const CACHE_NAME = 'veldion-v1';
+const CACHE_NAME = 'veldion-v2';
 const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/assets/css/style.css',
-  '/assets/js/app.js',
-  '/assets/js/data.js',
-  '/assets/images/logo.webp',
-  '/assets/icons/icon-192.png',
-  '/assets/icons/icon-512.png'
+  '/veldion/',
+  '/veldion/index.html',
+  '/veldion/assets/css/style.css',
+  '/veldion/assets/js/app.js',
+  '/veldion/assets/js/data.js',
+  '/veldion/assets/images/logo.webp',
+  '/veldion/assets/icons/icon-192.png',
+  '/veldion/assets/icons/icon-512.png'
 ];
 
-// Install: cache static assets
+// Install: cache static assets (satu per satu, agar tidak gagal semua)
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(STATIC_ASSETS))
+      .then(cache => {
+        return Promise.allSettled(
+          STATIC_ASSETS.map(url => cache.add(url).catch(err => {
+            console.warn('Gagal cache:', url, err);
+          }))
+        );
+      })
       .then(() => self.skipWaiting())
   );
 });
@@ -40,7 +46,7 @@ self.addEventListener('fetch', event => {
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
-  // Skip cross-origin requests (fonts, CDN, etc.)
+  // Skip cross-origin requests
   if (url.origin !== self.location.origin) return;
 
   // Cache-first for static assets
