@@ -58,7 +58,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
+                    fontFamily: { 'display': ['Geist', 'sans-serif'], 'body': ['Geist', 'sans-serif'], 'pixel': ['GeistPixel', 'monospace'] },
                     colors: {
                         void: { DEFAULT: '#080A0F' },
                         steel: { DEFAULT: '#94A3B8', light: '#CBD5E1', dark: '#64748B' },
@@ -73,7 +73,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             background-color: #080A0F; 
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
             color: #CBD5E1;
             min-height: 100vh;
             display: flex;
@@ -91,7 +91,7 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
         }
         .btn-shine::after {
             content: '';
@@ -106,7 +106,7 @@
         .btn-outline {
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
         }
         .btn-outline:hover {
             background: rgba(255,255,255,0.03);
@@ -146,6 +146,7 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
             color: #94A3B8;
+            font-family: 'GeistPixel', monospace;
         }
         .trust-badge .dot-indicator {
             display: inline-block;
@@ -204,7 +205,7 @@
             font-size: 12px;
             font-weight: 600;
             color: #64748B;
-            font-family: 'Inter', sans-serif;
+            font-family: 'GeistPixel', monospace;
             letter-spacing: 0.2px;
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.04);
@@ -228,7 +229,7 @@
         .slide-card .icon-wrap i { width: 28px; height: 28px; }
 
         .slide-card .title {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Geist', sans-serif;
             font-size: 22px;
             font-weight: 700;
             color: white;
@@ -360,7 +361,7 @@
 
     <header style="position:fixed; top:0; left:0; right:0; z-index:50; background:#080A0F; border-bottom:1px solid rgba(255,255,255,0.04); height:60px; display:flex; align-items:center;">
         <div class="container-custom" style="display:flex; justify-content:space-between; align-items:center;">
-            <a href="/veldion/" style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;" aria-label="Veldion Silver - Agregator Perak Fisik">VELDION</a>
+            <a href="/veldion/" style="font-family:'Geist',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;" aria-label="Veldion Silver - Agregator Perak Fisik">VELDION</a>
             <div style="display:flex; gap:8px;">
                 <a href="/veldion/blog/" style="font-size:12px; color:#64748B; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.04); transition:all 0.3s ease; font-weight:500;" aria-label="Kembali ke Blog Veldion">Blog</a>
                 <a href="/veldion/" style="font-size:12px; color:#64748B; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.04); transition:all 0.3s ease; font-weight:500;" aria-label="Veldion Silver - Platform Agregator Perak Fisik">Home</a>
@@ -376,7 +377,7 @@
                     <span class="dot-indicator"></span>
                     <span>Tips</span>
                 </div>
-                <h1 style="font-family:'Sora',sans-serif; font-size:24px; font-weight:700; color:white; margin-bottom:4px; letter-spacing:-0.5px; line-height:1.2;">
+                <h1 style="font-family:'Geist',sans-serif; font-size:24px; font-weight:700; color:white; margin-bottom:4px; letter-spacing:-0.5px; line-height:1.2;">
                     5 Cara Simpan Perak Fisik
                 </h1>
                 <p style="color:#94A3B8; font-size:14px;">
@@ -387,7 +388,6 @@
             <div class="slide-container fade-up" id="slideContainer">
                 <div class="slide-track" id="slideTrack">
 
-                    <!-- SLIDE 1: COVER -->
                     <div class="slide-card" data-index="0">
                         <span class="slide-badge">1 / 6</span>
                         <div class="icon-wrap" aria-label="Veldion Silver - 5 Cara Simpan Perak Fisik"><i data-lucide="package"></i></div>
@@ -398,7 +398,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 2 -->
                     <div class="slide-card" data-index="1">
                         <span class="slide-badge">2 / 6</span>
                         <div class="icon-wrap" aria-label="Veldion Silver - Simpan di Tempat Kering"><i data-lucide="droplets"></i></div>
@@ -410,7 +409,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 3 -->
                     <div class="slide-card" data-index="2">
                         <span class="slide-badge">3 / 6</span>
                         <div class="icon-wrap" aria-label="Veldion Silver - Jauhkan dari Bahan Kimia"><i data-lucide="flask-round"></i></div>
@@ -421,7 +419,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 4 -->
                     <div class="slide-card" data-index="3">
                         <span class="slide-badge">4 / 6</span>
                         <div class="icon-wrap" aria-label="Veldion Silver - Bungkus dengan Kain Lembut"><i data-lucide="shield-alert"></i></div>
@@ -432,7 +429,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 5 -->
                     <div class="slide-card" data-index="4">
                         <span class="slide-badge">5 / 6</span>
                         <div class="icon-wrap" aria-label="Veldion Silver - Jangan Dicampur dengan Logam Lain"><i data-lucide="layers"></i></div>
@@ -443,7 +439,6 @@
                         </div>
                     </div>
 
-                    <!-- SLIDE 6 -->
                     <div class="slide-card" data-index="5">
                         <span class="slide-badge">6 / 6</span>
                         <div class="icon-wrap" aria-label="Veldion Silver - Periksa Secara Berkala"><i data-lucide="eye"></i></div>
