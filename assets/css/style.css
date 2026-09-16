@@ -52,6 +52,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'GeistPixel';
+    src: url('/veldion/assets/fonts/GeistPixel/GeistPixel-Line.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ====== VARIABLES ====== */
 :root{
   --silver-platinum: linear-gradient(135deg, #E2E8F0 0%, #C0C5CE 30%, #94A3B8 60%, #CBD5E1 100%);
