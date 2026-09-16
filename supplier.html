@@ -10,7 +10,6 @@
     <meta name="description" content="Veldion Silver terhubung dengan supplier perak fisik terpercaya: Silverium, Key Silver, dan JSG/TDS. Semua produk 999.5 - 999.9, asli, dan siap kirim.">
     <link rel="canonical" href="https://veldionsilver.github.io/veldion/supplier/">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://veldionsilver.github.io/veldion/supplier/">
     <meta property="og:title" content="Supplier Perak Fisik Terpercaya • Veldion Silver">
@@ -18,7 +17,6 @@
     <meta property="og:image" content="https://veldionsilver.github.io/veldion/assets/images/og-image.webp">
     <meta property="og:site_name" content="Veldion Silver">
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Supplier Perak Fisik Terpercaya • Veldion Silver">
     <meta name="twitter:description" content="Veldion Silver terhubung dengan supplier perak fisik terpercaya: Silverium, Key Silver, dan JSG/TDS. Semua produk 999.5 - 999.9, asli, dan siap kirim.">
@@ -35,7 +33,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { 'display': ['Sora', 'sans-serif'], 'body': ['Inter', 'sans-serif'] },
+                    fontFamily: { 'display': ['Geist', 'sans-serif'], 'body': ['Geist', 'sans-serif'] },
                     colors: {
                         void: { DEFAULT: '#080A0F' },
                         steel: { DEFAULT: '#94A3B8', light: '#CBD5E1', dark: '#64748B' },
@@ -46,7 +44,6 @@
         }
     </script>
 
-    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -89,7 +86,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             background-color: #080A0F; 
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
             color: #CBD5E1;
             min-height: 100vh;
             display: flex;
@@ -104,7 +101,6 @@
         a { text-decoration: none; }
         .container-custom { max-width: 960px; margin: 0 auto; padding: 0 24px; width: 100%; }
 
-        /* ===== SUPPLIER CARD ===== */
         .supplier-card {
             background: rgba(255,255,255,0.015);
             border: 1px solid rgba(255,255,255,0.04);
@@ -165,7 +161,7 @@
         }
 
         .supplier-name {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Geist', sans-serif;
             font-size: 18px;
             font-weight: 700;
             color: white;
@@ -186,7 +182,6 @@
             transform: rotate(180deg);
         }
 
-        /* ===== DETAIL EXPAND — SMOOTH ===== */
         .supplier-detail {
             max-height: 0;
             overflow: hidden;
@@ -284,7 +279,6 @@
             transform: translateX(2px);
         }
 
-        /* ===== FADE-UP ===== */
         .fade-up {
             opacity: 0;
             transform: translateY(32px);
@@ -296,7 +290,6 @@
             transform: translateY(0);
         }
 
-        /* ===== BUTTON SHINE ===== */
         .btn-shine {
             position: relative;
             overflow: hidden;
@@ -334,22 +327,19 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header style="position:fixed; top:0; left:0; right:0; z-index:50; background:#080A0F; border-bottom:1px solid rgba(255,255,255,0.04); height:60px; display:flex; align-items:center;">
         <div class="container-custom" style="display:flex; justify-content:space-between; align-items:center; max-width:960px;">
-            <a href="/veldion/" style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;">VELDION</a>
+            <a href="/veldion/" style="font-family:'Geist',sans-serif; font-weight:700; font-size:18px; background:linear-gradient(135deg,#E2E8F0,#94A3B8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px;">VELDION</a>
             <a href="/veldion/" style="font-size:12px; color:#64748B; padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.04); transition:all 0.3s ease; font-weight:500;">← Kembali</a>
         </div>
     </header>
 
-    <!-- MAIN -->
     <main style="flex:1; padding-top:100px; padding-bottom:60px;">
         <div class="container-custom">
 
-            <!-- HERO -->
             <div class="text-center" style="margin-bottom:40px;">
                 <span class="text-xs font-bold text-silver tracking-[0.3em] uppercase">Network</span>
-                <h1 style="font-family:'Sora',sans-serif; font-size:28px; font-weight:700; color:white; margin-top:4px; margin-bottom:6px; letter-spacing:-0.5px;">
+                <h1 style="font-family:'Geist',sans-serif; font-size:28px; font-weight:700; color:white; margin-top:4px; margin-bottom:6px; letter-spacing:-0.5px;">
                     Supplier Perak Fisik <span class="text-silver-gradient">Veldion Silver</span>
                 </h1>
                 <p style="color:#64748B; font-size:14px; max-width:520px; margin:0 auto; line-height:1.7;">
@@ -357,10 +347,8 @@
                 </p>
             </div>
 
-            <!-- SUPPLIER GRID -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="supplierGrid">
 
-                <!-- SILVERIUM -->
                 <div class="supplier-card fade-up" data-supplier="silverium" style="transition-delay:0s;">
                     <div class="flex items-center gap-4">
                         <img src="assets/supplier/logosilverium.webp" alt="Logo Silverium — Supplier perak fisik 999.9" class="supplier-logo" loading="lazy">
@@ -388,7 +376,6 @@
                     </div>
                 </div>
 
-                <!-- KEY SILVER -->
                 <div class="supplier-card fade-up" data-supplier="keysilver" style="transition-delay:0.06s;">
                     <div class="flex items-center gap-4">
                         <img src="assets/supplier/logokeysilver.webp" alt="Logo Key Silver — Supplier perak fisik 999.5" class="supplier-logo" loading="lazy">
@@ -416,7 +403,6 @@
                     </div>
                 </div>
 
-                <!-- JSG / TDS -->
                 <div class="supplier-card fade-up" data-supplier="jsg" style="transition-delay:0.12s;">
                     <div class="flex items-center gap-4">
                         <img src="assets/supplier/logotds.webp" alt="Logo JSG TDS — Supplier perak fisik medalion 999.5" class="supplier-logo" loading="lazy">
@@ -446,7 +432,6 @@
 
             </div>
 
-            <!-- CTA -->
             <div class="fade-up" style="text-align:center; margin-top:44px; transition-delay:0.18s;">
                 <a href="/veldion/katalog/" class="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-silver-light to-silver text-void font-bold text-sm rounded-full btn-shine">
                     <i data-lucide="box" class="w-4 h-4"></i>
@@ -454,7 +439,6 @@
                 </a>
             </div>
 
-            <!-- FOOTER -->
             <div class="fade-up" style="border-top:1px solid rgba(255,255,255,0.03); margin-top:44px; padding-top:18px; text-align:center; color:#64748B; font-size:10px; letter-spacing:0.3px; transition-delay:0.24s;">
                 Veldion Silver · Platform Agregator Perak Fisik · 2026
             </div>
@@ -465,7 +449,6 @@
     <script>
         lucide.createIcons();
 
-        // ===== CARD EXPAND — SMOOTH =====
         const cards = document.querySelectorAll('.supplier-card');
         let activeCard = null;
 
@@ -475,7 +458,6 @@
 
                 const isExpanded = this.classList.contains('expanded');
 
-                // Tutup semua
                 cards.forEach(c => c.classList.remove('expanded'));
 
                 if (!isExpanded) {
@@ -489,7 +471,6 @@
             });
         });
 
-        // Klik di luar — tutup semua
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.supplier-card')) {
                 cards.forEach(c => c.classList.remove('expanded'));
@@ -497,7 +478,6 @@
             }
         });
 
-        // ===== FADE-UP OBSERVER =====
         const fadeElements = document.querySelectorAll('.fade-up');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
