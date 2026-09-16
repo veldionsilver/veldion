@@ -257,7 +257,19 @@ function renderBuyback() {
         return;
     }
 
-    buybackRates.forEach(r => {
+    // ============================================================
+    // FILTER SUPPLIER YANG DISEMBUNYIKAN
+    // Data tetap ada di Google Sheets, hanya tidak ditampilkan.
+    // Untuk menampilkan lagi: cukup hapus nama dari array di bawah.
+    // ============================================================
+    const HIDDEN_SUPPLIERS = ['antam'];
+
+    const visibleRates = buybackRates.filter(r => {
+        const name = (r.name || '').toLowerCase().trim();
+        return !HIDDEN_SUPPLIERS.some(hidden => name.includes(hidden));
+    });
+
+    visibleRates.forEach(r => {
         html += `
             <div class="flex justify-between items-center py-3 border-b border-white/5 hover:bg-silver/5 transition px-2">
                 <div class="flex items-center gap-2">
