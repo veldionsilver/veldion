@@ -1,4 +1,4 @@
-const CACHE_NAME = 'veldion-v2';
+const CACHE_NAME = 'veldion-v3';
 const STATIC_ASSETS = [
   '/veldion/',
   '/veldion/index.html',
